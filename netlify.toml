@@ -1,0 +1,77 @@
+[build]
+  command = "pnpm exec vite build"
+  publish = "dist/public"
+  functions = "netlify/functions"
+
+[build.environment]
+  VITE_DEPLOY_TARGET = "netlify"
+
+[functions]
+  node_bundler = "esbuild"
+
+[dev]
+  command = "pnpm exec vite --host 0.0.0.0"
+  publish = "dist/public"
+
+# Preserve established public paths before the SPA fallback.
+[[redirects]]
+  from = "/quienes-somos"
+  to = "/#quienes-somos"
+  status = 308
+  force = true
+
+[[redirects]]
+  from = "/proyectos/coopastur"
+  to = "/proyectos/coopastur-agrosocial"
+  status = 308
+  force = true
+
+[[redirects]]
+  from = "/presentation/conecta.html"
+  to = "/proyectos/conecta-asturias"
+  status = 308
+  force = true
+
+[[redirects]]
+  from = "/presentation/coopastur.html"
+  to = "/proyectos/coopastur-agrosocial"
+  status = 308
+  force = true
+
+[[redirects]]
+  from = "/presentation/nucleo.html"
+  to = "/proyectos/reutiliza-y-forma"
+  status = 308
+  force = true
+
+[[redirects]]
+  from = "/index_congreso.html"
+  to = "/proyectos"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/presentation/index.html"
+  to = "/proyectos"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/presentation/index copia.html"
+  to = "/proyectos"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/presentation/index%20copia.html"
+  to = "/proyectos"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Variant 2 scaffold only. Runtime secrets must be set in a separate Netlify
+# project's Functions environment; never put values in this file.

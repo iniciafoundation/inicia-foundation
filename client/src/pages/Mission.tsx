@@ -1,0 +1,35 @@
+import { ArrowRight, HeartHandshake, Leaf, Scale, ShieldAlert, UsersRound } from "lucide-react";
+import { Link } from "wouter";
+import { OriginalSiteNavigation } from "@/components/OriginalSiteNavigation";
+
+const statutoryAreas = [
+  { title: "Medio ambiente, biodiversidad y clima", Icon: Leaf, text: "Promover la sensibilización ante la contaminación ambiental y del aire, la degradación de mares y océanos, la disminución de la biodiversidad, el calentamiento global, el efecto invernadero, los agujeros de ozono y la contaminación radiactiva." },
+  { title: "Paz y seguridad humana", Icon: ShieldAlert, text: "Contribuir a una cultura de paz, prevenir la amenaza de guerra nuclear y fomentar la conciencia sobre la proliferación no autorizada de tecnologías nucleares y otros riesgos que afectan a todos los pueblos." },
+  { title: "Igualdad, desarrollo y derechos", Icon: Scale, text: "Abordar la brecha Norte-Sur, el atraso de territorios y comunidades, el hambre, la desnutrición, el analfabetismo, la desigualdad social, el desempleo, la violencia y el crimen organizado desde la sensibilización, la cooperación y la participación cívica." },
+  { title: "Recursos, alimentación y demografía", Icon: UsersRound, text: "Favorecer la reflexión sobre el acceso justo a alimentos, agua y recursos naturales; el agotamiento de recursos energéticos y materiales; los desafíos demográficos, el envejecimiento y la escasa conciencia social sobre esta etapa de la vida." },
+  { title: "Salud y bienestar colectivo", Icon: HeartHandshake, text: "Impulsar la conciencia pública sobre grandes desafíos de salud y bienestar, incluidos el envejecimiento y enfermedades de alto impacto social. INICIA no realiza diagnósticos, tratamientos ni asesoramiento clínico." },
+  { title: "Tecnología y riesgos globales", Icon: ShieldAlert, text: "Promover una mirada responsable sobre catástrofes globales, amenazas a la existencia humana y tecnologías emergentes —incluida la inteligencia artificial— sin sustituir a autoridades, especialistas ni instituciones competentes." },
+];
+
+const completeObjectives = [
+  "Problemas ambientales globales: contaminación ambiental, disminución de la biodiversidad, contaminación del aire, contaminación de mares y océanos, calentamiento global, efecto invernadero y agujeros de ozono.",
+  "Evitar la amenaza de la guerra nuclear y asegurar la paz para todos los pueblos, evitando a la comunidad mundial la proliferación no autorizada de tecnologías nucleares y la contaminación radiactiva del medio ambiente.",
+  "El problema del atraso de los países del tercer mundo y los problemas demográficos de la humanidad: crecimiento demográfico en los países en desarrollo y crisis demográfica en los países desarrollados.",
+  "Hambre y desnutrición; suministro de recursos a la humanidad; agotamiento de petróleo, gas natural, carbón, madera y metales no ferrosos; escasez de recursos acuáticos; uso responsable de los recursos del océano y exploración espacial.",
+  "El problema no resuelto del envejecimiento humano y la escasa conciencia pública sobre el envejecimiento.",
+  "El problema Norte-Sur: la brecha de desarrollo entre países ricos y pobres, el hambre y el analfabetismo.",
+  "El calentamiento global, los agujeros de ozono, las enfermedades cardiovasculares, el cáncer y el SIDA; el terrorismo y el peligro de asteroides.",
+  "La subestimación de amenazas a la existencia humana, como el desarrollo de inteligencia artificial hostil y las catástrofes globales.",
+  "La desigualdad social —incluida la brecha entre el 1 % más rico y el resto de la humanidad—, el aumento del desempleo, la violencia y el crimen organizado.",
+];
+
+export default function Mission() {
+  return <main className="min-h-screen bg-[#f8f6f1] text-[#0B2545]"><OriginalSiteNavigation />
+    <section className="bg-[#0B2545] py-20 text-white"><div className="mx-auto max-w-7xl px-5"><p className="text-xs font-bold uppercase tracking-[.2em] text-[#F4A833]">INICIA Foundation</p><h1 className="mt-4 max-w-4xl font-serif text-5xl leading-tight md:text-7xl">Misión y fines estatutarios.</h1><p className="mt-7 max-w-3xl text-lg leading-8 text-slate-200">Nuestra misión se fundamenta en la dignidad humana, la justicia social, la sostenibilidad ambiental, la paz, la participación y la prevención responsable de riesgos globales. INICIA desarrolla su contribución desde el ámbito cívico, comunitario y de interés público.</p></div></section>
+    <section className="mx-auto max-w-7xl px-5 py-20"><div className="max-w-4xl"><p className="text-xs font-bold uppercase tracking-[.18em] text-[#c78117]">Texto íntegro estructurado</p><h2 className="mt-3 font-serif text-4xl md:text-5xl">Ámbitos de actuación definidos en los fines de la organización.</h2><p className="mt-6 leading-8 text-slate-700">Los siguientes ámbitos recogen de forma estructurada los objetivos remitidos por la organización. No significan que INICIA afirme resolver por sí sola problemas globales; expresan el marco social, educativo, comunitario y de sensibilización desde el que orienta sus iniciativas.</p></div>
+      <div className="mt-12 grid gap-5 md:grid-cols-2">{statutoryAreas.map(({ title, text, Icon }) => <article key={title} className="rounded-3xl border border-[#0B2545]/10 bg-white p-8 shadow-sm"><Icon className="h-7 w-7 text-[#c78117]" /><h3 className="mt-5 font-serif text-3xl">{title}</h3><p className="mt-4 leading-7 text-slate-600">{text}</p></article>)}</div>
+      <section className="mt-16 border-t border-[#0B2545]/10 pt-12"><p className="text-xs font-bold uppercase tracking-[.18em] text-[#c78117]">Relación completa de fines remitidos por la organización</p><h2 className="mt-3 max-w-4xl font-serif text-4xl">Objetivos estatutarios, sin omisiones temáticas.</h2><p className="mt-5 max-w-4xl leading-8 text-slate-700">Esta relación conserva de forma completa los ámbitos que la organización ha proporcionado. Su publicación expresa un marco de fines y sensibilización; no atribuye a INICIA la resolución individual o exclusiva de estos desafíos.</p><ol className="mt-8 grid gap-4 md:grid-cols-2">{completeObjectives.map((objective, index) => <li key={objective} className="flex gap-4 rounded-2xl bg-white p-6 shadow-sm"><span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-[#F4A833] text-sm font-bold text-[#0B2545]">{index + 1}</span><p className="text-sm leading-7 text-slate-600">{objective}</p></li>)}</ol></section>
+      <div className="mt-12 rounded-3xl bg-[#e8eef1] p-8 md:p-10"><p className="text-xs font-bold uppercase tracking-[.18em] text-[#c78117]">Compromiso de actuación</p><p className="mt-4 max-w-4xl font-serif text-3xl leading-tight">INICIA orienta sus proyectos hacia la inclusión, el apoyo social, el desarrollo comunitario, la cooperación responsable y la defensa del interés público, dentro de sus capacidades, recursos disponibles y marcos legales aplicables.</p><Link href="/ideologia" className="mt-7 inline-flex items-center rounded-full bg-[#0B2545] px-5 py-3 text-sm font-bold text-white">Leer Ideología <ArrowRight className="ml-2 h-4 w-4" /></Link></div>
+    </section>
+  </main>;
+}

@@ -1,0 +1,768 @@
+{
+  "exportedAt": "2026-08-21T11:54:07.605Z",
+  "source": "current INICIA public catalog only",
+  "projects": [
+    {
+      "id": "project_acompanamiento_sociosanitario",
+      "slug": "acompanamiento-social-sociosanitario",
+      "title": "Acompañamiento Social y Sociosanitario",
+      "category": "Apoyo social",
+      "shortDescription": "Orientación individual para conocer recursos sociales y sanitarios, preparar gestiones y facilitar derivaciones cuando corresponde.",
+      "bodyHtml": "<h2>Acompañamiento Social y Sociosanitario</h2><p><strong>Estado:</strong> En desarrollo.</p><p><strong>Ámbito:</strong> Asturias y, cuando la situación y los recursos disponibles lo permiten, otros puntos de España.</p><p>INICIA estudia cada solicitud de forma individual cuando una persona enferma, una familia o una persona en situación de vulnerabilidad necesita orientación para conocer recursos sociales o sanitarios, preparar gestiones o identificar posibles vías de derivación.</p><p><strong>Límites del servicio:</strong> INICIA no realiza diagnósticos, no prescribe tratamientos y no sustituye la atención médica, sanitaria ni de emergencia. La atención clínica corresponde siempre a los servicios de salud competentes.</p><p><strong>Cómo solicitar orientación:</strong> utiliza el <a href=\"/contacto\">formulario de contacto</a> o escribe por <a href=\"https://wa.me/34624865051?text=Hola%2C%20quisiera%20consultar%20sobre%20acompa%C3%B1amiento%20social\" target=\"_blank\" rel=\"noreferrer\">WhatsApp</a>.</p>",
+      "heroImageUrl": null,
+      "status": "development",
+      "visibility": "published"
+    },
+    {
+      "id": "project_apoyo_alimentario",
+      "slug": "apoyo-alimentario",
+      "title": "Apoyo Alimentario Individualizado",
+      "category": "Necesidades básicas",
+      "shortDescription": "Estudio individual de solicitudes y, cuando la situación y los recursos disponibles lo permiten, apoyo mediante lotes de alimentos o derivación a recursos adecuados.",
+      "bodyHtml": "<h2>Apoyo Alimentario Individualizado</h2><p><strong>Estado:</strong> En desarrollo.</p><p><strong>Ámbito:</strong> Asturias y, cuando la situación y los recursos disponibles lo permiten, otros puntos de España.</p><p>INICIA recibe solicitudes de personas y hogares en situaciones vitales difíciles. Cada caso se estudia individualmente. Cuando procede y existe disponibilidad, la organización puede facilitar un lote de alimentos o orientar hacia recursos adecuados.</p><p><strong>Importante:</strong> la ayuda no es automática ni periódica; depende de la valoración individual y de los recursos disponibles.</p><p><strong>Cómo solicitar orientación:</strong> utiliza el <a href=\"/contacto\">formulario de contacto</a> o escribe por <a href=\"https://wa.me/34624865051?text=Hola%2C%20quisiera%20consultar%20sobre%20apoyo%20alimentario\" target=\"_blank\" rel=\"noreferrer\">WhatsApp</a>.</p>",
+      "heroImageUrl": null,
+      "status": "development",
+      "visibility": "published"
+    },
+    {
+      "id": "project_rural_resources_bank",
+      "slug": "banco-recursos-rurales",
+      "title": "Banco de Recursos Rurales",
+      "category": "Desarrollo rural · Sostenibilidad",
+      "shortDescription": "Iniciativa para identificar y conectar recursos rurales infrautilizados con personas, proyectos y nuevas oportunidades de desarrollo sostenible.",
+      "bodyHtml": "<h2>Banco de Recursos Rurales</h2><p><strong>Estado:</strong> En preparación.</p><p><strong>Ámbito:</strong> España.</p><p>Iniciativa para identificar y conectar terrenos, edificios, infraestructuras, conocimientos locales, materiales, capacidades profesionales e iniciativas comunitarias que se encuentran infrautilizados.</p><p>Busca transformar recursos dispersos en oportunidades prácticas para el desarrollo sostenible de los territorios rurales.</p>",
+      "heroImageUrl": null,
+      "status": "preparation",
+      "visibility": "published"
+    },
+    {
+      "id": "project_conecta_asturias",
+      "slug": "conecta-asturias",
+      "title": "Conecta Asturias",
+      "category": "Integración Social · Red de Apoyo",
+      "shortDescription": "Red de conexión entre personas en situación de vulnerabilidad y los recursos sociales disponibles en Asturias. Orientación, derivación y acompañamiento integral.",
+      "bodyHtml": "<h2>Conecta Asturias</h2><p><strong>Estado:</strong> En desarrollo.</p><p>Red de conexión entre personas en situación de vulnerabilidad y los recursos sociales disponibles en Asturias. Orientación, derivación y acompañamiento integral.</p>",
+      "heroImageUrl": null,
+      "status": "development",
+      "visibility": "published"
+    },
+    {
+      "id": "project_coop_astur",
+      "slug": "coopastur-agrosocial",
+      "title": "CoopAstur AgroSocial",
+      "category": "Desarrollo Rural · Economía Social",
+      "shortDescription": "Diseño estructural para el renacimiento rural en Asturias. Arquitectura dual entre Inicia Foundation y una cooperativa de iniciativa social para crear empleo sostenible, integrar a personas vulnerables y transformar municipios con menos de 5.000 habitantes.",
+      "bodyHtml": "<h2>CoopAstur AgroSocial</h2><p><strong>Estado:</strong> En desarrollo.</p><p><strong>Territorio:</strong> Asturias — municipios rurales.</p><p>Diseño estructural para el renacimiento rural en Asturias. Arquitectura dual entre Inicia Foundation y una cooperativa de iniciativa social para crear empleo sostenible, integrar a personas vulnerables y transformar municipios con menos de 5.000 habitantes.</p><p><strong>Cuota de mujeres prevista:</strong> 40%.</p>",
+      "heroImageUrl": null,
+      "status": "development",
+      "visibility": "published"
+    },
+    {
+      "id": "project_digital_automation",
+      "slug": "inicia-automatizacion-digital",
+      "title": "INICIA Digital Automation",
+      "category": "Transformación digital · Sociedad civil",
+      "shortDescription": "Iniciativa para reforzar la capacidad operativa de organizaciones sociales mediante automatización responsable y tecnologías abiertas.",
+      "bodyHtml": "<h2>INICIA Digital Automation</h2><p><strong>Estado:</strong> En desarrollo.</p><p><strong>Ámbito:</strong> España e internacional.</p><p>Iniciativa de transformación digital para reducir barreras administrativas en organizaciones de la sociedad civil mediante asistentes de IA, automatización de flujos, CRM, tratamiento documental, comunicación y tecnologías abiertas.</p><p>El objetivo es liberar tiempo y recursos para la misión social, con criterios de seguridad y supervisión humana.</p>",
+      "heroImageUrl": null,
+      "status": "development",
+      "visibility": "published"
+    },
+    {
+      "id": "project_civic_ai_commons",
+      "slug": "inicia-civic-ai-commons",
+      "title": "INICIA Civic AI Commons",
+      "category": "Innovación digital · Inteligencia artificial",
+      "shortDescription": "Iniciativa abierta para explorar herramientas de IA responsables, transparentes y orientadas al interés público para la sociedad civil.",
+      "bodyHtml": "<h2>INICIA Civic AI Commons</h2><p><strong>Estado:</strong> En desarrollo.</p><p><strong>Ámbito:</strong> Internacional.</p><p>Iniciativa abierta que explora herramientas de inteligencia artificial responsables, transparentes y orientadas al interés público para organizaciones de la sociedad civil.</p><p>Sus líneas de trabajo incluyen análisis documental, acceso a información pública, gestión de programas sociales, investigación, participación cívica y automatización administrativa, siempre con supervisión humana.</p>",
+      "heroImageUrl": null,
+      "status": "development",
+      "visibility": "published"
+    },
+    {
+      "id": "project_education_opportunity",
+      "slug": "inicia-educacion-oportunidad",
+      "title": "INICIA Education & Opportunity",
+      "category": "Educación · Inclusión social",
+      "shortDescription": "Programa para ampliar oportunidades mediante educación práctica, competencias digitales, participación social, emprendimiento y desarrollo profesional.",
+      "bodyHtml": "<h2>INICIA Education & Opportunity</h2><p><strong>Estado:</strong> En desarrollo.</p><p><strong>Ámbito:</strong> España e internacional.</p><p>Programa orientado a crear oportunidades a través de educación práctica, competencias digitales, participación social, emprendimiento, desarrollo profesional y cooperación internacional.</p><p>Su propósito es apoyar el desarrollo de conocimientos y confianza para participar activamente en la sociedad y construir trayectorias autónomas.</p>",
+      "heroImageUrl": null,
+      "status": "development",
+      "visibility": "published"
+    },
+    {
+      "id": "project_anticorruption",
+      "slug": "iniciativa-internacional-anticorrupcion",
+      "title": "Iniciativa Internacional Anticorrupción",
+      "category": "Transparencia · Acción cívica",
+      "shortDescription": "Iniciativa para explorar una plataforma de cooperación cívica orientada a la transparencia, la rendición de cuentas y la prevención de la corrupción.",
+      "bodyHtml": "<h2>Iniciativa Internacional Anticorrupción</h2><p><strong>Estado:</strong> En preparación.</p><p><strong>Ámbito:</strong> Internacional.</p><p>Iniciativa que explora una plataforma de cooperación entre organizaciones de la sociedad civil y personas comprometidas con la transparencia y la rendición de cuentas pública.</p><p>Las posibles líneas incluyen documentación, investigación, cooperación, intercambio de información, incidencia cívica y sensibilización preventiva.</p>",
+      "heroImageUrl": null,
+      "status": "preparation",
+      "visibility": "published"
+    },
+    {
+      "id": "project_family_integration",
+      "slug": "integracion-humanitaria-familias",
+      "title": "Programa Humanitario y de Integración Social de Familias",
+      "category": "Acompañamiento social · Integración",
+      "shortDescription": "Programa histórico implementado de acompañamiento integral para familias en alta vulnerabilidad social o en situación de desplazamiento forzado.",
+      "bodyHtml": "<h2>Programa Humanitario y de Integración Social de Familias</h2><p><strong>Estado:</strong> Programa histórico implementado.</p><p><strong>Ámbito:</strong> Asturias.</p><p>Programa de acompañamiento integral para familias en situación de alta vulnerabilidad social o de desplazamiento forzado.</p><p><strong>Datos históricos declarados por INICIA:</strong> apoyo y acompañamiento para la adaptación social y lingüística de 317 familias ucranianas; acompañamiento social y orientación de carácter jurídico a 129 familias de otros países y residentes locales que afrontaban barreras de aislamiento social.</p><p>El programa no sustituye la representación jurídica profesional ni los servicios públicos competentes.</p>",
+      "heroImageUrl": null,
+      "status": "implemented",
+      "visibility": "published"
+    },
+    {
+      "id": "project_social_enterprise_lab",
+      "slug": "laboratorio-emprendimiento-social",
+      "title": "Laboratorio de Emprendimiento Social",
+      "category": "Emprendimiento social · Innovación",
+      "shortDescription": "Espacio para explorar y desarrollar modelos de emprendimiento social sostenibles que generen impacto, empleo e innovación.",
+      "bodyHtml": "<h2>Laboratorio de Emprendimiento Social</h2><p><strong>Estado:</strong> En desarrollo.</p><p><strong>Ámbito:</strong> España.</p><p>Espacio para explorar y desarrollar modelos de emprendimiento social sostenibles que generen impacto, empleo, innovación, sostenibilidad económica y soluciones prácticas a retos locales.</p>",
+      "heroImageUrl": null,
+      "status": "development",
+      "visibility": "published"
+    },
+    {
+      "id": "project_social_innovation_lab",
+      "slug": "laboratorio-innovacion-social",
+      "title": "Laboratorio de Innovación Social: Modelos Disruptivos y Ágiles de Empleo",
+      "category": "Inclusión sociolaboral · Investigación",
+      "shortDescription": "Proyecto de investigación aplicada para desarrollar trayectorias innovadoras de empleo para personas con barreras elevadas de inclusión social y desempleo de larga duración.",
+      "bodyHtml": "<h2>Laboratorio de Innovación Social</h2><p><strong>Estado:</strong> En desarrollo.</p><p><strong>Ámbito:</strong> Asturias.</p><p>Proyecto de investigación aplicada para diseñar trayectorias de empleo innovadoras dirigidas a personas con barreras elevadas de inclusión social y desempleo de larga duración.</p><p>Explora nichos laborales no tradicionales, vacantes no cubiertas, modelos de microemprendimiento, cooperativas de freelances y evaluación del retorno social (SROI).</p><p><strong>Relación institucional:</strong> iniciativa orientada al diálogo con el Servicio Público de Empleo del Principado de Asturias (SEPEPA), sin afirmar un acuerdo formal de colaboración.</p>",
+      "heroImageUrl": null,
+      "status": "development",
+      "visibility": "published"
+    },
+    {
+      "id": "project_nucleo",
+      "slug": "nucleo",
+      "title": "NÚCLEO — Hub Social y Familiar",
+      "category": "Apoyo familiar",
+      "shortDescription": "Hub social de apoyo integral a familias, adolescentes y conciliación entre trabajo y vida familiar.",
+      "bodyHtml": "<h2>NÚCLEO — Hub Social y Familiar</h2><p><strong>Estado:</strong> En desarrollo.</p><p><strong>Territorio previsto:</strong> Municipio de Oviedo y región de Asturias.</p><p>Espacio multifuncional proyectado para la preparación digital preprofesional de jóvenes, el acompañamiento psicoemocional de adolescentes y el apoyo a la conciliación de familias trabajadoras.</p><p><strong>Objetivos:</strong> reforzar la resiliencia psicosocial de las familias, apoyar la adaptación social de adolescentes y favorecer la empleabilidad y la conciliación.</p>",
+      "heroImageUrl": null,
+      "status": "development",
+      "visibility": "published"
+    },
+    {
+      "id": "project_acompanamiento_administrativo",
+      "slug": "orientacion-acompanamiento-administrativo",
+      "title": "Orientación y Acompañamiento Administrativo",
+      "category": "Orientación social",
+      "shortDescription": "Apoyo individual para comprender opciones, organizar documentación, solicitar citas y acceder a recursos públicos o especializados.",
+      "bodyHtml": "<h2>Orientación y Acompañamiento Administrativo</h2><p><strong>Estado:</strong> En desarrollo.</p><p><strong>Ámbito:</strong> Asturias y, cuando la situación y los recursos disponibles lo permiten, otros puntos de España.</p><p>INICIA estudia individualmente consultas de personas que afrontan dificultades administrativas, incluidas personas migrantes, solicitantes de protección internacional y otras personas en situación de vulnerabilidad. Cuando procede, puede ofrecer información inicial, apoyo para organizar documentación, solicitud de citas y orientación hacia recursos públicos o especializados.</p><p><strong>Límites del servicio:</strong> INICIA no presta representación jurídica, no sustituye a Policía, Extranjería, la Oficina de Asilo y Refugio ni otros organismos competentes, y no garantiza resultados de procedimientos administrativos.</p><p><strong>Cómo solicitar orientación:</strong> utiliza el <a href=\"/contacto\">formulario de contacto</a> o escribe por <a href=\"https://wa.me/34624865051?text=Hola%2C%20quisiera%20consultar%20sobre%20orientaci%C3%B3n%20administrativa\" target=\"_blank\" rel=\"noreferrer\">WhatsApp</a>.</p>",
+      "heroImageUrl": null,
+      "status": "development",
+      "visibility": "published"
+    },
+    {
+      "id": "project_heritage_restoration",
+      "slug": "patrimonio-comunidad-restauracion",
+      "title": "Iniciativa de Patrimonio, Comunidad y Restauración",
+      "category": "Patrimonio · Participación ciudadana",
+      "shortDescription": "Iniciativa que explora formas de proteger y recuperar espacios comunitarios y culturales mediante participación pública y financiación colaborativa.",
+      "bodyHtml": "<h2>Iniciativa de Patrimonio, Comunidad y Restauración</h2><p><strong>Estado:</strong> En preparación.</p><p><strong>Ámbito:</strong> España.</p><p>Explora modelos de protección y recuperación de espacios comunitarios y culturales valiosos mediante participación ciudadana, financiación colaborativa, alianzas y nuevos usos sociales de lugares restaurados.</p>",
+      "heroImageUrl": null,
+      "status": "preparation",
+      "visibility": "published"
+    },
+    {
+      "id": "project_internships_learning",
+      "slug": "practicas-aprendizaje",
+      "title": "Programa de Prácticas y Aprendizaje Aplicado",
+      "category": "Educación · Desarrollo profesional",
+      "shortDescription": "Programa para acercar a estudiantes y profesionales jóvenes a proyectos sociales reales mediante experiencias prácticas y cooperación educativa.",
+      "bodyHtml": "<h2>Programa de Prácticas y Aprendizaje Aplicado</h2><p><strong>Estado:</strong> En desarrollo.</p><p><strong>Ámbito:</strong> Asturias.</p><p>Programa que crea oportunidades para que estudiantes y profesionales jóvenes participen en proyectos sociales reales mediante la cooperación con instituciones educativas.</p><p>Las áreas previstas incluyen trabajo social, educación, desarrollo comunitario, comunicación, gestión de proyectos e innovación digital.</p>",
+      "heroImageUrl": null,
+      "status": "development",
+      "visibility": "published"
+    },
+    {
+      "id": "project_civic_justice_network",
+      "slug": "red-internacional-justicia-civica",
+      "title": "Red Internacional de Justicia Cívica",
+      "category": "Derechos humanos · Acción cívica",
+      "shortDescription": "Iniciativa para explorar una red internacional de organizaciones e iniciativas cívicas orientadas a defender derechos humanos y reforzar la rendición de cuentas.",
+      "bodyHtml": "<h2>Red Internacional de Justicia Cívica</h2><p><strong>Estado:</strong> En preparación.</p><p><strong>Ámbito:</strong> Internacional.</p><p>Iniciativa para explorar una red de cooperación entre organizaciones, activistas e iniciativas cívicas que defienden derechos humanos y fortalecen la rendición de cuentas pública.</p><p>Promueve el intercambio de información, la participación cívica, la cooperación internacional y la defensa del interés público.</p>",
+      "heroImageUrl": null,
+      "status": "preparation",
+      "visibility": "published"
+    },
+    {
+      "id": "project_reutiliza_forma",
+      "slug": "reutiliza-y-forma",
+      "title": "Reutiliza y Forma",
+      "category": "Economía circular · Formación",
+      "shortDescription": "Iniciativa de economía circular, reparación técnica y reducción de residuos mediante aprendizaje práctico.",
+      "bodyHtml": "<h2>Reutiliza y Forma</h2><p><strong>Estado:</strong> En preparación.</p><p><strong>Territorio previsto:</strong> Gijón y Oviedo, Principado de Asturias.</p><p>Iniciativa de economía circular con talleres prácticos de reparación y recuperación de pequeños electrodomésticos y equipos electrónicos, orientada al aprendizaje de capacidades técnicas y a la reducción de residuos.</p><p><strong>Objetivos:</strong> reducir residuos domésticos, formar en reparación técnica y promover una cultura de reutilización de recursos.</p>",
+      "heroImageUrl": null,
+      "status": "preparation",
+      "visibility": "published"
+    },
+    {
+      "id": "project_rural_futures",
+      "slug": "rural-futures",
+      "title": "Rural Futures",
+      "category": "Proyecto en preparación",
+      "shortDescription": "Propuesta comunitaria para conectar biodiversidad, acción climática, inclusión y participación digital en la Comarca de la Sidra. Su ejecución queda sujeta a la resolución de financiación LEADER.",
+      "bodyHtml": "<h2>Rural Futures</h2><p><strong>Estado:</strong> En preparación.</p><p>Propuesta comunitaria para conectar biodiversidad, acción climática, inclusión y participación digital en la Comarca de la Sidra. Su ejecución queda sujeta a la resolución de financiación LEADER.</p>",
+      "heroImageUrl": null,
+      "status": "preparation",
+      "visibility": "published"
+    },
+    {
+      "id": "project_volunteering_participation",
+      "slug": "voluntariado-participacion-ciudadana",
+      "title": "Programa de Voluntariado y Participación Ciudadana",
+      "category": "Sociedad civil · Comunidad",
+      "shortDescription": "Modelos flexibles de voluntariado para reforzar la cohesión social, conectar saberes y apoyar proyectos sociales, rurales y ambientales.",
+      "bodyHtml": "<h2>Programa de Voluntariado y Participación Ciudadana</h2><p><strong>Estado:</strong> En desarrollo.</p><p><strong>Ámbito:</strong> Asturias e internacional.</p><p>Programa que promueve modelos flexibles de voluntariado y participación ciudadana. Facilita la colaboración de jóvenes, personas expertas y voluntariado internacional en proyectos de desarrollo rural, ecología y apoyo a personas en situación de vulnerabilidad.</p><p>Incluye posibilidades de participación presencial, en línea, intercultural y de aprendizaje de capacidades.</p>",
+      "heroImageUrl": null,
+      "status": "development",
+      "visibility": "published"
+    }
+  ],
+  "translations": [
+    {
+      "id": "project_acompanamiento_administrativo_en",
+      "projectId": "project_acompanamiento_administrativo",
+      "locale": "en",
+      "title": "Administrative Guidance and Support",
+      "category": "Social orientation",
+      "shortDescription": "Individual support to understand options, organize documents, request appointments, and access public or specialized resources.",
+      "bodyHtml": "<h2>Administrative Guidance and Support</h2><p><strong>Status:</strong> In development.</p><p><strong>Scope:</strong> Asturias and, when the situation and available resources permit, other parts of Spain.</p><p>INICIA reviews individual inquiries from people facing administrative difficulties, including migrants, applicants for international protection and other people in vulnerable situations. When appropriate, it may offer initial information, support to organize documents, assistance requesting appointments and guidance toward public or specialized resources.</p><p><strong>Service limits:</strong> INICIA does not provide legal representation, does not replace the Police, Extranjería, the Office of Asylum and Refuge or other competent bodies, and does not guarantee outcomes of administrative procedures.</p><p><strong>How to request guidance:</strong> use the <a href=\"/contacto\">contact form</a> or write via <a href=\"https://wa.me/34624865051?text=Hola%2C%20quisiera%20consultar%20sobre%20orientaci%C3%B3n%20administrativa\" target=\"_blank\" rel=\"noreferrer\">WhatsApp</a>.</p>"
+    },
+    {
+      "id": "project_acompanamiento_administrativo_ru",
+      "projectId": "project_acompanamiento_administrativo",
+      "locale": "ru",
+      "title": "Административное сопровождение и консультации",
+      "category": "Социальная ориентация",
+      "shortDescription": "Индивидуальная поддержка для понимания вариантов, организации документов, записи на приёмы и доступа к государственным или специализированным ресурсам.",
+      "bodyHtml": "<h2>Административное сопровождение и консультации</h2><p><strong>Статус:</strong> В разработке.</p><p><strong>Территория:</strong> Астурия и, когда ситуация и доступные ресурсы это позволяют, другие районы Испании.</p><p>INICIA изучает индивидуальные обращения людей, сталкивающихся с административными трудностями, включая мигрантов, претендентов на международную защиту и других лиц, находящихся в уязвимом положении. При необходимости организация может предоставить первоначальную информацию, помощь в организации документов, содействие при записи на приёмы и направление к государственным или специализированным ресурсам.</p><p><strong>Ограничения услуги:</strong> INICIA не оказывает юридического представительства, не заменяет Полицию, Extranjería, Офис по делам убежища и беженцев или другие компетентные органы и не гарантирует результатов административных процедур.</p><p><strong>Как запросить консультацию:</strong> используйте <a href=\"/contacto\">форму контакта</a> или напишите через <a href=\"https://wa.me/34624865051?text=Hola%2C%20quisiera%20consultar%20sobre%20orientaci%C3%B3n%20administrativa\" target=\"_blank\" rel=\"noreferrer\">WhatsApp</a>.</p>"
+    },
+    {
+      "id": "project_acompanamiento_administrativo_uk",
+      "projectId": "project_acompanamiento_administrativo",
+      "locale": "uk",
+      "title": "Орієнтація та адміністративний супровід",
+      "category": "Соціальна орієнтація",
+      "shortDescription": "Індивідуальна підтримка для розуміння варіантів, упорядкування документів, запису на прийоми та доступу до державних або спеціалізованих ресурсів.",
+      "bodyHtml": "<h2>Орієнтація та адміністративний супровід</h2><p><strong>Статус:</strong> В розробці.</p><p><strong>Територія:</strong> Астурія та, коли ситуація й доступні ресурси це дозволяють, інші райони Іспанії.</p><p>INICIA розглядає індивідуальні звернення людей, які стикаються з адміністративними труднощами, включно з мігрантами, претендентами на міжнародний захист та іншими особами, що перебувають у вразливому становищі. У разі потреби організація може надати початкову інформацію, допомогу в упорядкуванні документів, сприяння у записі на прийоми та направлення до державних або спеціалізованих ресурсів.</p><p><strong>Обмеження послуги:</strong> INICIA не надає юридичного представництва, не замінює Поліцію, Extranjería, Офіс з питань притулку та біженців чи інші компетентні органи та не гарантує результатів адміністративних процедур.</p><p><strong>Як замовити орієнтацію:</strong> скористайтесь <a href=\"/contacto\">формою контакту</a> або напишіть через <a href=\"https://wa.me/34624865051?text=Hola%2C%20quisiera%20consultar%20sobre%20orientaci%C3%B3n%20administrativa\" target=\"_blank\" rel=\"noreferrer\">WhatsApp</a>.</p>"
+    },
+    {
+      "id": "project_acompanamiento_sociosanitario_en",
+      "projectId": "project_acompanamiento_sociosanitario",
+      "locale": "en",
+      "title": "Social and Sociosanitary Accompaniment",
+      "category": "Social support",
+      "shortDescription": "Individual guidance to learn about social and healthcare resources, prepare procedures and facilitate referrals when appropriate.",
+      "bodyHtml": "<h2>Social and Sociosanitary Accompaniment</h2><p><strong>Status:</strong> In development.</p><p><strong>Scope:</strong> Asturias and, when the situation and the available resources allow, other parts of Spain.</p><p>INICIA examines each request individually when a sick person, a family or a person in a situation of vulnerability needs guidance to learn about social or healthcare resources, prepare procedures or identify possible referral pathways.</p><p><strong>Limits of the service:</strong> INICIA does not make diagnoses, does not prescribe treatments and does not replace medical, healthcare or emergency care. Clinical care always corresponds to the competent health services.</p><p><strong>How to request guidance:</strong> use the <a href=\"/contacto\">contact form</a> or write via <a href=\"https://wa.me/34624865051?text=Hola%2C%20quisiera%20consultar%20sobre%20acompa%C3%B1amiento%20social\" target=\"_blank\" rel=\"noreferrer\">WhatsApp</a>.</p>"
+    },
+    {
+      "id": "project_acompanamiento_sociosanitario_ru",
+      "projectId": "project_acompanamiento_sociosanitario",
+      "locale": "ru",
+      "title": "Социальное и социально-медицинское сопровождение",
+      "category": "Социальная поддержка",
+      "shortDescription": "Индивидуальная консультация для ознакомления с социальными и медицинскими ресурсами, подготовки оформлений и содействия в перенаправлениях, когда это уместно.",
+      "bodyHtml": "<h2>Социальное и социально-медицинское сопровождение</h2><p><strong>Статус:</strong> В разработке.</p><p><strong>Территория:</strong> Астурия и, когда ситуация и имеющиеся ресурсы это позволяют, другие части Испании.</p><p>INICIA рассматривает каждую заявку индивидуально, когда человеку, семье или лицу в уязвимом положении требуется ориентация, чтобы узнать о социальных или медицинских ресурсах, подготовить оформления или определить возможные пути перенаправления.</p><p><strong>Ограничения услуги:</strong> INICIA не ставит диагнозы, не назначает лечения и не заменяет медицинскую, лечебную или экстренную помощь. Клиническое обслуживание всегда находится в ведении компетентных служб здравоохранения.</p><p><strong>Как запросить консультацию:</strong> используйте <a href=\"/contacto\">форму обратной связи</a> или напишите в <a href=\"https://wa.me/34624865051?text=Hola%2C%20quisiera%20consultar%20sobre%20acompa%C3%B1amiento%20social\" target=\"_blank\" rel=\"noreferrer\">WhatsApp</a>.</p>"
+    },
+    {
+      "id": "project_acompanamiento_sociosanitario_uk",
+      "projectId": "project_acompanamiento_sociosanitario",
+      "locale": "uk",
+      "title": "Соціальне та соціально-медичне супроводження",
+      "category": "Соціальна підтримка",
+      "shortDescription": "Індивідуальна орієнтація для ознайомлення з соціальними та медичними ресурсами, підготовки оформлень і сприяння в направленнях, коли це доречно.",
+      "bodyHtml": "<h2>Соціальне та соціально-медичне супроводження</h2><p><strong>Статус:</strong> У стадії розробки.</p><p><strong>Територія:</strong> Астурія та, коли ситуація і наявні ресурси це дозволяють, інші частини Іспанії.</p><p>INICIA розглядає кожен запит індивідуально, коли особі, сім’ї або людині в уразливому становищі потрібна орієнтація щодо соціальних чи медичних ресурсів, підготовки оформлень або виявлення можливих шляхів для направлення.</p><p><strong>Обмеження послуги:</strong> INICIA не ставить діагнозів, не призначає лікування і не замінює медичну, лікувальну чи невідкладну допомогу. Клінічну допомогу завжди надають компетентні служби охорони здоров’я.</p><p><strong>Як замовити консультацію:</strong> скористайтеся <a href=\"/contacto\">контактною формою</a> або напишіть у <a href=\"https://wa.me/34624865051?text=Hola%2C%20quisiera%20consultar%20sobre%20acompa%C3%B1amiento%20social\" target=\"_blank\" rel=\"noreferrer\">WhatsApp</a>.</p>"
+    },
+    {
+      "id": "project_anticorruption_en",
+      "projectId": "project_anticorruption",
+      "locale": "en",
+      "title": "International Anti-Corruption Initiative",
+      "category": "Transparency · Civic action",
+      "shortDescription": "Initiative to explore a civic cooperation platform focused on transparency, accountability and the prevention of corruption.",
+      "bodyHtml": "<h2>International Anti-Corruption Initiative</h2><p><strong>Status:</strong> In preparation.</p><p><strong>Scope:</strong> International.</p><p>Initiative exploring a cooperation platform among civil society organizations and people committed to transparency and public accountability.</p><p>Possible lines include documentation, research, cooperation, information exchange, civic advocacy and preventive awareness-raising.</p>"
+    },
+    {
+      "id": "project_anticorruption_ru",
+      "projectId": "project_anticorruption",
+      "locale": "ru",
+      "title": "Международная антикоррупционная инициатива",
+      "category": "Прозрачность · Гражданская активность",
+      "shortDescription": "Инициатива по изучению платформы гражданского сотрудничества, ориентированной на прозрачность, подотчётность и предотвращение коррупции.",
+      "bodyHtml": "<h2>Международная антикоррупционная инициатива</h2><p><strong>Статус:</strong> В подготовке.</p><p><strong>Сфера:</strong> Международная.</p><p>Инициатива, изучающая платформу для сотрудничества организаций гражданского общества и людей, приверженных прозрачности и общественной подотчётности.</p><p>Возможные направления включают документацию, исследования, сотрудничество, обмен информацией, гражданскую адвокацию и профилактическое повышение осведомлённости.</p>"
+    },
+    {
+      "id": "project_anticorruption_uk",
+      "projectId": "project_anticorruption",
+      "locale": "uk",
+      "title": "Міжнародна антикорупційна ініціатива",
+      "category": "Прозорість · Громадянська активність",
+      "shortDescription": "Ініціатива з вивчення платформи громадянського співробітництва, спрямованої на прозорість, звітність і запобігання корупції.",
+      "bodyHtml": "<h2>Міжнародна антикорупційна ініціатива</h2><p><strong>Статус:</strong> У підготовці.</p><p><strong>Сфера:</strong> Міжнародна.</p><p>Ініціатива, що вивчає платформу для співпраці громадянських організацій і людей, відданих прозорості та публічній підзвітності.</p><p>Можливі напрямки включають документацію, дослідження, співпрацю, обмін інформацією, громадянську адвокацію та превентивне підвищення обізнаності.</p>"
+    },
+    {
+      "id": "project_apoyo_alimentario_en",
+      "projectId": "project_apoyo_alimentario",
+      "locale": "en",
+      "title": "Individualized Food Assistance",
+      "category": "Basic needs",
+      "shortDescription": "Individual assessment of requests and, when the situation and available resources allow, support through food parcels or referral to appropriate resources.",
+      "bodyHtml": "<h2>Individualized Food Assistance</h2><p><strong>Status:</strong> In development.</p><p><strong>Scope:</strong> Asturias and, when the situation and available resources allow, other parts of Spain.</p><p>INICIA receives requests from people and households in difficult life situations. Each case is assessed individually. When appropriate and if available, the organization can provide a food parcel or direct people to appropriate resources.</p><p><strong>Important:</strong> the assistance is not automatic or periodic; it depends on the individual assessment and on the available resources.</p><p><strong>How to request guidance:</strong> use the <a href=\"/contacto\">contact form</a> or write via <a href=\"https://wa.me/34624865051?text=Hola%2C%20quisiera%20consultar%20sobre%20apoyo%20alimentario\" target=\"_blank\" rel=\"noreferrer\">WhatsApp</a>.</p>"
+    },
+    {
+      "id": "project_apoyo_alimentario_ru",
+      "projectId": "project_apoyo_alimentario",
+      "locale": "ru",
+      "title": "Индивидуальная продовольственная помощь",
+      "category": "Основные потребности",
+      "shortDescription": "Индивидуальное рассмотрение запросов и, когда ситуация и доступные ресурсы позволяют, помощь в виде продовольственных наборов или направление к соответствующим ресурсам.",
+      "bodyHtml": "<h2>Индивидуальная продовольственная помощь</h2><p><strong>Статус:</strong> В разработке.</p><p><strong>Область:</strong> Астурия и, когда ситуация и доступные ресурсы позволяют, другие части Испании.</p><p>INICIA принимает запросы от людей и домохозяйств, находящихся в трудной жизненной ситуации. Каждый случай рассматривается индивидуально. Когда это целесообразно и есть возможность, организация может предоставить продовольственный набор или направить к соответствующим ресурсам.</p><p><strong>Важно:</strong> помощь не является автоматической или регулярной; она зависит от индивидуальной оценки и доступных ресурсов.</p><p><strong>Как запросить консультацию:</strong> используйте <a href=\"/contacto\">контактную форму</a> или напишите через <a href=\"https://wa.me/34624865051?text=Hola%2C%20quisiera%20consultar%20sobre%20apoyo%20alimentario\" target=\"_blank\" rel=\"noreferrer\">WhatsApp</a>.</p>"
+    },
+    {
+      "id": "project_apoyo_alimentario_uk",
+      "projectId": "project_apoyo_alimentario",
+      "locale": "uk",
+      "title": "Індивідуальна продовольча допомога",
+      "category": "Базові потреби",
+      "shortDescription": "Індивідуальне вивчення звернень і, коли ситуація та наявні ресурси дозволяють, допомога у вигляді продуктових наборів або перенаправлення до відповідних ресурсів.",
+      "bodyHtml": "<h2>Індивідуальна продовольча допомога</h2><p><strong>Статус:</strong> У стадії розробки.</p><p><strong>Масштаб:</strong> Астурія і, коли ситуація та наявні ресурси дозволяють, інші частини Іспанії.</p><p>INICIA отримує звернення від людей і домогосподарств у складних життєвих ситуаціях. Кожен випадок розглядається індивідуально. Коли це доречно і є можливість, організація може надати продуктовий набір або спрямувати до відповідних ресурсів.</p><p><strong>Важливо:</strong> допомога не є автоматичною або періодичною; вона залежить від індивідуальної оцінки та наявних ресурсів.</p><p><strong>Як попросити консультацію:</strong> скористайтеся <a href=\"/contacto\">формою контакту</a> або напишіть через <a href=\"https://wa.me/34624865051?text=Hola%2C%20quisiera%20consultar%20sobre%20apoyo%20alimentario\" target=\"_blank\" rel=\"noreferrer\">WhatsApp</a>.</p>"
+    },
+    {
+      "id": "project_civic_ai_commons_en",
+      "projectId": "project_civic_ai_commons",
+      "locale": "en",
+      "title": "INICIA Civic AI Commons",
+      "category": "Digital innovation · Artificial intelligence",
+      "shortDescription": "Open initiative to explore responsible, transparent and public-interest-oriented AI tools for civil society.",
+      "bodyHtml": "<h2>INICIA Civic AI Commons</h2><p><strong>Status:</strong> In development.</p><p><strong>Scope:</strong> International.</p><p>Open initiative that explores responsible, transparent and public-interest-oriented artificial intelligence tools for civil society organizations.</p><p>Its lines of work include document analysis, access to public information, management of social programs, research, civic participation and administrative automation, always with human oversight.</p>"
+    },
+    {
+      "id": "project_civic_ai_commons_ru",
+      "projectId": "project_civic_ai_commons",
+      "locale": "ru",
+      "title": "INICIA Civic AI Commons",
+      "category": "Цифровые инновации · Искусственный интеллект",
+      "shortDescription": "Открытая инициатива по изучению ответственных, прозрачных и ориентированных на общественные интересы инструментов ИИ для гражданского общества.",
+      "bodyHtml": "<h2>INICIA Civic AI Commons</h2><p><strong>Статус:</strong> В разработке.</p><p><strong>Масштаб:</strong> Международный.</p><p>Открытая инициатива, исследующая ответственные, прозрачные и ориентированные на общественные интересы инструменты искусственного интеллекта для организаций гражданского общества.</p><p>Её направления работы включают анализ документов, доступ к публичной информации, управление социальными программами, исследования, гражданское участие и административную автоматизацию, всегда под контролем человека.</p>"
+    },
+    {
+      "id": "project_civic_ai_commons_uk",
+      "projectId": "project_civic_ai_commons",
+      "locale": "uk",
+      "title": "INICIA Civic AI Commons",
+      "category": "Цифрові інновації · Штучний інтелект",
+      "shortDescription": "Відкрита ініціатива для вивчення відповідальних, прозорих та орієнтованих на суспільний інтерес інструментів ШІ для громадянського суспільства.",
+      "bodyHtml": "<h2>INICIA Civic AI Commons</h2><p><strong>Статус:</strong> У розробці.</p><p><strong>Масштаб:</strong> Міжнародний.</p><p>Відкрита ініціатива, що досліджує відповідальні, прозорі та орієнтовані на суспільний інтерес інструменти штучного інтелекту для організацій громадянського суспільства.</p><p>Її напрями роботи включають аналіз документів, доступ до публічної інформації, управління соціальними програмами, дослідження, громадську участь і адміністративну автоматизацію, завжди під людським наглядом.</p>"
+    },
+    {
+      "id": "project_civic_justice_network_en",
+      "projectId": "project_civic_justice_network",
+      "locale": "en",
+      "title": "International Network of Civic Justice",
+      "category": "Human rights · Civic action",
+      "shortDescription": "Initiative to explore an international network of organizations and civic initiatives aimed at defending human rights and strengthening accountability.",
+      "bodyHtml": "<h2>International Network of Civic Justice</h2><p><strong>Status:</strong> In preparation.</p><p><strong>Scope:</strong> International.</p><p>Initiative to explore a cooperation network among organizations, activists and civic initiatives that defend human rights and strengthen public accountability.</p><p>It promotes the exchange of information, civic participation, international cooperation and the defense of the public interest.</p>"
+    },
+    {
+      "id": "project_civic_justice_network_ru",
+      "projectId": "project_civic_justice_network",
+      "locale": "ru",
+      "title": "Международная сеть гражданской справедливости",
+      "category": "Права человека · Гражданская активность",
+      "shortDescription": "Инициатива по изучению международной сети организаций и гражданских инициатив, направленных на защиту прав человека и укрепление подотчётности.",
+      "bodyHtml": "<h2>Международная сеть гражданской справедливости</h2><p><strong>Статус:</strong> В подготовке.</p><p><strong>Сфера:</strong> Международная.</p><p>Инициатива по изучению сети сотрудничества между организациями, активистами и гражданскими инициативами, которые защищают права человека и укрепляют подотчётность.</p><p>Содействует обмену информацией, гражданскому участию, международному сотрудничеству и защите общественного интереса.</p>"
+    },
+    {
+      "id": "project_civic_justice_network_uk",
+      "projectId": "project_civic_justice_network",
+      "locale": "uk",
+      "title": "Міжнародна мережа громадянської справедливості",
+      "category": "Права людини · Громадянська активність",
+      "shortDescription": "Ініціатива з вивчення міжнародної мережі організацій та громадянських ініціатив, спрямованих на захист прав людини та посилення підзвітності.",
+      "bodyHtml": "<h2>Міжнародна мережа громадянської справедливості</h2><p><strong>Статус:</strong> Готується.</p><p><strong>Сфера:</strong> Міжнародна.</p><p>Ініціатива з вивчення мережі співпраці між організаціями, активістами та громадянськими ініціативами, які захищають права людини та зміцнюють підзвітність.</p><p>Сприяє обміну інформацією, громадянській участі, міжнародному співробітництву та захисту суспільного інтересу.</p>"
+    },
+    {
+      "id": "project_conecta_asturias_en",
+      "projectId": "project_conecta_asturias",
+      "locale": "en",
+      "title": "Conecta Asturias",
+      "category": "Social Integration · Support Network",
+      "shortDescription": "Network connecting people in situations of vulnerability with the social resources available in Asturias. Guidance, referral and comprehensive support.",
+      "bodyHtml": "<h2>Conecta Asturias</h2><p><strong>Status:</strong> In development.</p><p>Network connecting people in situations of vulnerability with the social resources available in Asturias. Guidance, referral and comprehensive support.</p>"
+    },
+    {
+      "id": "project_conecta_asturias_ru",
+      "projectId": "project_conecta_asturias",
+      "locale": "ru",
+      "title": "Conecta Asturias",
+      "category": "Социальная интеграция · Сеть поддержки",
+      "shortDescription": "Сеть, объединяющая людей в уязвимом положении с доступными в Asturias социальными ресурсами. Консультирование, направление и комплексное сопровождение.",
+      "bodyHtml": "<h2>Conecta Asturias</h2><p><strong>Статус:</strong> В разработке.</p><p>Сеть, объединяющая людей в уязвимом положении с доступными в Asturias социальными ресурсами. Консультирование, направление и комплексное сопровождение.</p>"
+    },
+    {
+      "id": "project_conecta_asturias_uk",
+      "projectId": "project_conecta_asturias",
+      "locale": "uk",
+      "title": "Conecta Asturias",
+      "category": "Соціальна інтеграція · Мережа підтримки",
+      "shortDescription": "Мережа, що з'єднує людей уразливого становища з соціальними ресурсами, доступними в Asturias. Орієнтація, направлення та комплексний супровід.",
+      "bodyHtml": "<h2>Conecta Asturias</h2><p><strong>Статус:</strong> У розробці.</p><p>Мережа, що з'єднує людей уразливого становища з соціальними ресурсами, доступними в Asturias. Орієнтація, направлення та комплексний супровід.</p>"
+    },
+    {
+      "id": "project_coop_astur_en",
+      "projectId": "project_coop_astur",
+      "locale": "en",
+      "title": "CoopAstur AgroSocial",
+      "category": "Rural Development · Social Economy",
+      "shortDescription": "Structural design for rural rebirth in Asturias. Dual architecture between Inicia Foundation and a social initiative cooperative to create sustainable employment, integrate vulnerable people and transform municipalities with fewer than 5.000 inhabitants.",
+      "bodyHtml": "<h2>CoopAstur AgroSocial</h2><p><strong>Status:</strong> In development.</p><p><strong>Territory:</strong> Asturias — rural municipalities.</p><p>Structural design for rural rebirth in Asturias. Dual architecture between Inicia Foundation and a social initiative cooperative to create sustainable employment, integrate vulnerable people and transform municipalities with fewer than 5.000 inhabitants.</p><p><strong>Planned share of women:</strong> 40%.</p>"
+    },
+    {
+      "id": "project_coop_astur_ru",
+      "projectId": "project_coop_astur",
+      "locale": "ru",
+      "title": "CoopAstur AgroSocial",
+      "category": "Развитие сельских территорий · Социальная экономика",
+      "shortDescription": "Структурный дизайн для возрождения сельских территорий в Астурии. Двойная архитектура между Inicia Foundation и кооперативом социального направления для создания устойчивых рабочих мест, интеграции уязвимых людей и преобразования муниципалитетов с населением менее 5.000 человек.",
+      "bodyHtml": "<h2>CoopAstur AgroSocial</h2><p><strong>Состояние:</strong> В разработке.</p><p><strong>Территория:</strong> Астурия — сельские муниципалитеты.</p><p>Структурный дизайн для возрождения сельских территорий в Астурии. Двойная архитектура между Inicia Foundation и кооперативом социального направления для создания устойчивых рабочих мест, интеграции уязвимых людей и преобразования муниципалитетов с населением менее 5.000 человек.</p><p><strong>Предполагаемая доля женщин:</strong> 40%.</p>"
+    },
+    {
+      "id": "project_coop_astur_uk",
+      "projectId": "project_coop_astur",
+      "locale": "uk",
+      "title": "CoopAstur AgroSocial",
+      "category": "Розвиток сільської місцевості · Соціальна економіка",
+      "shortDescription": "Структурний дизайн для відродження сільських територій в Астурією. Подвійна архітектура між Inicia Foundation та кооперативом соціальної ініціативи для створення сталого працевлаштування, інтеграції вразливих людей і трансформації муніципалітетів з населенням менше 5.000 осіб.",
+      "bodyHtml": "<h2>CoopAstur AgroSocial</h2><p><strong>Статус:</strong> У розробці.</p><p><strong>Територія:</strong> Астурія — сільські муніципалітети.</p><p>Структурний дизайн для відродження сільських територій в Астурії. Подвійна архітектура між Inicia Foundation та кооперативом соціальної ініціативи для створення сталого працевлаштування, інтеграції вразливих людей і трансформації муніципалітетів з населенням менше 5.000 осіб.</p><p><strong>Передбачена частка жінок:</strong> 40%.</p>"
+    },
+    {
+      "id": "project_digital_automation_en",
+      "projectId": "project_digital_automation",
+      "locale": "en",
+      "title": "INICIA Digital Automation",
+      "category": "Digital transformation · Civil society",
+      "shortDescription": "Initiative to strengthen the operational capacity of social organizations through responsible automation and open technologies.",
+      "bodyHtml": "<h2>INICIA Digital Automation</h2><p><strong>Status:</strong> In development.</p><p><strong>Scope:</strong> Spain and international.</p><p>Digital transformation initiative to reduce administrative barriers in civil society organizations through AI assistants, workflow automation, CRM, document processing, communication and open technologies.</p><p>The goal is to free up time and resources for the social mission, with security criteria and human oversight.</p>"
+    },
+    {
+      "id": "project_digital_automation_ru",
+      "projectId": "project_digital_automation",
+      "locale": "ru",
+      "title": "INICIA Цифровая автоматизация",
+      "category": "Цифровая трансформация · Гражданское общество",
+      "shortDescription": "Инициатива по укреплению оперативной способности социальных организаций посредством ответственной автоматизации и открытых технологий.",
+      "bodyHtml": "<h2>INICIA Цифровая автоматизация</h2><p><strong>Статус:</strong> В разработке.</p><p><strong>Охват:</strong> Испания и международный уровень.</p><p>Инициатива цифровой трансформации для снижения административных барьеров в организациях гражданского общества посредством ассистентов ИИ, автоматизации рабочих процессов, CRM, обработки документов, коммуникации и открытых технологий.</p><p>Цель — освободить время и ресурсы для социальной миссии, с критериями безопасности и человеческим надзором.</p>"
+    },
+    {
+      "id": "project_digital_automation_uk",
+      "projectId": "project_digital_automation",
+      "locale": "uk",
+      "title": "INICIA Цифрова автоматизація",
+      "category": "Цифрова трансформація · Цивільне суспільство",
+      "shortDescription": "Ініціатива щодо посилення операційної спроможності соціальних організацій шляхом відповідальної автоматизації та відкритих технологій.",
+      "bodyHtml": "<h2>INICIA Цифрова автоматизація</h2><p><strong>Статус:</strong> У розробці.</p><p><strong>Охоплення:</strong> Іспанія та міжнародний рівень.</p><p>Ініціатива цифрової трансформації для зменшення адміністративних бар'єрів в організаціях громадянського суспільства за допомогою асистентів ШІ, автоматизації робочих процесів, CRM, обробки документів, комунікації та відкритих технологій.</p><p>Мета — звільнити час і ресурси для соціальної місії, з критеріями безпеки та людським наглядом.</p>"
+    },
+    {
+      "id": "project_education_opportunity_en",
+      "projectId": "project_education_opportunity",
+      "locale": "en",
+      "title": "INICIA Education & Opportunity",
+      "category": "Education · Social inclusion",
+      "shortDescription": "Program to expand opportunities through practical education, digital skills, social participation, entrepreneurship and professional development.",
+      "bodyHtml": "<h2>INICIA Education & Opportunity</h2><p><strong>Status:</strong> In development.</p><p><strong>Scope:</strong> Spain and international.</p><p>The program is aimed at creating opportunities through practical education, digital skills, social participation, entrepreneurship, professional development and international cooperation.</p><p>Its purpose is to support the development of knowledge and confidence to participate actively in society and build independent pathways.</p>"
+    },
+    {
+      "id": "project_education_opportunity_ru",
+      "projectId": "project_education_opportunity",
+      "locale": "ru",
+      "title": "INICIA Образование и возможности",
+      "category": "Образование · Социальное включение",
+      "shortDescription": "Программа по расширению возможностей посредством практического образования, цифровых компетенций, общественного участия, предпринимательства и профессионального развития.",
+      "bodyHtml": "<h2>INICIA Образование и возможности</h2><p><strong>Состояние:</strong> В разработке.</p><p><strong>Охват:</strong> Испания и международный уровень.</p><p>Программа, направленная на создание возможностей через практическое образование, цифровые компетенции, общественное участие, предпринимательство, профессиональное развитие и международное сотрудничество.</p><p>Её цель — поддерживать развитие знаний и уверенности для активного участия в обществе и построения самостоятельных траекторий.</p>"
+    },
+    {
+      "id": "project_education_opportunity_uk",
+      "projectId": "project_education_opportunity",
+      "locale": "uk",
+      "title": "INICIA Освіта та можливості",
+      "category": "Освіта · Соціальна інклюзія",
+      "shortDescription": "Програма для розширення можливостей через практичну освіту, цифрові компетенції, суспільну участь, підприємництво та професійний розвиток.",
+      "bodyHtml": "<h2>INICIA Освіта та можливості</h2><p><strong>Статус:</strong> У процесі розробки.</p><p><strong>Поширення:</strong> Іспанія та міжнародний рівень.</p><p>Програма спрямована на створення можливостей через практичну освіту, цифрові компетенції, суспільну участь, підприємництво, професійний розвиток та міжнародне співробітництво.</p><p>Її мета — підтримувати розвиток знань і впевненості для активної участі в суспільстві та побудови самостійних траєкторій.</p>"
+    },
+    {
+      "id": "project_family_integration_en",
+      "projectId": "project_family_integration",
+      "locale": "en",
+      "title": "Humanitarian and Social Integration Program for Families",
+      "category": "Social support · Integration",
+      "shortDescription": "Implemented historical programme of comprehensive support for families facing high social vulnerability or forced displacement.",
+      "bodyHtml": "<h2>Humanitarian and Social Integration Programme for Families</h2><p><strong>Status:</strong> Implemented historical programme.</p><p><strong>Scope:</strong> Asturias.</p><p>A comprehensive support programme for families facing high social vulnerability or forced displacement.</p><p><strong>Historical data reported by INICIA:</strong> support for the social and language adaptation of 317 Ukrainian families; social accompaniment and legally oriented guidance for 129 families from other countries and local residents facing barriers of social isolation.</p><p>The programme does not replace professional legal representation or the competent public services.</p>"
+    },
+    {
+      "id": "project_family_integration_ru",
+      "projectId": "project_family_integration",
+      "locale": "ru",
+      "title": "Гуманитарная и социальная программа интеграции семей",
+      "category": "Социальное сопровождение · Интеграция",
+      "shortDescription": "Реализованная историческая программа комплексного сопровождения семей, находящихся в ситуации высокой социальной уязвимости или вынужденного перемещения.",
+      "bodyHtml": "<h2>Гуманитарная программа и программа социальной интеграции семей</h2><p><strong>Статус:</strong> Реализованная историческая программа.</p><p><strong>Территория:</strong> Астурия.</p><p>Программа комплексного сопровождения семей, находящихся в ситуации высокой социальной уязвимости или вынужденного перемещения.</p><p><strong>Исторические данные, заявленные INICIA:</strong> поддержка социальной и языковой адаптации 317 украинских семей; социальное сопровождение и юридически ориентированное консультирование 129 семей из других стран и местных жителей, столкнувшихся с социальной изоляцией.</p><p>Программа не заменяет профессиональное юридическое представительство или компетентные государственные службы.</p>"
+    },
+    {
+      "id": "project_family_integration_uk",
+      "projectId": "project_family_integration",
+      "locale": "uk",
+      "title": "Гуманітарна та соціальна програма інтеграції сімей",
+      "category": "Соціальний супровід · Інтеграція",
+      "shortDescription": "Реалізована історична програма комплексного супроводу сімей, які перебувають у ситуації високої соціальної вразливості або вимушеного переміщення.",
+      "bodyHtml": "<h2>Гуманітарна програма та програма соціальної інтеграції сімей</h2><p><strong>Статус:</strong> Реалізована історична програма.</p><p><strong>Територія:</strong> Астурія.</p><p>Програма комплексного супроводу сімей, які перебувають у ситуації високої соціальної вразливості або вимушеного переміщення.</p><p><strong>Історичні дані, заявлені INICIA:</strong> підтримка соціальної та мовної адаптації 317 українських сімей; соціальний супровід і юридично орієнтоване консультування 129 сімей з інших країн та місцевих жителів, які зіткнулися із соціальною ізоляцією.</p><p>Програма не замінює професійне юридичне представництво або компетентні державні служби.</p>"
+    },
+    {
+      "id": "project_heritage_restoration_en",
+      "projectId": "project_heritage_restoration",
+      "locale": "en",
+      "title": "Heritage, Community and Restoration Initiative",
+      "category": "Heritage · Citizen participation",
+      "shortDescription": "Initiative that explores ways to protect and recover community and cultural spaces through public participation and collaborative financing.",
+      "bodyHtml": "<h2>Heritage, Community and Restoration Initiative</h2><p><strong>Status:</strong> In preparation.</p><p><strong>Scope:</strong> Spain.</p><p>Explores models of protection and recovery of valuable community and cultural spaces through citizen participation, collaborative financing, partnerships and new social uses of restored places.</p>"
+    },
+    {
+      "id": "project_heritage_restoration_ru",
+      "projectId": "project_heritage_restoration",
+      "locale": "ru",
+      "title": "Инициатива «Наследие, сообщество и реставрация»",
+      "category": "Наследие · Гражданское участие",
+      "shortDescription": "Инициатива, изучающая способы защиты и восстановления общественных и культурных пространств посредством участия граждан и коллективного финансирования.",
+      "bodyHtml": "<h2>Инициатива «Наследие, сообщество и реставрация»</h2><p><strong>Статус:</strong> В подготовке.</p><p><strong>Охват:</strong> Испания.</p><p>Изучает модели защиты и восстановления ценных общественных и культурных пространств посредством участия граждан, коллективного финансирования, партнёрств и новых социальных функций восстановленных мест.</p>"
+    },
+    {
+      "id": "project_heritage_restoration_uk",
+      "projectId": "project_heritage_restoration",
+      "locale": "uk",
+      "title": "Ініціатива спадщини, громади та реставрації",
+      "category": "Спадщина · Громадська участь",
+      "shortDescription": "Ініціатива, яка досліджує способи захисту та відновлення громадських і культурних просторів через громадську участь та колективне фінансування.",
+      "bodyHtml": "<h2>Ініціатива спадщини, громади та реставрації</h2><p><strong>Статус:</strong> У підготовці.</p><p><strong>Охоплення:</strong> Іспанія.</p><p>Досліджує моделі захисту та відновлення цінних громадських і культурних просторів через участь громадян, колективне фінансування, партнерства та нові соціальні використання відновлених місць.</p>"
+    },
+    {
+      "id": "project_internships_learning_en",
+      "projectId": "project_internships_learning",
+      "locale": "en",
+      "title": "Internships and Applied Learning Program",
+      "category": "Education · Professional development",
+      "shortDescription": "Program to connect students and young professionals with real social projects through practical experiences and educational cooperation.",
+      "bodyHtml": "<h2>Internships and Applied Learning Program</h2><p><strong>Status:</strong> In development.</p><p><strong>Scope:</strong> Asturias.</p><p>Program that creates opportunities for students and young professionals to participate in real social projects through cooperation with educational institutions.</p><p>The planned areas include social work, education, community development, communication, project management and digital innovation.</p>"
+    },
+    {
+      "id": "project_internships_learning_ru",
+      "projectId": "project_internships_learning",
+      "locale": "ru",
+      "title": "Программа стажировок и прикладного обучения",
+      "category": "Образование · Профессиональное развитие",
+      "shortDescription": "Программа, направленная на сближение студентов и молодых специалистов с реальными социальными проектами посредством практического опыта и образовательного сотрудничества.",
+      "bodyHtml": "<h2>Программа стажировок и прикладного обучения</h2><p><strong>Статус:</strong> В разработке.</p><p><strong>Регион:</strong> Астурия.</p><p>Программа, создающая возможности для участия студентов и молодых специалистов в реальных социальных проектах через сотрудничество с образовательными учреждениями.</p><p>Предполагаемые области включают социальную работу, образование, развитие сообществ, коммуникации, управление проектами и цифровые инновации.</p>"
+    },
+    {
+      "id": "project_internships_learning_uk",
+      "projectId": "project_internships_learning",
+      "locale": "uk",
+      "title": "Програма стажувань і прикладного навчання",
+      "category": "Освіта · Професійний розвиток",
+      "shortDescription": "Програма для зближення студентів і молодих фахівців з реальними соціальними проєктами через практичний досвід і освітню співпрацю.",
+      "bodyHtml": "<h2>Програма стажувань і прикладного навчання</h2><p><strong>Статус:</strong> У розробці.</p><p><strong>Сфера:</strong> Астурія.</p><p>Програма, яка створює можливості для студентів і молодих фахівців брати участь у реальних соціальних проєктах через співпрацю з навчальними закладами.</p><p>Заплановані сфери включають соціальну роботу, освіту, розвиток громад, комунікації, управління проєктами та цифрові інновації.</p>"
+    },
+    {
+      "id": "project_nucleo_en",
+      "projectId": "project_nucleo",
+      "locale": "en",
+      "title": "NÚCLEO — Social and Family Hub",
+      "category": "Family support",
+      "shortDescription": "Social hub offering comprehensive support to families, adolescents, and work–life reconciliation.",
+      "bodyHtml": "<h2>NÚCLEO — Social and Family Hub</h2><p><strong>Status:</strong> In development.</p><p><strong>Planned territory:</strong> Municipality of Oviedo and the region of Asturias.</p><p>Multifunctional space planned for pre-professional digital preparation of young people, psycho-emotional accompaniment of adolescents, and support for work–family reconciliation for working families.</p><p><strong>Objectives:</strong> reinforce families' psychosocial resilience, support adolescents' social adaptation, and favour employability and reconciliation.</p>"
+    },
+    {
+      "id": "project_nucleo_ru",
+      "projectId": "project_nucleo",
+      "locale": "ru",
+      "title": "NÚCLEO — Социальный и семейный хаб",
+      "category": "Семейная поддержка",
+      "shortDescription": "Социальный хаб, обеспечивающий комплексную поддержку семей, подростков и содействие сочетанию работы и семейной жизни.",
+      "bodyHtml": "<h2>NÚCLEO — Социальный и семейный хаб</h2><p><strong>Статус:</strong> В разработке.</p><p><strong>Предполагаемая территория:</strong> Муниципалитет Овьедо и регион Астурия.</p><p>Многофункциональное пространство, запланированное для предпрофессиональной цифровой подготовки молодёжи, психоэмоциональной поддержки подростков и помощи в совмещении работы и семейной жизни для работающих семей.</p><p><strong>Цели:</strong> укрепить психосоциальную устойчивость семей, поддержать социальную адаптацию подростков и способствовать трудоустройству и совмещению работы и семейной жизни.</p>"
+    },
+    {
+      "id": "project_nucleo_uk",
+      "projectId": "project_nucleo",
+      "locale": "uk",
+      "title": "NÚCLEO — Соціальний і сімейний хаб",
+      "category": "Сімейна підтримка",
+      "shortDescription": "Соціальний хаб, що надає комплексну підтримку сім'ям, підліткам і сприяє поєднанню роботи та сімейного життя.",
+      "bodyHtml": "<h2>NÚCLEO — Соціальний і сімейний хаб</h2><p><strong>Статус:</strong> У розробці.</p><p><strong>Територія запланована:</strong> Муніципалітет Ов'єдо та регіон Астурія.</p><p>Багатофункціональний простір, запланований для передпрофесійної цифрової підготовки молоді, психоемоційного супроводу підлітків та підтримки поєднання роботи й сімейного життя для працюючих сімей.</p><p><strong>Цілі:</strong> посилити психосоціальну стійкість сімей, підтримати соціальну адаптацію підлітків та сприяти підвищенню працевлаштованості і поєднанню роботи й сімейного життя.</p>"
+    },
+    {
+      "id": "project_reutiliza_forma_en",
+      "projectId": "project_reutiliza_forma",
+      "locale": "en",
+      "title": "Reuse and Train",
+      "category": "Circular economy · Training",
+      "shortDescription": "Circular economy initiative, technical repair and waste reduction through hands-on learning.",
+      "bodyHtml": "<h2>Reuse and Train</h2><p><strong>Status:</strong> In preparation.</p><p><strong>Planned territory:</strong> Gijón and Oviedo, Principado de Asturias.</p><p>Circular economy initiative with hands-on workshops for repair and recovery of small appliances and electronic equipment, aimed at learning technical skills and reducing waste.</p><p><strong>Objectives:</strong> reduce household waste, train in technical repair and promote a culture of resource reuse.</p>"
+    },
+    {
+      "id": "project_reutiliza_forma_ru",
+      "projectId": "project_reutiliza_forma",
+      "locale": "ru",
+      "title": "Повторное использование и обучение",
+      "category": "Экономика замкнутого цикла · Обучение",
+      "shortDescription": "Инициатива экономики замкнутого цикла, технического ремонта и сокращения отходов посредством практического обучения.",
+      "bodyHtml": "<h2>Повторное использование и обучение</h2><p><strong>Статус:</strong> En preparación.</p><p><strong>Территория prevista:</strong> Gijón y Oviedo, Principado de Asturias.</p><p>Инициатива экономики замкнутого цикла с практическими мастерскими по ремонту и восстановлению мелкой бытовой техники и электронного оборудования, ориентированная на обучение техническим навыкам и на сокращение отходов.</p><p><strong>Цели:</strong> сократить бытовые отходы, обучить техническому ремонту и продвигать культуру повторного использования ресурсов.</p>"
+    },
+    {
+      "id": "project_reutiliza_forma_uk",
+      "projectId": "project_reutiliza_forma",
+      "locale": "uk",
+      "title": "Повторне використання та навчання",
+      "category": "Економіка замкнутого циклу · Навчання",
+      "shortDescription": "Ініціатива економіки замкнутого циклу, технічного ремонту та скорочення відходів шляхом практичного навчання.",
+      "bodyHtml": "<h2>Повторне використання та навчання</h2><p><strong>Статус:</strong> En preparación.</p><p><strong>Територія prevista:</strong> Gijón y Oviedo, Principado de Asturias.</p><p>Ініціатива економіки замкнутого циклу з практичними майстернями з ремонту та відновлення невеликих побутових приладів і електронної техніки, спрямована на опанування технічних навичок і на зменшення кількості відходів.</p><p><strong>Цілі:</strong> зменшити побутові відходи, навчити технічному ремонту та сприяти культурі повторного використання ресурсів.</p>"
+    },
+    {
+      "id": "project_rural_futures_en",
+      "projectId": "project_rural_futures",
+      "locale": "en",
+      "title": "Rural Futures",
+      "category": "Project in preparation",
+      "shortDescription": "Community proposal to connect biodiversity, climate action, inclusion and digital participation in the Comarca de la Sidra. Its execution is subject to the LEADER funding resolution.",
+      "bodyHtml": "<h2>Rural Futures</h2><p><strong>Status:</strong> In preparation.</p><p>Community proposal to connect biodiversity, climate action, inclusion and digital participation in the Comarca de la Sidra. Its execution is subject to the LEADER funding resolution.</p>"
+    },
+    {
+      "id": "project_rural_futures_ru",
+      "projectId": "project_rural_futures",
+      "locale": "ru",
+      "title": "Rural Futures",
+      "category": "Проект в подготовке",
+      "shortDescription": "Общественная инициатива по объединению биоразнообразия, климатических действий, инклюзии и цифрового участия в Comarca de la Sidra. Её реализация зависит от решения по финансированию LEADER.",
+      "bodyHtml": "<h2>Rural Futures</h2><p><strong>Состояние:</strong> В подготовке.</p><p>Общественная инициатива, направленная на соединение биоразнообразия, климатических действий, инклюзии и цифрового участия в Comarca de la Sidra. Её реализация зависит от решения по финансированию LEADER.</p>"
+    },
+    {
+      "id": "project_rural_futures_uk",
+      "projectId": "project_rural_futures",
+      "locale": "uk",
+      "title": "Rural Futures",
+      "category": "Проєкт у підготовці",
+      "shortDescription": "Громадська пропозиція для поєднання біорізноманіття, кліматичних дій, інклюзії та цифрової участі в Comarca de la Sidra. Її виконання залежить від рішення щодо фінансування LEADER.",
+      "bodyHtml": "<h2>Rural Futures</h2><p><strong>Стан:</strong> У підготовці.</p><p>Громадська пропозиція для поєднання біорізноманіття, кліматичних дій, інклюзії та цифрової участі в Comarca de la Sidra. Її виконання залежить від рішення щодо фінансування LEADER.</p>"
+    },
+    {
+      "id": "project_rural_resources_bank_en",
+      "projectId": "project_rural_resources_bank",
+      "locale": "en",
+      "title": "Rural Resources Bank",
+      "category": "Rural development · Sustainability",
+      "shortDescription": "Initiative to identify and connect underutilized rural resources with people, projects and new opportunities for sustainable development.",
+      "bodyHtml": "<h2>Rural Resources Bank</h2><p><strong>Status:</strong> In preparation.</p><p><strong>Scope:</strong> Spain.</p><p>Initiative to identify and connect land, buildings, infrastructure, local knowledge, materials, professional capacities and community initiatives that are underutilized.</p><p>It seeks to transform dispersed resources into practical opportunities for the sustainable development of rural territories.</p>"
+    },
+    {
+      "id": "project_rural_resources_bank_ru",
+      "projectId": "project_rural_resources_bank",
+      "locale": "ru",
+      "title": "Банк сельских ресурсов",
+      "category": "Развитие сельских территорий · Устойчивое развитие",
+      "shortDescription": "Инициатива по выявлению и соединению недостаточно используемых сельских ресурсов с людьми, проектами и новыми возможностями для устойчивого развития.",
+      "bodyHtml": "<h2>Банк сельских ресурсов</h2><p><strong>Статус:</strong> В подготовке.</p><p><strong>Охват:</strong> Испания.</p><p>Инициатива по выявлению и соединению земель, зданий, инфраструктур, местных знаний, материалов, профессиональных возможностей и общественных инициатив, которые недоиспользуются.</p><p>Стремится преобразовать рассеянные ресурсы в практические возможности для устойчивого развития сельских территорий.</p>"
+    },
+    {
+      "id": "project_rural_resources_bank_uk",
+      "projectId": "project_rural_resources_bank",
+      "locale": "uk",
+      "title": "Банк сільських ресурсів",
+      "category": "Розвиток сільських територій · Сталий розвиток",
+      "shortDescription": "Ініціатива з ідентифікації та поєднання недостатньо використовуваних сільських ресурсів з людьми, проєктами та новими можливостями сталого розвитку.",
+      "bodyHtml": "<h2>Банк сільських ресурсів</h2><p><strong>Статус:</strong> У підготовці.</p><p><strong>Охоплення:</strong> Іспанія.</p><p>Ініціатива з ідентифікації та поєднання земель, будівель, інфраструктур, місцевих знань, матеріалів, професійних можливостей та громадських ініціатив, які використовуються недостатньо.</p><p>Має на меті перетворити розпорошені ресурси на практичні можливості для сталого розвитку сільських територій.</p>"
+    },
+    {
+      "id": "project_social_enterprise_lab_en",
+      "projectId": "project_social_enterprise_lab",
+      "locale": "en",
+      "title": "Social Entrepreneurship Lab",
+      "category": "Social entrepreneurship · Innovation",
+      "shortDescription": "Space to explore and develop sustainable social entrepreneurship models that generate impact, employment and innovation.",
+      "bodyHtml": "<h2>Social Entrepreneurship Lab</h2><p><strong>Status:</strong> In development.</p><p><strong>Scope:</strong> Spain.</p><p>Space to explore and develop sustainable social entrepreneurship models that generate impact, employment, innovation, economic sustainability and practical solutions to local challenges.</p>"
+    },
+    {
+      "id": "project_social_enterprise_lab_ru",
+      "projectId": "project_social_enterprise_lab",
+      "locale": "ru",
+      "title": "Лаборатория социального предпринимательства",
+      "category": "Социальное предпринимательство · Инновации",
+      "shortDescription": "Пространство для исследования и разработки устойчивых моделей социального предпринимательства, которые создают воздействие, занятость и инновации.",
+      "bodyHtml": "<h2>Лаборатория социального предпринимательства</h2><p><strong>Статус:</strong> В разработке.</p><p><strong>Охват:</strong> Испания.</p><p>Пространство для исследования и разработки устойчивых моделей социального предпринимательства, которые создают воздействие, занятость, инновации, экономическую устойчивость и практические решения местных проблем.</p>"
+    },
+    {
+      "id": "project_social_enterprise_lab_uk",
+      "projectId": "project_social_enterprise_lab",
+      "locale": "uk",
+      "title": "Лабораторія соціального підприємництва",
+      "category": "Соціальне підприємництво · Інновації",
+      "shortDescription": "Простір для дослідження та розробки стійких моделей соціального підприємництва, які створюють вплив, працевлаштування та інновації.",
+      "bodyHtml": "<h2>Лабораторія соціального підприємництва</h2><p><strong>Статус:</strong> В розробці.</p><p><strong>Сфера:</strong> Іспанія.</p><p>Простір для дослідження та розробки стійких моделей соціального підприємництва, які створюють вплив, працевлаштування, інновації, економічну стійкість та практичні рішення місцевих викликів.</p>"
+    },
+    {
+      "id": "project_social_innovation_lab_en",
+      "projectId": "project_social_innovation_lab",
+      "locale": "en",
+      "title": "Social Innovation Lab: Disruptive and Agile Employment Models",
+      "category": "Social and labour inclusion · Research",
+      "shortDescription": "Applied research project to develop innovative employment pathways for people with high barriers to social inclusion and long-term unemployment.",
+      "bodyHtml": "<h2>Social Innovation Lab</h2><p><strong>Status:</strong> In development.</p><p><strong>Scope:</strong> Asturias.</p><p>Applied research project to design innovative employment pathways aimed at people with high barriers to social inclusion and long-term unemployment.</p><p>It explores non-traditional employment niches, unfilled vacancies, micro-entrepreneurship models, freelance cooperatives and social return evaluation (SROI).</p><p><strong>Institutional relationship:</strong> initiative oriented toward dialogue with the Public Employment Service of the Principality of Asturias (SEPEPA), without asserting a formal collaboration agreement.</p>"
+    },
+    {
+      "id": "project_social_innovation_lab_ru",
+      "projectId": "project_social_innovation_lab",
+      "locale": "ru",
+      "title": "Лаборатория социальных инноваций: прорывные и гибкие модели занятости",
+      "category": "Социально-трудовая инклюзия · Исследование",
+      "shortDescription": "Прикладной исследовательский проект по разработке инновационных трудовых траекторий для людей с высокими барьерами социальной интеграции и длительной безработицей.",
+      "bodyHtml": "<h2>Лаборатория социальных инноваций</h2><p><strong>Статус:</strong> В разработке.</p><p><strong>Регион:</strong> Asturias.</p><p>Прикладной исследовательский проект по разработке инновационных трудовых траекторий для людей с высокими барьерами социальной интеграции и длительной безработицы.</p><p>Исследует нетрадиционные трудовые ниши, незаполненные вакансии, модели микропредпринимательства, кооперативы фрилансеров и оценку социального возврата (SROI).</p><p><strong>Институциональные отношения:</strong> инициатива, ориентированная на диалог с Servicio Público de Empleo del Principado de Asturias (SEPEPA), без утверждения наличия формального соглашения о сотрудничестве.</p>"
+    },
+    {
+      "id": "project_social_innovation_lab_uk",
+      "projectId": "project_social_innovation_lab",
+      "locale": "uk",
+      "title": "Лабораторія соціальних інновацій: дисраптивні та гнучкі моделі працевлаштування",
+      "category": "Соціально-трудова інклюзія · Дослідження",
+      "shortDescription": "Прикладний дослідницький проєкт для розробки інноваційних трудових траєкторій для людей із високими бар'єрами соціальної інклюзії та тривалою безробітністю.",
+      "bodyHtml": "<h2>Лабораторія соціальних інновацій</h2><p><strong>Статус:</strong> В процесі розробки.</p><p><strong>Регіон:</strong> Asturias.</p><p>Прикладний дослідницький проєкт для розробки інноваційних трудових траєкторій для людей із високими бар'єрами соціальної інклюзії та тривалою безробітністю.</p><p>Досліджує нетрадиційні трудові ніші, незаповнені вакансії, моделі мікропідприємництва, кооперативи фрілансерів та оцінку соціального повернення (SROI).</p><p><strong>Інституційні відносини:</strong> ініціатива, орієнтована на діалог із Servicio Público de Empleo del Principado de Asturias (SEPEPA), без ствердження наявності формальної угоди про співпрацю.</p>"
+    },
+    {
+      "id": "project_volunteering_participation_en",
+      "projectId": "project_volunteering_participation",
+      "locale": "en",
+      "title": "Volunteering and Citizen Participation Programme",
+      "category": "Civil society · Community",
+      "shortDescription": "Flexible volunteering models to strengthen social cohesion, connect knowledge, and support social, rural, and environmental projects.",
+      "bodyHtml": "<h2>Volunteering and Citizen Participation Programme</h2><p><strong>Status:</strong> In development.</p><p><strong>Scope:</strong> Asturias and international.</p><p>The programme promotes flexible models of volunteering and citizen participation. It facilitates the collaboration of young people, experts and international volunteers in rural development, ecology and projects supporting people in situations of vulnerability.</p><p>Includes opportunities for in-person, online, intercultural participation and skills learning.</p>"
+    },
+    {
+      "id": "project_volunteering_participation_ru",
+      "projectId": "project_volunteering_participation",
+      "locale": "ru",
+      "title": "Программа добровольчества и гражданского участия",
+      "category": "Гражданское общество · Сообщество",
+      "shortDescription": "Гибкие модели волонтёрства для укрепления социальной сплочённости, обмена знаниями и поддержки социальных, сельских и экологических проектов.",
+      "bodyHtml": "<h2>Программа добровольчества и гражданского участия</h2><p><strong>Статус:</strong> В стадии разработки.</p><p><strong>Охват:</strong> Астурия и международный уровень.</p><p>Программа, продвигающая гибкие модели волонтёрства и гражданского участия. Обеспечивает сотрудничество молодёжи, экспертов и международных волонтёров в проектах сельского развития, экологии и поддержке людей в уязвимом положении.</p><p>Включает возможности очного, онлайн и межкультурного участия, а также обучения навыкам.</p>"
+    },
+    {
+      "id": "project_volunteering_participation_uk",
+      "projectId": "project_volunteering_participation",
+      "locale": "uk",
+      "title": "Програма волонтерства та громадської участі",
+      "category": "Цивільне суспільство · Спільнота",
+      "shortDescription": "Гнучкі моделі волонтерства для посилення соціальної згуртованості, поєднання знань та підтримки соціальних, сільських і екологічних проєктів.",
+      "bodyHtml": "<h2>Програма волонтерства та громадської участі</h2><p><strong>Стан:</strong> У розробці.</p><p><strong>Охоплення:</strong> Астурія та міжнародний рівень.</p><p>Програма, яка пропагує гнучкі моделі волонтерства та громадської участі. Вона сприяє співпраці молоді, експертів і міжнародних волонтерів у проєктах сільського розвитку, екології та підтримки людей у вразливому становищі.</p><p>Включає можливості для очної, онлайн, міжкультурної участі та навчання навичкам.</p>"
+    }
+  ]
+}

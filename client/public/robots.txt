@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /solicitud/
+
+Sitemap: https://iniciafoundation.org/sitemap.xml

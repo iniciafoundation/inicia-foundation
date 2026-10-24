@@ -1,0 +1,46 @@
+import { useEffect } from "react";
+import { useLocation } from "wouter";
+import { getSiteMetadata } from "@/lib/seo";
+
+const publicOrigin = "https://iniciafoundation.org";
+
+function upsertMeta(selector: string, attributes: Record<string, string>) {
+  let element = document.head.querySelector<HTMLMetaElement>(selector);
+  if (!element) {
+    element = document.createElement("meta");
+    document.head.appendChild(element);
+  }
+  Object.entries(attributes).forEach(([key, value]) => element!.setAttribute(key, value));
+}
+
+function upsertCanonical(href: string) {
+  let element = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+  if (!element) {
+    element = document.createElement("link");
+    element.rel = "canonical";
+    document.head.appendChild(element);
+  }
+  element.href = href;
+}
+
+export function SiteMetadata() {
+  const [pathname] = useLocation();
+
+  useEffect(() => {
+    const metadata = getSiteMetadata(pathname);
+    const canonical = `${publicOrigin}${pathname === "/" ? "/" : pathname.replace(/\/$/, "")}`;
+    document.title = metadata.title;
+    document.documentElement.lang = "es";
+    upsertMeta('meta[name="description"]', { name: "description", content: metadata.description });
+    upsertMeta('meta[name="robots"]', { name: "robots", content: metadata.robots });
+    upsertMeta('meta[property="og:title"]', { property: "og:title", content: metadata.title });
+    upsertMeta('meta[property="og:description"]', { property: "og:description", content: metadata.description });
+    upsertMeta('meta[property="og:site_name"]', { property: "og:site_name", content: brand });
+    upsertMeta('meta[property="og:type"]', { property: "og:type", content: "website" });
+    upsertCanonical(canonical);
+  }, [pathname]);
+
+  return null;
+}
+
+const brand = "INICIA Foundation";

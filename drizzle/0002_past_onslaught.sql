@@ -1,0 +1,2 @@
+ALTER TABLE `applications` ADD `retentionStatus` enum('pending_legal_review','retention_review_due','closed') DEFAULT 'pending_legal_review' NOT NULL;--> statement-breakpoint
+ALTER TABLE `applications` ADD `retentionPolicyReference` varchar(255);
