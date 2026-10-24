@@ -8,10 +8,10 @@ const HORIZONTAL_LOGO = publicAssets.horizontalLogo;
 const MARK_LOGO = publicAssets.markLogo;
 
 const copy: Record<Locale, { items: readonly [string, string][]; donate: string; open: string; close: string; place: string }> = {
-  es: { items: [["Quiénes somos", "/#quienes-somos"], ["Proyectos", "/proyectos"], ["Misión", "/mision"], ["Ideología", "/ideologia"], ["Galería", "/galeria"], ["Colaborar", "/colaborar"], ["Contacto", "/contacto"]], donate: "Donar", open: "Abrir menú", close: "Cerrar menú", place: "INICIA Foundation · Asturias, España" },
-  en: { items: [["About us", "/#quienes-somos"], ["Projects", "/proyectos"], ["Mission", "/mision"], ["Ideology", "/ideologia"], ["Gallery", "/galeria"], ["Get involved", "/colaborar"], ["Contact", "/contacto"]], donate: "Donate", open: "Open menu", close: "Close menu", place: "INICIA Foundation · Asturias, Spain" },
-  ru: { items: [["О нас", "/#quienes-somos"], ["Проекты", "/proyectos"], ["Миссия", "/mision"], ["Идеология", "/ideologia"], ["Галерея", "/galeria"], ["Участвовать", "/colaborar"], ["Контакты", "/contacto"]], donate: "Поддержать", open: "Открыть меню", close: "Закрыть меню", place: "INICIA Foundation · Астурия, Испания" },
-  uk: { items: [["Про нас", "/#quienes-somos"], ["Проєкти", "/proyectos"], ["Місія", "/mision"], ["Ідеологія", "/ideologia"], ["Галерея", "/galeria"], ["Долучитися", "/colaborar"], ["Контакти", "/contacto"]], donate: "Підтримати", open: "Відкрити меню", close: "Закрити меню", place: "INICIA Foundation · Астурія, Іспанія" },
+  es: { items: [["Quiénes somos", "/#quienes-somos"], ["Proyectos", "/proyectos"], ["Misión", "/mision"], ["Ideología", "/ideologia"], ["Alianzas", "/alianzas"], ["Colaborar", "/colaborar"], ["Contacto", "/contacto"]], donate: "Donar", open: "Abrir menú", close: "Cerrar menú", place: "INICIA Foundation · Asturias, España" },
+  en: { items: [["About us", "/#quienes-somos"], ["Projects", "/proyectos"], ["Mission", "/mision"], ["Ideology", "/ideologia"], ["Partners", "/alianzas"], ["Get involved", "/colaborar"], ["Contact", "/contacto"]], donate: "Donate", open: "Open menu", close: "Close menu", place: "INICIA Foundation · Asturias, Spain" },
+  ru: { items: [["О нас", "/#quienes-somos"], ["Проекты", "/proyectos"], ["Миссия", "/mision"], ["Идеология", "/ideologia"], ["Партнёры", "/alianzas"], ["Участвовать", "/colaborar"], ["Контакты", "/contacto"]], donate: "Поддержать", open: "Открыть меню", close: "Закрыть меню", place: "INICIA Foundation · Астурия, Испания" },
+  uk: { items: [["Про нас", "/#quienes-somos"], ["Проєкти", "/proyectos"], ["Місія", "/mision"], ["Ідеологія", "/ideologia"], ["Партнери", "/alianzas"], ["Долучитися", "/colaborar"], ["Контакти", "/contacto"]], donate: "Підтримати", open: "Відкрити меню", close: "Закрити меню", place: "INICIA Foundation · Астурія, Іспанія" },
 };
 
 function BrandLogo({ compact = false }: { compact?: boolean }) {

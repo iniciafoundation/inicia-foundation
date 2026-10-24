@@ -24,9 +24,9 @@ const publicPages: Record<string, Omit<SiteMetadata, "robots">> = {
     title: `Proyectos sociales en Asturias | ${brand}`,
     description: "Conoce los proyectos sociales, comunitarios, rurales y de inclusión de INICIA Foundation en Asturias y España, con su estado declarado.",
   },
-  "/galeria": {
-    title: `Galería institucional | ${brand}`,
-    description: "Espacio institucional de INICIA Foundation para futuras imágenes originales y autorizadas de actividades y proyectos.",
+  "/alianzas": {
+    title: `Alianzas y colaboraciones | ${brand}`,
+    description: "Instituciones, entidades sociales, centros educativos y empresas con los que colabora INICIA Foundation en inclusión, formación y desarrollo comunitario.",
   },
   "/colaborar": {
     title: `Voluntariado, socios y colaboración | ${brand}`,
