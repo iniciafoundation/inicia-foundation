@@ -4,6 +4,15 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Forum", Georgia, "Times New Roman", serif;
+  --color-navy: #0B1E3A;
+  --color-navy-2: #0F274A;
+  --color-navy-3: #13315A;
+  --color-gold: #D6B25E;
+  --color-gold-hi: #F0D893;
+  --color-gold-ink: #7E5F1E;
+  --color-cream: #F7F3EA;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);

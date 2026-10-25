@@ -1,25 +1,43 @@
-import { FormEvent, useState } from "react";
-import { ArrowLeft, CheckCircle2, MessageCircle, Send } from "lucide-react";
-import { Link } from "wouter";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
+import { Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import { OriginalSiteNavigation } from "@/components/OriginalSiteNavigation";
+import { RequestForm } from "@/components/RequestForm";
 import { SocialLinks } from "@/components/SocialLinks";
+import { SpiralMark } from "@/components/SpiralMark";
+import { useT } from "@/lib/i18n";
+import { isRequestType } from "@/lib/requests";
+import { CONTACT } from "@/lib/siteConfig";
 
-const FORM_ENDPOINT = "https://formspree.io/f/mdawrvbo";
+const copy = {
+  es: { eyebrow: "Contacto", title: "Estamos para", accent: "escucharte.", intro: "Elige qué necesitas y te guiamos paso a paso. Respondemos a cada solicitud de forma individual.", direct: "Contacto directo", whatsapp: "Escribir por WhatsApp", places: "Dónde atendemos", gijon: "Av. Manuel Llaneza, 68 · 33208 Gijón", others: "Oviedo, Madrid, Barcelona y Valencia: con cita previa.", follow: "Síguenos", disclaimer: "INICIA no presta representación jurídica, no sustituye a organismos públicos ni ofrece diagnóstico médico." },
+  en: { eyebrow: "Contact", title: "We are here", accent: "to listen.", intro: "Choose what you need and we will guide you step by step. Every request is reviewed individually.", direct: "Direct contact", whatsapp: "Write on WhatsApp", places: "Where we work", gijon: "Av. Manuel Llaneza, 68 · 33208 Gijón, Spain", others: "Oviedo, Madrid, Barcelona and Valencia: by appointment.", follow: "Follow us", disclaimer: "INICIA does not provide legal representation, does not replace public services and does not give medical diagnosis." },
+  ru: { eyebrow: "Контакты", title: "Мы рядом, чтобы", accent: "выслушать.", intro: "Выберите, что вам нужно, и мы проведём вас шаг за шагом. Каждую заявку рассматриваем индивидуально.", direct: "Связаться напрямую", whatsapp: "Написать в WhatsApp", places: "Где мы принимаем", gijon: "Av. Manuel Llaneza, 68 · 33208 Хихон", others: "Овьедо, Мадрид, Барселона и Валенсия — по предварительной записи.", follow: "Мы в соцсетях", disclaimer: "INICIA не оказывает юридического представительства, не заменяет государственные службы и не ставит медицинских диагнозов." },
+  uk: { eyebrow: "Контакти", title: "Ми поруч, щоб", accent: "вислухати.", intro: "Оберіть, що вам потрібно, і ми проведемо вас крок за кроком. Кожну заявку розглядаємо індивідуально.", direct: "Зв’язатися напряму", whatsapp: "Написати у WhatsApp", places: "Де ми приймаємо", gijon: "Av. Manuel Llaneza, 68 · 33208 Хіхон", others: "Ов’єдо, Мадрид, Барселона та Валенсія — за попереднім записом.", follow: "Ми в соцмережах", disclaimer: "INICIA не надає юридичного представництва, не замінює державні служби та не ставить медичних діагнозів." },
+};
 
 export default function Contact() {
-  const [state, setState] = useState<"idle" | "sending" | "sent" | "error">("idle");
-  const submit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setState("sending");
-    try {
-      const response = await fetch(FORM_ENDPOINT, { method: "POST", body: new FormData(event.currentTarget), headers: { Accept: "application/json" } });
-      if (!response.ok) throw new Error("Contact form failed");
-      event.currentTarget.reset();
-      setState("sent");
-    } catch { setState("error"); }
-  };
-  return <main className="min-h-screen bg-[#f8f6f1] text-[#0B2545]"><header className="bg-[#0B2545] px-5 py-5 text-white"><div className="mx-auto max-w-5xl"><Link href="/" className="text-sm"><ArrowLeft className="mr-1 inline h-4 w-4" />Inicia Foundation</Link></div></header><section className="mx-auto grid max-w-5xl gap-10 px-5 py-16 lg:grid-cols-[.78fr_1.22fr]"><aside><p className="text-xs font-bold uppercase tracking-[.18em] text-[#c78117]">Contacto</p><h1 className="mt-3 font-serif text-5xl">Cuéntanos tu situación.</h1><p className="mt-5 leading-8 text-slate-600">Puedes solicitar orientación sobre apoyo alimentario, acompañamiento administrativo o acompañamiento social y sociosanitario. El equipo revisa cada consulta de forma individual.</p><div className="mt-8 rounded-2xl bg-[#0B2545] p-6 text-white"><MessageCircle className="h-6 w-6 text-[#F4A833]" /><h2 className="mt-3 font-serif text-2xl">WhatsApp y teléfono</h2><p className="mt-2 text-sm leading-6 text-slate-200">Puedes escribir por WhatsApp o llamar al número publicado por INICIA.</p><a className="mt-4 flex w-fit items-center gap-2 rounded-full bg-[#F4A833] px-4 py-2 text-sm font-bold text-[#0B2545]" href="tel:+34624865051">+34 624 865 051</a><a className="mt-3 inline-flex rounded-full border border-white/40 px-4 py-2 text-sm font-bold text-white" href="https://wa.me/34624865051" target="_blank" rel="noreferrer">Abrir WhatsApp</a></div><div className="mt-6 rounded-2xl border border-[#0B2545]/10 bg-white p-6"><p className="text-xs font-bold uppercase tracking-[.16em] text-[#c78117]">Puntos de atención</p><div className="mt-4 space-y-4 text-sm leading-6 text-slate-600"><div><p className="font-bold text-[#0B2545]">Gijón</p><p>Av. Manuel Llaneza, 68 · 33208 Gijón</p></div><div><p className="font-bold text-[#0B2545]">Oviedo</p><p>Atención también en Oviedo, Asturias. Contacta previamente por teléfono, WhatsApp o formulario para coordinar la atención.</p></div><div><p className="font-bold text-[#0B2545]">Madrid · Barcelona · Valencia</p><p>Atención disponible en estas ciudades con contacto previo. No se publican direcciones hasta que la organización confirme cada punto de atención.</p></div></div></div><div className="mt-6"><p className="text-xs font-bold uppercase tracking-[.16em] text-[#c78117]">Síguenos</p><div className="mt-3"><SocialLinks /></div></div><p className="mt-7 text-xs leading-5 text-slate-500">INICIA no presta representación jurídica, no sustituye a organismos públicos ni ofrece diagnóstico o tratamiento médico. Las solicitudes se valoran según cada situación y los recursos disponibles.</p></aside><section className="rounded-3xl bg-white p-7 shadow-sm"><h2 className="font-serif text-3xl">Formulario de contacto</h2><p className="mt-2 text-sm text-slate-600">No es necesario adjuntar documentos sensibles en este primer contacto.</p><form className="mt-7 space-y-5" onSubmit={submit}><div className="grid gap-5 sm:grid-cols-2"><div><Label htmlFor="name">Nombre</Label><Input id="name" name="nombre" required className="mt-2" /></div><div><Label htmlFor="email">Email</Label><Input id="email" name="email" type="email" required className="mt-2" /></div></div><div><Label htmlFor="phone">Teléfono o WhatsApp</Label><Input id="phone" name="telefono" className="mt-2" /></div><div><Label htmlFor="topic">Motivo de la consulta</Label><select id="topic" name="asunto" required className="mt-2 h-10 w-full rounded-md border border-input bg-background px-3 text-sm"><option value="">Selecciona una opción</option><option>Apoyo alimentario</option><option>Orientación y acompañamiento administrativo</option><option>Acompañamiento social y sociosanitario</option><option>Otra consulta</option></select></div><div><Label htmlFor="message">Mensaje</Label><Textarea id="message" name="mensaje" required className="mt-2 min-h-36" placeholder="Describe brevemente tu consulta, sin enviar datos médicos, documentos de identidad ni información sensible en este primer contacto." /></div><label className="flex items-start gap-3 text-sm leading-6 text-slate-600"><input name="privacidad" type="checkbox" required className="mt-1 shrink-0" /><span>He leído la <Link className="underline" href="/identidad">información de identidad y contacto</Link> y entiendo que no debo enviar datos sensibles en este primer mensaje. La política de privacidad definitiva permanece pendiente de aprobación jurídica de la organización.</span></label><Button className="w-full bg-[#0B2545] hover:bg-[#173f6a]" disabled={state === "sending"}>{state === "sending" ? "Enviando…" : <><Send className="mr-2 h-4 w-4" />Enviar consulta</>}</Button>{state === "sent" && <p className="flex items-center gap-2 rounded-xl bg-emerald-50 p-4 text-sm text-emerald-800"><CheckCircle2 className="h-5 w-5" />Consulta enviada. El equipo la revisará de forma individual.</p>}{state === "error" && <p className="rounded-xl bg-red-50 p-4 text-sm text-red-800">No se pudo enviar el formulario. Prueba WhatsApp o escribe a info@iniciafoundation.org.</p>}</form></section></section></main>;
+  const t = useT(copy);
+  const params = new URLSearchParams(typeof window !== "undefined" ? window.location.search : "");
+  const tipo = params.get("tipo");
+  const proyecto = params.get("proyecto") ?? undefined;
+
+  return <main className="min-h-screen bg-[#F7F3EA] text-[#0B1E3A]">
+    <OriginalSiteNavigation dark />
+    <section className="relative overflow-hidden bg-[#0B1E3A] px-5 pb-32 pt-16 text-white">
+      <SpiralMark className="pointer-events-none absolute -right-24 -top-10 h-[420px] w-[420px] opacity-20" />
+      <div className="relative mx-auto max-w-6xl"><p className="text-xs font-bold uppercase tracking-[.2em] text-[#D6B25E]">{t.eyebrow}</p><h1 className="mt-4 max-w-3xl font-serif text-5xl leading-[1.02] md:text-6xl">{t.title} <span className="text-[#F0D893]">{t.accent}</span></h1><p className="mt-5 max-w-2xl text-lg leading-8 text-slate-200">{t.intro}</p></div>
+    </section>
+    <section className="relative z-10 mx-auto -mt-20 grid max-w-6xl gap-8 px-5 pb-20 lg:grid-cols-[1.35fr_.65fr]">
+      <div className="relative"><RequestForm initialType={isRequestType(tipo) ? tipo : undefined} project={proyecto} /></div>
+      <aside className="space-y-5 lg:pt-0">
+        <div className="rounded-3xl bg-[#0F274A] p-6 text-white shadow-sm ring-1 ring-[#D6B25E]/25"><p className="text-xs font-bold uppercase tracking-[.16em] text-[#D6B25E]">{t.direct}</p>
+          <a href={CONTACT.whatsapp} target="_blank" rel="noreferrer" className="mt-4 flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#D6B25E] px-4 text-sm font-bold text-[#0B1E3A]"><MessageCircle className="h-4 w-4" />{t.whatsapp}</a>
+          <a href={CONTACT.phoneHref} className="mt-3 flex min-h-12 items-center justify-center gap-2 rounded-full border border-white/30 px-4 text-sm font-bold"><Phone className="h-4 w-4 text-[#D6B25E]" />{CONTACT.phone}</a>
+          <a href={`mailto:${CONTACT.email}`} className="mt-3 flex min-h-12 items-center justify-center gap-2 rounded-full border border-white/30 px-4 text-sm font-bold"><Mail className="h-4 w-4 text-[#D6B25E]" />{CONTACT.email}</a>
+        </div>
+        <div className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-[#0B1E3A]/10"><p className="text-xs font-bold uppercase tracking-[.16em] text-[#7E5F1E]">{t.places}</p><p className="mt-4 flex gap-2 text-sm leading-6"><MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[#7E5F1E]" /><a className="underline decoration-[#D6B25E] underline-offset-4" href="https://maps.app.goo.gl/kqzE7HTLe2PHM5BJ8" target="_blank" rel="noreferrer">{t.gijon}</a></p><p className="mt-3 text-sm leading-6 text-slate-600">{t.others}</p></div>
+        <div className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-[#0B1E3A]/10"><p className="text-xs font-bold uppercase tracking-[.16em] text-[#7E5F1E]">{t.follow}</p><div className="mt-4"><SocialLinks /></div></div>
+        <p className="px-2 text-xs leading-5 text-slate-500">{t.disclaimer}</p>
+      </aside>
+    </section>
+  </main>;
 }

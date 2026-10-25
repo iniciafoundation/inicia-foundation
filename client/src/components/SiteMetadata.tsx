@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useLocation } from "wouter";
 import { getSiteMetadata } from "@/lib/seo";
+import { getLocale } from "@/lib/i18n";
 
 const publicOrigin = "https://iniciafoundation.org";
 
@@ -30,7 +31,7 @@ export function SiteMetadata() {
     const metadata = getSiteMetadata(pathname);
     const canonical = `${publicOrigin}${pathname === "/" ? "/" : pathname.replace(/\/$/, "")}`;
     document.title = metadata.title;
-    document.documentElement.lang = "es";
+    document.documentElement.lang = getLocale();
     upsertMeta('meta[name="description"]', { name: "description", content: metadata.description });
     upsertMeta('meta[name="robots"]', { name: "robots", content: metadata.robots });
     upsertMeta('meta[property="og:title"]', { property: "og:title", content: metadata.title });

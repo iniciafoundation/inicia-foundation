@@ -12,7 +12,7 @@ export function SignatureCanvas({ onChange }: { onChange: (dataUrl: string) => v
     if (!context) return;
     context.lineWidth = 2.2;
     context.lineCap = "round";
-    context.strokeStyle = "#12355b";
+    context.strokeStyle = "#0F274A";
     context.fillStyle = "#ffffff";
     context.fillRect(0, 0, canvas.width, canvas.height);
   }, []);

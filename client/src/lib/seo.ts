@@ -36,6 +36,14 @@ const publicPages: Record<string, Omit<SiteMetadata, "robots">> = {
     title: `Contacto | ${brand} · ONG Asturias`,
     description: "Contacta con INICIA Foundation en Gijón o por WhatsApp para orientación, colaboración o información sobre proyectos sociales.",
   },
+  "/donar": {
+    title: `Donar | ${brand} · Bizum y transferencia`,
+    description: "Apoya a INICIA Foundation con Bizum, transferencia bancaria, material o alimentos. Cada aportación sostiene el acompañamiento a familias en Asturias.",
+  },
+  "/noticias": {
+    title: `Noticias | ${brand}`,
+    description: "Novedades de INICIA Foundation: actividades, proyectos, convocatorias y resultados.",
+  },
   "/identidad": {
     title: `Identidad legal | ${brand}`,
     description: "Datos de identidad, registro y contacto de la Asociación INICIA Foundation en Asturias.",
