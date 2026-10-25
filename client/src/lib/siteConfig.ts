@@ -20,9 +20,9 @@ export const CONTACT = {
 /** Donation details. Leave a value empty ("") to show "coming soon" for that method. */
 export const DONATION = {
   holder: "Asociación Inicia Foundation",
-  iban: "",
+  iban: "ES50 3007 0100 1421 5938 1827",
   bic: "",
-  bank: "",
+  bank: "Caja Rural de Gijón",
   bizumCode: "",
   /** Optional card / international payment link (e.g. Stripe Payment Link). */
   cardLink: "",
