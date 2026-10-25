@@ -5,7 +5,7 @@
 
 @theme inline {
   --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
-  --font-serif: "Forum", Georgia, "Times New Roman", serif;
+  --font-serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
   --color-navy: #0B1E3A;
   --color-navy-2: #0F274A;
   --color-navy-3: #13315A;
@@ -128,7 +128,10 @@
   }
   body {
     @apply bg-background text-foreground;
+    background-color: #060A12;
+    color: #EEE7D7;
   }
+  ::selection { background: rgba(214, 178, 94, 0.35); }
   button:not(:disabled),
   [role="button"]:not([aria-disabled="true"]),
   [type="button"]:not(:disabled),

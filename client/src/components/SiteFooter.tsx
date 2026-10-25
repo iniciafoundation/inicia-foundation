@@ -13,7 +13,7 @@ const copy = {
 
 export function SiteFooter() {
   const t = useT(copy);
-  return <footer className="border-t border-[#D6B25E]/25 bg-[#081629] py-12 text-slate-200">
+  return <footer className="border-t border-[#D6B25E]/25 bg-[#04070D] py-12 text-slate-200">
     <div className="mx-auto grid max-w-7xl gap-10 px-5 md:grid-cols-4">
       <div className="md:col-span-2"><img src={publicAssets.horizontalLogo} alt="INICIA Foundation" className="h-20 w-80 object-contain object-left" loading="lazy" /><p className="mt-3 max-w-sm text-sm leading-6 text-slate-300">{t.about}</p><p className="mt-3 text-sm"><a className="hover:text-[#F0D893]" href={CONTACT.phoneHref}>{CONTACT.phone}</a> · <a className="hover:text-[#F0D893]" href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a></p><div className="mt-5"><SocialLinks light /></div></div>
       <div><p className="font-bold text-[#D6B25E]">{t.org}</p>{t.links.map(([label, href]) => <a key={href} className="mt-2.5 block text-sm hover:text-[#F0D893]" href={href}>{label}</a>)}</div>

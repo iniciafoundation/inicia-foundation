@@ -20,23 +20,23 @@ export default function Contact() {
   const tipo = params.get("tipo");
   const proyecto = params.get("proyecto") ?? undefined;
 
-  return <main className="min-h-screen bg-[#F7F3EA] text-[#0B1E3A]">
+  return <main className="min-h-screen bg-[#060A12] text-[#EEE7D7]">
     <OriginalSiteNavigation dark />
-    <section className="relative overflow-hidden bg-[#0B1E3A] px-5 pb-32 pt-16 text-white">
-      <SpiralMark className="pointer-events-none absolute -right-24 -top-10 h-[420px] w-[420px] opacity-20" />
-      <div className="relative mx-auto max-w-6xl"><p className="text-xs font-bold uppercase tracking-[.2em] text-[#D6B25E]">{t.eyebrow}</p><h1 className="mt-4 max-w-3xl font-serif text-5xl leading-[1.02] md:text-6xl">{t.title} <span className="text-[#F0D893]">{t.accent}</span></h1><p className="mt-5 max-w-2xl text-lg leading-8 text-slate-200">{t.intro}</p></div>
+    <section className="relative isolate overflow-hidden bg-[#060A12] bg-[#08101E] px-5 pb-32 pt-16 text-white"><img src="/assets/photos/community-1920.webp" srcSet="/assets/photos/community-960.webp 960w, /assets/photos/community-1920.webp 1920w" sizes="100vw" alt="" fetchPriority="high" className="absolute inset-0 -z-20 h-full w-full object-cover" /><div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#060A12] via-[#060A12]/80 to-[#060A12]/25" /><div className="absolute inset-x-0 bottom-0 -z-10 h-32 bg-gradient-to-t from-[#060A12] to-transparent" />
+      <SpiralMark className="pointer-events-none absolute -right-24 -top-10 -z-10 hidden h-[420px] w-[420px] opacity-40 md:block" />
+      <div className="relative mx-auto max-w-6xl"><p className="text-xs font-bold uppercase tracking-[.2em] text-[#D6B25E]">{t.eyebrow}</p><h1 className="mt-4 max-w-3xl font-serif text-5xl leading-[1.02] md:text-6xl">{t.title} <span className="italic text-[#F0D893]">{t.accent}</span></h1><p className="mt-5 max-w-2xl text-lg leading-8 text-slate-200">{t.intro}</p></div>
     </section>
     <section className="relative z-10 mx-auto -mt-20 grid max-w-6xl gap-8 px-5 pb-20 lg:grid-cols-[1.35fr_.65fr]">
       <div className="relative"><RequestForm initialType={isRequestType(tipo) ? tipo : undefined} project={proyecto} /></div>
       <aside className="space-y-5 lg:pt-0">
-        <div className="rounded-3xl bg-[#0F274A] p-6 text-white shadow-sm ring-1 ring-[#D6B25E]/25"><p className="text-xs font-bold uppercase tracking-[.16em] text-[#D6B25E]">{t.direct}</p>
-          <a href={CONTACT.whatsapp} target="_blank" rel="noreferrer" className="mt-4 flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#D6B25E] px-4 text-sm font-bold text-[#0B1E3A]"><MessageCircle className="h-4 w-4" />{t.whatsapp}</a>
+        <div className="rounded-3xl bg-[#0A1424] p-6 text-white shadow-sm ring-1 ring-[#D6B25E]/25"><p className="text-xs font-bold uppercase tracking-[.16em] text-[#D6B25E]">{t.direct}</p>
+          <a href={CONTACT.whatsapp} target="_blank" rel="noreferrer" className="mt-4 flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#D6B25E] px-4 text-sm font-bold text-[#120D05]"><MessageCircle className="h-4 w-4" />{t.whatsapp}</a>
           <a href={CONTACT.phoneHref} className="mt-3 flex min-h-12 items-center justify-center gap-2 rounded-full border border-white/30 px-4 text-sm font-bold"><Phone className="h-4 w-4 text-[#D6B25E]" />{CONTACT.phone}</a>
           <a href={`mailto:${CONTACT.email}`} className="mt-3 flex min-h-12 items-center justify-center gap-2 rounded-full border border-white/30 px-4 text-sm font-bold"><Mail className="h-4 w-4 text-[#D6B25E]" />{CONTACT.email}</a>
         </div>
-        <div className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-[#0B1E3A]/10"><p className="text-xs font-bold uppercase tracking-[.16em] text-[#7E5F1E]">{t.places}</p><p className="mt-4 flex gap-2 text-sm leading-6"><MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[#7E5F1E]" /><a className="underline decoration-[#D6B25E] underline-offset-4" href="https://maps.app.goo.gl/kqzE7HTLe2PHM5BJ8" target="_blank" rel="noreferrer">{t.gijon}</a></p><p className="mt-3 text-sm leading-6 text-slate-600">{t.others}</p></div>
-        <div className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-[#0B1E3A]/10"><p className="text-xs font-bold uppercase tracking-[.16em] text-[#7E5F1E]">{t.follow}</p><div className="mt-4"><SocialLinks /></div></div>
-        <p className="px-2 text-xs leading-5 text-slate-500">{t.disclaimer}</p>
+        <div className="rounded-3xl bg-[#0C1320] p-6 shadow-sm ring-1 ring-[#D6B25E]/20"><p className="text-xs font-bold uppercase tracking-[.16em] text-[#D6B25E]">{t.places}</p><p className="mt-4 flex gap-2 text-sm leading-6"><MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[#D6B25E]" /><a className="underline decoration-[#D6B25E] underline-offset-4" href="https://maps.app.goo.gl/kqzE7HTLe2PHM5BJ8" target="_blank" rel="noreferrer">{t.gijon}</a></p><p className="mt-3 text-sm leading-6 text-slate-300">{t.others}</p></div>
+        <div className="rounded-3xl bg-[#0C1320] p-6 shadow-sm ring-1 ring-[#D6B25E]/20"><p className="text-xs font-bold uppercase tracking-[.16em] text-[#D6B25E]">{t.follow}</p><div className="mt-4"><SocialLinks /></div></div>
+        <p className="px-2 text-xs leading-5 text-slate-400">{t.disclaimer}</p>
       </aside>
     </section>
   </main>;

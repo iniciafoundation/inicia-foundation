@@ -97,11 +97,11 @@ function CopyRow({ label, value, copyLabel, copiedLabel }: { label: string; valu
     catch { const area = document.createElement("textarea"); area.value = value; document.body.appendChild(area); area.select(); document.execCommand("copy"); area.remove(); }
     setDone(true); setTimeout(() => setDone(false), 1800);
   };
-  return <div className="flex items-center justify-between gap-3 rounded-2xl border border-[#0B1E3A]/10 bg-[#F7F3EA] px-4 py-3"><div className="min-w-0"><p className="text-[11px] font-bold uppercase tracking-[.14em] text-[#7E5F1E]">{label}</p><p className="mt-0.5 break-all font-mono text-base font-semibold text-[#0B1E3A]">{value}</p></div><button type="button" onClick={copyValue} className="inline-flex min-h-11 shrink-0 items-center gap-1.5 rounded-full bg-[#0B1E3A] px-4 text-xs font-bold text-[#F0D893]">{done ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}{done ? copiedLabel : copyLabel}</button></div>;
+  return <div className="flex items-center justify-between gap-3 rounded-2xl border border-[#D6B25E]/20 bg-[#060A12] px-4 py-3"><div className="min-w-0"><p className="text-[11px] font-bold uppercase tracking-[.14em] text-[#D6B25E]">{label}</p><p className="mt-0.5 break-all font-mono text-base font-semibold text-[#EEE7D7]">{value}</p></div><button type="button" onClick={copyValue} className="inline-flex min-h-11 shrink-0 items-center gap-1.5 rounded-full bg-[#D6B25E] px-4 text-xs font-bold text-[#120D05]">{done ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}{done ? copiedLabel : copyLabel}</button></div>;
 }
 
 function Soon({ text, cta }: { text: string; cta: string }) {
-  return <div className="rounded-2xl border border-dashed border-[#D6B25E] bg-[#FFFBF1] p-5"><p className="leading-7 text-slate-700">{text}</p><a href={CONTACT.whatsapp} target="_blank" rel="noreferrer" className="mt-4 inline-flex min-h-11 items-center rounded-full bg-[#0B1E3A] px-5 text-sm font-bold text-[#F0D893]">{cta}</a></div>;
+  return <div className="rounded-2xl border border-dashed border-[#D6B25E] bg-[#D6B25E]/10 p-5"><p className="leading-7 text-slate-200">{text}</p><a href={CONTACT.whatsapp} target="_blank" rel="noreferrer" className="mt-4 inline-flex min-h-11 items-center rounded-full bg-[#D6B25E] px-5 text-sm font-bold text-[#120D05]">{cta}</a></div>;
 }
 
 /** EPC (SEPA credit transfer) QR payload, readable by many European banking apps. */
@@ -117,7 +117,7 @@ function TransferQr({ amount, reference }: { amount?: number; reference: string 
     import("qrcode").then(({ toDataURL }) => toDataURL(epcPayload(DONATION.iban, DONATION.bic, DONATION.holder, amount, reference), { margin: 1, width: 220, color: { dark: "#0B1E3A", light: "#FFFFFF" } })).then(url => { if (!cancelled) setSrc(url); }).catch(() => undefined);
     return () => { cancelled = true; };
   }, [amount, reference]);
-  return src ? <img src={src} alt="QR" width={180} height={180} className="rounded-xl border border-[#0B1E3A]/10" /> : null;
+  return src ? <img src={src} alt="QR" width={180} height={180} className="rounded-xl border border-[#D6B25E]/20" /> : null;
 }
 
 export default function Donate() {
@@ -128,40 +128,40 @@ export default function Donate() {
   const [method, setMethod] = useState<Method>(DONATION.bizumCode ? "bizum" : "transfer");
   const finalAmount = custom ? Number(custom) || undefined : amount;
 
-  return <main className="min-h-screen bg-[#F7F3EA] text-[#0B1E3A]">
+  return <main className="min-h-screen bg-[#060A12] text-[#EEE7D7]">
     <OriginalSiteNavigation dark />
-    <section className="relative overflow-hidden bg-[#0B1E3A] px-5 pb-36 pt-16 text-white">
-      <SpiralMark className="pointer-events-none absolute -right-20 top-0 h-[460px] w-[460px] opacity-20" />
-      <div className="relative mx-auto max-w-6xl"><p className="text-xs font-bold uppercase tracking-[.2em] text-[#D6B25E]">{t.eyebrow}</p><h1 className="mt-4 max-w-3xl font-serif text-5xl leading-[1.02] md:text-6xl">{t.title} <span className="text-[#F0D893]">{t.accent}</span></h1><p className="mt-5 max-w-2xl text-lg leading-8 text-slate-200">{t.intro}</p>
+    <section className="relative isolate overflow-hidden bg-[#060A12] bg-[#08101E] px-5 pb-36 pt-16 text-white"><img src="/assets/photos/seedling-1920.webp" srcSet="/assets/photos/seedling-960.webp 960w, /assets/photos/seedling-1920.webp 1920w" sizes="100vw" alt="" fetchPriority="high" className="absolute inset-0 -z-20 h-full w-full object-cover" /><div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#060A12] via-[#060A12]/80 to-[#060A12]/25" /><div className="absolute inset-x-0 bottom-0 -z-10 h-32 bg-gradient-to-t from-[#060A12] to-transparent" />
+      <SpiralMark className="pointer-events-none absolute -right-20 top-0 -z-10 hidden h-[460px] w-[460px] opacity-40 md:block" />
+      <div className="relative mx-auto max-w-6xl"><p className="text-xs font-bold uppercase tracking-[.2em] text-[#D6B25E]">{t.eyebrow}</p><h1 className="mt-4 max-w-3xl font-serif text-5xl leading-[1.02] md:text-6xl">{t.title} <span className="italic text-[#F0D893]">{t.accent}</span></h1><p className="mt-5 max-w-2xl text-lg leading-8 text-slate-200">{t.intro}</p>
         <dl className="mt-10 grid max-w-3xl grid-cols-3 gap-4 border-t border-[#D6B25E]/30 pt-6">{t.stats.map(([value, label]) => <div key={label}><dt className="sr-only">{label}</dt><dd className="font-serif text-4xl text-[#F0D893] md:text-5xl">{value}</dd><p className="mt-1 text-xs leading-5 text-slate-300 md:text-sm">{label}</p></div>)}</dl>
       </div>
     </section>
 
     <section className="relative z-10 mx-auto -mt-24 max-w-6xl px-5">
-      <div className="grid gap-8 rounded-3xl bg-white p-6 shadow-xl ring-1 ring-[#0B1E3A]/10 sm:p-9 lg:grid-cols-[.9fr_1.1fr]">
+      <div className="grid gap-8 rounded-3xl bg-[#0C1320] p-6 shadow-xl ring-1 ring-[#D6B25E]/20 sm:p-9 lg:grid-cols-[.9fr_1.1fr]">
         <div>
-          <p className="text-sm font-bold text-[#0B1E3A]">{t.amountLabel}</p>
-          <div className="mt-4 grid grid-cols-4 gap-2">{[10, 25, 50].map(value => <button key={value} type="button" aria-pressed={!custom && amount === value} onClick={() => { setAmount(value); setCustom(""); }} className={`min-h-14 rounded-2xl border text-lg font-bold transition ${!custom && amount === value ? "border-[#0B1E3A] bg-[#0B1E3A] text-[#F0D893]" : "border-[#0B1E3A]/15 hover:border-[#D6B25E]"}`}>{value} €</button>)}
-            <input aria-label={t.other} placeholder={t.other} inputMode="numeric" value={custom} onChange={e => setCustom(e.target.value.replace(/[^0-9]/g, ""))} className={`min-h-14 rounded-2xl border px-3 text-center text-lg font-bold outline-none focus:border-[#D6B25E] ${custom ? "border-[#0B1E3A]" : "border-[#0B1E3A]/15"}`} /></div>
-          <p className="mt-3 text-sm text-slate-500">{t.amountNote}</p>
-          {DONATION.teamingLink && <a href={DONATION.teamingLink} target="_blank" rel="noreferrer" className="mt-6 block rounded-2xl bg-[#F7F3EA] p-5 transition hover:ring-2 hover:ring-[#D6B25E]"><p className="font-serif text-2xl">{t.teaming}</p><p className="mt-1 text-sm text-slate-600">{t.teamingText}</p></a>}
+          <p className="text-sm font-bold text-[#EEE7D7]">{t.amountLabel}</p>
+          <div className="mt-4 grid grid-cols-4 gap-2">{[10, 25, 50].map(value => <button key={value} type="button" aria-pressed={!custom && amount === value} onClick={() => { setAmount(value); setCustom(""); }} className={`min-h-14 rounded-2xl border text-lg font-bold transition ${!custom && amount === value ? "border-[#D6B25E]/20 bg-[#08101E] text-[#F0D893]" : "border-[#D6B25E]/20 hover:border-[#D6B25E]"}`}>{value} €</button>)}
+            <input aria-label={t.other} placeholder={t.other} inputMode="numeric" value={custom} onChange={e => setCustom(e.target.value.replace(/[^0-9]/g, ""))} className={`min-h-14 rounded-2xl border px-3 text-center text-lg font-bold outline-none focus:border-[#D6B25E] bg-transparent ${custom ? "border-[#D6B25E]" : "border-[#D6B25E]/20"}`} /></div>
+          <p className="mt-3 text-sm text-slate-400">{t.amountNote}</p>
+          {DONATION.teamingLink && <a href={DONATION.teamingLink} target="_blank" rel="noreferrer" className="mt-6 block rounded-2xl bg-[#060A12] p-5 transition hover:ring-2 hover:ring-[#D6B25E]"><p className="font-serif text-2xl">{t.teaming}</p><p className="mt-1 text-sm text-slate-300">{t.teamingText}</p></a>}
         </div>
         <div>
-          <div role="tablist" className="grid gap-2" style={{ gridTemplateColumns: `repeat(${methods.length}, minmax(0, 1fr))` }}>{methods.map(key => { const Icon = key === "bizum" ? Smartphone : key === "transfer" ? Landmark : CreditCard; return <button key={key} role="tab" type="button" aria-selected={method === key} onClick={() => setMethod(key)} className={`flex min-h-12 items-center justify-center gap-2 rounded-full text-sm font-bold transition ${method === key ? "bg-[#D6B25E] text-[#0B1E3A]" : "bg-[#F7F3EA] text-[#0B1E3A] hover:bg-[#EFE3C4]"}`}><Icon className="h-4 w-4" />{t.methods[key]}</button>; })}</div>
+          <div role="tablist" className="grid gap-2" style={{ gridTemplateColumns: `repeat(${methods.length}, minmax(0, 1fr))` }}>{methods.map(key => { const Icon = key === "bizum" ? Smartphone : key === "transfer" ? Landmark : CreditCard; return <button key={key} role="tab" type="button" aria-selected={method === key} onClick={() => setMethod(key)} className={`flex min-h-12 items-center justify-center gap-2 rounded-full text-sm font-bold transition ${method === key ? "bg-[#D6B25E] text-[#120D05]" : "bg-[#060A12] text-[#EEE7D7] hover:bg-[#1A2436]"}`}><Icon className="h-4 w-4" />{t.methods[key]}</button>; })}</div>
           <div className="mt-6 space-y-4" role="tabpanel">
-            {method === "bizum" && <>{DONATION.bizumCode ? <><ol className="space-y-2">{t.bizumSteps.map((line, index) => <li key={line} className="flex gap-3 text-sm leading-6"><span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#0B1E3A] text-xs font-bold text-[#F0D893]">{index + 1}</span>{line}</li>)}</ol><CopyRow label={t.bizumCode} value={DONATION.bizumCode} copyLabel={t.copy} copiedLabel={t.copied} />{finalAmount && <p className="text-sm text-slate-600">{finalAmount} €</p>}</> : <Soon text={t.soon} cta={t.soonCta} />}</>}
-            {method === "transfer" && <>{DONATION.iban ? <><ol className="space-y-2">{t.transferSteps.map((line, index) => <li key={line} className="flex gap-3 text-sm leading-6"><span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#0B1E3A] text-xs font-bold text-[#F0D893]">{index + 1}</span>{line}</li>)}</ol><CopyRow label={t.iban} value={DONATION.iban} copyLabel={t.copy} copiedLabel={t.copied} /><CopyRow label={t.holder} value={DONATION.holder} copyLabel={t.copy} copiedLabel={t.copied} />{DONATION.bank && <p className="px-1 text-sm text-slate-600">{DONATION.bank}</p>}<CopyRow label={t.concept} value={t.conceptValue} copyLabel={t.copy} copiedLabel={t.copied} /><div className="hidden items-center gap-4 sm:flex"><TransferQr amount={finalAmount} reference={t.conceptValue} /><p className="text-sm text-slate-600">{t.qr}</p></div></> : <Soon text={t.soon} cta={t.soonCta} />}</>}
-            {method === "card" && DONATION.cardLink && <div><p className="leading-7 text-slate-700">{t.card}</p><a href={DONATION.cardLink} target="_blank" rel="noreferrer" className="mt-4 inline-flex min-h-12 items-center rounded-full bg-[#0B1E3A] px-6 text-sm font-bold text-[#F0D893]">{t.cardCta}<ArrowRight className="ml-2 h-4 w-4" /></a></div>}
+            {method === "bizum" && <>{DONATION.bizumCode ? <><ol className="space-y-2">{t.bizumSteps.map((line, index) => <li key={line} className="flex gap-3 text-sm leading-6"><span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#D6B25E] text-xs font-bold text-[#120D05]">{index + 1}</span>{line}</li>)}</ol><CopyRow label={t.bizumCode} value={DONATION.bizumCode} copyLabel={t.copy} copiedLabel={t.copied} />{finalAmount && <p className="text-sm text-slate-300">{finalAmount} €</p>}</> : <Soon text={t.soon} cta={t.soonCta} />}</>}
+            {method === "transfer" && <>{DONATION.iban ? <><ol className="space-y-2">{t.transferSteps.map((line, index) => <li key={line} className="flex gap-3 text-sm leading-6"><span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#D6B25E] text-xs font-bold text-[#120D05]">{index + 1}</span>{line}</li>)}</ol><CopyRow label={t.iban} value={DONATION.iban} copyLabel={t.copy} copiedLabel={t.copied} /><CopyRow label={t.holder} value={DONATION.holder} copyLabel={t.copy} copiedLabel={t.copied} />{DONATION.bank && <p className="px-1 text-sm text-slate-300">{DONATION.bank}</p>}<CopyRow label={t.concept} value={t.conceptValue} copyLabel={t.copy} copiedLabel={t.copied} /><div className="hidden items-center gap-4 sm:flex"><TransferQr amount={finalAmount} reference={t.conceptValue} /><p className="text-sm text-slate-300">{t.qr}</p></div></> : <Soon text={t.soon} cta={t.soonCta} />}</>}
+            {method === "card" && DONATION.cardLink && <div><p className="leading-7 text-slate-200">{t.card}</p><a href={DONATION.cardLink} target="_blank" rel="noreferrer" className="mt-4 inline-flex min-h-12 items-center rounded-full bg-[#D6B25E] px-6 text-sm font-bold text-[#120D05]">{t.cardCta}<ArrowRight className="ml-2 h-4 w-4" /></a></div>}
           </div>
         </div>
       </div>
-      <p className="mt-5 text-center text-xs leading-5 text-slate-500">{t.trust}</p>
+      <p className="mt-5 text-center text-xs leading-5 text-slate-400">{t.trust}</p>
     </section>
 
     <section className="mx-auto max-w-6xl px-5 py-20"><h2 className="font-serif text-4xl md:text-5xl">{t.ways}</h2>
-      <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">{t.wayItems.map(([title, text, href], index) => { const Icon = WAY_ICONS[index]; return <Link key={title} href={href} className="group rounded-3xl bg-white p-6 shadow-sm ring-1 ring-[#0B1E3A]/10 transition hover:-translate-y-0.5 hover:ring-[#D6B25E]"><Icon className="h-7 w-7 text-[#7E5F1E]" /><h3 className="mt-4 font-serif text-2xl">{title}</h3><p className="mt-2 text-sm leading-6 text-slate-600">{text}</p><ArrowRight className="mt-4 h-4 w-4 text-[#7E5F1E] transition group-hover:translate-x-1" /></Link>; })}</div>
+      <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">{t.wayItems.map(([title, text, href], index) => { const Icon = WAY_ICONS[index]; return <Link key={title} href={href} className="group rounded-3xl bg-[#0C1320] p-6 shadow-sm ring-1 ring-[#D6B25E]/20 transition hover:-translate-y-0.5 hover:ring-[#D6B25E]"><Icon className="h-7 w-7 text-[#D6B25E]" /><h3 className="mt-4 font-serif text-2xl">{title}</h3><p className="mt-2 text-sm leading-6 text-slate-300">{text}</p><ArrowRight className="mt-4 h-4 w-4 text-[#D6B25E] transition group-hover:translate-x-1" /></Link>; })}</div>
     </section>
 
-    <section id="material" className="bg-[#0F274A] px-5 py-20"><div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[.7fr_1.3fr]"><div className="text-white"><h2 className="font-serif text-4xl md:text-5xl">{t.formTitle}</h2><p className="mt-4 leading-7 text-slate-200">{t.formIntro}</p></div><RequestForm initialType="donar" compact /></div></section>
+    <section id="material" className="bg-[#0A1424] px-5 py-20"><div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[.7fr_1.3fr]"><div className="text-white"><h2 className="font-serif text-4xl md:text-5xl">{t.formTitle}</h2><p className="mt-4 leading-7 text-slate-200">{t.formIntro}</p></div><RequestForm initialType="donar" compact /></div></section>
   </main>;
 }

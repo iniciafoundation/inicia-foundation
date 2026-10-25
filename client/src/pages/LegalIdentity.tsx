@@ -75,14 +75,14 @@ const copy: Record<Locale, LegalCopy> = {
 export default function LegalIdentity() {
   const [locale] = useLocale();
   const t = copy[locale];
-  return <main className="min-h-screen bg-[#F7F3EA] text-[#0B1E3A]"><OriginalSiteNavigation dark />
-    <section className="mx-auto max-w-5xl px-5 py-16"><p className="text-sm font-bold uppercase tracking-[.18em] text-[#7E5F1E]">{t.eyebrow}</p><h1 className="mt-3 font-serif text-5xl text-[#0B1E3A]">{t.title}</h1><p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">{t.intro}</p>
+  return <main className="min-h-screen bg-[#060A12] text-[#EEE7D7]"><OriginalSiteNavigation dark />
+    <section className="mx-auto max-w-5xl px-5 py-16"><p className="text-sm font-bold uppercase tracking-[.18em] text-[#D6B25E]">{t.eyebrow}</p><h1 className="mt-3 font-serif text-5xl text-[#EEE7D7]">{t.title}</h1><p className="mt-5 max-w-3xl text-lg leading-8 text-slate-300">{t.intro}</p>
       <div className="mt-10 grid gap-5 md:grid-cols-3">
-        <article className="rounded-2xl border border-[#0B1E3A]/10 bg-white p-6 shadow-sm"><Building2 className="h-6 w-6 text-[#7E5F1E]" /><h2 className="mt-4 font-serif text-2xl text-[#0B1E3A]">{t.entityTitle}</h2><p className="mt-3 text-sm leading-6 text-slate-600"><strong>ASOCIACIÓN Inicia Foundation</strong><br />NIF/CIF: G05426242<br />{t.scope}</p></article>
-        <article className="rounded-2xl border border-[#0B1E3A]/10 bg-white p-6 shadow-sm"><MapPin className="h-6 w-6 text-[#7E5F1E]" /><h2 className="mt-4 font-serif text-2xl text-[#0B1E3A]">{t.addressTitle}</h2><p className="mt-3 text-sm leading-6 text-slate-600">Avenida Manuel Llaneza, 68<br />Gijón, Asturias, España</p></article>
-        <article className="rounded-2xl border border-[#0B1E3A]/10 bg-white p-6 shadow-sm"><FileCheck2 className="h-6 w-6 text-[#7E5F1E]" /><h2 className="mt-4 font-serif text-2xl text-[#0B1E3A]">{t.registryTitle}</h2><p className="mt-3 text-sm leading-6 text-slate-600">Registro de Asociaciones del Principado de Asturias{t.registryNote && <><br /><span className="text-slate-500">{t.registryNote}</span></>}<br />{t.registryNumber}</p></article>
+        <article className="rounded-2xl border border-[#D6B25E]/20 bg-[#0C1320] p-6 shadow-sm"><Building2 className="h-6 w-6 text-[#D6B25E]" /><h2 className="mt-4 font-serif text-2xl text-[#EEE7D7]">{t.entityTitle}</h2><p className="mt-3 text-sm leading-6 text-slate-300"><strong>ASOCIACIÓN Inicia Foundation</strong><br />NIF/CIF: G05426242<br />{t.scope}</p></article>
+        <article className="rounded-2xl border border-[#D6B25E]/20 bg-[#0C1320] p-6 shadow-sm"><MapPin className="h-6 w-6 text-[#D6B25E]" /><h2 className="mt-4 font-serif text-2xl text-[#EEE7D7]">{t.addressTitle}</h2><p className="mt-3 text-sm leading-6 text-slate-300">Avenida Manuel Llaneza, 68<br />Gijón, Asturias, España</p></article>
+        <article className="rounded-2xl border border-[#D6B25E]/20 bg-[#0C1320] p-6 shadow-sm"><FileCheck2 className="h-6 w-6 text-[#D6B25E]" /><h2 className="mt-4 font-serif text-2xl text-[#EEE7D7]">{t.registryTitle}</h2><p className="mt-3 text-sm leading-6 text-slate-300">Registro de Asociaciones del Principado de Asturias{t.registryNote && <><br /><span className="text-slate-400">{t.registryNote}</span></>}<br />{t.registryNumber}</p></article>
       </div>
-      <section className="mt-10 rounded-3xl border border-[#D6B25E]/50 bg-[#F0D893]/35 p-7"><h2 className="font-serif text-3xl text-[#0B1E3A]">{t.pendingTitle}</h2><p className="mt-3 max-w-3xl leading-7 text-slate-700">{t.pendingText}</p></section>
+      <section className="mt-10 rounded-3xl border border-[#D6B25E]/50 bg-[#D6B25E]/10 p-7"><h2 className="font-serif text-3xl text-[#EEE7D7]">{t.pendingTitle}</h2><p className="mt-3 max-w-3xl leading-7 text-slate-200">{t.pendingText}</p></section>
     </section>
     <SiteFooter />
   </main>;
