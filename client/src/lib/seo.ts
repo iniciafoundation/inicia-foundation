@@ -66,6 +66,9 @@ export function getSiteMetadata(pathname: string): SiteMetadata {
   if (pathname === "/admin" || pathname === "/login") {
     return { title: `CRM privado | ${brand}`, description: "Acceso administrativo restringido de INICIA Foundation.", robots: "noindex,nofollow,noarchive" };
   }
+  if (pathname === "/404") {
+    return { title: `Página no encontrada | ${brand}`, description: "La página que buscas no existe en el sitio de INICIA Foundation.", robots: "noindex,follow" };
+  }
   if (pathname.startsWith("/solicitud/")) {
     return { title: `Socios y voluntariado | ${brand}`, description: "Solicitud de participación en INICIA Foundation sujeta a documentos jurídicos y consentimientos activados.", robots: "noindex,follow" };
   }

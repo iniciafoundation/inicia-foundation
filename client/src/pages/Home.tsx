@@ -1,4 +1,5 @@
 import { ArrowRight, Building2, HandHeart, HeartHandshake, LifeBuoy, Lightbulb, MapPin, MessageCircle, Phone, ShieldCheck, Target, UsersRound } from "lucide-react";
+import { useState } from "react";
 import { Link } from "wouter";
 import { OriginalSiteNavigation } from "@/components/OriginalSiteNavigation";
 import { ProjectVisual } from "@/components/ProjectVisual";
@@ -12,7 +13,7 @@ import { publicAssets } from "@/lib/publicAssets";
 import { type PhotoName, photo } from "@/lib/photos";
 import { CONTACT } from "@/lib/siteConfig";
 import { trpc } from "@/lib/trpc";
-import { AllianceAreas, allianceCopy } from "./Alliances";
+import { AllianceAreas, allianceCopy } from "@/components/AllianceAreas";
 
 const HERO_IMAGE = publicAssets.heroCommunity;
 
@@ -129,9 +130,15 @@ const ROUTE_ICONS = [LifeBuoy, HandHeart, Building2, HeartHandshake];
 const PILLAR_ICONS = [UsersRound, HeartHandshake, ShieldCheck];
 const MISSION_ICONS = [HeartHandshake, Target, Lightbulb];
 
+const MAP_BUTTON: Record<Locale, string> = { es: "Mostrar el mapa", en: "Show the map", ru: "Показать карту", uk: "Показати карту", ast: "Amosar el mapa" };
+
+/** The Google map loads only after a click: faster page and no Google cookies before the visitor chooses. */
 function FoundationMap({ label }: { label: string }) {
+  const [locale] = useLocale();
+  const [show, setShow] = useState(false);
   return <div className="relative min-h-[360px] overflow-hidden rounded-3xl bg-[#08101E] shadow-sm ring-1 ring-[#D6B25E]/25">
-    <iframe title="Mapa INICIA Foundation" src="https://www.google.com/maps?q=ONG%20Inicia%20Foundation%2C%20Av.%20Manuel%20Llaneza%2C%2068%2C%20Gij%C3%B3n&output=embed" className="absolute inset-0 h-full w-full border-0 opacity-85" loading="lazy" />
+    {show ? <iframe title="Mapa INICIA Foundation" src="https://www.google.com/maps?q=ONG%20Inicia%20Foundation%2C%20Av.%20Manuel%20Llaneza%2C%2068%2C%20Gij%C3%B3n&output=embed" className="absolute inset-0 h-full w-full border-0 opacity-85" />
+      : <button type="button" onClick={() => setShow(true)} className="absolute inset-0 flex items-start justify-center pt-24 text-sm font-bold text-[#F0D893]" style={{ backgroundImage: "radial-gradient(circle at 50% 35%, rgba(214,178,94,.18), transparent 55%), repeating-linear-gradient(0deg, rgba(214,178,94,.06) 0 1px, transparent 1px 48px), repeating-linear-gradient(90deg, rgba(214,178,94,.06) 0 1px, transparent 1px 48px)" }}><span className="inline-flex min-h-11 items-center gap-2 rounded-full border border-[#D6B25E]/50 bg-[#060A12]/80 px-5"><MapPin className="h-4 w-4" />{MAP_BUTTON[locale]}</span></button>}
     <div className="absolute inset-x-4 bottom-4 rounded-2xl bg-[#060A12]/95 p-4 text-white"><p className="text-xs font-bold uppercase tracking-[.16em] text-[#D6B25E]">INICIA Foundation</p><p className="mt-1 text-sm">Av. Manuel Llaneza, 68 · 33208 Gijón</p><a className="mt-3 inline-flex min-h-10 items-center rounded-full bg-[#D6B25E] px-4 text-xs font-bold text-[#120D05]" href="https://maps.app.goo.gl/kqzE7HTLe2PHM5BJ8" target="_blank" rel="noreferrer">{label}</a></div>
   </div>;
 }

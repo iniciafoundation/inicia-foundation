@@ -74,14 +74,58 @@
   status = 410
   force = true
 
-# Public pages are prerendered to their own index.html (scripts/prerender.mjs) and
-# are served directly. Anything else (login, admin, unknown URLs) gets the app shell.
+# The netlify.app address is a duplicate of the real domain: send it there permanently.
+# (Deploy previews use other hosts, e.g. deploy-preview-2--iniciafoundation.netlify.app.)
 [[redirects]]
-  from = "/*"
+  from = "https://iniciafoundation.netlify.app/*"
+  to = "https://iniciafoundation.org/:splat"
+  status = 301
+  force = true
+
+# Old application forms now live in the request hub.
+[[redirects]]
+  from = "/solicitud/socio"
+  to = "/contacto?tipo=donar&modo=socio"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/solicitud/voluntariado"
+  to = "/contacto?tipo=voluntariado"
+  status = 301
+  force = true
+
+# Public pages are prerendered to their own .html files (scripts/prerender.mjs) and
+# are served directly. Only the private app routes get the empty app shell.
+[[redirects]]
+  from = "/admin"
   to = "/spa.html"
   status = 200
 
+[[redirects]]
+  from = "/admin/*"
+  to = "/spa.html"
+  status = 200
+
+[[redirects]]
+  from = "/login"
+  to = "/spa.html"
+  status = 200
+
+# Anything else is a real "page not found": Netlify serves 404.html with status 404.
+
 # Hashed JS/CSS and images: let browsers keep them; HTML always revalidates.
+# Security headers for every page.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), interest-cohort=()"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data:; connect-src 'self' https://script.google.com https://script.googleusercontent.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com https://www.google.com; frame-src https://www.youtube-nocookie.com https://www.google.com https://maps.google.com; frame-ancestors 'self'; base-uri 'self'; object-src 'none'; form-action 'self' mailto:; upgrade-insecure-requests"
+
 [[headers]]
   for = "/assets/*"
   [headers.values]

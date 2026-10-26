@@ -79,9 +79,11 @@ export const netlifyAppRouter = t.router({
           const translated = await db.select().from(projectTranslations).where(eq(projectTranslations.locale, input.locale));
           const byProject = new Map(translated.map(item => [item.projectId, item]));
           const fromDb = rows.map(item => { const translation = byProject.get(item.id); return { ...item, title: translation?.title || item.title, category: translation?.category || item.category, shortDescription: translation?.shortDescription || item.shortDescription, bodyHtml: translation?.bodyHtml || item.bodyHtml, status: publicProjectStatus(item.status, input.locale) }; });
-          // Projects added to the published catalog file but not yet in the database (e.g. Neara) are shown too.
-          const known = new Set(fromDb.map(item => item.slug));
-          return [...fromDb, ...localizedFallbackCatalog(input.locale).filter(item => !known.has(item.slug))];
+          // The catalog file in the repository is the source of truth for public texts (same as the prerendered
+          // pages); projects that exist only in the database are added after it.
+          const catalog = localizedFallbackCatalog(input.locale);
+          const inCatalog = new Set(catalog.map(item => item.slug));
+          return [...catalog, ...fromDb.filter(item => !inCatalog.has(item.slug))];
         } catch { return localizedFallbackCatalog(input.locale); }
       }),
       activeDocuments: publicProcedure.input(z.object({ applicationType })).query(async ({ input }) => {

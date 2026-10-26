@@ -17,7 +17,7 @@ const copy: Record<Locale, { items: readonly [string, string][]; donate: string;
 
 function BrandLogo({ compact = false }: { compact?: boolean }) {
   return <>
-    <img src={HORIZONTAL_LOGO} alt="INICIA Foundation" className={`hidden object-contain object-left ${compact ? "h-12 w-48 sm:block" : "h-16 w-64 sm:block"}`} />
+    <img src={HORIZONTAL_LOGO} srcSet={`/assets/inicia/inicia-foundation-horizontal-logo-320.webp 320w, ${HORIZONTAL_LOGO} 640w`} sizes="256px" width={256} height={114} alt="INICIA Foundation" className={`hidden object-contain object-left ${compact ? "h-12 w-48 sm:block" : "h-16 w-64 sm:block"}`} />
     <img src={MARK_LOGO} alt="INICIA Foundation" className={`block rounded-full object-cover sm:hidden ${compact ? "h-12 w-12" : "h-12 w-12"}`} />
   </>;
 }

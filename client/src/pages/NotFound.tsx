@@ -1,52 +1,32 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { AlertCircle, Home } from "lucide-react";
-import { useLocation } from "wouter";
+import { ArrowRight, Compass } from "lucide-react";
+import { Link } from "wouter";
+import { OriginalSiteNavigation } from "@/components/OriginalSiteNavigation";
+import { SiteFooter } from "@/components/SiteFooter";
+import { SpiralMark } from "@/components/SpiralMark";
+import { type Locale, useT } from "@/lib/i18n";
+
+const copy: Record<Locale, { code: string; title: string; text: string; home: string; links: [string, string][] }> = {
+  es: { code: "Error 404", title: "Esta página no existe.", text: "Puede que el enlace esté mal escrito o que la página se haya movido. Estas son las secciones más visitadas:", home: "Ir al inicio", links: [["Proyectos", "/proyectos"], ["Necesito ayuda", "/contacto?tipo=ayuda"], ["Voluntariado", "/contacto?tipo=voluntariado"], ["Donar", "/donar"], ["Contacto", "/contacto"]] },
+  en: { code: "Error 404", title: "This page does not exist.", text: "The link may be mistyped or the page may have moved. These are the most visited sections:", home: "Go to the home page", links: [["Projects", "/proyectos"], ["I need help", "/contacto?tipo=ayuda"], ["Volunteering", "/contacto?tipo=voluntariado"], ["Donate", "/donar"], ["Contact", "/contacto"]] },
+  ru: { code: "Ошибка 404", title: "Такой страницы нет.", text: "Возможно, ссылка набрана с ошибкой или страница переехала. Самые популярные разделы:", home: "На главную", links: [["Проекты", "/proyectos"], ["Мне нужна помощь", "/contacto?tipo=ayuda"], ["Волонтёрство", "/contacto?tipo=voluntariado"], ["Пожертвовать", "/donar"], ["Контакты", "/contacto"]] },
+  uk: { code: "Помилка 404", title: "Такої сторінки немає.", text: "Можливо, посилання набрано з помилкою або сторінку перенесено. Найпопулярніші розділи:", home: "На головну", links: [["Проєкти", "/proyectos"], ["Мені потрібна допомога", "/contacto?tipo=ayuda"], ["Волонтерство", "/contacto?tipo=voluntariado"], ["Пожертвувати", "/donar"], ["Контакти", "/contacto"]] },
+  ast: { code: "Error 404", title: "Esta páxina nun esiste.", text: "Seique l'enllaz tea mal escritu o que la páxina se movió. Estes son les seiciones más visitaes:", home: "Dir al aniciu", links: [["Proyeutos", "/proyectos"], ["Preciso ayuda", "/contacto?tipo=ayuda"], ["Voluntariáu", "/contacto?tipo=voluntariado"], ["Donar", "/donar"], ["Contactu", "/contacto"]] },
+};
 
 export default function NotFound() {
-  const [, setLocation] = useLocation();
-
-  const handleGoHome = () => {
-    setLocation("/");
-  };
-
-  return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100">
-      <Card className="w-full max-w-lg mx-4 shadow-lg border-0 bg-white/80 backdrop-blur-sm">
-        <CardContent className="pt-8 pb-8 text-center">
-          <div className="flex justify-center mb-6">
-            <div className="relative">
-              <div className="absolute inset-0 bg-red-100 rounded-full animate-pulse" />
-              <AlertCircle className="relative h-16 w-16 text-red-500" />
-            </div>
-          </div>
-
-          <h1 className="text-4xl font-bold text-slate-900 mb-2">404</h1>
-
-          <h2 className="text-xl font-semibold text-slate-200 mb-4">
-            Page Not Found
-          </h2>
-
-          <p className="text-slate-300 mb-8 leading-relaxed">
-            Sorry, the page you are looking for doesn't exist.
-            <br />
-            It may have been moved or deleted.
-          </p>
-
-          <div
-            id="not-found-button-group"
-            className="flex flex-col sm:flex-row gap-3 justify-center"
-          >
-            <Button
-              onClick={handleGoHome}
-              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg"
-            >
-              <Home className="w-4 h-4 mr-2" />
-              Go Home
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
-    </div>
-  );
+  const t = useT(copy);
+  return <main className="min-h-screen bg-[#060A12] text-[#EEE7D7]">
+    <OriginalSiteNavigation />
+    <section className="relative isolate overflow-hidden px-5 py-28">
+      <SpiralMark className="pointer-events-none absolute -right-24 top-0 -z-10 hidden h-[460px] w-[460px] opacity-30 md:block" />
+      <div className="mx-auto max-w-3xl">
+        <p className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[.3em] text-[#D6B25E]"><Compass className="h-4 w-4" />{t.code}</p>
+        <h1 className="mt-5 font-serif text-5xl leading-tight md:text-6xl">{t.title}</h1>
+        <p className="mt-5 max-w-xl text-lg leading-8 text-slate-300">{t.text}</p>
+        <div className="mt-8 flex flex-wrap gap-3">{t.links.map(([label, href]) => <Link key={href} href={href} className="inline-flex min-h-11 items-center rounded-full border border-[#D6B25E]/40 px-5 text-sm font-semibold text-[#F0D893] transition hover:border-[#D6B25E] hover:bg-[#D6B25E]/10">{label}</Link>)}</div>
+        <Link href="/" className="mt-10 inline-flex min-h-12 items-center rounded-full bg-[#D6B25E] px-7 text-sm font-bold text-[#120D05]">{t.home}<ArrowRight className="ml-2 h-4 w-4" /></Link>
+      </div>
+    </section>
+    <SiteFooter />
+  </main>;
 }

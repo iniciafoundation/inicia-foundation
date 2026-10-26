@@ -7,6 +7,13 @@ import { createRoot, hydrateRoot } from "react-dom/client";
 import superjson from "superjson";
 import App from "./App";
 import { startLogin } from "./const";
+// Fonts are served from our own site (no requests to Google Fonts): faster and GDPR-friendly.
+import "@fontsource-variable/manrope/wght.css";
+import "@fontsource/cormorant-garamond/500.css";
+import "@fontsource/cormorant-garamond/600.css";
+import "@fontsource/cormorant-garamond/700.css";
+import "@fontsource/cormorant-garamond/500-italic.css";
+import "@fontsource/cormorant-garamond/600-italic.css";
 import "./index.css";
 import { getLocale } from "./lib/i18n";
 import { SHEETS_ENDPOINT } from "./lib/siteConfig";
@@ -88,7 +95,11 @@ const app = (
   </trpc.Provider>
 );
 
-if (prerendered && container.hasChildNodes() && getLocale() === "es") {
+// Form deep links (?tipo=…&plan=…) render a different first screen than the prerendered page,
+// so those are rendered fresh instead of hydrated (avoids a React hydration mismatch).
+const changesFirstRender = ["tipo", "proyecto", "modo", "plan", "zona"].some(key => new URLSearchParams(window.location.search).has(key));
+
+if (prerendered && container.hasChildNodes() && getLocale() === "es" && !changesFirstRender) {
   queryClient.setQueryData(getQueryKey(trpc.crm.public.projects, { locale: "es" }, "query"), prerendered.projects, { updatedAt: 1 });
   if (prerendered.content) queryClient.setQueryData(["site-content", SHEETS_ENDPOINT], prerendered.content, { updatedAt: 1 });
   hydrateRoot(container, app);

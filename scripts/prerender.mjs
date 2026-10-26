@@ -105,6 +105,20 @@ for (const route of routes) {
   count += 1;
 }
 
+// Real "page not found": Netlify serves 404.html with HTTP status 404 for unknown addresses.
+{
+  const body = await render("/404", { projects, content });
+  const meta = getSiteMetadata("/404");
+  const html = template
+    .replace(/<title>[\s\S]*?<\/title>/, `<title>${escapeText(meta.title)}</title>`)
+    .replace(/<meta name="description" content="[^"]*"\s*\/?>/, `<meta name="description" content="${escapeAttr(meta.description)}" />`)
+    .replace(/<meta name="robots" content="[^"]*"\s*\/?>/, `<meta name="robots" content="${escapeAttr(meta.robots)}" />`)
+    .replace(/<link rel="canonical" href="[^"]*"\s*\/?>\s*/, "")
+    .replace('<div id="root"></div>', `<div id="root">${body}</div><script>window.__INICIA_PRERENDER__=${json({ projects, content: content ?? null })}</script>`);
+  if (!html.includes(body)) throw new Error("Could not inject prerendered HTML for 404");
+  await fs.writeFile(path.join(outDir, "404.html"), html);
+}
+
 // Sitemap with every prerendered public page (legal pages are lower priority).
 const today = new Date().toISOString().slice(0, 10);
 const priority = route => (route === "/" ? "1.0" : ["/aviso-legal", "/privacidad", "/cookies"].includes(route) ? "0.3" : route.startsWith("/proyectos/") ? "0.7" : "0.8");
