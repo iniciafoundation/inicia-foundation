@@ -8,12 +8,12 @@ import { useLocale, useT } from "@/lib/i18n";
 import { requestCopy } from "@/lib/requestCopy";
 import { useSettings } from "@/lib/content";
 import { track } from "@/lib/analytics";
-import { CONTACT, DONATION } from "@/lib/siteConfig";
+import { CONTACT, DONATION, QUICK_AMOUNTS, SMALL_MAX } from "@/lib/siteConfig";
 
 type Method = "bizum" | "transfer" | "card" | "paypal" | "other";
 
 const copy = {
-  es: { membersEyebrow: "Hazte socio/a", membersTitle: "Apoyo constante, cada mes.", membersIntro: "Las cuotas de socios dan estabilidad a los programas. La cuota se cobra por domiciliación bancaria: no tienes que acordarte de transferir.", membersCta: "Hacerme socio/a", membersNote: "Tras enviar la solicitud te contactamos para firmar la orden de domiciliación SEPA. Puedes darte de baja cuando quieras.", 
+  es: { smallNote: "Para importes de 1 a 5 € te proponemos Bizum o transferencia: con tarjeta o PayPal la comisión de la plataforma se llevaría una parte importante de tu donación.", feeNote: "La plataforma de pago descuenta una pequeña comisión de cada donación. Con Bizum o transferencia llega íntegra.",  membersEyebrow: "Hazte socio/a", membersTitle: "Apoyo constante, cada mes.", membersIntro: "Las cuotas de socios dan estabilidad a los programas. La cuota se cobra por domiciliación bancaria: no tienes que acordarte de transferir.", membersCta: "Hacerme socio/a", membersNote: "Tras enviar la solicitud te contactamos para firmar la orden de domiciliación SEPA. Puedes darte de baja cuando quieras.", 
     eyebrow: "Donar", title: "Tu apoyo, convertido en", accent: "ayuda real.", intro: "Cada aportación sostiene el acompañamiento a familias, la formación y los proyectos comunitarios de INICIA.",
     stats: [["317", "familias ucranianas acompañadas"], ["129", "familias de otros orígenes y vecinos"], ["2021", "trabajando desde"]],
     amountLabel: "Elige un importe", other: "Otro", amountNote: "Indica este importe en Bizum o en tu transferencia.",
@@ -33,7 +33,7 @@ const copy = {
     formTitle: "Donar material o hacerte socio/a", formIntro: "Cuéntanos qué quieres aportar y te contactamos para organizarlo.",
     trust: "INICIA Foundation · Asociación sin ánimo de lucro · NIF G05426242 · Registro de Asociaciones del Principado de Asturias nº 13148",
   },
-  en: { membersEyebrow: "Become a member", membersTitle: "Steady support, every month.", membersIntro: "Membership fees give the programmes stability. The fee is collected by direct debit, so you never have to remember a transfer.", membersCta: "Become a member", membersNote: "After you send the request we will contact you to sign the SEPA direct debit mandate. You can cancel at any time.", 
+  en: { smallNote: "For amounts from €1 to €5 we suggest Bizum or bank transfer: by card or PayPal the platform fee would take a large part of your donation.", feeNote: "The payment platform deducts a small fee from each donation. By Bizum or bank transfer it arrives in full.",  membersEyebrow: "Become a member", membersTitle: "Steady support, every month.", membersIntro: "Membership fees give the programmes stability. The fee is collected by direct debit, so you never have to remember a transfer.", membersCta: "Become a member", membersNote: "After you send the request we will contact you to sign the SEPA direct debit mandate. You can cancel at any time.", 
     eyebrow: "Donate", title: "Your support, turned into", accent: "real help.", intro: "Every contribution sustains INICIA's support for families, training and community projects.",
     stats: [["317", "Ukrainian families supported"], ["129", "families of other origins and neighbours"], ["2021", "working since"]],
     amountLabel: "Choose an amount", other: "Other", amountNote: "Enter this amount in Bizum or in your transfer.",
@@ -53,7 +53,7 @@ const copy = {
     formTitle: "Donate goods or become a member", formIntro: "Tell us what you would like to give and we will contact you to arrange it.",
     trust: "INICIA Foundation · Non-profit association · Tax ID G05426242 · Registered in the Principality of Asturias, no. 13148",
   },
-  ru: { membersEyebrow: "Стать членом фонда", membersTitle: "Постоянная поддержка каждый месяц.", membersIntro: "Членские взносы дают программам стабильность. Взнос списывается автоматически с банковского счёта — не нужно помнить о переводах.", membersCta: "Стать членом фонда", membersNote: "После заявки мы свяжемся с вами, чтобы подписать поручение на автосписание SEPA. Отказаться можно в любой момент.", 
+  ru: { smallNote: "Для сумм от 1 до 5 € предлагаем Bizum или банковский перевод: при оплате картой или через PayPal комиссия платформы забрала бы заметную часть пожертвования.", feeNote: "Платёжная платформа удерживает небольшую комиссию с каждого пожертвования. Через Bizum или перевод сумма доходит полностью.",  membersEyebrow: "Стать членом фонда", membersTitle: "Постоянная поддержка каждый месяц.", membersIntro: "Членские взносы дают программам стабильность. Взнос списывается автоматически с банковского счёта — не нужно помнить о переводах.", membersCta: "Стать членом фонда", membersNote: "После заявки мы свяжемся с вами, чтобы подписать поручение на автосписание SEPA. Отказаться можно в любой момент.", 
     eyebrow: "Поддержать", title: "Ваша поддержка превращается в", accent: "реальную помощь.", intro: "Каждый взнос помогает INICIA сопровождать семьи, проводить обучение и развивать местные проекты.",
     stats: [["317", "украинских семей получили поддержку"], ["129", "семей другого происхождения и местных жителей"], ["2021", "работаем с"]],
     amountLabel: "Выберите сумму", other: "Другая", amountNote: "Укажите эту сумму в Bizum или в переводе.",
@@ -73,7 +73,7 @@ const copy = {
     formTitle: "Передать вещи или стать членом фонда", formIntro: "Расскажите, чем хотите помочь, и мы свяжемся с вами, чтобы всё организовать.",
     trust: "INICIA Foundation · Некоммерческая ассоциация · NIF G05426242 · Реестр ассоциаций Астурии № 13148",
   },
-  uk: { membersEyebrow: "Стати членом фонду", membersTitle: "Постійна підтримка щомісяця.", membersIntro: "Членські внески дають програмам стабільність. Внесок списується автоматично з банківського рахунку — не треба пам’ятати про перекази.", membersCta: "Стати членом фонду", membersNote: "Після заявки ми зв’яжемося з вами, щоб підписати доручення на автосписання SEPA. Відмовитися можна будь-коли.", 
+  uk: { smallNote: "Для сум від 1 до 5 € пропонуємо Bizum або банківський переказ: при оплаті карткою чи через PayPal комісія платформи забрала б помітну частину пожертви.", feeNote: "Платіжна платформа утримує невелику комісію з кожної пожертви. Через Bizum або переказ сума надходить повністю.",  membersEyebrow: "Стати членом фонду", membersTitle: "Постійна підтримка щомісяця.", membersIntro: "Членські внески дають програмам стабільність. Внесок списується автоматично з банківського рахунку — не треба пам’ятати про перекази.", membersCta: "Стати членом фонду", membersNote: "Після заявки ми зв’яжемося з вами, щоб підписати доручення на автосписання SEPA. Відмовитися можна будь-коли.", 
     eyebrow: "Підтримати", title: "Ваша підтримка перетворюється на", accent: "реальну допомогу.", intro: "Кожен внесок допомагає INICIA супроводжувати родини, проводити навчання та розвивати місцеві проєкти.",
     stats: [["317", "українських родин отримали підтримку"], ["129", "родин іншого походження та місцевих мешканців"], ["2021", "працюємо з"]],
     amountLabel: "Оберіть суму", other: "Інша", amountNote: "Вкажіть цю суму в Bizum або в переказі.",
@@ -137,8 +137,8 @@ function LinkQr({ value, label }: { value: string; label: string }) {
   return src ? <div className="flex items-center gap-4"><img src={src} alt="QR" width={150} height={150} className="rounded-xl border border-[#D6B25E]/20" /><p className="text-sm text-slate-300">{label}</p></div> : null;
 }
 
-function LinkMethod({ text, cta, href, qr, method }: { text: string; cta: string; href: string; qr: string; method: string }) {
-  return <div className="space-y-5"><p className="leading-7 text-slate-200">{text}</p><a href={href} target="_blank" rel="noreferrer" onClick={() => track("donate_intent", { method })} className="inline-flex min-h-12 items-center rounded-full bg-[#D6B25E] px-6 text-sm font-bold text-[#120D05]">{cta}<ArrowRight className="ml-2 h-4 w-4" /></a><div className="hidden sm:block"><LinkQr value={href} label={qr} /></div></div>;
+function LinkMethod({ text, cta, href, qr, method, fee }: { text: string; cta: string; href: string; qr: string; method: string; fee: string }) {
+  return <div className="space-y-5"><p className="leading-7 text-slate-200">{text}</p><p className="text-xs leading-5 text-slate-400">{fee}</p><a href={href} target="_blank" rel="noreferrer" onClick={() => track("donate_intent", { method })} className="inline-flex min-h-12 items-center rounded-full bg-[#D6B25E] px-6 text-sm font-bold text-[#120D05]">{cta}<ArrowRight className="ml-2 h-4 w-4" /></a><div className="hidden sm:block"><LinkQr value={href} label={qr} /></div></div>;
 }
 
 export default function Donate() {
@@ -149,7 +149,10 @@ export default function Donate() {
   const [locale] = useLocale();
   const plans = requestCopy[locale].donar.plans;
   const available: Record<Method, boolean> = { bizum: Boolean(settings.bizumCode), transfer: Boolean(DONATION.iban), card: Boolean(settings.cardLink), paypal: Boolean(settings.paypalLink), other: Boolean(settings.otherLink) };
-  const methods = (["bizum", "transfer", "card", "paypal", "other"] as Method[]).filter(key => available[key]);
+  const chosenAmount = custom ? Number(custom) || undefined : amount;
+  const small = chosenAmount !== undefined && chosenAmount <= SMALL_MAX;
+  // Card, PayPal and other platforms charge a fee per payment: for small amounts only Bizum and transfer are offered.
+  const methods = (["bizum", "transfer", "card", "paypal", "other"] as Method[]).filter(key => available[key] && (!small || key === "bizum" || key === "transfer"));
   const [chosen, setMethod] = useState<Method>();
   const method = chosen && available[chosen] ? chosen : methods[0];
   const finalAmount = custom ? Number(custom) || undefined : amount;
@@ -167,9 +170,10 @@ export default function Donate() {
       <div className="grid gap-8 rounded-3xl bg-[#0C1320] p-6 shadow-xl ring-1 ring-[#D6B25E]/20 sm:p-9 lg:grid-cols-[.9fr_1.1fr]">
         <div>
           <p className="text-sm font-bold text-[#EEE7D7]">{t.amountLabel}</p>
-          <div className="mt-4 grid grid-cols-4 gap-2">{[10, 25, 50].map(value => <button key={value} type="button" aria-pressed={!custom && amount === value} onClick={() => { setAmount(value); setCustom(""); }} className={`min-h-14 rounded-2xl border text-lg font-bold transition ${!custom && amount === value ? "border-[#D6B25E] bg-[#D6B25E] text-[#120D05]" : "border-[#D6B25E]/20 hover:border-[#D6B25E]"}`}>{value} €</button>)}
+          <div className="mt-4 grid grid-cols-3 gap-2 sm:grid-cols-5">{QUICK_AMOUNTS.map(value => <button key={value} type="button" aria-pressed={!custom && amount === value} onClick={() => { setAmount(value); setCustom(""); }} className={`min-h-14 rounded-2xl border text-lg font-bold transition ${!custom && amount === value ? "border-[#D6B25E] bg-[#D6B25E] text-[#120D05]" : "border-[#D6B25E]/20 hover:border-[#D6B25E]"}`}>{value} €</button>)}
             <input aria-label={t.other} placeholder={t.other} inputMode="numeric" value={custom} onChange={e => setCustom(e.target.value.replace(/[^0-9]/g, ""))} className={`min-h-14 rounded-2xl border px-3 text-center text-lg font-bold outline-none focus:border-[#D6B25E] bg-transparent ${custom ? "border-[#D6B25E]" : "border-[#D6B25E]/20"}`} /></div>
           <p className="mt-3 text-sm text-slate-400">{t.amountNote}</p>
+          {small && <p className="mt-3 rounded-xl border border-[#D6B25E]/30 bg-[#D6B25E]/10 p-3 text-sm leading-6 text-[#F0D893]">{t.smallNote}</p>}
           <div className="mt-8 hidden border-t border-[#D6B25E]/20 pt-6 lg:block"><LinkQr value="https://iniciafoundation.org/donar" label={t.pageQr} /></div>
           {settings.teamingLink && <a href={settings.teamingLink} onClick={() => track("donate_intent", { method: "teaming" })} target="_blank" rel="noreferrer" className="mt-6 block rounded-2xl bg-[#060A12] p-5 transition hover:ring-2 hover:ring-[#D6B25E]"><p className="font-serif text-2xl">{t.teaming}</p><p className="mt-1 text-sm text-slate-300">{t.teamingText}</p></a>}
         </div>
@@ -178,9 +182,9 @@ export default function Donate() {
           <div className="mt-6 space-y-4" role="tabpanel">
             {method === "bizum" && <>{settings.bizumCode ? <><ol className="space-y-2">{t.bizumSteps.map((line, index) => <li key={line} className="flex gap-3 text-sm leading-6"><span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#D6B25E] text-xs font-bold text-[#120D05]">{index + 1}</span>{line}</li>)}</ol><CopyRow label={t.bizumCode} value={settings.bizumCode} copyLabel={t.copy} copiedLabel={t.copied} />{finalAmount && <p className="text-sm text-slate-300">{finalAmount} €</p>}</> : <Soon text={t.soon} cta={t.soonCta} />}</>}
             {method === "transfer" && <>{DONATION.iban ? <><ol className="space-y-2">{t.transferSteps.map((line, index) => <li key={line} className="flex gap-3 text-sm leading-6"><span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#D6B25E] text-xs font-bold text-[#120D05]">{index + 1}</span>{line}</li>)}</ol><CopyRow label={t.iban} value={DONATION.iban} copyLabel={t.copy} copiedLabel={t.copied} onCopy={() => track("donate_intent", { method: "transfer" })} /><CopyRow label={t.holder} value={DONATION.holder} copyLabel={t.copy} copiedLabel={t.copied} />{DONATION.bank && <p className="px-1 text-sm text-slate-300">{DONATION.bank}</p>}<CopyRow label={t.concept} value={t.conceptValue} copyLabel={t.copy} copiedLabel={t.copied} /><div className="hidden items-center gap-4 sm:flex"><TransferQr amount={finalAmount} reference={t.conceptValue} /><p className="text-sm text-slate-300">{t.qr}</p></div></> : <Soon text={t.soon} cta={t.soonCta} />}</>}
-            {method === "card" && <LinkMethod text={t.card} cta={t.cardCta} href={settings.cardLink} qr={t.linkQr} method="card" />}
-            {method === "paypal" && <LinkMethod text={t.paypal} cta={t.paypalCta} href={settings.paypalLink} qr={t.linkQr} method="paypal" />}
-            {method === "other" && <LinkMethod text={t.otherText} cta={settings.otherName || t.otherCta} href={settings.otherLink} qr={t.linkQr} method="other" />}
+            {method === "card" && <LinkMethod text={t.card} cta={t.cardCta} href={settings.cardLink} qr={t.linkQr} method="card" fee={t.feeNote} />}
+            {method === "paypal" && <LinkMethod text={t.paypal} cta={t.paypalCta} href={settings.paypalLink} qr={t.linkQr} method="paypal" fee={t.feeNote} />}
+            {method === "other" && <LinkMethod text={t.otherText} cta={settings.otherName || t.otherCta} href={settings.otherLink} qr={t.linkQr} method="other" fee={t.feeNote} />}
           </div>
         </div>
       </div>

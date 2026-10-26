@@ -21,7 +21,7 @@ const CONFIG = {
 const COMMON_START = ['fecha', 'referencia', 'estado', 'responsable', 'notas', 'nombre', 'email', 'telefono', 'canal', 'ciudad', 'idioma', 'proyecto'];
 const COMMON_END = ['pagina'];
 /** Added later: kept at the end so existing rows stay aligned. */
-const EXTRA_END = ['zona', 'plan'];
+const EXTRA_END = ['zona', 'plan', 'entidad'];
 
 const REQUEST_TABS = {
   ayuda: { tab: 'Ayuda', fields: ['necesidad', 'personas', 'urgente', 'mensaje'] },
@@ -43,7 +43,7 @@ const SETTINGS = [
   ['social_facebook', 'https://www.facebook.com/iniciafoundation/', 'Enlace a la página de Facebook'],
   ['social_instagram', 'https://www.instagram.com/inicia_found', 'Enlace a Instagram'],
   ['social_linkedin', 'https://www.linkedin.com/in/iniciafoundation', 'Enlace a LinkedIn'],
-  ['social_youtube', '', 'Enlace al canal de YouTube'],
+  ['social_youtube', 'https://www.youtube.com/@IniciaFoundation', 'Enlace al canal de YouTube'],
   ['social_tiktok', '', 'Enlace a TikTok'],
   ['social_x', '', 'Enlace a X (Twitter)'],
   ['social_telegram', '', 'Enlace al canal de Telegram'],
@@ -86,7 +86,7 @@ function setup() {
 
   Object.keys(REQUEST_TABS).forEach(key => {
     const conf = REQUEST_TABS[key];
-    const sheet = ensureSheet_(ss, conf.tab, COMMON_START.concat(conf.fields, COMMON_END, EXTRA_END));
+    const sheet = ensureSheet_(ss, conf.tab, unique_(COMMON_START.concat(conf.fields, COMMON_END, EXTRA_END)));
     sheet.getRange(2, 3, sheet.getMaxRows() - 1, 1).setDataValidation(status);
   });
   Object.keys(CONTENT_TABS).forEach(tab => {
@@ -120,6 +120,8 @@ function syncHeader_(sheet, columns) {
   }
 }
 
+function unique_(list) { return list.filter((item, i) => list.indexOf(item) === i); }
+
 function sheet_() {
   const id = PropertiesService.getScriptProperties().getProperty('SHEET_ID');
   if (!id) throw new Error('Run setup() first');
@@ -145,7 +147,7 @@ function doPost(e) {
 
     const ref = clean_(data.referencia) || ('INI-' + Date.now());
     const values = Object.assign({}, data, { fecha: new Date(), referencia: ref, estado: 'Nueva', responsable: '', notas: '' });
-    const columns = COMMON_START.concat(conf.fields, COMMON_END, EXTRA_END);
+    const columns = unique_(COMMON_START.concat(conf.fields, COMMON_END, EXTRA_END));
     const row = columns.map(column => column === 'fecha' ? values.fecha : clean_(values[column]));
 
     const lock = LockService.getScriptLock();

@@ -19,7 +19,11 @@ export const CONTACT = {
 
 /** Donation details. Leave a value empty ("") to show "coming soon" for that method. */
 /** Membership plans shown on the site. Change amounts here (one republish) — see the "socio" step of the form. */
-export const MEMBERSHIP = { fullAmount: 30, fullPeriod: "mensual" as const, minAmount: 5, flexibleAmounts: [5, 10, 25, 30] };
+export const MEMBERSHIP = { fullAmount: 30, fullPeriod: "mensual" as const, reducedAmount: 10, companyMin: 50, minAmount: 5, flexibleAmounts: [5, 10, 25, 30, 50, 100] };
+
+/** One-off donation quick amounts. Amounts up to SMALL_MAX are offered only by Bizum or bank transfer (card fees). */
+export const QUICK_AMOUNTS = [1, 2, 5, 10, 25, 30, 50, 100];
+export const SMALL_MAX = 5;
 
 /** Places where INICIA works; people choose the nearest one in the forms. */
 export const ZONES = ["gijon", "aviles", "oviedo", "madrid", "barcelona", "valencia", "online"] as const;
@@ -56,6 +60,7 @@ export const DEFAULT_SETTINGS: Record<string, string> = {
   social_facebook: "https://www.facebook.com/iniciafoundation/",
   social_instagram: "https://www.instagram.com/inicia_found",
   social_linkedin: "https://www.linkedin.com/in/iniciafoundation",
+  social_youtube: "https://www.youtube.com/@IniciaFoundation",
   pago_bizum_codigo: DONATION.bizumCode,
   pago_tarjeta_enlace: DONATION.cardLink,
   pago_teaming_enlace: DONATION.teamingLink,

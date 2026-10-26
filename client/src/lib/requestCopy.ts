@@ -13,13 +13,13 @@ export type RequestCopy = {
   send: string;
   sending: string;
   required: string;
-  errors: { required: string; choose: string; email: string; name: string; consent: string; summary: string; consentLabel: string; minAmount: string };
+  errors: { required: string; choose: string; email: string; name: string; consent: string; summary: string; consentLabel: string; minAmount: string; companyMin: string };
   projectChip: string;
   change: string;
   ayuda: { needLabel: string; needs: Option[]; people: string; urgent: string; urgentNote: string; message: string; messageHint: string };
   voluntariado: { areasLabel: string; areas: Option[]; whenLabel: string; when: Option[]; modeLabel: string; modes: Option[]; languages: string; adult: string; minorNote: string; message: string };
   organizacion: { entity: string; entityType: string; entityTypes: Option[]; web: string; role: string; offerLabel: string; offers: Option[]; message: string };
-  donar: { modeLabel: string; modes: Option[]; moneyText: string; moneyCta: string; goodsLabel: string; goods: Option[]; goodsDesc: string; deliveryLabel: string; delivery: Option[]; planLabel: string; plans: { key: string; title: string; price: string; text: string }[]; feeLabel: string; fees: Option[]; otherAmount: string; periodLabel: string; periods: Option[]; socioNote: string };
+  donar: { modeLabel: string; modes: Option[]; moneyText: string; moneyCta: string; goodsLabel: string; goods: Option[]; goodsDesc: string; deliveryLabel: string; delivery: Option[]; planLabel: string; plans: { key: string; title: string; price: string; text: string }[]; feeLabel: string; fees: Option[]; otherAmount: string; companyFees: Option[]; companyOther: string; companyName: string; periodLabel: string; periods: Option[]; socioNote: string };
   otro: { topicLabel: string; topics: Option[]; message: string };
   contact: { name: string; email: string; phone: string; channelLabel: string; channels: Option[]; city: string; zoneLabel: string; zones: Option[]; consent: string; privacyLink: string; sensitive: string };
   done: { title: string; reference: string; next: string; again: string; home: string };
@@ -41,7 +41,7 @@ export const requestCopy: Record<Locale, RequestCopy> = {
     otherLink: "Otra consulta o prensa",
     back: "Atrás", next: "Continuar", send: "Enviar", sending: "Enviando…",
     required: "Completa los campos obligatorios para continuar.",
-    errors: { required: "Este campo es obligatorio.", choose: "Elige al menos una opción.", email: "Revisa el email: debe tener la forma nombre@dominio.com.", name: "Escribe tu nombre (mínimo 2 letras).", consent: "Marca la casilla para que podamos responderte.", summary: "Revisa los campos marcados en rojo:", consentLabel: "Consentimiento", minAmount: "La cantidad mínima es 5 €." },
+    errors: { required: "Este campo es obligatorio.", choose: "Elige al menos una opción.", email: "Revisa el email: debe tener la forma nombre@dominio.com.", name: "Escribe tu nombre (mínimo 2 letras).", consent: "Marca la casilla para que podamos responderte.", summary: "Revisa los campos marcados en rojo:", consentLabel: "Consentimiento", minAmount: "La cantidad mínima es 5 €.", companyMin: "Para empresas la cuota mínima es 50 € al mes." },
     projectChip: "Proyecto", change: "Cambiar",
     ayuda: {
       needLabel: "¿Con qué necesitas ayuda?",
@@ -87,10 +87,15 @@ export const requestCopy: Record<Locale, RequestCopy> = {
       plans: [
         { key: "pleno", title: "Socio/a de pleno derecho", price: "30 € al mes", text: "Formas parte activa de INICIA y participas en sus programas y actividades." },
         { key: "colaborador", title: "Socio/a colaborador/a", price: "Desde 5 €", text: "Eliges tu cuota y la frecuencia. Apoyas los programas y recibes información sobre su impacto." },
+        { key: "reducida", title: "Cuota reducida", price: "10 € al mes", text: "Para estudiantes, personas en desempleo o pensionistas. Mismos derechos de participación que la cuota completa." },
+        { key: "empresa", title: "Empresa o entidad socia", price: "Desde 50 € al mes", text: "Mención en «Alianzas» con vuestro consentimiento, informe anual de impacto y certificado de colaboración." },
       ],
       feeLabel: "Tu cuota",
-      fees: [["5", "5 €"], ["10", "10 €"], ["25", "25 €"], ["30", "30 €"], ["otra", "Otra cantidad"]],
+      fees: [["5", "5 €"], ["10", "10 €"], ["25", "25 €"], ["30", "30 €"], ["50", "50 €"], ["100", "100 €"], ["otra", "Otra cantidad"]],
       otherAmount: "Cantidad en euros (mínimo 5 €)",
+      companyFees: [["50", "50 €"], ["100", "100 €"], ["250", "250 €"], ["otra", "Otra cantidad"]],
+      companyOther: "Cantidad mensual en euros (mínimo 50 €)",
+      companyName: "Nombre de la empresa o entidad",
       periodLabel: "Periodicidad",
       periods: [["mensual", "Mensual"], ["trimestral", "Trimestral"], ["anual", "Anual"]],
       socioNote: "Te contactaremos para firmar la domiciliación bancaria. No te pedimos tu cuenta por este formulario.",
@@ -124,7 +129,7 @@ export const requestCopy: Record<Locale, RequestCopy> = {
     otherLink: "Other enquiry or press",
     back: "Back", next: "Continue", send: "Send", sending: "Sending…",
     required: "Please fill in the required fields to continue.",
-    errors: { required: "This field is required.", choose: "Choose at least one option.", email: "Check the e-mail: it should look like name@domain.com.", name: "Enter your name (at least 2 letters).", consent: "Tick the box so we can reply to you.", summary: "Please check the fields marked in red:", consentLabel: "Consent", minAmount: "The minimum amount is €5." },
+    errors: { required: "This field is required.", choose: "Choose at least one option.", email: "Check the e-mail: it should look like name@domain.com.", name: "Enter your name (at least 2 letters).", consent: "Tick the box so we can reply to you.", summary: "Please check the fields marked in red:", consentLabel: "Consent", minAmount: "The minimum amount is €5.", companyMin: "For companies the minimum fee is €50 a month." },
     projectChip: "Project", change: "Change",
     ayuda: {
       needLabel: "What do you need help with?",
@@ -170,10 +175,15 @@ export const requestCopy: Record<Locale, RequestCopy> = {
       plans: [
         { key: "pleno", title: "Full member", price: "€30 a month", text: "You are an active part of INICIA and take part in its programmes and activities." },
         { key: "colaborador", title: "Supporting member", price: "From €5", text: "You choose the amount and frequency. You support the programmes and receive updates on their impact." },
+        { key: "reducida", title: "Reduced fee", price: "€10 a month", text: "For students, unemployed people or pensioners. The same participation rights as the full fee." },
+        { key: "empresa", title: "Company or organisation member", price: "From €50 a month", text: "Mention on the Partners page with your consent, annual impact report and certificate of collaboration." },
       ],
       feeLabel: "Your fee",
-      fees: [["5", "€5"], ["10", "€10"], ["25", "€25"], ["30", "€30"], ["otra", "Other amount"]],
+      fees: [["5", "€5"], ["10", "€10"], ["25", "€25"], ["30", "€30"], ["50", "€50"], ["100", "€100"], ["otra", "Other amount"]],
       otherAmount: "Amount in euros (minimum €5)",
+      companyFees: [["50", "€50"], ["100", "€100"], ["250", "€250"], ["otra", "Other amount"]],
+      companyOther: "Monthly amount in euros (minimum €50)",
+      companyName: "Company or organisation name",
       periodLabel: "Frequency",
       periods: [["mensual", "Monthly"], ["trimestral", "Quarterly"], ["anual", "Yearly"]],
       socioNote: "We will contact you to sign the direct debit mandate. We never ask for your bank account in this form.",
@@ -207,7 +217,7 @@ export const requestCopy: Record<Locale, RequestCopy> = {
     otherLink: "Другой вопрос или пресса",
     back: "Назад", next: "Далее", send: "Отправить", sending: "Отправляем…",
     required: "Заполните обязательные поля, чтобы продолжить.",
-    errors: { required: "Это обязательное поле.", choose: "Выберите хотя бы один вариант.", email: "Проверьте email: он должен выглядеть как имя@домен.com.", name: "Укажите имя (минимум 2 буквы).", consent: "Отметьте галочку, чтобы мы могли вам ответить.", summary: "Проверьте поля, выделенные красным:", consentLabel: "Согласие на обработку данных", minAmount: "Минимальная сумма — 5 €." },
+    errors: { required: "Это обязательное поле.", choose: "Выберите хотя бы один вариант.", email: "Проверьте email: он должен выглядеть как имя@домен.com.", name: "Укажите имя (минимум 2 буквы).", consent: "Отметьте галочку, чтобы мы могли вам ответить.", summary: "Проверьте поля, выделенные красным:", consentLabel: "Согласие на обработку данных", minAmount: "Минимальная сумма — 5 €.", companyMin: "Для компаний минимальный взнос — 50 € в месяц." },
     projectChip: "Проект", change: "Изменить",
     ayuda: {
       needLabel: "С чем вам нужна помощь?",
@@ -253,10 +263,15 @@ export const requestCopy: Record<Locale, RequestCopy> = {
       plans: [
         { key: "pleno", title: "Полноправный член", price: "30 € в месяц", text: "Вы активно участвуете в жизни INICIA, её программах и мероприятиях." },
         { key: "colaborador", title: "Член-попечитель", price: "От 5 €", text: "Вы сами выбираете сумму и периодичность. Поддерживаете программы и получаете отчёты об их результатах." },
+        { key: "reducida", title: "Льготный взнос", price: "10 € в месяц", text: "Для студентов, безработных и пенсионеров. Те же права участия, что и при полном взносе." },
+        { key: "empresa", title: "Компания или организация", price: "От 50 € в месяц", text: "Упоминание в разделе «Партнёры» с вашего согласия, годовой отчёт о результатах и сертификат о сотрудничестве." },
       ],
       feeLabel: "Ваш взнос",
-      fees: [["5", "5 €"], ["10", "10 €"], ["25", "25 €"], ["30", "30 €"], ["otra", "Другая сумма"]],
+      fees: [["5", "5 €"], ["10", "10 €"], ["25", "25 €"], ["30", "30 €"], ["50", "50 €"], ["100", "100 €"], ["otra", "Другая сумма"]],
       otherAmount: "Сумма в евро (минимум 5 €)",
+      companyFees: [["50", "50 €"], ["100", "100 €"], ["250", "250 €"], ["otra", "Другая сумма"]],
+      companyOther: "Сумма в месяц в евро (минимум 50 €)",
+      companyName: "Название компании или организации",
       periodLabel: "Периодичность",
       periods: [["mensual", "Ежемесячно"], ["trimestral", "Раз в квартал"], ["anual", "Раз в год"]],
       socioNote: "Мы свяжемся с вами, чтобы оформить автоматическое списание. Номер счёта в этой форме мы не спрашиваем.",
@@ -290,7 +305,7 @@ export const requestCopy: Record<Locale, RequestCopy> = {
     otherLink: "Інше питання або преса",
     back: "Назад", next: "Далі", send: "Надіслати", sending: "Надсилаємо…",
     required: "Заповніть обов’язкові поля, щоб продовжити.",
-    errors: { required: "Це обов’язкове поле.", choose: "Оберіть хоча б один варіант.", email: "Перевірте email: він має виглядати як імʼя@домен.com.", name: "Вкажіть імʼя (мінімум 2 літери).", consent: "Позначте галочку, щоб ми могли вам відповісти.", summary: "Перевірте поля, виділені червоним:", consentLabel: "Згода на обробку даних", minAmount: "Мінімальна сума — 5 €." },
+    errors: { required: "Це обов’язкове поле.", choose: "Оберіть хоча б один варіант.", email: "Перевірте email: він має виглядати як імʼя@домен.com.", name: "Вкажіть імʼя (мінімум 2 літери).", consent: "Позначте галочку, щоб ми могли вам відповісти.", summary: "Перевірте поля, виділені червоним:", consentLabel: "Згода на обробку даних", minAmount: "Мінімальна сума — 5 €.", companyMin: "Для компаній мінімальний внесок — 50 € на місяць." },
     projectChip: "Проєкт", change: "Змінити",
     ayuda: {
       needLabel: "З чим вам потрібна допомога?",
@@ -336,10 +351,15 @@ export const requestCopy: Record<Locale, RequestCopy> = {
       plans: [
         { key: "pleno", title: "Повноправний член", price: "30 € на місяць", text: "Ви активно берете участь у житті INICIA, її програмах і заходах." },
         { key: "colaborador", title: "Член-меценат", price: "Від 5 €", text: "Ви самі обираєте суму та періодичність. Підтримуєте програми й отримуєте звіти про їхні результати." },
+        { key: "reducida", title: "Пільговий внесок", price: "10 € на місяць", text: "Для студентів, безробітних і пенсіонерів. Ті самі права участі, що й за повного внеску." },
+        { key: "empresa", title: "Компанія або організація", price: "Від 50 € на місяць", text: "Згадка в розділі «Партнери» за вашою згодою, річний звіт про результати та сертифікат про співпрацю." },
       ],
       feeLabel: "Ваш внесок",
-      fees: [["5", "5 €"], ["10", "10 €"], ["25", "25 €"], ["30", "30 €"], ["otra", "Інша сума"]],
+      fees: [["5", "5 €"], ["10", "10 €"], ["25", "25 €"], ["30", "30 €"], ["50", "50 €"], ["100", "100 €"], ["otra", "Інша сума"]],
       otherAmount: "Сума в євро (мінімум 5 €)",
+      companyFees: [["50", "50 €"], ["100", "100 €"], ["250", "250 €"], ["otra", "Інша сума"]],
+      companyOther: "Сума на місяць у євро (мінімум 50 €)",
+      companyName: "Назва компанії або організації",
       periodLabel: "Періодичність",
       periods: [["mensual", "Щомісяця"], ["trimestral", "Раз на квартал"], ["anual", "Раз на рік"]],
       socioNote: "Ми зв’яжемося з вами, щоб оформити автоматичне списання. Номер рахунку в цій формі ми не запитуємо.",

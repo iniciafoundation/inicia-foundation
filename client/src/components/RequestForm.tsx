@@ -49,7 +49,7 @@ export function RequestForm({ initialType, project, compact = false }: { initial
     const params = new URLSearchParams(typeof window !== "undefined" ? window.location.search : "");
     const start: Values = { canal: "whatsapp" };
     const modo = params.get("modo"); if (modo && ["dinero", "especie", "socio"].includes(modo)) start.modo = modo;
-    const plan = params.get("plan"); if (plan && ["pleno", "colaborador"].includes(plan)) { start.modo = "socio"; start.plan = plan; }
+    const plan = params.get("plan"); if (plan && ["pleno", "colaborador", "reducida", "empresa"].includes(plan)) { start.modo = "socio"; start.plan = plan; }
     const zona = params.get("zona"); if (zona && (ZONES as readonly string[]).includes(zona)) start.zona = zona;
     return start;
   });
@@ -86,6 +86,10 @@ export function RequestForm({ initialType, project, compact = false }: { initial
             need("cuota", "choose"); need("periodicidad", "choose");
             if (v("cuota") === "otra") { if (!has("cuota_otra")) e.cuota_otra = "required"; else if (Number(s("cuota_otra")) < MEMBERSHIP.minAmount) e.cuota_otra = "minAmount"; }
           }
+          if (v("plan") === "empresa") {
+            need("entidad"); need("cuota", "choose");
+            if (v("cuota") === "otra") { if (!has("cuota_otra")) e.cuota_otra = "required"; else if (Number(s("cuota_otra")) < MEMBERSHIP.companyMin) e.cuota_otra = "companyMin"; }
+          }
         }
         else if (v("modo") !== "dinero") need("modo", "choose");
         break;
@@ -121,8 +125,8 @@ export function RequestForm({ initialType, project, compact = false }: { initial
   const errorLabels = (errs: Record<string, ErrKind>, labels: Record<string, string>) => Object.keys(errs).map(key => labels[key]).filter(Boolean);
   const labels2: Record<string, string> = type ? {
     necesidad: t.ayuda.needLabel, mensaje: type === "ayuda" ? t.ayuda.message : type === "organizacion" ? t.organizacion.message : t.otro.message,
-    areas: t.voluntariado.areasLabel, disponibilidad: t.voluntariado.whenLabel, entidad: t.organizacion.entity, tipo_entidad: t.organizacion.entityType,
-    modo: t.donar.modeLabel, que_dona: t.donar.goodsLabel, descripcion: t.donar.goodsDesc, plan: t.donar.planLabel, cuota_otra: t.donar.otherAmount, cuota: t.donar.feeLabel, periodicidad: t.donar.periodLabel, tema: t.otro.topicLabel,
+    areas: t.voluntariado.areasLabel, disponibilidad: t.voluntariado.whenLabel, tipo_entidad: t.organizacion.entityType,
+    modo: t.donar.modeLabel, que_dona: t.donar.goodsLabel, descripcion: t.donar.goodsDesc, plan: t.donar.planLabel, cuota_otra: v("plan") === "empresa" ? t.donar.companyOther : t.donar.otherAmount, cuota: t.donar.feeLabel, entidad: type === "donar" ? t.donar.companyName : t.organizacion.entity, periodicidad: t.donar.periodLabel, tema: t.otro.topicLabel,
   } : {};
   const labels3: Record<string, string> = { nombre: t.contact.name, email: t.contact.email, consentimiento: t.errors.consentLabel };
 
@@ -135,7 +139,10 @@ export function RequestForm({ initialType, project, compact = false }: { initial
     if (s("website")) return; // honeypot
     const ref = makeReference();
     setState("sending");
-    const fixedPlan = type === "donar" && v("modo") === "socio" && v("plan") === "pleno" ? { cuota: String(MEMBERSHIP.fullAmount), periodicidad: MEMBERSHIP.fullPeriod, cuota_otra: undefined } : {};
+    const socio = type === "donar" && v("modo") === "socio";
+    const fixedPlan = socio && v("plan") === "pleno" ? { cuota: String(MEMBERSHIP.fullAmount), periodicidad: MEMBERSHIP.fullPeriod, cuota_otra: undefined }
+      : socio && v("plan") === "reducida" ? { cuota: String(MEMBERSHIP.reducedAmount), periodicidad: "mensual", cuota_otra: undefined }
+      : socio && v("plan") === "empresa" ? { periodicidad: "mensual" } : {};
     const payload = { referencia: ref, tipo: type, proyecto: project, idioma: locale, pagina: typeof window !== "undefined" ? window.location.pathname : "", ...Object.fromEntries(Object.entries(values).filter(([key]) => key !== "website")), ...fixedPlan };
     try {
       await sendRequest(payload);
@@ -213,9 +220,14 @@ export function RequestForm({ initialType, project, compact = false }: { initial
         </>}
         {v("modo") === "socio" && <>
           <fieldset data-error={err("plan") ? "true" : undefined} className="scroll-mt-32"><legend className="text-sm font-semibold text-[#EEE7D7]">{t.donar.planLabel}<span className="text-[#D6B25E]"> *</span></legend>
-            <div className={`mt-3 grid gap-3 sm:grid-cols-2 ${err("plan") ? "rounded-2xl p-2 ring-2 ring-red-400/60" : ""}`}>{t.donar.plans.map(plan => { const active = v("plan") === plan.key; return <button key={plan.key} type="button" aria-pressed={active} onClick={() => set("plan")(plan.key)} className={`flex flex-col items-start rounded-2xl border p-5 text-left transition ${active ? "border-[#D6B25E] bg-[#D6B25E]/10" : "border-[#D6B25E]/20 bg-[#060A12] hover:border-[#D6B25E]"}`}><span className="font-serif text-2xl text-[#EEE7D7]">{plan.title}</span><span className="mt-1 text-sm font-bold text-[#F0D893]">{plan.price}</span><span className="mt-2 text-sm leading-6 text-slate-300">{plan.text}</span></button>; })}</div>
+            <div className={`mt-3 grid gap-3 sm:grid-cols-2 ${err("plan") ? "rounded-2xl p-2 ring-2 ring-red-400/60" : ""}`}>{t.donar.plans.map(plan => { const active = v("plan") === plan.key; return <button key={plan.key} type="button" aria-pressed={active} onClick={() => setValues(current => ({ ...current, plan: plan.key, cuota: undefined as unknown as string, cuota_otra: "" }))} className={`flex flex-col items-start rounded-2xl border p-5 text-left transition ${active ? "border-[#D6B25E] bg-[#D6B25E]/10" : "border-[#D6B25E]/20 bg-[#060A12] hover:border-[#D6B25E]"}`}><span className="font-serif text-2xl text-[#EEE7D7]">{plan.title}</span><span className="mt-1 text-sm font-bold text-[#F0D893]">{plan.price}</span><span className="mt-2 text-sm leading-6 text-slate-300">{plan.text}</span></button>; })}</div>
             <ErrorText text={err("plan")} />
           </fieldset>
+          {v("plan") === "empresa" && <>
+            <Field label={t.donar.companyName} required error={err("entidad")}><input className={fieldClass} autoComplete="organization" value={s("entidad")} onChange={e => set("entidad")(e.target.value)} onBlur={touch("entidad")} /></Field>
+            <Chips label={t.donar.feeLabel} options={t.donar.companyFees} value={v("cuota") as string} onChange={set("cuota")} required error={err("cuota")} />
+            {v("cuota") === "otra" && <Field label={t.donar.companyOther} required error={err("cuota_otra")}><input type="number" min={MEMBERSHIP.companyMin} step={1} inputMode="numeric" className={fieldClass} value={s("cuota_otra")} onChange={e => set("cuota_otra")(e.target.value)} onBlur={touch("cuota_otra")} /></Field>}
+          </>}
           {v("plan") === "colaborador" && <>
             <Chips label={t.donar.feeLabel} options={t.donar.fees} value={v("cuota") as string} onChange={set("cuota")} required error={err("cuota")} />
             {v("cuota") === "otra" && <Field label={t.donar.otherAmount} required error={err("cuota_otra")}><input type="number" min={MEMBERSHIP.minAmount} step={1} inputMode="numeric" className={fieldClass} value={s("cuota_otra")} onChange={e => set("cuota_otra")(e.target.value)} onBlur={touch("cuota_otra")} /></Field>}
