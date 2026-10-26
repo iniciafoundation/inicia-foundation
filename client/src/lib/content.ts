@@ -5,9 +5,10 @@ import { DEFAULT_SETTINGS, SHEETS_ENDPOINT, SOCIAL_NETWORKS } from "./siteConfig
 export type NewsItem = { id: string; fecha: string; titulo: string; resumen: string; texto: string; imagen: string; enlace: string; proyecto: string; idioma: string };
 export type Fundraiser = { proyecto: string; objetivo: number; recaudado: number; donantes: number; nota_es?: string; nota_en?: string; nota_ru?: string; nota_uk?: string };
 export type EventItem = { fecha: string; hora: string; titulo: string; lugar: string; enlace: string; idioma: string };
-export type SiteContent = { news: NewsItem[]; fundraising: Fundraiser[]; events: EventItem[]; settings: Record<string, string> };
+export type FaqItem = { idioma: string; pregunta: string; palabras_clave: string; respuesta: string; enlace: string };
+export type SiteContent = { news: NewsItem[]; fundraising: Fundraiser[]; events: EventItem[]; faq: FaqItem[]; settings: Record<string, string> };
 
-const EMPTY: SiteContent = { news: [], fundraising: [], events: [], settings: {} };
+const EMPTY: SiteContent = { news: [], fundraising: [], events: [], faq: [], settings: {} };
 
 /** Public content managed in the Google Sheet (tabs Noticias, Recaudacion, Eventos). */
 export function useSiteContent(endpoint = SHEETS_ENDPOINT) {
@@ -20,7 +21,7 @@ export function useSiteContent(endpoint = SHEETS_ENDPOINT) {
       const response = await fetch(`${endpoint}?action=content`);
       if (!response.ok) throw new Error(`Content ${response.status}`);
       const data = await response.json();
-      return { news: data.news ?? [], fundraising: data.fundraising ?? [], events: data.events ?? [], settings: data.settings ?? {} };
+      return { news: data.news ?? [], fundraising: data.fundraising ?? [], events: data.events ?? [], faq: data.faq ?? [], settings: data.settings ?? {} };
     },
     placeholderData: EMPTY,
   });

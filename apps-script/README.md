@@ -40,6 +40,8 @@
 
 **Eventos** — мероприятия: дата, время, название, место, ссылка; галочка **publicar**. Прошедшие скрываются сами.
 
+**Asistente** — вопросы и ответы для помощника «Pregúntanos» на сайте: `idioma` (es/en/ru/uk или todos), `pregunta`, `palabras_clave` (слова, по которым его найти), `respuesta`, `enlace` (необязательно, например /donar). Галочка **publicar** — показать.
+
 **Ajustes** — настройки сайта без новой публикации (0 кредитов Netlify). Колонка `valor`:
 - `social_*` — ссылки на соцсети (Facebook, Instagram, LinkedIn, YouTube, TikTok, X, Telegram, канал WhatsApp, Threads, Bluesky). Пустое значение — иконки на сайте нет.
 - `pago_bizum_codigo` — код Bizum ONG от банка; появится вкладка Bizum.

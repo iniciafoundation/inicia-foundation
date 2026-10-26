@@ -33,6 +33,7 @@ const CONTENT_TABS = {
   Noticias: ['publicar', 'fecha', 'idioma', 'titulo', 'resumen', 'texto', 'imagen', 'enlace', 'proyecto'],
   Recaudacion: ['activo', 'proyecto', 'objetivo', 'recaudado', 'donantes', 'nota_es', 'nota_en', 'nota_ru', 'nota_uk'],
   Eventos: ['publicar', 'fecha', 'hora', 'idioma', 'titulo', 'lugar', 'enlace'],
+  Asistente: ['publicar', 'idioma', 'pregunta', 'palabras_clave', 'respuesta', 'enlace'],
 };
 
 /** Site settings editable without republishing the website (tab "Ajustes": clave | valor | nota). */
@@ -206,9 +207,11 @@ function readContent_() {
   const events = rows('Eventos').filter(r => r.publicar === true && r.titulo && iso(r.fecha) >= today)
     .map(r => ({ fecha: iso(r.fecha), hora: r.hora instanceof Date ? Utilities.formatDate(r.hora, 'Europe/Madrid', 'HH:mm') : String(r.hora || ''), idioma: String(r.idioma || 'todos'), titulo: String(r.titulo), lugar: String(r.lugar || ''), enlace: String(r.enlace || '') }))
     .sort((a, b) => a.fecha.localeCompare(b.fecha)).slice(0, 12);
+  const faq = rows('Asistente').filter(r => r.publicar === true && r.pregunta && r.respuesta)
+    .map(r => ({ idioma: String(r.idioma || 'es'), pregunta: String(r.pregunta).slice(0, 200), palabras_clave: String(r.palabras_clave || '').slice(0, 300), respuesta: String(r.respuesta).slice(0, 1200), enlace: String(r.enlace || '') })).slice(0, 80);
   const settings = {};
   rows('Ajustes').forEach(r => { const key = String(r.clave || '').trim(); const value = String(r.valor || '').trim(); if (/^[a-z0-9_]+$/.test(key) && value) settings[key] = value.slice(0, 500); });
-  return { news, fundraising, events, settings, updated: new Date().toISOString() };
+  return { news, fundraising, events, faq, settings, updated: new Date().toISOString() };
 }
 
 /** Turns a Google Drive share link into a direct image URL (the file must be shared "anyone with the link"). */
