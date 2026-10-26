@@ -6,17 +6,16 @@ jobs:
     steps:
       - uses: actions/setup-node@v4
         with: { node-version: 22 }
-      - name: Apps Script endpoint and page speed
+      - name: What blocks first paint on the preview
         run: |
           exec > >(tee -a out.txt) 2>&1
-          echo "== Redirect check"; for u in alianzas noticias proyectos proyectos/nucleo identidad; do curl -s -o /dev/null -w "$u %{http_code} %{redirect_url}\n" https://deploy-preview-4--iniciafoundation.netlify.app/$u; done
-          curl -s https://deploy-preview-4--iniciafoundation.netlify.app/sitemap.xml | head -c 400; echo
-          echo "== Lighthouse (mobile, real network)"
+          U=https://deploy-preview-4--iniciafoundation.netlify.app/alianzas
+          curl -sI --compressed $U | grep -iE "content-encoding|cache-control|x-robots|content-length|server"
+          curl -s --compressed $U -o page.html; wc -c page.html
+          grep -oE '<(script|link)[^>]*>' page.html | grep -vE 'preload" as="image' | head -20
           npm i -g lighthouse@13 >/dev/null 2>&1
-          for u in https://deploy-preview-4--iniciafoundation.netlify.app/ https://deploy-preview-4--iniciafoundation.netlify.app/alianzas https://deploy-preview-4--iniciafoundation.netlify.app/noticias https://deploy-preview-4--iniciafoundation.netlify.app/proyectos https://deploy-preview-4--iniciafoundation.netlify.app/mision; do for k in 1 2; do
-            lighthouse "$u" --quiet --chrome-flags="--headless=new --no-sandbox" --only-categories=performance,seo,accessibility,best-practices --output=json --output-path=lh.json >/dev/null 2>&1
-            node -e "const r=require('./lh.json');const a=r.audits;const c=r.categories;console.log('$u', Object.values(c).map(x=>x.id+'='+Math.round(x.score*100)).join(' '),'FCP',a['first-contentful-paint'].displayValue,'LCP',a['largest-contentful-paint'].displayValue,'TBT',a['total-blocking-time'].displayValue,'CLS',a['cumulative-layout-shift'].displayValue,'TTFB',a['server-response-time']?.displayValue||'');const lcp=a['lcp-breakdown-insight']?.details?.items?.[1]?.snippet||'';console.log('  LCP el:',lcp.slice(0,140));const fails=Object.values(a).filter(x=>x.score!==null&&x.score<0.9&&x.scoreDisplayMode!=='informative'&&x.scoreDisplayMode!=='manual'&&x.scoreDisplayMode!=='notApplicable').map(x=>x.id+(x.displayValue?' ('+x.displayValue+')':''));console.log('  issues:',fails.join(', '))" || true
-          done; done
+          lighthouse $U --quiet --chrome-flags="--headless=new --no-sandbox" --only-categories=performance --output=json --output-path=lh.json >/dev/null 2>&1
+          node -e "const a=require('./lh.json').audits;for(const k of ['render-blocking-insight','network-dependency-tree-insight','lcp-breakdown-insight']){console.log('##',k,JSON.stringify(a[k]?.details).slice(0,1500))};const n=a['network-requests'].details.items.map(i=>[Math.round(i.networkRequestTime),Math.round(i.networkEndTime),Math.round(i.transferSize/1024)+'KB',i.url.slice(0,90)].join(' '));console.log(n.join('\n'))"
       - name: Publish output
         if: always()
         run: |
