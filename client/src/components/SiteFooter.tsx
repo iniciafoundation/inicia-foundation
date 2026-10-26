@@ -22,7 +22,7 @@ export function SiteFooter() {
       <div><p className="font-bold text-[#D6B25E]">{t.help}</p>{t.help2.map(([label, href]) => <Link key={href} className="mt-2.5 block text-sm hover:text-[#F0D893]" href={href}>{label}</Link>)}</div>
     </div>
     <div className="mx-auto mt-10 max-w-7xl border-t border-white/15 px-5 pt-5 text-xs leading-6 text-slate-400">
-      <p>Asociación Inicia Foundation · NIF G05426242 · Registro de Asociaciones del Principado de Asturias nº 13148 · Av. Manuel Llaneza, 68, 33208 Gijón (Asturias), España</p>
+      <p>Asociación Inicia Foundation · NIF G05426242 · Registro de Asociaciones del Principado de Asturias nº 13148 · Erasmus+ / Cuerpo Europeo de Solidaridad OID E10445982 · Av. Manuel Llaneza, 68, 33208 Gijón (Asturias), España</p>
       <div className="mt-2 flex flex-wrap justify-between gap-3"><span>© {new Date().getFullYear()} Inicia Foundation. {t.rights}</span><span className="flex flex-wrap gap-x-4 gap-y-1"><Link href="/aviso-legal" className="hover:text-[#F0D893]">{t.legal}</Link><Link href="/privacidad" className="hover:text-[#F0D893]">{t.privacy}</Link><Link href="/cookies" className="hover:text-[#F0D893]">{t.cookies}</Link><button type="button" onClick={openConsentSettings} className="hover:text-[#F0D893]">{t.cookieSettings}</button><Link href="/identidad" className="hover:text-[#F0D893]">NIF / Registro</Link></span></div>
     </div>
   </footer>;

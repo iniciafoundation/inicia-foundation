@@ -1,5 +1,5 @@
 /** Brand photography (WebP, 960w and 1920w) stored in client/public/assets/photos. */
-export type PhotoName = "earth" | "community" | "planting" | "team" | "seedling" | "horizon" | "learning" | "energy" | "vision";
+export type PhotoName = "earth" | "community" | "planting" | "team" | "seedling" | "horizon" | "learning" | "energy" | "vision" | "river" | "coast" | "whale" | "river-logo" | "sea-logo" | "spiral-logo";
 
 export function photo(name: PhotoName) {
   const base = `/assets/photos/${name}`;
