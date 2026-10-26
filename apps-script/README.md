@@ -40,6 +40,16 @@
 
 **Eventos** — мероприятия: дата, время, название, место, ссылка; галочка **publicar**. Прошедшие скрываются сами.
 
+**Ajustes** — настройки сайта без новой публикации (0 кредитов Netlify). Колонка `valor`:
+- `social_*` — ссылки на соцсети (Facebook, Instagram, LinkedIn, YouTube, TikTok, X, Telegram, канал WhatsApp, Threads, Bluesky). Пустое значение — иконки на сайте нет.
+- `pago_bizum_codigo` — код Bizum ONG от банка; появится вкладка Bizum.
+- `pago_tarjeta_enlace` — ссылка оплаты картой / Apple Pay / Google Pay (Stripe Payment Link или TPV банка); появится вкладка «Карта» с QR-кодом.
+- `pago_paypal_enlace`, `pago_teaming_enlace`, `pago_otro_nombre` + `pago_otro_enlace` — другие способы.
+- `video_inicio_youtube` — ссылка на видео YouTube для главной страницы.
+- `analitica_ga4` (G-…) и `google_ads_conversion` (AW-…/метка) — включают баннер cookie и измерение конверсий для Google Ad Grants.
+- `aviso_banner` — короткий текст жёлтой полосы вверху сайта.
+Принимаются только ссылки, начинающиеся с https://.
+
 Чтобы изменения появились сразу, а не через 5 минут: в редакторе скрипта выберите функцию **refreshContent** → Выполнить.
 
 ## Безопасность
