@@ -1,0 +1,33 @@
+name: diag-forms
+on: { push: { branches: [diag-forms-2026-10-26] } }
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - name: Apps Script endpoint and page speed
+        run: |
+          exec > >(tee -a out.txt) 2>&1
+          EP="https://script.google.com/macros/s/AKfycby8-zwlvbK6Zv56Bqh-oWsL9DFCNMc0xCVoHJBG8oTBzjs1Q5FBLBc0N5Bv5JjbLWls/exec"
+          echo "== GET base"; curl -sL -m 30 "$EP" | head -c 300; echo
+          echo "== GET content"; curl -sL -m 30 "$EP?action=content" > content.json; head -c 200 content.json; echo
+          python3 -c "import json;d=json.load(open('content.json'));print('news',len(d.get('news',[])),'events',len(d.get('events',[])),'fund',len(d.get('fundraising',[])),'faq',len(d.get('faq',[])),'settings',sorted(d.get('settings',{}).keys()),'updated',d.get('updated'))" || true
+          echo "== POST test (ast autoreply only exists in the newest script)"
+          REF="INI-TEST-$(date +%s)"
+          curl -sL -m 60 -H 'Content-Type: text/plain;charset=utf-8' --data "{\"referencia\":\"$REF\",\"tipo\":\"otro\",\"idioma\":\"ast\",\"nombre\":\"Prueba tecnica web (Claude) - se puede borrar\",\"email\":\"iniciafoundation@gmail.com\",\"tema\":\"prueba\",\"mensaje\":\"PRUEBA TECNICA automatica del formulario. Se puede borrar.\",\"zona\":\"gijon, oviedo, online\",\"canal\":\"email\",\"pagina\":\"/contacto\"}" "$EP"; echo; echo "REF=$REF"
+          echo "== Lighthouse (mobile, real network)"
+          npm i -g lighthouse@13 >/dev/null 2>&1
+          for u in https://deploy-preview-4--iniciafoundation.netlify.app/ https://deploy-preview-4--iniciafoundation.netlify.app/alianzas https://deploy-preview-4--iniciafoundation.netlify.app/noticias https://deploy-preview-4--iniciafoundation.netlify.app/proyectos https://iniciafoundation.org/; do
+            lighthouse "$u" --quiet --chrome-flags="--headless=new --no-sandbox" --only-categories=performance,seo,accessibility,best-practices --output=json --output-path=lh.json >/dev/null 2>&1
+            node -e "const r=require('./lh.json');const a=r.audits;const c=r.categories;console.log('$u', Object.values(c).map(x=>x.id+'='+Math.round(x.score*100)).join(' '),'FCP',a['first-contentful-paint'].displayValue,'LCP',a['largest-contentful-paint'].displayValue,'TBT',a['total-blocking-time'].displayValue,'CLS',a['cumulative-layout-shift'].displayValue,'TTFB',a['server-response-time']?.displayValue||'');const lcp=a['lcp-breakdown-insight']?.details?.items?.[1]?.snippet||'';console.log('  LCP el:',lcp.slice(0,140));const fails=Object.values(a).filter(x=>x.score!==null&&x.score<0.9&&x.scoreDisplayMode!=='informative'&&x.scoreDisplayMode!=='manual'&&x.scoreDisplayMode!=='notApplicable').map(x=>x.id+(x.displayValue?' ('+x.displayValue+')':''));console.log('  issues:',fails.join(', '))" || true
+          done
+      - name: Publish output
+        if: always()
+        run: |
+          python3 - <<'PY'
+          t=open('out.txt',errors='replace').read()
+          for i in range(0,len(t),3500):
+              chunk=t[i:i+3500].replace('%','%25').replace('\r','').replace('\n','%0A')
+              print(f"::notice title=part{i//3500}::{chunk}")
+          PY
