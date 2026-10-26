@@ -29,3 +29,28 @@ export const DONATION = {
   /** Optional Teaming group link for 1 €/month micro-donations. */
   teamingLink: "",
 };
+
+/** Social networks with a reserved place on the site. A network appears only when it has a link
+ * (here or in the "Ajustes" tab of the Google Sheet), so there are never empty icons. */
+export const SOCIAL_NETWORKS = [
+  { key: "social_facebook", label: "Facebook" },
+  { key: "social_instagram", label: "Instagram" },
+  { key: "social_linkedin", label: "LinkedIn" },
+  { key: "social_youtube", label: "YouTube" },
+  { key: "social_tiktok", label: "TikTok" },
+  { key: "social_x", label: "X" },
+  { key: "social_telegram", label: "Telegram" },
+  { key: "social_whatsapp_canal", label: "WhatsApp" },
+  { key: "social_threads", label: "Threads" },
+  { key: "social_bluesky", label: "Bluesky" },
+] as const;
+
+/** Defaults used until the Google Sheet is connected. The sheet always wins. */
+export const DEFAULT_SETTINGS: Record<string, string> = {
+  social_facebook: "https://www.facebook.com/iniciafoundation/",
+  social_instagram: "https://www.instagram.com/inicia_found",
+  social_linkedin: "https://www.linkedin.com/in/iniciafoundation",
+  pago_bizum_codigo: DONATION.bizumCode,
+  pago_tarjeta_enlace: DONATION.cardLink,
+  pago_teaming_enlace: DONATION.teamingLink,
+};

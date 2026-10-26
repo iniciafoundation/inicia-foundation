@@ -35,6 +35,30 @@ const CONTENT_TABS = {
   Eventos: ['publicar', 'fecha', 'hora', 'idioma', 'titulo', 'lugar', 'enlace'],
 };
 
+/** Site settings editable without republishing the website (tab "Ajustes": clave | valor | nota). */
+const SETTINGS = [
+  ['social_facebook', 'https://www.facebook.com/iniciafoundation/', 'Enlace a la página de Facebook'],
+  ['social_instagram', 'https://www.instagram.com/inicia_found', 'Enlace a Instagram'],
+  ['social_linkedin', 'https://www.linkedin.com/in/iniciafoundation', 'Enlace a LinkedIn'],
+  ['social_youtube', '', 'Enlace al canal de YouTube'],
+  ['social_tiktok', '', 'Enlace a TikTok'],
+  ['social_x', '', 'Enlace a X (Twitter)'],
+  ['social_telegram', '', 'Enlace al canal de Telegram'],
+  ['social_whatsapp_canal', '', 'Enlace al canal de WhatsApp'],
+  ['social_threads', '', 'Enlace a Threads'],
+  ['social_bluesky', '', 'Enlace a Bluesky'],
+  ['pago_bizum_codigo', '', 'Código Bizum ONG (5 cifras) que da el banco'],
+  ['pago_tarjeta_enlace', '', 'Enlace de pago con tarjeta / Apple Pay / Google Pay (p. ej. Stripe Payment Link o TPV del banco)'],
+  ['pago_paypal_enlace', '', 'Enlace de PayPal (p. ej. https://www.paypal.com/donate/?hosted_button_id=...)'],
+  ['pago_teaming_enlace', '', 'Enlace al grupo de Teaming (1 €/mes)'],
+  ['pago_otro_nombre', '', 'Nombre de otra plataforma de donación (p. ej. migranodearena)'],
+  ['pago_otro_enlace', '', 'Enlace de esa plataforma'],
+  ['video_inicio_youtube', '', 'Enlace a un vídeo de YouTube para la página de inicio'],
+  ['analitica_ga4', '', 'ID de Google Analytics 4 (G-XXXXXXX)'],
+  ['google_ads_conversion', '', 'ID de conversión de Google Ads (AW-XXXXXXX/etiqueta)'],
+  ['aviso_banner', '', 'Texto corto para una franja de aviso arriba (vacío = sin franja)'],
+];
+
 const TYPE_NAMES = { ayuda: 'Necesita ayuda', voluntariado: 'Voluntariado', organizacion: 'Organización', donar: 'Apoyo / donación', otro: 'Otra consulta' };
 
 const AUTOREPLY = {
@@ -66,6 +90,9 @@ function setup() {
     const sheet = ensureSheet_(ss, tab, CONTENT_TABS[tab]);
     sheet.getRange(2, 1, sheet.getMaxRows() - 1, 1).insertCheckboxes();
   });
+  const settings = ensureSheet_(ss, 'Ajustes', ['clave', 'valor', 'nota']);
+  if (settings.getLastRow() === 1) settings.getRange(2, 1, SETTINGS.length, 3).setValues(SETTINGS);
+  settings.setColumnWidth(1, 200); settings.setColumnWidth(2, 380); settings.setColumnWidth(3, 420);
   const news = ss.getSheetByName('Noticias');
   if (news.getLastRow() === 1) news.appendRow([false, new Date(), 'es', 'Ejemplo: título de la noticia', 'Resumen de una o dos frases.', 'Texto completo (opcional).', '', '', '']);
   const first = ss.getSheets()[0];
@@ -179,7 +206,9 @@ function readContent_() {
   const events = rows('Eventos').filter(r => r.publicar === true && r.titulo && iso(r.fecha) >= today)
     .map(r => ({ fecha: iso(r.fecha), hora: r.hora instanceof Date ? Utilities.formatDate(r.hora, 'Europe/Madrid', 'HH:mm') : String(r.hora || ''), idioma: String(r.idioma || 'todos'), titulo: String(r.titulo), lugar: String(r.lugar || ''), enlace: String(r.enlace || '') }))
     .sort((a, b) => a.fecha.localeCompare(b.fecha)).slice(0, 12);
-  return { news, fundraising, events, updated: new Date().toISOString() };
+  const settings = {};
+  rows('Ajustes').forEach(r => { const key = String(r.clave || '').trim(); const value = String(r.valor || '').trim(); if (/^[a-z0-9_]+$/.test(key) && value) settings[key] = value.slice(0, 500); });
+  return { news, fundraising, events, settings, updated: new Date().toISOString() };
 }
 
 /** Turns a Google Drive share link into a direct image URL (the file must be shared "anyone with the link"). */

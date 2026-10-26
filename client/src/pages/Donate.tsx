@@ -1,26 +1,29 @@
 import { useEffect, useState } from "react";
 import { Link } from "wouter";
-import { ArrowRight, Building2, Check, Copy, CreditCard, HandHeart, Landmark, Package, Smartphone, UsersRound } from "lucide-react";
+import { ArrowRight, Building2, Check, Copy, CreditCard, Globe, HandHeart, Landmark, Package, Smartphone, UsersRound, Wallet } from "lucide-react";
 import { OriginalSiteNavigation } from "@/components/OriginalSiteNavigation";
 import { RequestForm } from "@/components/RequestForm";
 import { SpiralMark } from "@/components/SpiralMark";
 import { useT } from "@/lib/i18n";
+import { useSettings } from "@/lib/content";
+import { track } from "@/lib/analytics";
 import { CONTACT, DONATION } from "@/lib/siteConfig";
 
-type Method = "bizum" | "transfer" | "card";
+type Method = "bizum" | "transfer" | "card" | "paypal" | "other";
 
 const copy = {
   es: {
     eyebrow: "Donar", title: "Tu apoyo, convertido en", accent: "ayuda real.", intro: "Cada aportación sostiene el acompañamiento a familias, la formación y los proyectos comunitarios de INICIA.",
     stats: [["317", "familias ucranianas acompañadas"], ["129", "familias de otros orígenes y vecinos"], ["2021", "trabajando desde"]],
     amountLabel: "Elige un importe", other: "Otro", amountNote: "Indica este importe en Bizum o en tu transferencia.",
-    methods: { bizum: "Bizum", transfer: "Transferencia", card: "Tarjeta" },
+    methods: { bizum: "Bizum", transfer: "Transferencia", card: "Tarjeta", paypal: "PayPal", other: "Otra" },
     bizumSteps: ["Abre la app de tu banco y entra en Bizum.", "Elige «Donar a una ONG» o «Donativos».", "Introduce nuestro código y el importe."],
     bizumCode: "Código Bizum ONG",
     transferSteps: ["Copia el IBAN y el titular.", "Haz la transferencia desde tu banco.", "En el concepto escribe «Donativo» y, si quieres, el proyecto."],
     holder: "Titular", iban: "IBAN", bic: "BIC", concept: "Concepto", conceptValue: "Donativo",
     qr: "Escanea con la app de tu banco",
-    card: "Pago seguro con tarjeta desde cualquier país.", cardCta: "Donar con tarjeta",
+    card: "Pago seguro con tarjeta, Apple Pay o Google Pay desde cualquier país.", cardCta: "Donar con tarjeta",
+    linkQr: "Escanea con el móvil para pagar", paypal: "Dona con tu cuenta de PayPal o con tarjeta a través de PayPal.", paypalCta: "Donar con PayPal", otherText: "Dona a través de esta plataforma de donaciones.", otherCta: "Ir a la plataforma", pageQr: "¿Estás en el ordenador? Escanea este código y dona desde tu móvil.",
     soon: "Estamos activando este método. Mientras tanto, escríbenos y te indicamos cómo donar.", soonCta: "Escribir por WhatsApp",
     copy: "Copiar", copied: "Copiado",
     teaming: "Dona 1 € al mes con Teaming", teamingText: "Microdonaciones de 1 € al mes. Pequeño para ti, enorme sumado.",
@@ -33,13 +36,14 @@ const copy = {
     eyebrow: "Donate", title: "Your support, turned into", accent: "real help.", intro: "Every contribution sustains INICIA's support for families, training and community projects.",
     stats: [["317", "Ukrainian families supported"], ["129", "families of other origins and neighbours"], ["2021", "working since"]],
     amountLabel: "Choose an amount", other: "Other", amountNote: "Enter this amount in Bizum or in your transfer.",
-    methods: { bizum: "Bizum", transfer: "Bank transfer", card: "Card" },
+    methods: { bizum: "Bizum", transfer: "Bank transfer", card: "Card", paypal: "PayPal", other: "Other" },
     bizumSteps: ["Open your banking app and go to Bizum.", "Choose “Donate to an NGO” (Donar a una ONG).", "Enter our code and the amount."],
     bizumCode: "Bizum NGO code",
     transferSteps: ["Copy the IBAN and account holder.", "Make the transfer from your bank.", "Write “Donativo” as the reference and, if you like, the project."],
     holder: "Account holder", iban: "IBAN", bic: "BIC", concept: "Reference", conceptValue: "Donativo",
     qr: "Scan with your banking app",
-    card: "Secure card payment from any country.", cardCta: "Donate by card",
+    card: "Secure payment by card, Apple Pay or Google Pay from any country.", cardCta: "Donate by card",
+    linkQr: "Scan with your phone to pay", paypal: "Donate with your PayPal account or by card via PayPal.", paypalCta: "Donate with PayPal", otherText: "Donate through this donation platform.", otherCta: "Go to the platform", pageQr: "On a computer? Scan this code to donate from your phone.",
     soon: "We are activating this method. Meanwhile, write to us and we will tell you how to donate.", soonCta: "Write on WhatsApp",
     copy: "Copy", copied: "Copied",
     teaming: "Give €1 a month with Teaming", teamingText: "€1 monthly micro-donations. Small for you, huge together.",
@@ -52,13 +56,14 @@ const copy = {
     eyebrow: "Поддержать", title: "Ваша поддержка превращается в", accent: "реальную помощь.", intro: "Каждый взнос помогает INICIA сопровождать семьи, проводить обучение и развивать местные проекты.",
     stats: [["317", "украинских семей получили поддержку"], ["129", "семей другого происхождения и местных жителей"], ["2021", "работаем с"]],
     amountLabel: "Выберите сумму", other: "Другая", amountNote: "Укажите эту сумму в Bizum или в переводе.",
-    methods: { bizum: "Bizum", transfer: "Перевод", card: "Карта" },
+    methods: { bizum: "Bizum", transfer: "Перевод", card: "Карта", paypal: "PayPal", other: "Другое" },
     bizumSteps: ["Откройте приложение своего банка и раздел Bizum.", "Выберите «Donar a una ONG» (пожертвование НКО).", "Введите наш код и сумму."],
     bizumCode: "Код Bizum для НКО",
     transferSteps: ["Скопируйте IBAN и получателя.", "Сделайте перевод из своего банка.", "В назначении платежа напишите «Donativo» и, если хотите, название проекта."],
     holder: "Получатель", iban: "IBAN", bic: "BIC", concept: "Назначение", conceptValue: "Donativo",
     qr: "Отсканируйте в приложении банка",
-    card: "Безопасная оплата картой из любой страны.", cardCta: "Пожертвовать картой",
+    card: "Безопасная оплата картой, Apple Pay или Google Pay из любой страны.", cardCta: "Пожертвовать картой",
+    linkQr: "Отсканируйте телефоном, чтобы оплатить", paypal: "Пожертвуйте со своего счёта PayPal или картой через PayPal.", paypalCta: "Пожертвовать через PayPal", otherText: "Пожертвуйте через эту платформу пожертвований.", otherCta: "Перейти на платформу", pageQr: "Вы за компьютером? Отсканируйте код и пожертвуйте с телефона.",
     soon: "Мы подключаем этот способ. Пока напишите нам — подскажем, как сделать пожертвование.", soonCta: "Написать в WhatsApp",
     copy: "Копировать", copied: "Скопировано",
     teaming: "1 € в месяц через Teaming", teamingText: "Микропожертвования по 1 € в месяц. Немного для вас — много вместе.",
@@ -71,13 +76,14 @@ const copy = {
     eyebrow: "Підтримати", title: "Ваша підтримка перетворюється на", accent: "реальну допомогу.", intro: "Кожен внесок допомагає INICIA супроводжувати родини, проводити навчання та розвивати місцеві проєкти.",
     stats: [["317", "українських родин отримали підтримку"], ["129", "родин іншого походження та місцевих мешканців"], ["2021", "працюємо з"]],
     amountLabel: "Оберіть суму", other: "Інша", amountNote: "Вкажіть цю суму в Bizum або в переказі.",
-    methods: { bizum: "Bizum", transfer: "Переказ", card: "Картка" },
+    methods: { bizum: "Bizum", transfer: "Переказ", card: "Картка", paypal: "PayPal", other: "Інше" },
     bizumSteps: ["Відкрийте застосунок свого банку та розділ Bizum.", "Оберіть «Donar a una ONG» (пожертва НГО).", "Введіть наш код і суму."],
     bizumCode: "Код Bizum для НГО",
     transferSteps: ["Скопіюйте IBAN та отримувача.", "Зробіть переказ зі свого банку.", "У призначенні платежу напишіть «Donativo» і, за бажанням, назву проєкту."],
     holder: "Отримувач", iban: "IBAN", bic: "BIC", concept: "Призначення", conceptValue: "Donativo",
     qr: "Відскануйте в застосунку банку",
-    card: "Безпечна оплата карткою з будь-якої країни.", cardCta: "Пожертвувати карткою",
+    card: "Безпечна оплата карткою, Apple Pay або Google Pay з будь-якої країни.", cardCta: "Пожертвувати карткою",
+    linkQr: "Відскануйте телефоном, щоб оплатити", paypal: "Пожертвуйте зі свого рахунку PayPal або карткою через PayPal.", paypalCta: "Пожертвувати через PayPal", otherText: "Пожертвуйте через цю платформу пожертв.", otherCta: "Перейти на платформу", pageQr: "Ви за комп’ютером? Відскануйте код і пожертвуйте з телефона.",
     soon: "Ми підключаємо цей спосіб. Поки що напишіть нам — підкажемо, як зробити пожертву.", soonCta: "Написати у WhatsApp",
     copy: "Копіювати", copied: "Скопійовано",
     teaming: "1 € на місяць через Teaming", teamingText: "Мікропожертви по 1 € на місяць. Небагато для вас — багато разом.",
@@ -90,12 +96,12 @@ const copy = {
 
 const WAY_ICONS = [Package, UsersRound, Building2, HandHeart];
 
-function CopyRow({ label, value, copyLabel, copiedLabel }: { label: string; value: string; copyLabel: string; copiedLabel: string }) {
+function CopyRow({ label, value, copyLabel, copiedLabel, onCopy }: { label: string; value: string; copyLabel: string; copiedLabel: string; onCopy?: () => void }) {
   const [done, setDone] = useState(false);
   const copyValue = async () => {
     try { await navigator.clipboard.writeText(value.replace(/\s/g, label === "IBAN" ? "" : " ")); }
     catch { const area = document.createElement("textarea"); area.value = value; document.body.appendChild(area); area.select(); document.execCommand("copy"); area.remove(); }
-    setDone(true); setTimeout(() => setDone(false), 1800);
+    onCopy?.(); setDone(true); setTimeout(() => setDone(false), 1800);
   };
   return <div className="flex items-center justify-between gap-3 rounded-2xl border border-[#0B1E3A]/10 bg-[#F7F3EA] px-4 py-3"><div className="min-w-0"><p className="text-[11px] font-bold uppercase tracking-[.14em] text-[#7E5F1E]">{label}</p><p className="mt-0.5 break-all font-mono text-base font-semibold text-[#0B1E3A]">{value}</p></div><button type="button" onClick={copyValue} className="inline-flex min-h-11 shrink-0 items-center gap-1.5 rounded-full bg-[#0B1E3A] px-4 text-xs font-bold text-[#F0D893]">{done ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}{done ? copiedLabel : copyLabel}</button></div>;
 }
@@ -120,12 +126,29 @@ function TransferQr({ amount, reference }: { amount?: number; reference: string 
   return src ? <img src={src} alt="QR" width={180} height={180} className="rounded-xl border border-[#0B1E3A]/10" /> : null;
 }
 
+function LinkQr({ value, label }: { value: string; label: string }) {
+  const [src, setSrc] = useState<string>();
+  useEffect(() => {
+    let cancelled = false;
+    import("qrcode").then(({ toDataURL }) => toDataURL(value, { margin: 1, width: 220, color: { dark: "#0B1E3A", light: "#FFFFFF" } })).then(url => { if (!cancelled) setSrc(url); }).catch(() => undefined);
+    return () => { cancelled = true; };
+  }, [value]);
+  return src ? <div className="flex items-center gap-4"><img src={src} alt="QR" width={150} height={150} className="rounded-xl border border-[#0B1E3A]/10" /><p className="text-sm text-slate-600">{label}</p></div> : null;
+}
+
+function LinkMethod({ text, cta, href, qr, method }: { text: string; cta: string; href: string; qr: string; method: string }) {
+  return <div className="space-y-5"><p className="leading-7 text-slate-700">{text}</p><a href={href} target="_blank" rel="noreferrer" onClick={() => track("donate_intent", { method })} className="inline-flex min-h-12 items-center rounded-full bg-[#0B1E3A] px-6 text-sm font-bold text-[#F0D893]">{cta}<ArrowRight className="ml-2 h-4 w-4" /></a><div className="hidden sm:block"><LinkQr value={href} label={qr} /></div></div>;
+}
+
 export default function Donate() {
   const t = useT(copy);
   const [amount, setAmount] = useState<number | undefined>(25);
   const [custom, setCustom] = useState("");
-  const methods: Method[] = DONATION.cardLink ? ["bizum", "transfer", "card"] : ["bizum", "transfer"];
-  const [method, setMethod] = useState<Method>(DONATION.bizumCode ? "bizum" : "transfer");
+  const settings = useSettings();
+  const available: Record<Method, boolean> = { bizum: Boolean(settings.bizumCode), transfer: Boolean(DONATION.iban), card: Boolean(settings.cardLink), paypal: Boolean(settings.paypalLink), other: Boolean(settings.otherLink) };
+  const methods = (["bizum", "transfer", "card", "paypal", "other"] as Method[]).filter(key => available[key]);
+  const [chosen, setMethod] = useState<Method>();
+  const method = chosen && available[chosen] ? chosen : methods[0];
   const finalAmount = custom ? Number(custom) || undefined : amount;
 
   return <main className="min-h-screen bg-[#F7F3EA] text-[#0B1E3A]">
@@ -144,14 +167,17 @@ export default function Donate() {
           <div className="mt-4 grid grid-cols-4 gap-2">{[10, 25, 50].map(value => <button key={value} type="button" aria-pressed={!custom && amount === value} onClick={() => { setAmount(value); setCustom(""); }} className={`min-h-14 rounded-2xl border text-lg font-bold transition ${!custom && amount === value ? "border-[#0B1E3A] bg-[#0B1E3A] text-[#F0D893]" : "border-[#0B1E3A]/15 hover:border-[#D6B25E]"}`}>{value} €</button>)}
             <input aria-label={t.other} placeholder={t.other} inputMode="numeric" value={custom} onChange={e => setCustom(e.target.value.replace(/[^0-9]/g, ""))} className={`min-h-14 rounded-2xl border px-3 text-center text-lg font-bold outline-none focus:border-[#D6B25E] ${custom ? "border-[#0B1E3A]" : "border-[#0B1E3A]/15"}`} /></div>
           <p className="mt-3 text-sm text-slate-500">{t.amountNote}</p>
-          {DONATION.teamingLink && <a href={DONATION.teamingLink} target="_blank" rel="noreferrer" className="mt-6 block rounded-2xl bg-[#F7F3EA] p-5 transition hover:ring-2 hover:ring-[#D6B25E]"><p className="font-serif text-2xl">{t.teaming}</p><p className="mt-1 text-sm text-slate-600">{t.teamingText}</p></a>}
+          <div className="mt-8 hidden border-t border-[#0B1E3A]/10 pt-6 lg:block"><LinkQr value="https://iniciafoundation.org/donar" label={t.pageQr} /></div>
+          {settings.teamingLink && <a href={settings.teamingLink} onClick={() => track("donate_intent", { method: "teaming" })} target="_blank" rel="noreferrer" className="mt-6 block rounded-2xl bg-[#F7F3EA] p-5 transition hover:ring-2 hover:ring-[#D6B25E]"><p className="font-serif text-2xl">{t.teaming}</p><p className="mt-1 text-sm text-slate-600">{t.teamingText}</p></a>}
         </div>
         <div>
-          <div role="tablist" className="grid gap-2" style={{ gridTemplateColumns: `repeat(${methods.length}, minmax(0, 1fr))` }}>{methods.map(key => { const Icon = key === "bizum" ? Smartphone : key === "transfer" ? Landmark : CreditCard; return <button key={key} role="tab" type="button" aria-selected={method === key} onClick={() => setMethod(key)} className={`flex min-h-12 items-center justify-center gap-2 rounded-full text-sm font-bold transition ${method === key ? "bg-[#D6B25E] text-[#0B1E3A]" : "bg-[#F7F3EA] text-[#0B1E3A] hover:bg-[#EFE3C4]"}`}><Icon className="h-4 w-4" />{t.methods[key]}</button>; })}</div>
+          <div role="tablist" className="grid gap-2" style={{ gridTemplateColumns: `repeat(${Math.min(methods.length, 3)}, minmax(0, 1fr))` }}>{methods.map(key => { const Icon = key === "bizum" ? Smartphone : key === "transfer" ? Landmark : key === "card" ? CreditCard : key === "paypal" ? Wallet : Globe; return <button key={key} role="tab" type="button" aria-selected={method === key} onClick={() => setMethod(key)} className={`flex min-h-12 items-center justify-center gap-2 rounded-full text-sm font-bold transition ${method === key ? "bg-[#D6B25E] text-[#0B1E3A]" : "bg-[#F7F3EA] text-[#0B1E3A] hover:bg-[#EFE3C4]"}`}><Icon className="h-4 w-4" />{key === "other" && settings.otherName ? settings.otherName : t.methods[key]}</button>; })}</div>
           <div className="mt-6 space-y-4" role="tabpanel">
-            {method === "bizum" && <>{DONATION.bizumCode ? <><ol className="space-y-2">{t.bizumSteps.map((line, index) => <li key={line} className="flex gap-3 text-sm leading-6"><span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#0B1E3A] text-xs font-bold text-[#F0D893]">{index + 1}</span>{line}</li>)}</ol><CopyRow label={t.bizumCode} value={DONATION.bizumCode} copyLabel={t.copy} copiedLabel={t.copied} />{finalAmount && <p className="text-sm text-slate-600">{finalAmount} €</p>}</> : <Soon text={t.soon} cta={t.soonCta} />}</>}
-            {method === "transfer" && <>{DONATION.iban ? <><ol className="space-y-2">{t.transferSteps.map((line, index) => <li key={line} className="flex gap-3 text-sm leading-6"><span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#0B1E3A] text-xs font-bold text-[#F0D893]">{index + 1}</span>{line}</li>)}</ol><CopyRow label={t.iban} value={DONATION.iban} copyLabel={t.copy} copiedLabel={t.copied} /><CopyRow label={t.holder} value={DONATION.holder} copyLabel={t.copy} copiedLabel={t.copied} />{DONATION.bank && <p className="px-1 text-sm text-slate-600">{DONATION.bank}</p>}<CopyRow label={t.concept} value={t.conceptValue} copyLabel={t.copy} copiedLabel={t.copied} /><div className="hidden items-center gap-4 sm:flex"><TransferQr amount={finalAmount} reference={t.conceptValue} /><p className="text-sm text-slate-600">{t.qr}</p></div></> : <Soon text={t.soon} cta={t.soonCta} />}</>}
-            {method === "card" && DONATION.cardLink && <div><p className="leading-7 text-slate-700">{t.card}</p><a href={DONATION.cardLink} target="_blank" rel="noreferrer" className="mt-4 inline-flex min-h-12 items-center rounded-full bg-[#0B1E3A] px-6 text-sm font-bold text-[#F0D893]">{t.cardCta}<ArrowRight className="ml-2 h-4 w-4" /></a></div>}
+            {method === "bizum" && <>{settings.bizumCode ? <><ol className="space-y-2">{t.bizumSteps.map((line, index) => <li key={line} className="flex gap-3 text-sm leading-6"><span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#0B1E3A] text-xs font-bold text-[#F0D893]">{index + 1}</span>{line}</li>)}</ol><CopyRow label={t.bizumCode} value={settings.bizumCode} copyLabel={t.copy} copiedLabel={t.copied} />{finalAmount && <p className="text-sm text-slate-600">{finalAmount} €</p>}</> : <Soon text={t.soon} cta={t.soonCta} />}</>}
+            {method === "transfer" && <>{DONATION.iban ? <><ol className="space-y-2">{t.transferSteps.map((line, index) => <li key={line} className="flex gap-3 text-sm leading-6"><span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#0B1E3A] text-xs font-bold text-[#F0D893]">{index + 1}</span>{line}</li>)}</ol><CopyRow label={t.iban} value={DONATION.iban} copyLabel={t.copy} copiedLabel={t.copied} onCopy={() => track("donate_intent", { method: "transfer" })} /><CopyRow label={t.holder} value={DONATION.holder} copyLabel={t.copy} copiedLabel={t.copied} />{DONATION.bank && <p className="px-1 text-sm text-slate-600">{DONATION.bank}</p>}<CopyRow label={t.concept} value={t.conceptValue} copyLabel={t.copy} copiedLabel={t.copied} /><div className="hidden items-center gap-4 sm:flex"><TransferQr amount={finalAmount} reference={t.conceptValue} /><p className="text-sm text-slate-600">{t.qr}</p></div></> : <Soon text={t.soon} cta={t.soonCta} />}</>}
+            {method === "card" && <LinkMethod text={t.card} cta={t.cardCta} href={settings.cardLink} qr={t.linkQr} method="card" />}
+            {method === "paypal" && <LinkMethod text={t.paypal} cta={t.paypalCta} href={settings.paypalLink} qr={t.linkQr} method="paypal" />}
+            {method === "other" && <LinkMethod text={t.otherText} cta={settings.otherName || t.otherCta} href={settings.otherLink} qr={t.linkQr} method="other" />}
           </div>
         </div>
       </div>

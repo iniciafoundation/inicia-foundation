@@ -5,7 +5,8 @@ import { ProjectVisual } from "@/components/ProjectVisual";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SocialLinks } from "@/components/SocialLinks";
 import { SpiralMark } from "@/components/SpiralMark";
-import { forLocale, formatDate, useSiteContent } from "@/lib/content";
+import { forLocale, formatDate, useSettings, useSiteContent } from "@/lib/content";
+import { YouTubeLite } from "@/components/YouTubeLite";
 import { type Locale, useLocale } from "@/lib/i18n";
 import { publicAssets } from "@/lib/publicAssets";
 import { CONTACT } from "@/lib/siteConfig";
@@ -120,6 +121,7 @@ export default function Home() {
   const featured = projects.filter(project => featuredSlugs.includes(project.slug));
   const displayedProjects = featured.length ? featured : projects.slice(0, 3);
   const { data: content } = useSiteContent();
+  const settings = useSettings();
   const latestNews = forLocale(content?.news ?? [], locale).slice(0, 3);
 
   return <main className="min-h-screen bg-[#F7F3EA] text-[#0B1E3A]">
@@ -148,6 +150,8 @@ export default function Home() {
     <section className="mx-auto max-w-7xl px-5 py-20"><h2 className="font-serif text-4xl md:text-5xl">{t.routeTitle}</h2>
       <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">{t.routes.map(([title, text, href], index) => { const Icon = ROUTE_ICONS[index]; return <Link key={href} href={href} className="group flex min-h-48 flex-col rounded-3xl bg-white p-6 shadow-sm ring-1 ring-[#0B1E3A]/10 transition hover:-translate-y-1 hover:bg-[#0B1E3A] hover:shadow-xl"><Icon className="h-8 w-8 text-[#7E5F1E] group-hover:text-[#D6B25E]" /><span className="mt-5 font-serif text-2xl group-hover:text-[#F0D893]">{title}</span><span className="mt-2 text-sm leading-6 text-slate-600 group-hover:text-slate-200">{text}</span><ArrowRight className="mt-auto h-5 w-5 pt-1 text-[#7E5F1E] transition group-hover:translate-x-1 group-hover:text-[#D6B25E]" /></Link>; })}</div>
     </section>
+
+    {settings.homeVideo && <section className="mx-auto max-w-5xl px-5 pb-20"><YouTubeLite id={settings.homeVideo} title="INICIA Foundation" /></section>}
 
     <section id="quienes-somos" className="mx-auto grid max-w-7xl gap-10 px-5 pb-20 md:grid-cols-2">
       <div className="relative overflow-hidden rounded-3xl bg-[#0B1E3A] p-10 text-white"><SpiralMark className="pointer-events-none absolute -bottom-10 -right-10 h-64 w-64 opacity-20" /><p className="text-xs font-bold uppercase tracking-[.18em] text-[#D6B25E]">{t.aboutEyebrow}</p><h2 className="relative mt-4 font-serif text-5xl">{t.aboutTitle}</h2><p className="relative mt-6 max-w-xl leading-8 text-slate-200">{t.aboutText}</p></div>

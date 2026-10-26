@@ -5,6 +5,7 @@ import { useLocale } from "@/lib/i18n";
 import { requestCopy } from "@/lib/requestCopy";
 import { type RequestType, makeReference, sendRequest } from "@/lib/requests";
 import { CONTACT } from "@/lib/siteConfig";
+import { track } from "@/lib/analytics";
 
 type Values = Record<string, string | string[] | boolean>;
 
@@ -74,6 +75,7 @@ export function RequestForm({ initialType, project, compact = false }: { initial
     setState("sending");
     try {
       await sendRequest({ referencia: ref, tipo: type, proyecto: project, idioma: locale, pagina: typeof window !== "undefined" ? window.location.pathname : "", ...Object.fromEntries(Object.entries(values).filter(([key]) => key !== "website")) });
+      track("generate_lead", { tipo: type });
       setReference(ref);
       setState("idle");
     } catch {

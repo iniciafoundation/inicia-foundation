@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Link } from "wouter";
 import { publicAssets } from "@/lib/publicAssets";
 import { type Locale, useLocale } from "@/lib/i18n";
+import { useSettings } from "@/lib/content";
 const HORIZONTAL_LOGO = publicAssets.horizontalLogo;
 const MARK_LOGO = publicAssets.markLogo;
 
@@ -29,7 +30,9 @@ export function OriginalSiteNavigation({ dark = false, locale: localeProp, onLoc
   const border = dark ? "border-[#0B1E3A]/15" : "border-white/20";
   const strings = copy[locale];
 
+  const { banner } = useSettings();
   return <div className="sticky top-0 z-40">
+    {banner && <div className="bg-[#D6B25E] px-4 py-2 text-center text-xs font-bold text-[#0B1E3A]">{banner}</div>}
     <div className={`flex min-h-10 items-center justify-end gap-0.5 px-3 text-[10px] font-bold tracking-[.16em] ${dark ? "bg-[#f7f3eb] text-[#0B1E3A]" : "bg-[#081629]/95 text-white"}`}>
       {(["es", "en", "ru", "uk"] as Locale[]).map(language => <button key={language} type="button" onClick={() => chooseLocale(language)} aria-pressed={locale === language} className={`min-h-9 min-w-9 rounded px-1.5 py-1 transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D6B25E] ${locale === language ? "bg-[#D6B25E] text-[#0B1E3A]" : "opacity-65 hover:opacity-100"}`}>{language.toUpperCase()}</button>)}
     </div>

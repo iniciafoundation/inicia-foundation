@@ -44,6 +44,18 @@ const publicPages: Record<string, Omit<SiteMetadata, "robots">> = {
     title: `Noticias | ${brand}`,
     description: "Novedades de INICIA Foundation: actividades, proyectos, convocatorias y resultados.",
   },
+  "/privacidad": {
+    title: `Política de privacidad | ${brand}`,
+    description: "Cómo trata INICIA Foundation los datos personales recogidos en su sitio web y cómo ejercer tus derechos.",
+  },
+  "/cookies": {
+    title: `Política de cookies | ${brand}`,
+    description: "Qué cookies y almacenamiento usa el sitio de INICIA Foundation y cómo configurarlos.",
+  },
+  "/aviso-legal": {
+    title: `Aviso legal | ${brand}`,
+    description: "Datos identificativos y condiciones de uso del sitio web de la Asociación Inicia Foundation.",
+  },
   "/identidad": {
     title: `Identidad legal | ${brand}`,
     description: "Datos de identidad, registro y contacto de la Asociación INICIA Foundation en Asturias.",
