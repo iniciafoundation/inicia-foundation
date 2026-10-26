@@ -5,6 +5,7 @@ import { useLocale } from "@/lib/i18n";
 import { requestCopy } from "@/lib/requestCopy";
 import { type RequestType, makeReference, sendRequest } from "@/lib/requests";
 import { CONTACT } from "@/lib/siteConfig";
+import { track } from "@/lib/analytics";
 
 type Values = Record<string, string | string[] | boolean>;
 
@@ -25,7 +26,7 @@ function Chips({ label, options, value, onChange, multiple = false, required }: 
     onChange(list.includes(key) ? list.filter(item => item !== key) : [...list, key]);
   };
   return <fieldset><legend className="text-sm font-semibold text-[#EEE7D7]">{label}{required && <span className="text-[#D6B25E]"> *</span>}</legend>
-    <div className="mt-3 flex flex-wrap gap-2">{options.map(([key, text]) => <button key={key} type="button" aria-pressed={selected(key)} onClick={() => toggle(key)} className={`min-h-11 rounded-full border px-4 py-2 text-sm font-medium transition ${selected(key) ? "border-[#D6B25E]/20 bg-[#08101E] text-[#F0D893]" : "border-[#D6B25E]/20 bg-[#0C1320] text-[#EEE7D7] hover:border-[#D6B25E]"}`}>{text}</button>)}</div>
+    <div className="mt-3 flex flex-wrap gap-2">{options.map(([key, text]) => <button key={key} type="button" aria-pressed={selected(key)} onClick={() => toggle(key)} className={`min-h-11 rounded-full border px-4 py-2 text-sm font-medium transition ${selected(key) ? "border-[#D6B25E] bg-[#D6B25E] text-[#120D05]" : "border-[#D6B25E]/20 bg-[#0C1320] text-[#EEE7D7] hover:border-[#D6B25E]"}`}>{text}</button>)}</div>
   </fieldset>;
 }
 
@@ -74,6 +75,7 @@ export function RequestForm({ initialType, project, compact = false }: { initial
     setState("sending");
     try {
       await sendRequest({ referencia: ref, tipo: type, proyecto: project, idioma: locale, pagina: typeof window !== "undefined" ? window.location.pathname : "", ...Object.fromEntries(Object.entries(values).filter(([key]) => key !== "website")) });
+      track("generate_lead", { tipo: type });
       setReference(ref);
       setState("idle");
     } catch {

@@ -5,7 +5,8 @@ import { ProjectVisual } from "@/components/ProjectVisual";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SocialLinks } from "@/components/SocialLinks";
 import { SpiralMark } from "@/components/SpiralMark";
-import { forLocale, formatDate, useSiteContent } from "@/lib/content";
+import { forLocale, formatDate, useSettings, useSiteContent } from "@/lib/content";
+import { YouTubeLite } from "@/components/YouTubeLite";
 import { type Locale, useLocale } from "@/lib/i18n";
 import { publicAssets } from "@/lib/publicAssets";
 import { type PhotoName, photo } from "@/lib/photos";
@@ -127,6 +128,7 @@ export default function Home() {
   const featured = projects.filter(project => featuredSlugs.includes(project.slug));
   const displayedProjects = featured.length ? featured : projects.slice(0, 3);
   const { data: content } = useSiteContent();
+  const settings = useSettings();
   const latestNews = forLocale(content?.news ?? [], locale).slice(0, 3);
 
   return <main className="min-h-screen bg-[#060A12] text-[#EEE7D7]">
@@ -157,6 +159,8 @@ export default function Home() {
     <section className="mx-auto max-w-7xl px-5 py-24"><p className="text-[11px] font-semibold uppercase tracking-[.3em] text-[#D6B25E]">INICIA</p><h2 className="mt-3 font-serif text-5xl md:text-6xl">{t.routeTitle}</h2>
       <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">{t.routes.map(([title, text, href], index) => { const Icon = ROUTE_ICONS[index]; const img = photo(ROUTE_PHOTOS[index]); return <Link key={href} href={href} className="group relative isolate flex min-h-[340px] flex-col justify-end overflow-hidden rounded-3xl border border-[#D6B25E]/20 p-6 transition duration-300 hover:-translate-y-1 hover:border-[#D6B25E]/60 hover:shadow-[0_20px_60px_rgba(0,0,0,.55)]"><img src={img.src} srcSet={img.srcSet} sizes="(min-width:1024px) 25vw, (min-width:640px) 50vw, 100vw" alt="" loading="lazy" className="absolute inset-0 -z-20 h-full w-full object-cover transition duration-700 group-hover:scale-105" /><div className="absolute inset-0 -z-10 bg-gradient-to-t from-[#060A12] via-[#060A12]/70 to-[#060A12]/10" /><Icon className="h-8 w-8 text-[#D6B25E]" /><span className="mt-4 font-serif text-3xl leading-tight text-white">{title}</span><span className="mt-2 text-sm leading-6 text-slate-200">{text}</span><span className="mt-5 inline-flex h-10 w-10 items-center justify-center rounded-full border border-[#D6B25E]/50 text-[#F0D893] transition group-hover:bg-[#D6B25E] group-hover:text-[#120D05]"><ArrowRight className="h-4 w-4" /></span></Link>; })}</div>
     </section>
+
+    {settings.homeVideo && <section className="mx-auto max-w-5xl px-5 pb-24"><YouTubeLite id={settings.homeVideo} title="INICIA Foundation" /></section>}
 
     <section id="quienes-somos" className="mx-auto grid max-w-7xl gap-10 px-5 pb-24 md:grid-cols-2">
       <div className="relative isolate flex min-h-[460px] flex-col justify-end overflow-hidden rounded-3xl border border-[#D6B25E]/20 p-10 text-white"><img src={HORIZON.src} srcSet={HORIZON.srcSet} sizes="(min-width:768px) 50vw, 100vw" alt="" loading="lazy" className="absolute inset-0 -z-20 h-full w-full object-cover" /><div className="absolute inset-0 -z-10 bg-gradient-to-t from-[#060A12] via-[#060A12]/60 to-transparent" /><p className="text-[11px] font-semibold uppercase tracking-[.3em] text-[#D6B25E]">{t.aboutEyebrow}</p><h2 className="relative mt-4 font-serif text-5xl">{t.aboutTitle}</h2><p className="relative mt-5 max-w-xl leading-8 text-slate-200">{t.aboutText}</p></div>
