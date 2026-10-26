@@ -50,7 +50,7 @@ export function RequestForm({ initialType, project, compact = false }: { initial
     const start: Values = { canal: "whatsapp" };
     const modo = params.get("modo"); if (modo && ["dinero", "especie", "socio"].includes(modo)) start.modo = modo;
     const plan = params.get("plan"); if (plan && ["pleno", "colaborador", "reducida", "empresa"].includes(plan)) { start.modo = "socio"; start.plan = plan; }
-    const zona = params.get("zona"); if (zona && (ZONES as readonly string[]).includes(zona)) start.zona = zona;
+    const zona = params.get("zona"); if (zona && (ZONES as readonly string[]).includes(zona)) start.zona = [zona];
     return start;
   });
   const [state, setState] = useState<"idle" | "sending" | "error">("idle");
@@ -253,7 +253,7 @@ export function RequestForm({ initialType, project, compact = false }: { initial
         <Field label={t.contact.phone}><input type="tel" autoComplete="tel" inputMode="tel" className={fieldClass} value={s("telefono")} onChange={e => set("telefono")(e.target.value)} /></Field>
         <Field label={t.contact.city}><input autoComplete="address-level2" className={fieldClass} value={s("ciudad")} onChange={e => set("ciudad")(e.target.value)} /></Field>
       </div>
-      <Chips label={t.contact.zoneLabel} options={t.contact.zones} value={v("zona") as string} onChange={set("zona")} />
+      <Chips label={t.contact.zoneLabel} options={t.contact.zones} value={v("zona") as string[]} onChange={set("zona")} multiple />
       <Chips label={t.contact.channelLabel} options={t.contact.channels} value={v("canal") as string} onChange={set("canal")} />
       <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden className="hidden" value={s("website")} onChange={e => set("website")(e.target.value)} />
       <p className="text-xs leading-5 text-slate-400">{t.contact.sensitive}</p>
