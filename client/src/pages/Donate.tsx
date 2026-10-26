@@ -1,3 +1,4 @@
+import { SiteFooter } from "@/components/SiteFooter";
 import { useEffect, useState } from "react";
 import { Link } from "wouter";
 import { ArrowRight, Building2, Check, Copy, CreditCard, Globe, HandHeart, Landmark, Package, Smartphone, UsersRound, Wallet } from "lucide-react";
@@ -221,5 +222,5 @@ export default function Donate() {
     </section>
 
     <section id="material" className="bg-[#0A1424] px-5 py-20"><div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[.7fr_1.3fr]"><div className="text-white"><h2 className="font-serif text-4xl md:text-5xl">{t.formTitle}</h2><p className="mt-4 leading-7 text-slate-200">{t.formIntro}</p></div><RequestForm initialType="donar" compact /></div></section>
-  </main>;
+  <SiteFooter /></main>;
 }
