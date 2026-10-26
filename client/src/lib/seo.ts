@@ -9,8 +9,8 @@ const publicSuffix = "ONG en Asturias";
 
 const publicPages: Record<string, Omit<SiteMetadata, "robots">> = {
   "/": {
-    title: `${brand} | ${publicSuffix}`,
-    description: "INICIA Foundation es una ONG en Asturias que impulsa proyectos sociales, inclusión y desarrollo comunitario. Conoce la misión, los proyectos y cómo colaborar.",
+    title: `${brand} | ONG en Asturias: inclusión y voluntariado`,
+    description: "ONG sin ánimo de lucro en Asturias: proyectos sociales, inclusión, apoyo a familias y migrantes, voluntariado y formación. Pide ayuda, colabora o dona.",
   },
   "/mision": {
     title: `Misión y fines estatutarios | ${brand}`,

@@ -45,6 +45,7 @@ export function SiteMetadata() {
     upsertMeta('meta[property="og:description"]', { property: "og:description", content: metadata.description });
     upsertMeta('meta[property="og:site_name"]', { property: "og:site_name", content: brand });
     upsertMeta('meta[property="og:type"]', { property: "og:type", content: "website" });
+    upsertMeta('meta[property="og:url"]', { property: "og:url", content: canonical });
     upsertCanonical(canonical);
   }, [pathname]);
 

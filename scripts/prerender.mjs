@@ -66,6 +66,16 @@ const escapeAttr = value => String(value).replace(/&/g, "&amp;").replace(/"/g, "
 const escapeText = value => String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;");
 const json = value => JSON.stringify(value).replace(/</g, "\\u003c");
 
+/** <link rel=preload> for the first image marked fetchpriority="high" in the page. */
+function heroPreload(body) {
+  const img = body.match(/<img\b[^>]*fetchPriority="high"[^>]*>/i)?.[0];
+  if (!img) return "";
+  const attr = name => img.match(new RegExp(`\\s${name}="([^"]*)"`, "i"))?.[1];
+  const src = attr("src"); const srcset = attr("srcSet"); const sizes = attr("sizes");
+  if (!src) return "";
+  return `  <link rel="preload" as="image" href="${src}"${srcset ? ` imagesrcset="${srcset}"` : ""}${sizes ? ` imagesizes="${sizes}"` : ""} fetchpriority="high" />\n  `;
+}
+
 let count = 0;
 for (const route of routes) {
   const body = await render(route, { projects, content });
@@ -81,17 +91,25 @@ for (const route of routes) {
     .replace(/<meta name="description" content="[^"]*"\s*\/?>/, `<meta name="description" content="${escapeAttr(meta.description)}" />`)
     .replace(/<meta name="robots" content="[^"]*"\s*\/?>/, `<meta name="robots" content="${escapeAttr(meta.robots)}" />`)
     .replace(/<link rel="canonical" href="[^"]*"\s*\/?>/, `<link rel="canonical" href="${canonical}" />`)
+    .replace(/<meta property="og:url" content="[^"]*"\s*\/?>/, `<meta property="og:url" content="${canonical}" />`)
     .replace(/<meta property="og:title" content="[^"]*"\s*\/?>/, `<meta property="og:title" content="${escapeAttr(meta.title)}" />`)
     .replace(/<meta property="og:description" content="[^"]*"\s*\/?>/, `<meta property="og:description" content="${escapeAttr(meta.description)}" />`)
-    // Home: start downloading the hero photo right away (it is the largest element on screen).
-    .replace("</head>", route === "/" ? '    <link rel="preload" as="image" href="/assets/photos/earth-960.webp" imagesrcset="/assets/photos/earth-960.webp 960w, /assets/photos/earth-1920.webp 1920w" imagesizes="100vw" fetchpriority="high" />\n  </head>' : "</head>")
+    // Start downloading the page's hero photo right away (it is the largest element on screen).
+    .replace("</head>", heroPreload(body) + "</head>")
     .replace('<div id="root"></div>', `<div id="root">${body}</div><script>window.__INICIA_PRERENDER__=${json({ projects, content: content ?? null })}</script>`);
   if (!html.includes(body)) throw new Error(`Could not inject prerendered HTML for ${route}`);
-  const file = route === "/" ? path.join(outDir, "index.html") : path.join(outDir, route.slice(1), "index.html");
+  // "/mision" -> mision.html (Netlify serves it at /mision without a trailing-slash redirect).
+  const file = route === "/" ? path.join(outDir, "index.html") : path.join(outDir, `${route.slice(1)}.html`);
   await fs.mkdir(path.dirname(file), { recursive: true });
   await fs.writeFile(file, html);
   count += 1;
 }
+
+// Sitemap with every prerendered public page (legal pages are lower priority).
+const today = new Date().toISOString().slice(0, 10);
+const priority = route => (route === "/" ? "1.0" : ["/aviso-legal", "/privacidad", "/cookies"].includes(route) ? "0.3" : route.startsWith("/proyectos/") ? "0.7" : "0.8");
+const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${routes.map(route => `  <url><loc>https://iniciafoundation.org${route}</loc><lastmod>${today}</lastmod><priority>${priority(route)}</priority></url>`).join("\n")}\n</urlset>\n`;
+await fs.writeFile(path.join(outDir, "sitemap.xml"), sitemap);
 
 await fs.rm(serverDir, { recursive: true, force: true });
 console.log(`Prerendered ${count} pages into dist/public`);
