@@ -1,7 +1,9 @@
 import { useSyncExternalStore } from "react";
 
-export type Locale = "es" | "en" | "ru" | "uk";
-export const LOCALES: Locale[] = ["es", "en", "ru", "uk"];
+export type Locale = "es" | "en" | "ru" | "uk" | "ast";
+export const LOCALES: Locale[] = ["es", "en", "ru", "uk", "ast"];
+/** Project texts come from the catalog, which has no Asturian yet: Asturian falls back to Spanish there. */
+export const contentLocale = (locale: Locale): "es" | "en" | "ru" | "uk" => (locale === "ast" ? "es" : locale);
 const KEY = "inicia-lang";
 
 const isLocale = (value: unknown): value is Locale => typeof value === "string" && (LOCALES as string[]).includes(value);

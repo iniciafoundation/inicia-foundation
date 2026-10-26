@@ -2,7 +2,7 @@ import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Link } from "wouter";
 import { publicAssets } from "@/lib/publicAssets";
-import { type Locale, useLocale } from "@/lib/i18n";
+import { LOCALES, type Locale, useLocale } from "@/lib/i18n";
 import { useSettings } from "@/lib/content";
 const HORIZONTAL_LOGO = publicAssets.horizontalLogo;
 const MARK_LOGO = publicAssets.markLogo;
@@ -34,7 +34,7 @@ export function OriginalSiteNavigation({ dark = false, locale: localeProp, onLoc
   return <div className="sticky top-0 z-40">
     {banner && <div className="bg-[#D6B25E] px-4 py-2 text-center text-xs font-bold text-[#120D05]">{banner}</div>}
     <div className={`flex min-h-10 items-center justify-end gap-0.5 px-3 text-[10px] font-bold tracking-[.16em] bg-[#04070D] text-[#EEE7D7]`}>
-      {(["es", "en", "ru", "uk"] as Locale[]).map(language => <button key={language} type="button" onClick={() => chooseLocale(language)} aria-pressed={locale === language} className={`min-h-9 min-w-9 rounded px-1.5 py-1 transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D6B25E] ${locale === language ? "bg-[#D6B25E] text-[#120D05]" : "opacity-65 hover:opacity-100"}`}>{language.toUpperCase()}</button>)}
+      {LOCALES.map(language => <button key={language} type="button" onClick={() => chooseLocale(language)} aria-pressed={locale === language} className={`min-h-9 min-w-9 rounded px-1.5 py-1 transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D6B25E] ${locale === language ? "bg-[#D6B25E] text-[#120D05]" : "opacity-65 hover:opacity-100"}`}>{language.toUpperCase()}</button>)}
     </div>
     <header className={`border-b ${border} bg-[#060A12]/85 backdrop-blur-md`}>
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-2 sm:px-5 sm:py-3">

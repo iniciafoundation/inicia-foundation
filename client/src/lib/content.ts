@@ -30,13 +30,14 @@ export function useSiteContent(endpoint = SHEETS_ENDPOINT) {
 /** Items in the visitor's language, or marked for all languages; falls back to Spanish. */
 export function forLocale<T extends { idioma: string }>(items: T[], locale: Locale): T[] {
   const match = items.filter(item => item.idioma === locale || item.idioma === "todos" || item.idioma === "");
+  if (!match.length && locale === "ast") return items.filter(item => item.idioma === "es");
   return match.length ? match : items.filter(item => item.idioma === "es");
 }
 
 export function formatDate(value: string, locale: Locale) {
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) return value;
-  return date.toLocaleDateString({ es: "es-ES", en: "en-GB", ru: "ru-RU", uk: "uk-UA" }[locale], { day: "numeric", month: "long", year: "numeric" });
+  return date.toLocaleDateString({ es: "es-ES", en: "en-GB", ru: "ru-RU", uk: "uk-UA", ast: "ast-ES" }[locale], { day: "numeric", month: "long", year: "numeric" });
 }
 
 /** Only http(s) links are accepted from the sheet. */

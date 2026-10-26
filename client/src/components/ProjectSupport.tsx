@@ -1,7 +1,7 @@
 import { Link } from "wouter";
 import { HandHeart, HeartHandshake } from "lucide-react";
 import { useSiteContent } from "@/lib/content";
-import { useLocale } from "@/lib/i18n";
+import { useLocale, contentLocale, type Locale } from "@/lib/i18n";
 
 const copy = {
   es: { title: "Apoya este proyecto", raised: "recaudados de", donors: "personas ya han apoyado", donate: "Donar a este proyecto", join: "Quiero participar", concept: "Indica en el concepto" },
@@ -19,7 +19,7 @@ export function ProjectSupport({ slug, title }: { slug: string; title: string })
   const { data } = useSiteContent();
   const goal = data?.fundraising.find(item => item.proyecto === slug);
   const percent = goal && goal.objetivo > 0 ? Math.min(100, Math.round((goal.recaudado / goal.objetivo) * 100)) : 0;
-  const note = goal ? (goal[`nota_${locale}` as const] || goal.nota_es) : undefined;
+  const note = goal ? (goal[`nota_${contentLocale(locale)}` as const] || goal.nota_es) : undefined;
   const reference = `Donativo ${title}`.slice(0, 35);
 
   return <section className="mt-10 overflow-hidden rounded-3xl bg-[#08101E] p-7 text-white sm:p-9">

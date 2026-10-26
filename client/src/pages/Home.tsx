@@ -7,7 +7,7 @@ import { SocialLinks } from "@/components/SocialLinks";
 import { SpiralMark } from "@/components/SpiralMark";
 import { forLocale, formatDate, useSettings, useSiteContent } from "@/lib/content";
 import { YouTubeLite } from "@/components/YouTubeLite";
-import { type Locale, useLocale } from "@/lib/i18n";
+import { type Locale, useLocale, contentLocale } from "@/lib/i18n";
 import { publicAssets } from "@/lib/publicAssets";
 import { type PhotoName, photo } from "@/lib/photos";
 import { CONTACT } from "@/lib/siteConfig";
@@ -123,7 +123,7 @@ export default function Home() {
   const [locale] = useLocale();
   const t = copy[locale];
   const partners = allianceCopy[locale];
-  const projects = trpc.crm.public.projects.useQuery({ locale }).data ?? [];
+  const projects = trpc.crm.public.projects.useQuery({ locale: contentLocale(locale) }).data ?? [];
   const featuredSlugs = ["nucleo", "coopastur-agrosocial", "rural-futures"];
   const featured = projects.filter(project => featuredSlugs.includes(project.slug));
   const displayedProjects = featured.length ? featured : projects.slice(0, 3);
