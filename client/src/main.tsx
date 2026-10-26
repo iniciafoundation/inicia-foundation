@@ -7,13 +7,6 @@ import { createRoot, hydrateRoot } from "react-dom/client";
 import superjson from "superjson";
 import App from "./App";
 import { startLogin } from "./const";
-// Fonts are served from our own site (no requests to Google Fonts): faster and GDPR-friendly.
-import "@fontsource-variable/manrope/wght.css";
-import "@fontsource/cormorant-garamond/500.css";
-import "@fontsource/cormorant-garamond/600.css";
-import "@fontsource/cormorant-garamond/700.css";
-import "@fontsource/cormorant-garamond/500-italic.css";
-import "@fontsource/cormorant-garamond/600-italic.css";
 import "./index.css";
 import { getLocale } from "./lib/i18n";
 import { SHEETS_ENDPOINT } from "./lib/siteConfig";
