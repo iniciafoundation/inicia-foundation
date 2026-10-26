@@ -68,6 +68,19 @@ const copy: Record<Locale, IdeologyCopy> = {
     practiceText: "Принципи не замінюють індивідуальної оцінки кожної ситуації, чинних норм і компетенції державних служб чи профільних фахівців. Вони визначають те, як INICIA інформує, співпрацює та розробляє свої ініціативи.",
     cta: "Місія та статутні цілі",
   },
+  ast: {
+    title: "Ideoloxía y principios d'aición.",
+    intro: "Un compromisu cívicu cola dignidá, la cooperación, la igualdá d'oportunidaes, la sostenibilidá y la meyora responsable de les condiciones de vida.",
+    principles: [
+      ["Dignidá y solidaridá", "Les persones, los sos derechos y la so participación activa tán nel centru de l'aición social y comunitaria."],
+      ["Xusticia ya inclusión", "La organización orienta les sos iniciatives a amenorgar barreres, desigualdaes y situaciones de vulnerabilidá per aciu d'información, acompañamientu y cooperación responsable."],
+      ["Sostenibilidá y responsabilidá", "L'aición cívica incorpora la proteición ambiental, l'usu responsable de recursos y la conciencia sobre los riesgos compartíos pola sociedá."],
+      ["Comunidá y participación", "INICIA valora la cooperación ente persones, comunidaes, entidaes ya instituciones pa construyir rempuestes realistes d'interés públicu."],
+    ],
+    practiceTitle: "De los principios a la práctica.",
+    practiceText: "Los principios nun sustituyen la evaluación individual de cada situación, la normativa aplicable nin la competencia de servicios públicos o profesionales especializaos. Guíen la forma na qu'INICIA informa, collabora y diseña les sos iniciatives.",
+    cta: "Consultar misión y fines",
+  },
 };
 
 export default function Ideology() {

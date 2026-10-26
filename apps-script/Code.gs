@@ -69,6 +69,7 @@ const AUTOREPLY = {
   en: { subject: 'We have received your request', body: (name, ref) => `Hello ${name},\n\nThank you for contacting ${CONFIG.ORG_NAME}. We have received your request, reference ${ref}.\n\nWe will review it and reply through the channel you chose. If it is urgent, write to us on WhatsApp at ${CONFIG.WHATSAPP}.\n\nKind regards,\n${CONFIG.ORG_NAME}\n${CONFIG.SITE_URL}` },
   ru: { subject: 'Мы получили вашу заявку', body: (name, ref) => `Здравствуйте, ${name}!\n\nСпасибо, что написали в ${CONFIG.ORG_NAME}. Мы получили вашу заявку, номер ${ref}.\n\nМы рассмотрим её и ответим удобным для вас способом. Если вопрос срочный, напишите нам в WhatsApp: ${CONFIG.WHATSAPP}.\n\nС уважением,\n${CONFIG.ORG_NAME}\n${CONFIG.SITE_URL}` },
   uk: { subject: 'Ми отримали вашу заявку', body: (name, ref) => `Вітаємо, ${name}!\n\nДякуємо, що написали до ${CONFIG.ORG_NAME}. Ми отримали вашу заявку, номер ${ref}.\n\nМи розглянемо її та відповімо зручним для вас способом. Якщо питання термінове, напишіть нам у WhatsApp: ${CONFIG.WHATSAPP}.\n\nЗ повагою,\n${CONFIG.ORG_NAME}\n${CONFIG.SITE_URL}` },
+  ast: { subject: 'Recibimos la to solicitú', body: (name, ref) => `Hola ${name}:\n\nGracies por escribir a ${CONFIG.ORG_NAME}. Recibimos la to solicitú cola referencia ${ref}.\n\nVamos revisala y contestate pela vía qu'escoyisti. Si ye urxente, escríbinos per WhatsApp al ${CONFIG.WHATSAPP}.\n\nUn saludu,\n${CONFIG.ORG_NAME}\n${CONFIG.SITE_URL}` },
 };
 
 /* ---------- Setup ---------- */

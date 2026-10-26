@@ -99,6 +99,23 @@ const copy: Record<Locale, HomeCopy> = {
     donateEyebrow: "Підтримати", donateTitle: "Ваша підтримка робить це можливим.", donateText: "Пожертвуйте за кілька секунд через Bizum або переказ — або допоможіть речами, продуктами чи своїм часом.", donateCta: "Підтримати", donateOther: "Інші способи допомогти",
     contactEyebrow: "Контакти", contactTitle: "Поговорімо.", contactText: "Хіхон: Av. Manuel Llaneza, 68. Авілес, Ов’єдо, Мадрид, Барселона та Валенсія — за попереднім записом.", whatsapp: "WhatsApp", directions: "Як дістатися", follow: "Ми в соцмережах", formCta: "Написати нам",
   },
+  ast: {
+    badge: "ONG · Asturies, España · dende 2021", heroTitle: "Aniciamos el cambéu que", heroAccent: "la sociedá precisa.", heroText: "INICIA Foundation trabaya pola inclusión, el desendolcu comunitariu y l'apoyu a persones en situación de vulnerabilidá.", ctaHelp: "Preciso ayuda", ctaSupport: "Quiero ayudar", ctaProjects: "Ver proyeutos",
+    stats: [["317", "families ucraínes acompañaes"], ["129", "families d'otros oríxenes y vecinos"], ["20", "iniciatives en marcha y en diseñu"], ["2021", "añu de fundación"]],
+    ribbon: "Inclusión · Comunidá · Formación · Collaboración · Asturies",
+    routeTitle: "¿Qué te trai a INICIA?", routes: [["Preciso ayuda", "Alimentos, trámites, empleu o acompañamientu.", "/contacto?tipo=ayuda"], ["Quiero ser voluntariu/a", "El to tiempu y les tos habilidaes en proyeutos reales.", "/contacto?tipo=voluntariado"], ["Soi una organización", "Alianzes, patrociniu y proyeutos conxuntos.", "/contacto?tipo=organizacion"], ["Quiero donar", "Bizum, tresferencia o material.", "/donar"]],
+    aboutEyebrow: "Quién somos", aboutTitle: "Una organización nacida pa tresformar vides.", aboutText: "Somos una entidá ensin ánimu de llucru con sede n'Asturies. Impulsamos proyeutos sociales, desendolcu comunitariu y collaboración institucional.",
+    pillars: [["Desendolcu comunitariu", "Iniciatives que coneuten capacidaes llocales, families y recursos sociales."], ["Collaboración institucional", "Alianzes responsables p'ampliar l'algame de les iniciatives sociales."], ["Apoyu y orientación", "Información clara y procesos rastrexables pa la participación ciudadana."]],
+    missionEyebrow: "Misión, oxetivos ya ideoloxía", missionTitle: "Una aición cívica énte desafíos humanos, sociales y globales.", missionText: "Los fines estatutarios d'INICIA Foundation coneuten la dignidá humana, la xusticia social, la sostenibilidá ambiental, la participación y la prevención responsable de riesgos globales.",
+    mission: [["Misión", "Promover la inclusión, el desendolcu comunitariu, la cooperación y l'apoyu social dende una entidá ensin ánimu de llucru con sede n'Asturies."], ["Fines estatutarios", "Contribuyir a una sociedá más sostenible, pacífica, xusta ya informada per aciu d'iniciatives sociales, comunitaries, educatives y de sensibilización."], ["Ideoloxía", "Compromisu cola dignidá, la participación ciudadana, la cooperación responsable y la meyora de les condiciones de vida na comunidá."]],
+    ideologyLink: "Consultar la seición d'Ideoloxía", areasLabel: "Ámbitos de los fines estatutarios",
+    areas: [["Mediu ambiente y clima", "Sensibilización énte la contaminación, la perda de biodiversidá, el calentamientu global y l'usu responsable de los recursos naturales."], ["Paz y seguranza humana", "Promoción d'una cultura de paz y de la conciencia pública sobre riesgos que afeuten a tolos pueblos."], ["Igualdá y desendolcu", "Atención a la desigualdá social, la probeza, la fame, el desempleu y los factores d'esclusión."], ["Recursos y demografía", "Seguranza alimentaria, accesu equitativu a recursos y retos demográficos y del avieyamientu."], ["Salú y bienestar social", "Sensibilización sobre l'avieyamientu y la salú pública. INICIA nun fai diagnósticu nin tratamientu."], ["Teunoloxía y riesgos globales", "Una mirada responsable haza les teunoloxíes emerxentes, incluyida la intelixencia artificial."]],
+    projectsEyebrow: "Proyeutos destacaos", projectsTitle: "Trés iniciatives pa conocer INICIA.", projectsText: "El catálogu completu axunta 20 iniciatives y amuesa l'estáu de caúna.", projectsCta: "Esplorar tolos proyeutos", viewProject: "Ver proyeutu", projectImageAlt: "Persones organizando una iniciativa comunitaria",
+    newsEyebrow: "Noticies", newsTitle: "Lo últimu d'INICIA.", newsCta: "Toles noticies",
+    partnersEyebrow: "Alianzes", partnersTitle: "Con quién trabayamos.",
+    donateEyebrow: "Donar", donateTitle: "El to apoyu failo posible.", donateText: "Dona en segundos per Bizum o tresferencia, o apurre material, alimentos o el to tiempu.", donateCta: "Donar agora", donateOther: "Otres formes d'apoyar",
+    contactEyebrow: "Contactu", contactTitle: "Falemos.", contactText: "Xixón: Av. Manuel Llaneza, 68. Avilés, Uviéu, Madrid, Barcelona y Valencia: con cita previa.", whatsapp: "WhatsApp", directions: "Cómo llegar", follow: "Síguinos", formCta: "Escribinos",
+  },
 };
 
 const EARTH = photo("earth");
@@ -107,7 +124,7 @@ const LEARNING = photo("learning");
 const ENERGY = photo("energy");
 const SEEDLING = photo("seedling");
 const ROUTE_PHOTOS: PhotoName[] = ["community", "planting", "team", "seedling"];
-const TAGLINE: Record<Locale, string> = { es: "Personas · Planeta · Innovación", en: "People · Planet · Innovation", ru: "Люди · Планета · Инновации", uk: "Люди · Планета · Інновації" };
+const TAGLINE: Record<Locale, string> = { es: "Personas · Planeta · Innovación", en: "People · Planet · Innovation", ru: "Люди · Планета · Инновации", uk: "Люди · Планета · Інновації", ast: "Persones · Planeta · Innovación" };
 const ROUTE_ICONS = [LifeBuoy, HandHeart, Building2, HeartHandshake];
 const PILLAR_ICONS = [UsersRound, HeartHandshake, ShieldCheck];
 const MISSION_ICONS = [HeartHandshake, Target, Lightbulb];

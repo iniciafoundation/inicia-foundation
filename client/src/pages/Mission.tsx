@@ -151,6 +151,38 @@ const copy: Record<Locale, MissionCopy> = {
     commitment: "INICIA спрямовує свої проєкти на інклюзію, соціальну підтримку, розвиток громад, відповідальну співпрацю та захист суспільних інтересів у межах своїх можливостей, доступних ресурсів і чинної правової бази.",
     cta: "Читати про ідеологію",
   },
+  ast: {
+    title: "Misión y fines estatutarios.",
+    intro: "La nuestra misión fundaméntase na dignidá humana, la xusticia social, la sostenibilidá ambiental, la paz, la participación y la prevención responsable de riesgos globales. INICIA desendolca la so contribución dende l'ámbitu cívicu, comunitariu y d'interés públicu.",
+    areasEyebrow: "Testu íntegru estructuráu",
+    areasTitle: "Ámbitos d'actuación definíos nos fines de la organización.",
+    areasIntro: "Los ámbitos siguientes recueyen de forma estructurada los oxetivos unviaos pola organización. Nun significa qu'INICIA afirme resolver sola problemes globales; espresen el marcu social, educativu, comunitariu y de sensibilización dende'l qu'orienta les sos iniciatives.",
+    areas: [
+      ["Mediu ambiente, biodiversidá y clima", "Promover la sensibilización énte la contaminación ambiental y del aire, la degradación de mares y océanos, la mengua de la biodiversidá, el calentamientu global, l'efeutu ivernaderu, los furacos d'ozonu y la contaminación radiactiva."],
+      ["Paz y seguridá humana", "Contribuyir a una cultura de paz, prevenir l'amenaza de guerra nuclear y fomentar la conciencia sobre la proliferación non autorizada de teunoloxíes nucleares y otros riesgos qu'afeuten a tolos pueblos."],
+      ["Igualdá, desendolcu y derechos", "Abordar la fienda Norte-Sur, l'atrasu de territorios y comunidaes, la fame, la desnutrición, l'analfabetismu, la desigualdá social, el desempléu, la violencia y el crime organizáu dende la sensibilización, la cooperación y la participación cívica."],
+      ["Recursos, alimentación y demografía", "Favorecer la reflexón sobre l'accesu xustu a alimentos, agua y recursos naturales; l'escosamientu de recursos enerxéticos y materiales; los retos demográficos, l'avieyamientu y la poca conciencia social sobre esta etapa de la vida."],
+      ["Salú y bienestar coleutivu", "Impulsar la conciencia pública sobre grandes retos de salú y bienestar, incluyíos l'avieyamientu y enfermedaes d'altu impactu social. INICIA nun fai diagnósticos, tratamientos nin asesoramientu clínicu."],
+      ["Teunoloxía y riesgos globales", "Promover una mirada responsable sobre catástrofes globales, amenaces a la esistencia humana y teunoloxíes emerxentes —incluyida la intelixencia artificial— ensin sustituyir a autoridaes, especialistes nin instituciones competentes."],
+    ],
+    objectivesEyebrow: "Rellación completa de fines unviaos pola organización",
+    objectivesTitle: "Oxetivos estatutarios, ensin omisiones temátiques.",
+    objectivesIntro: "Esta rellación caltién de forma completa los ámbitos que la organización proporcionó. La so publicación espresa un marcu de fines y sensibilización; nun-y atribuye a INICIA la resolución individual o esclusiva d'estos retos.",
+    objectives: [
+      "Problemes ambientales globales: contaminación ambiental, mengua de la biodiversidá, contaminación del aire, contaminación de mares y océanos, calentamientu global, efeutu ivernaderu y furacos d'ozonu.",
+      "Evitar l'amenaza de la guerra nuclear y asegurar la paz pa tolos pueblos, evitándo-y a la comunidá mundial la proliferación non autorizada de teunoloxíes nucleares y la contaminación radiactiva del mediu ambiente.",
+      "El problema del atrasu de los países del tercer mundu y los problemes demográficos de la humanidá: crecimientu demográficu nos países en desendolcu y crisis demográfica nos países desendolcaos.",
+      "Fame y desnutrición; suministru de recursos a la humanidá; escosamientu de petróleu, gas natural, carbón, madera y metales non ferrosos; escasez de recursos acuáticos; usu responsable de los recursos del océanu y esploración espacial.",
+      "El problema ensin resolver del avieyamientu humanu y la poca conciencia pública sobre l'avieyamientu.",
+      "El problema Norte-Sur: la fienda de desendolcu ente países ricos y probes, la fame y l'analfabetismu.",
+      "El calentamientu global, los furacos d'ozonu, les enfermedaes cardiovasculares, el cáncer y el SIDA; el terrorismu y el peligru d'asteroides.",
+      "La infravaloración d'amenaces a la esistencia humana, como'l desendolcu d'intelixencia artificial hostil y les catástrofes globales.",
+      "La desigualdá social —incluyida la fienda ente l'1 % más ricu y el restu de la humanidá—, l'aumentu del desempléu, la violencia y el crime organizáu.",
+    ],
+    commitmentEyebrow: "Compromisu d'actuación",
+    commitment: "INICIA orienta los sos proyeutos a la inclusión, l'apoyu social, el desendolcu comunitariu, la cooperación responsable y la defensa del interés públicu, dientro de les sos capacidaes, recursos disponibles y marcos llegales aplicables.",
+    cta: "Lleer Ideoloxía",
+  },
 };
 
 export default function Mission() {

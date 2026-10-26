@@ -23,6 +23,7 @@ const UPDATED: Record<Locale, string> = {
   en: "Last updated: 26 October 2026",
   ru: "Последнее обновление: 26 октября 2026 г.",
   uk: "Останнє оновлення: 26 жовтня 2026 р.",
+  ast: "Últimu anovamientu: 26 d'ochobre de 2026",
 };
 
 const LINK_CLASS = "underline decoration-[#D6B25E] decoration-2 underline-offset-4 hover:text-[#0B1E3A]";
@@ -245,6 +246,50 @@ const privacyCopy: Record<Locale, PageCopy> = {
       ] },
     ],
   },
+  ast: {
+    eyebrow: "Proteición de datos",
+    title: "Política de privacidá",
+    intro: "Esplicamos cómo la Asociación Inicia Foundation trata los datos personales que recibe per esti sitiu web, d'alcuerdu col Reglamento (UE) 2016/679 (RGPD) y la Ley Orgánica 3/2018 de Protección de Datos Personales y garantía de los derechos digitales (LOPDGDD).",
+    sections: [
+      { h: "1. Responsable del tratamientu", paragraphs: [
+        "Asociación Inicia Foundation, NIF G05426242, inscrita nel Registro de Asociaciones del Principado de Asturias col nº 13148.",
+        "Domiciliu: Avenida Manuel Llaneza, 68, 33208 Gijón (Asturias), España.",
+        "Contautu pa proteición de datos y exerciciu de derechos: direccion@iniciafoundation.org. Contautu xeneral: info@iniciafoundation.org. Teléfonu: +34 624 865 051. Sitiu web: iniciafoundation.org.",
+      ] },
+      { h: "2. Datos que tratamos", paragraphs: [
+        "Per aciu de los formularios del sitiu (solicitú d'ayuda, voluntariáu, organizaciones, donaciones n'especie o interés en facese sociu/a y otres consultes) recoyemos: nome, corréu electrónicu, teléfonu, ciudá, canal y llingua de contautu preferíos, y la información que la mesma persona escribe nel so mensaxe.",
+        "Los formularios piden espresamente que nun s'unvien datos de salú nin documentos d'identidá. Rogámos-y que nun incluya esti tipu d'información nos sos mensaxes.",
+      ] },
+      { h: "3. Finalidaes", paragraphs: ["Usamos los datos namás pa:"], list: [
+        "atender y responder a les solicitúes y consultes recibíes;",
+        "xestionar el voluntariáu, la condición de sociu/a y la collaboración con persones y organizaciones;",
+        "informar sobre les nuestres actividaes, namás si la persona lo pidió.",
+      ] },
+      { h: "4. Base xurídica", paragraphs: ["Conforme al artículu 6 del RGPD, el tratamientu básase en:"], list: [
+        "el consentimientu de la persona interesada, dau per aciu de la caxella del formulariu;",
+        "l'aplicación de midíes precontractuales o contractuales, nel casu de voluntarios/es y socios/es;",
+        "l'interés llexítimu en responder a les organizaciones que contauten con nós;",
+        "el cumplimientu d'obligaciones llegales, como les contables y fiscales rellatives a les donaciones.",
+      ] },
+      { h: "5. Ónde se guarden los datos", paragraphs: [
+        "Los datos unviaos per aciu de los formularios almacénense nel entornu Google Workspace de l'asociación (Google Sheets), y los avisos de solicitúes nueves unviense per corréu electrónicu al equipu de la entidá.",
+      ] },
+      { h: "6. Plazu de caltenimientu", paragraphs: [
+        "Caltenemos los datos el tiempu necesariu pa xestionar la solicitú y, depués, un máximu de 2 años, sacante qu'una obligación llegal esixa un plazu mayor (por exemplu, los rexistros contables de les donaciones).",
+      ] },
+      { h: "7. Destinatarios y tresferencies internacionales", paragraphs: [
+        "Nun vendemos nin cedemos datos personales a terceros. Pa prestar el serviciu trabayamos colos siguientes encargaos del tratamientu: Google (Google Workspace), Netlify (aloxamientu web) y, si ye'l casu, Cloudflare (aloxamientu o analítica).",
+        "Cuando estos fornidores traten datos fuera del Espaciu Económicu Européu, les tresferencies tán amparaes poles cláusules contractuales tipu de la Comisión Europea o pol Marcu de Privacidá de Datos UE-EE. XX.",
+      ] },
+      { h: "8. Los sos derechos", paragraphs: [
+        "Pue exercer en cualquier momentu los sos derechos d'accesu, rectificación, supresión, oposición, llimitación del tratamientu y portabilidá, y tamién retirar el consentimientu dau, escribiendo a direccion@iniciafoundation.org. La retirada del consentimientu nun afeuta a la llicitú del tratamientu previu.",
+        "Si considera que los sos derechos nun foron atendíos como debe, pue presentar una reclamación énte l'Agencia Española de Protección de Datos (www.aepd.es).",
+      ] },
+      { h: "9. Menores d'edá", paragraphs: [
+        "D'alcuerdu col artículu 7 de la LOPDGDD, les persones menores de 14 años nun puen dar el so consentimientu por sí mesmes. Nesi casu, la solicitú tien de facela la so ma, el so pa o el so tutor/a llegal.",
+      ] },
+    ],
+  },
 };
 
 /* ------------------------------------------------------------------ */
@@ -384,6 +429,39 @@ const cookieCopy: Record<Locale, CookieCopy> = {
       { name: "_gcl_au", category: "Реклама / конверсії", purpose: "Google Ads: вимірювання конверсій рекламних кампаній.", consent: true },
     ],
   },
+  ast: {
+    eyebrow: "Cookies",
+    title: "Política de cookies",
+    intro: "Esta páxina esplica qué cookies y teunoloxíes d'almacenamientu asemeyaes usa'l sitiu web de la Asociación Inicia Foundation y cómo pue decidir sobre'l so usu.",
+    sections: [
+      { h: "1. Qué son les cookies", paragraphs: [
+        "Les cookies y teunoloxíes asemeyaes, como l'almacenamientu llocal del navegador (localStorage), permiten guardar pequeñes cantidaes d'información nel preséu de la persona que visita'l sitiu.",
+      ] },
+      { h: "2. Almacenamientu téunicamente necesariu", paragraphs: [
+        "Pa que'l sitiu funcione guardamos nel localStorage del so navegador la llingua escoyida y la so decisión sobre les cookies. Esta información nun s'unvia a terceros y nun rique consentimientu, porque ye estrictamente necesaria pa prestar el serviciu solicitáu.",
+      ] },
+      { h: "3. Analítica y midida de conversiones", paragraphs: [
+        "Usamos Google Analytics 4 pa conocer de forma agregada cómo s'usa'l sitiu, y la midida de conversiones de Google Ads pa saber si les nuestres campañes funcionen. Estes ferramientes namás s'activen si usté lo aceuta nel banner de cookies. Si nun lo aceuta, nun se carguen.",
+      ] },
+      { h: "4. Vídeos de YouTube", paragraphs: [
+        "Los vídeos incrustaos sírvense dende'l dominiu youtube-nocookie.com y namás se carguen cuando usté primi nellos. Hasta esi momentu, YouTube nun recibe nengún datu de la so visita.",
+      ] },
+      { h: "5. Cómo camudar la so eleición", paragraphs: [
+        "Pue modificar o retirar el so consentimientu en cualquier momentu col enllaz «Configurar cookies» asitiáu nel pie de páxina. Tamién pue desaniciar les cookies y l'almacenamientu llocal dende la configuración del so navegador.",
+        "Pa más información sobre'l tratamientu de los sos datos, consulte la nuestra Política de privacidá o escriba a direccion@iniciafoundation.org.",
+      ] },
+    ],
+    tableTitle: "Cookies y almacenamientu usaos",
+    columns: ["Nome", "Categoría", "Finalidá", "Usu"],
+    always: "Siempre",
+    onlyWithConsent: "Namás con consentimientu",
+    rows: [
+      { name: "inicia-lang", category: "Necesaria", purpose: "Recordar la llingua escoyida (localStorage).", consent: false },
+      { name: "inicia-consent", category: "Necesaria", purpose: "Recordar la so decisión sobre les cookies (localStorage).", consent: false },
+      { name: "_ga, _ga_*", category: "Analítica", purpose: "Google Analytics 4: estadístiques agregaes d'usu del sitiu.", consent: true },
+      { name: "_gcl_au", category: "Publicidá / conversión", purpose: "Google Ads: midida de conversiones de campañes.", consent: true },
+    ],
+  },
 };
 
 /* ------------------------------------------------------------------ */
@@ -500,6 +578,34 @@ const legalCopy: Record<Locale, PageCopy> = {
       ] },
       { h: "6. Застосовне право та підсудність", paragraphs: [
         "Це повідомлення регулюється законодавством Іспанії. Спори розглядаються судами Хіхона (Gijón), якщо законодавство про захист прав споживачів не передбачає іншої підсудності.",
+      ] },
+    ],
+  },
+  ast: {
+    eyebrow: "Información llegal",
+    title: "Avisu llegal",
+    intro: "En cumplimientu del artículu 10 de la Ley 34/2002, de 11 de julio, de servicios de la sociedad de la información y de comercio electrónico (LSSI-CE), apúrrense los datos del titular d'esti sitiu web y les condiciones que regulen el so usu.",
+    sections: [
+      { h: "1. Titular del sitiu web", paragraphs: [
+        "Asociación Inicia Foundation, NIF G05426242, inscrita nel Registro de Asociaciones del Principado de Asturias col nº 13148.",
+        "Domiciliu: Avenida Manuel Llaneza, 68, 33208 Gijón (Asturias), España.",
+        "Corréu electrónicu: info@iniciafoundation.org. Teléfonu: +34 624 865 051. Sitiu web: iniciafoundation.org.",
+      ] },
+      { h: "2. Oxetu del sitiu", paragraphs: [
+        "Esti sitiu web ufre información sobre l'asociación, los sos proyeutos y les formes de collaborar con ella. L'accesu ye de baldre y nun esixe rexistru; l'unviu de formularios ríxese pola nuestra Política de privacidá.",
+      ] },
+      { h: "3. Propiedá intelectual ya industrial", paragraphs: [
+        "Sacante que s'indique lo contrario, los testos, imáxenes, logotipos y demás conteníos d'esti sitiu pertenecen a la Asociación Inicia Foundation. Delles imáxenes tienen calter meramente ilustrativu.",
+        "Nun ta permitida la reproducción, distribución o tresformación de los conteníos con fines comerciales ensin autorización previa y per escritu de l'asociación.",
+      ] },
+      { h: "4. Enllaces esternos", paragraphs: [
+        "Esti sitiu pue incluyir enllaces a páxines de terceros. L'asociación nun controla esos sitios y nun se fai responsable de los sos conteníos, de la so disponibilidá nin de les sos polítiques de privacidá. Si tien conocencia de dalgún enllaz que lleve a conteníos ilícitos, rogámos-y que nos lo comunique a info@iniciafoundation.org.",
+      ] },
+      { h: "5. Proteición de datos y cookies", paragraphs: [
+        "El tratamientu de los datos personales y l'usu de cookies descríbense na Política de privacidá y na Política de cookies d'esti sitiu.",
+      ] },
+      { h: "6. Llexislación aplicable y xurisdicción", paragraphs: [
+        "Esti avisu llegal ríxese pola llexislación española. Pa cualquier controversia, les partes sométense a los xulgaos y tribunales de Xixón, sacante que la normativa de proteición de les persones consumidores estableza otru fueru.",
       ] },
     ],
   },

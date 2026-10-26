@@ -11,6 +11,7 @@ const labels = {
   en: { loading: "Loading project…", missing: "Project not found", back: "Back to the portfolio", home: "INICIA Foundation" },
   ru: { loading: "Загрузка проекта…", missing: "Проект не найден", back: "Вернуться к каталогу", home: "INICIA Foundation" },
   uk: { loading: "Завантаження проєкту…", missing: "Проєкт не знайдено", back: "Повернутися до каталогу", home: "INICIA Foundation" },
+  ast: { loading: "Cargando proyeutu…", missing: "Proyeutu non atopáu", back: "Volver al catálogu", home: "INICIA Foundation" },
 };
 
 export default function ProjectDetail() {

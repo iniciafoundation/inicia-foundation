@@ -9,6 +9,7 @@ const copy = {
   en: { text: "We use Google analytics and measurement cookies only if you accept, to learn what works and improve the site.", accept: "Accept", reject: "Reject", more: "Cookie policy" },
   ru: { text: "Мы используем аналитические cookie Google только с вашего согласия — чтобы понимать, что работает, и улучшать сайт.", accept: "Принять", reject: "Отклонить", more: "Политика cookie" },
   uk: { text: "Ми використовуємо аналітичні cookie Google лише з вашої згоди — щоб розуміти, що працює, і покращувати сайт.", accept: "Прийняти", reject: "Відхилити", more: "Політика cookie" },
+  ast: { text: "Usamos cookies d'analís y midida de Google namái si les aceutes, pa saber qué funciona y ameyorar el sitiu.", accept: "Aceutar", reject: "Refugar", more: "Política de cookies" },
 };
 
 /** Cookie consent: appears only when analytics is configured (sheet "Ajustes"); loads Google tags after "Accept". */

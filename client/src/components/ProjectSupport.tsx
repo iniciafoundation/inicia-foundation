@@ -8,6 +8,7 @@ const copy = {
   en: { title: "Support this project", raised: "raised of", donors: "people have already supported", donate: "Donate to this project", join: "I want to take part", concept: "Use this reference" },
   ru: { title: "Поддержите этот проект", raised: "собрано из", donors: "человек уже поддержали", donate: "Пожертвовать на проект", join: "Хочу участвовать", concept: "Укажите в назначении платежа" },
   uk: { title: "Підтримайте цей проєкт", raised: "зібрано з", donors: "людей уже підтримали", donate: "Пожертвувати на проєкт", join: "Хочу долучитися", concept: "Вкажіть у призначенні платежу" },
+  ast: { title: "Sofita esti proyectu", raised: "recoyíos de", donors: "persones yá sofitaron", donate: "Donar a esti proyectu", join: "Quiero participar", concept: "Indica nel conceptu" },
 };
 
 const euro = (value: number) => new Intl.NumberFormat("es-ES", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(value);

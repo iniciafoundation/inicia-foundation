@@ -70,6 +70,19 @@ const copy: Record<Locale, LegalCopy> = {
     pendingTitle: "Документи на юридичній перевірці",
     pendingText: "Політику конфіденційності, порядок реалізації прав суб’єктів персональних даних (ARCO-POL), строк зберігання даних, умови членства, членські внески, можливі податкові пільги, угоду про волонтерську діяльність і страхування волонтерів буде опубліковано лише після того, як організація надасть їхні остаточні затверджені редакції. Доки цей процес не завершено, сайт не подає ці документи як чинні.",
   },
+  ast: {
+    eyebrow: "Identidá de la organización",
+    title: "Información rexistral",
+    intro: "Datos institucionales confirmaos de ASOCIACIÓN Inicia Foundation pa identificar la entidá responsable d'esti portal.",
+    entityTitle: "Entidá",
+    scope: "Ámbitu: Principáu d'Asturies / España",
+    addressTitle: "Domiciliu social",
+    registryTitle: "Rexistru",
+    registryNote: "(Rexistru d'Asociaciones del Principáu d'Asturies)",
+    registryNumber: "Númberu d'inscripción 13148",
+    pendingTitle: "Documentos en validación xurídica",
+    pendingText: "La política de privacidá, la canal de derechos ARCO-POL, el plazu de caltenimientu, les condiciones de sociu/a, les cuotes, los eventuales beneficios fiscales, l'alcuerdu d'incorporación de voluntariáu y los sos seguros namás se van publicar cuando la organización apurra les sos versiones definitives aprobaes. El portal nun presenta estos documentos como vixentes mentanto esi procesu tea pendiente.",
+  },
 };
 
 export default function LegalIdentity() {
