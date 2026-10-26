@@ -221,6 +221,17 @@
       "heroImageUrl": null,
       "status": "development",
       "visibility": "published"
+    },
+    {
+      "id": "project_neara",
+      "slug": "neara",
+      "title": "Neara",
+      "category": "Innovación social · Tecnología",
+      "shortDescription": "Plataforma de presencia compartida y ayuda mutua que conecta a personas de distintos países para compartir su día a día, con traducción automática de voz.",
+      "bodyHtml": "<h2>Neara — estar cerca, aunque haya distancia</h2><p><strong>Estado:</strong> En desarrollo (fase de concepto).</p><p><strong>Ámbito:</strong> Internacional, con un piloto previsto en un único corredor lingüístico (por ejemplo, español–inglés o ucraniano–inglés).</p><p>Neara es una plataforma de presencia compartida y ayuda mutua. Conecta a personas de distintos países para compartir parte de su vida cotidiana —tomar un café, trabajar en compañía, pasear, practicar un idioma o ayudarse con una gestión— mientras la voz se traduce automáticamente en tiempo real.</p><h3>Para quién</h3><ul><li>Personas que viven solas o se sienten aisladas.</li><li>Personas migrantes y estudiantes internacionales recién llegados.</li><li>Personas mayores o con movilidad reducida.</li><li>Entidades que buscan programas de acompañamiento y apoyo social.</li></ul><h3>Cómo se desarrollará</h3><ul><li>Etapa 1: aplicación móvil con audio, vídeo y subtítulos traducidos.</li><li>Etapa 2: uso con auriculares y dispositivos ponibles habituales.</li><li>Etapa 3: más adelante, presencia espacial y realidad virtual.</li></ul><h3>Principios</h3><p>Seguridad desde el diseño (verificación de identidad, protección de menores, sin grabación por defecto, moderación y salida inmediata), privacidad conforme al RGPD y ningún uso publicitario de las conversaciones. El objetivo es reforzar los vínculos humanos, no generar dependencia de la plataforma.</p><h3>Próximos pasos</h3><p>Entrevistas con posibles usuarios, prototipo sin realidad virtual y piloto cerrado con entidades colaboradoras (universidades, escuelas de idiomas y ONG).</p><h3>Buscamos</h3><p>Socios tecnológicos (audio y vídeo en tiempo real, traducción), entidades para el piloto y financiación.</p><p><em>«Neara» es un nombre de trabajo.</em></p>",
+      "heroImageUrl": null,
+      "status": "development",
+      "visibility": "published"
     }
   ],
   "translations": [
@@ -763,6 +774,33 @@
       "category": "Цивільне суспільство · Спільнота",
       "shortDescription": "Гнучкі моделі волонтерства для посилення соціальної згуртованості, поєднання знань та підтримки соціальних, сільських і екологічних проєктів.",
       "bodyHtml": "<h2>Програма волонтерства та громадської участі</h2><p><strong>Стан:</strong> У розробці.</p><p><strong>Охоплення:</strong> Астурія та міжнародний рівень.</p><p>Програма, яка пропагує гнучкі моделі волонтерства та громадської участі. Вона сприяє співпраці молоді, експертів і міжнародних волонтерів у проєктах сільського розвитку, екології та підтримки людей у вразливому становищі.</p><p>Включає можливості для очної, онлайн, міжкультурної участі та навчання навичкам.</p>"
+    },
+    {
+      "id": "project_neara_en",
+      "projectId": "project_neara",
+      "locale": "en",
+      "title": "Neara",
+      "category": "Social innovation · Technology",
+      "shortDescription": "A shared-presence and mutual-help platform that connects people from different countries to share everyday life, with automatic voice translation.",
+      "bodyHtml": "<h2>Neara — close, beyond distance</h2><p><strong>Status:</strong> In development (concept stage).</p><p><strong>Scope:</strong> International, with a pilot planned in a single language corridor (for example Spanish–English or Ukrainian–English).</p><p>Neara is a shared-presence and mutual-help platform. It connects people from different countries to share part of their everyday life — having a coffee, working side by side, going for a walk, practising a language or helping with a task — while speech is translated automatically in real time.</p><h3>Who it is for</h3><ul><li>People who live alone or feel isolated.</li><li>Newly arrived migrants and international students.</li><li>Older people or people with reduced mobility.</li><li>Organisations looking for support and companionship programmes.</li></ul><h3>How it will be developed</h3><ul><li>Stage 1: mobile app with audio, video and translated subtitles.</li><li>Stage 2: use with ordinary headphones and wearable devices.</li><li>Stage 3: later on, spatial presence and virtual reality.</li></ul><h3>Principles</h3><p>Safety by design (identity verification, protection of minors, no recording by default, moderation and instant exit), GDPR-compliant privacy and no advertising use of conversations. The aim is to strengthen human bonds, not to create dependence on the platform.</p><h3>Next steps</h3><p>Interviews with potential users, a prototype without virtual reality and a closed pilot with partner organisations (universities, language schools and NGOs).</p><h3>We are looking for</h3><p>Technology partners (real-time audio and video, translation), pilot organisations and funding.</p><p><em>“Neara” is a working name.</em></p>"
+    },
+    {
+      "id": "project_neara_ru",
+      "projectId": "project_neara",
+      "locale": "ru",
+      "title": "Neara («Рядом»)",
+      "category": "Социальные инновации · Технологии",
+      "shortDescription": "Платформа совместного присутствия и взаимопомощи: соединяет людей из разных стран, чтобы разделять повседневную жизнь, с автоматическим переводом речи.",
+      "bodyHtml": "<h2>Neara — быть рядом, даже если между вами тысячи километров</h2><p><strong>Статус:</strong> В разработке (стадия концепции).</p><p><strong>География:</strong> Международная; пилот планируется в одном языковом направлении (например, испанский–английский или украинский–английский).</p><p>Neara — платформа совместного присутствия и взаимопомощи. Она соединяет людей из разных стран, чтобы они могли разделить часть обычного дня — выпить кофе, поработать рядом, погулять, попрактиковать язык или помочь друг другу с делом, — а речь при этом автоматически переводится в реальном времени.</p><h3>Для кого</h3><ul><li>Люди, которые живут одни или чувствуют себя одиноко.</li><li>Недавно переехавшие мигранты и иностранные студенты.</li><li>Пожилые люди и люди с ограниченной мобильностью.</li><li>Организации, которым нужны программы сопровождения и социальной поддержки.</li></ul><h3>Как будет развиваться</h3><ul><li>Этап 1: мобильное приложение с аудио, видео и переведёнными субтитрами.</li><li>Этап 2: работа с обычными наушниками и носимыми устройствами.</li><li>Этап 3: позже — пространственное присутствие и виртуальная реальность.</li></ul><h3>Принципы</h3><p>Безопасность с самого начала (проверка личности, защита несовершеннолетних, без записи по умолчанию, модерация и мгновенный выход), приватность по GDPR и никакого рекламного использования разговоров. Цель — укреплять человеческие связи, а не создавать зависимость от платформы.</p><h3>Следующие шаги</h3><p>Интервью с потенциальными пользователями, прототип без VR и закрытый пилот с организациями-партнёрами (университеты, языковые школы, НКО).</p><h3>Мы ищем</h3><p>Технологических партнёров (аудио и видео в реальном времени, перевод), организации для пилота и финансирование.</p><p><em>«Neara» — рабочее название.</em></p>"
+    },
+    {
+      "id": "project_neara_uk",
+      "projectId": "project_neara",
+      "locale": "uk",
+      "title": "Neara («Поруч»)",
+      "category": "Соціальні інновації · Технології",
+      "shortDescription": "Платформа спільної присутності та взаємодопомоги: поєднує людей з різних країн, щоб ділитися повсякденним життям, з автоматичним перекладом мовлення.",
+      "bodyHtml": "<h2>Neara — бути поруч, навіть якщо між вами тисячі кілометрів</h2><p><strong>Статус:</strong> У розробці (стадія концепції).</p><p><strong>Географія:</strong> Міжнародна; пілот заплановано в одному мовному напрямі (наприклад, іспанська–англійська або українська–англійська).</p><p>Neara — платформа спільної присутності та взаємодопомоги. Вона поєднує людей з різних країн, щоб вони могли розділити частину звичайного дня — випити кави, попрацювати поруч, погуляти, попрактикувати мову або допомогти одне одному зі справою, — а мовлення при цьому автоматично перекладається в реальному часі.</p><h3>Для кого</h3><ul><li>Люди, які живуть самі або почуваються самотньо.</li><li>Нещодавно переїхалі мігранти та іноземні студенти.</li><li>Літні люди та люди з обмеженою мобільністю.</li><li>Організації, яким потрібні програми супроводу та соціальної підтримки.</li></ul><h3>Як розвиватиметься</h3><ul><li>Етап 1: мобільний застосунок з аудіо, відео та перекладеними субтитрами.</li><li>Етап 2: робота зі звичайними навушниками та носимими пристроями.</li><li>Етап 3: згодом — просторова присутність і віртуальна реальність.</li></ul><h3>Принципи</h3><p>Безпека від самого початку (перевірка особи, захист неповнолітніх, без запису за замовчуванням, модерація та миттєвий вихід), приватність згідно з GDPR і жодного рекламного використання розмов. Мета — зміцнювати людські зв’язки, а не створювати залежність від платформи.</p><h3>Наступні кроки</h3><p>Інтерв’ю з потенційними користувачами, прототип без VR і закритий пілот з організаціями-партнерами (університети, мовні школи, НГО).</p><h3>Ми шукаємо</h3><p>Технологічних партнерів (аудіо та відео в реальному часі, переклад), організації для пілоту та фінансування.</p><p><em>«Neara» — робоча назва.</em></p>"
     }
   ]
 }
