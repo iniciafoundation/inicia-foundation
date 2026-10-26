@@ -2,11 +2,14 @@ import { trpc } from "@/lib/trpc";
 import { COOKIE_NAME, UNAUTHED_ERR_MSG } from '@shared/const';
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { httpBatchLink, TRPCClientError } from "@trpc/client";
-import { createRoot } from "react-dom/client";
+import { getQueryKey } from "@trpc/react-query";
+import { createRoot, hydrateRoot } from "react-dom/client";
 import superjson from "superjson";
 import App from "./App";
 import { startLogin } from "./const";
 import "./index.css";
+import { getLocale } from "./lib/i18n";
+import { SHEETS_ENDPOINT } from "./lib/siteConfig";
 
 const queryClient = new QueryClient();
 
@@ -72,10 +75,24 @@ const trpcClient = trpc.createClient({
   ],
 });
 
-createRoot(document.getElementById("root")!).render(
+// Pages are prerendered to static HTML at build time (scripts/prerender.mjs).
+// Reuse that HTML (hydrate) when the visitor sees the default Spanish version;
+// otherwise render normally. Build-time data is marked stale so it refreshes.
+const container = document.getElementById("root")!;
+const prerendered = (window as unknown as { __INICIA_PRERENDER__?: { projects: unknown[]; content: unknown } }).__INICIA_PRERENDER__;
+const app = (
   <trpc.Provider client={trpcClient} queryClient={queryClient}>
     <QueryClientProvider client={queryClient}>
       <App />
     </QueryClientProvider>
   </trpc.Provider>
 );
+
+if (prerendered && container.hasChildNodes() && getLocale() === "es") {
+  queryClient.setQueryData(getQueryKey(trpc.crm.public.projects, { locale: "es" }, "query"), prerendered.projects, { updatedAt: 1 });
+  if (prerendered.content) queryClient.setQueryData(["site-content", SHEETS_ENDPOINT], prerendered.content, { updatedAt: 1 });
+  hydrateRoot(container, app);
+} else {
+  container.textContent = "";
+  createRoot(container).render(app);
+}
