@@ -7,6 +7,7 @@ const projectAssets: Record<string, string> = {
   nucleo: publicAssets.nucleoIllustration,
   "coopastur-agrosocial": publicAssets.coopAsturIllustration,
   "rural futures": publicAssets.ruralFuturesIllustration,
+  neara: "/assets/photos/earth-960.webp",
 };
 
 const pickVisual = (category: string) => {
