@@ -33,7 +33,7 @@ type HomeCopy = {
 const copy: Record<Locale, HomeCopy> = {
   es: {
     badge: "ONG · Asturias, España · desde 2021", heroTitle: "Iniciamos el cambio que", heroAccent: "la sociedad necesita.", heroText: "INICIA Foundation trabaja por la inclusión, el desarrollo comunitario y el apoyo a personas en situación de vulnerabilidad.", ctaHelp: "Necesito ayuda", ctaSupport: "Quiero ayudar", ctaProjects: "Ver proyectos",
-    stats: [["317", "familias ucranianas acompañadas"], ["129", "familias de otros orígenes y vecinos"], ["20", "iniciativas en marcha y en diseño"], ["2021", "año de fundación"]],
+    stats: [["2561", "familias ucranianas acompañadas"], ["1380", "familias de otros orígenes y vecinos"], ["20", "iniciativas en marcha y en diseño"], ["2021", "año de fundación"]],
     ribbon: "Inclusión · Comunidad · Formación · Colaboración · Asturias",
     routeTitle: "¿Qué te trae a INICIA?", routes: [["Necesito ayuda", "Alimentos, trámites, empleo o acompañamiento.", "/contacto?tipo=ayuda"], ["Quiero ser voluntario/a", "Tu tiempo y tus habilidades en proyectos reales.", "/contacto?tipo=voluntariado"], ["Soy una organización", "Alianzas, patrocinio y proyectos conjuntos.", "/contacto?tipo=organizacion"], ["Quiero donar", "Bizum, transferencia o material.", "/donar"]],
     aboutEyebrow: "Quiénes somos", aboutTitle: "Una organización nacida para transformar vidas.", aboutText: "Somos una entidad sin ánimo de lucro con sede en Asturias. Impulsamos proyectos sociales, desarrollo comunitario y colaboración institucional.",
@@ -50,7 +50,7 @@ const copy: Record<Locale, HomeCopy> = {
   },
   en: {
     badge: "NGO · Asturias, Spain · since 2021", heroTitle: "We start the change", heroAccent: "society needs.", heroText: "INICIA Foundation works for inclusion, community development and support for people in vulnerable situations.", ctaHelp: "I need help", ctaSupport: "I want to help", ctaProjects: "See projects",
-    stats: [["317", "Ukrainian families supported"], ["129", "families of other origins and neighbours"], ["20", "initiatives running or in design"], ["2021", "year founded"]],
+    stats: [["2561", "Ukrainian families supported"], ["1380", "families of other origins and neighbours"], ["20", "initiatives running or in design"], ["2021", "year founded"]],
     ribbon: "Inclusion · Community · Training · Collaboration · Asturias",
     routeTitle: "What brings you to INICIA?", routes: [["I need help", "Food, paperwork, jobs or support.", "/contacto?tipo=ayuda"], ["I want to volunteer", "Your time and skills in real projects.", "/contacto?tipo=voluntariado"], ["I represent an organisation", "Partnerships, sponsorship and joint projects.", "/contacto?tipo=organizacion"], ["I want to donate", "Bizum, bank transfer or goods.", "/donar"]],
     aboutEyebrow: "About us", aboutTitle: "An organisation born to transform lives.", aboutText: "We are a non-profit organisation based in Asturias. We drive social projects, community development and institutional collaboration.",
@@ -67,7 +67,7 @@ const copy: Record<Locale, HomeCopy> = {
   },
   ru: {
     badge: "НКО · Астурия, Испания · с 2021 года", heroTitle: "Мы начинаем перемены, которые", heroAccent: "нужны обществу.", heroText: "INICIA Foundation работает ради инклюзии, развития сообществ и поддержки людей в трудной ситуации.", ctaHelp: "Мне нужна помощь", ctaSupport: "Хочу помочь", ctaProjects: "Проекты",
-    stats: [["317", "украинских семей получили поддержку"], ["129", "семей другого происхождения и местных жителей"], ["20", "инициатив в работе и в разработке"], ["2021", "год основания"]],
+    stats: [["2561", "украинских семей получили поддержку"], ["1380", "семей другого происхождения и местных жителей"], ["20", "инициатив в работе и в разработке"], ["2021", "год основания"]],
     ribbon: "Инклюзия · Сообщество · Обучение · Сотрудничество · Астурия",
     routeTitle: "Что привело вас в INICIA?", routes: [["Мне нужна помощь", "Продукты, документы, работа, сопровождение.", "/contacto?tipo=ayuda"], ["Хочу стать волонтёром", "Ваше время и навыки — в реальные проекты.", "/contacto?tipo=voluntariado"], ["Я представляю организацию", "Партнёрство, спонсорство, совместные проекты.", "/contacto?tipo=organizacion"], ["Хочу поддержать", "Bizum, перевод или вещи.", "/donar"]],
     aboutEyebrow: "О нас", aboutTitle: "Организация, созданная, чтобы менять жизни.", aboutText: "Мы — некоммерческая организация из Астурии. Развиваем социальные проекты, местные сообщества и сотрудничество с учреждениями.",
@@ -84,7 +84,7 @@ const copy: Record<Locale, HomeCopy> = {
   },
   uk: {
     badge: "НГО · Астурія, Іспанія · з 2021 року", heroTitle: "Ми починаємо зміни, яких", heroAccent: "потребує суспільство.", heroText: "INICIA Foundation працює заради інклюзії, розвитку громад і підтримки людей у складних обставинах.", ctaHelp: "Мені потрібна допомога", ctaSupport: "Хочу допомогти", ctaProjects: "Проєкти",
-    stats: [["317", "українських родин отримали підтримку"], ["129", "родин іншого походження та місцевих мешканців"], ["20", "ініціатив у роботі та розробці"], ["2021", "рік заснування"]],
+    stats: [["2561", "українських родин отримали підтримку"], ["1380", "родин іншого походження та місцевих мешканців"], ["20", "ініціатив у роботі та розробці"], ["2021", "рік заснування"]],
     ribbon: "Інклюзія · Громада · Навчання · Співпраця · Астурія",
     routeTitle: "Що привело вас до INICIA?", routes: [["Мені потрібна допомога", "Продукти, документи, робота, супровід.", "/contacto?tipo=ayuda"], ["Хочу бути волонтером", "Ваш час і навички — у реальні проєкти.", "/contacto?tipo=voluntariado"], ["Я представляю організацію", "Партнерство, спонсорство, спільні проєкти.", "/contacto?tipo=organizacion"], ["Хочу підтримати", "Bizum, переказ або речі.", "/donar"]],
     aboutEyebrow: "Про нас", aboutTitle: "Організація, створена, щоб змінювати життя.", aboutText: "Ми — неприбуткова організація з Астурії. Розвиваємо соціальні проєкти, місцеві громади та співпрацю з установами.",
@@ -101,7 +101,7 @@ const copy: Record<Locale, HomeCopy> = {
   },
   ast: {
     badge: "ONG · Asturies, España · dende 2021", heroTitle: "Aniciamos el cambéu que", heroAccent: "la sociedá precisa.", heroText: "INICIA Foundation trabaya pola inclusión, el desendolcu comunitariu y l'apoyu a persones en situación de vulnerabilidá.", ctaHelp: "Preciso ayuda", ctaSupport: "Quiero ayudar", ctaProjects: "Ver proyeutos",
-    stats: [["317", "families ucraínes acompañaes"], ["129", "families d'otros oríxenes y vecinos"], ["20", "iniciatives en marcha y en diseñu"], ["2021", "añu de fundación"]],
+    stats: [["2561", "families ucraínes acompañaes"], ["1380", "families d'otros oríxenes y vecinos"], ["20", "iniciatives en marcha y en diseñu"], ["2021", "añu de fundación"]],
     ribbon: "Inclusión · Comunidá · Formación · Collaboración · Asturies",
     routeTitle: "¿Qué te trai a INICIA?", routes: [["Preciso ayuda", "Alimentos, trámites, empleu o acompañamientu.", "/contacto?tipo=ayuda"], ["Quiero ser voluntariu/a", "El to tiempu y les tos habilidaes en proyeutos reales.", "/contacto?tipo=voluntariado"], ["Soi una organización", "Alianzes, patrociniu y proyeutos conxuntos.", "/contacto?tipo=organizacion"], ["Quiero donar", "Bizum, tresferencia o material.", "/donar"]],
     aboutEyebrow: "Quién somos", aboutTitle: "Una organización nacida pa tresformar vides.", aboutText: "Somos una entidá ensin ánimu de llucru con sede n'Asturies. Impulsamos proyeutos sociales, desendolcu comunitariu y collaboración institucional.",
