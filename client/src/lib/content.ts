@@ -1,6 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
+import { useMemo } from "react";
 import type { Locale } from "./i18n";
 import { DEFAULT_SETTINGS, SHEETS_ENDPOINT, SOCIAL_NETWORKS } from "./siteConfig";
+import { withSiteNews } from "./siteNews";
 
 export type NewsItem = { id: string; fecha: string; titulo: string; resumen: string; texto: string; imagen: string; enlace: string; proyecto: string; idioma: string };
 export type Fundraiser = { proyecto: string; objetivo: number; recaudado: number; donantes: number; nota_es?: string; nota_en?: string; nota_ru?: string; nota_uk?: string };
@@ -12,7 +14,7 @@ const EMPTY: SiteContent = { news: [], fundraising: [], events: [], faq: [], set
 
 /** Public content managed in the Google Sheet (tabs Noticias, Recaudacion, Eventos). */
 export function useSiteContent(endpoint = SHEETS_ENDPOINT) {
-  return useQuery({
+  const query = useQuery({
     queryKey: ["site-content", endpoint],
     enabled: Boolean(endpoint),
     staleTime: 5 * 60 * 1000,
@@ -25,6 +27,11 @@ export function useSiteContent(endpoint = SHEETS_ENDPOINT) {
     },
     placeholderData: EMPTY,
   });
+  // News written into the website are always shown, alongside the sheet's,
+  // even while the sheet is loading or cannot be reached.
+  const base = query.data ?? EMPTY;
+  const data = useMemo(() => ({ ...base, news: withSiteNews(base.news) }), [base]);
+  return { ...query, data };
 }
 
 /** Items in the visitor's language, or marked for all languages; falls back to Spanish. */
