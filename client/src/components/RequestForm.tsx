@@ -1,6 +1,6 @@
 import { FormEvent, ReactNode, useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "wouter";
-import { ArrowLeft, ArrowRight, Building2, CheckCircle2, HandHeart, HeartHandshake, LifeBuoy, Loader2, MessageCircle, Send } from "lucide-react";
+import { AlertCircle, ArrowLeft, ArrowRight, Building2, CheckCircle2, HandHeart, HeartHandshake, LifeBuoy, Loader2, MessageCircle, Send } from "lucide-react";
 import { useLocale } from "@/lib/i18n";
 import { requestCopy } from "@/lib/requestCopy";
 import { type RequestType, flatten, makeReference, sendRequest } from "@/lib/requests";
@@ -14,19 +14,28 @@ const MAIN_TYPES: RequestType[] = ["ayuda", "voluntariado", "organizacion", "don
 
 const fieldClass = "mt-2 w-full rounded-xl border border-[#D6B25E]/20 bg-[#0C1320] px-4 py-3 text-base text-[#EEE7D7] outline-none transition focus:border-[#D6B25E] focus:ring-2 focus:ring-[#D6B25E]/40";
 
-function Field({ label, children, required }: { label: string; children: ReactNode; required?: boolean }) {
-  return <label className="block text-sm font-semibold text-[#EEE7D7]">{label}{required && <span className="text-[#D6B25E]"> *</span>}{children}</label>;
+function ErrorText({ text }: { text?: string }) {
+  return text ? <span role="alert" className="mt-1.5 flex items-center gap-1.5 text-xs font-semibold text-red-300"><AlertCircle className="h-3.5 w-3.5 shrink-0" />{text}</span> : null;
 }
 
-function Chips({ label, options, value, onChange, multiple = false, required }: { label: string; options: [string, string][]; value: string | string[] | undefined; onChange: (next: string | string[]) => void; multiple?: boolean; required?: boolean }) {
+function Summary({ title, items }: { title: string; items: string[] }) {
+  return <div role="alert" className="rounded-xl border border-red-400/40 bg-red-500/10 p-4 text-sm text-red-200"><p className="flex items-center gap-2 font-semibold"><AlertCircle className="h-4 w-4" />{title}</p>{items.length > 0 && <ul className="mt-2 list-disc space-y-0.5 pl-6">{items.map(item => <li key={item}>{item}</li>)}</ul>}</div>;
+}
+
+function Field({ label, children, required, error }: { label: string; children: ReactNode; required?: boolean; error?: string }) {
+  return <label data-error={error ? "true" : undefined} className={`block scroll-mt-32 text-sm font-semibold text-[#EEE7D7] ${error ? "[&_input]:border-red-400 [&_input]:ring-2 [&_input]:ring-red-400/30 [&_input:focus]:border-red-400 [&_input:focus]:ring-red-400/40 [&_textarea]:border-red-400 [&_textarea]:ring-2 [&_textarea]:ring-red-400/30 [&_textarea:focus]:border-red-400 [&_textarea:focus]:ring-red-400/40" : ""}`}>{label}{required && <span className="text-[#D6B25E]"> *</span>}{children}<ErrorText text={error} /></label>;
+}
+
+function Chips({ label, options, value, onChange, multiple = false, required, error }: { label: string; options: [string, string][]; value: string | string[] | undefined; onChange: (next: string | string[]) => void; multiple?: boolean; required?: boolean; error?: string }) {
   const selected = (key: string) => (multiple ? Array.isArray(value) && value.includes(key) : value === key);
   const toggle = (key: string) => {
     if (!multiple) return onChange(key);
     const list = Array.isArray(value) ? value : [];
     onChange(list.includes(key) ? list.filter(item => item !== key) : [...list, key]);
   };
-  return <fieldset><legend className="text-sm font-semibold text-[#EEE7D7]">{label}{required && <span className="text-[#D6B25E]"> *</span>}</legend>
-    <div className="mt-3 flex flex-wrap gap-2">{options.map(([key, text]) => <button key={key} type="button" aria-pressed={selected(key)} onClick={() => toggle(key)} className={`min-h-11 rounded-full border px-4 py-2 text-sm font-medium transition ${selected(key) ? "border-[#D6B25E] bg-[#D6B25E] text-[#120D05]" : "border-[#D6B25E]/20 bg-[#0C1320] text-[#EEE7D7] hover:border-[#D6B25E]"}`}>{text}</button>)}</div>
+  return <fieldset data-error={error ? "true" : undefined} className="scroll-mt-32"><legend className="text-sm font-semibold text-[#EEE7D7]">{label}{required && <span className="text-[#D6B25E]"> *</span>}</legend>
+    <div className={`mt-3 flex flex-wrap gap-2 ${error ? "rounded-2xl p-2 ring-2 ring-red-400/60" : ""}`}>{options.map(([key, text]) => <button key={key} type="button" aria-pressed={selected(key)} onClick={() => toggle(key)} className={`min-h-11 rounded-full border px-4 py-2 text-sm font-medium transition ${selected(key) ? "border-[#D6B25E] bg-[#D6B25E] text-[#120D05]" : "border-[#D6B25E]/20 bg-[#0C1320] text-[#EEE7D7] hover:border-[#D6B25E]"}`}>{text}</button>)}</div>
+    <ErrorText text={error} />
   </fieldset>;
 }
 
@@ -53,24 +62,62 @@ export function RequestForm({ initialType, project, compact = false }: { initial
   const set = (key: string) => (next: string | string[] | boolean) => setValues(current => ({ ...current, [key]: next }));
   const has = (key: string) => { const value = values[key]; return Array.isArray(value) ? value.length > 0 : typeof value === "string" ? value.trim().length > 0 : value === true; };
 
-  const step2Valid = useMemo(() => {
+  type ErrKind = Exclude<keyof typeof t.errors, "summary" | "consentLabel">;
+  const errors2 = useMemo(() => {
+    const e: Record<string, ErrKind> = {};
+    const need = (key: string, kind: ErrKind = "required") => { if (!has(key)) e[key] = kind; };
     switch (type) {
-      case "ayuda": return has("necesidad") && has("mensaje");
-      case "voluntariado": return has("areas") && has("disponibilidad");
-      case "organizacion": return has("entidad") && has("tipo_entidad") && has("mensaje");
-      case "donar": return v("modo") === "especie" ? has("que_dona") && has("descripcion") : v("modo") === "socio" ? has("cuota") && has("periodicidad") : false;
-      case "otro": return has("tema") && has("mensaje");
-      default: return false;
+      case "ayuda": need("necesidad", "choose"); need("mensaje"); break;
+      case "voluntariado": need("areas", "choose"); need("disponibilidad", "choose"); break;
+      case "organizacion": need("entidad"); need("tipo_entidad", "choose"); need("mensaje"); break;
+      case "donar":
+        if (v("modo") === "especie") { need("que_dona", "choose"); need("descripcion"); }
+        else if (v("modo") === "socio") { need("cuota", "choose"); need("periodicidad", "choose"); }
+        else if (v("modo") !== "dinero") need("modo", "choose");
+        break;
+      case "otro": need("tema", "choose"); need("mensaje"); break;
     }
+    return e;
   }, [type, values]); // eslint-disable-line react-hooks/exhaustive-deps
-  const step3Valid = s("nombre").trim().length >= 2 && /\S+@\S+\.\S+/.test(s("email")) && v("consentimiento") === true;
+  const errors3 = useMemo(() => {
+    const e: Record<string, ErrKind> = {};
+    const name = s("nombre").trim();
+    if (!name) e.nombre = "required"; else if (name.length < 2) e.nombre = "name";
+    const email = s("email").trim();
+    if (!email) e.email = "required"; else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) e.email = "email";
+    if (v("consentimiento") !== true) e.consentimiento = "consent";
+    return e;
+  }, [values]); // eslint-disable-line react-hooks/exhaustive-deps
+  const step2Valid = Object.keys(errors2).length === 0;
+  const step3Valid = Object.keys(errors3).length === 0;
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
+  const touch = (key: string) => () => setTouched(current => ({ ...current, [key]: true }));
+  /** Error text for a field: shown after a failed "continue/send", or after leaving a field that was filled wrong. */
+  const err = (key: string) => {
+    const kind = (step === 3 ? errors3 : errors2)[key];
+    if (!kind) return undefined;
+    if (showRequired || (touched[key] && has(key))) return t.errors[kind];
+    return undefined;
+  };
+  const focusFirstError = () => setTimeout(() => {
+    const first = formRef.current?.querySelector<HTMLElement>('[data-error="true"]');
+    first?.scrollIntoView({ behavior: "smooth", block: "center" });
+    first?.querySelector<HTMLElement>("input, textarea, button")?.focus({ preventScroll: true });
+  }, 50);
+  const errorLabels = (errs: Record<string, ErrKind>, labels: Record<string, string>) => Object.keys(errs).map(key => labels[key]).filter(Boolean);
+  const labels2: Record<string, string> = type ? {
+    necesidad: t.ayuda.needLabel, mensaje: type === "ayuda" ? t.ayuda.message : type === "organizacion" ? t.organizacion.message : t.otro.message,
+    areas: t.voluntariado.areasLabel, disponibilidad: t.voluntariado.whenLabel, entidad: t.organizacion.entity, tipo_entidad: t.organizacion.entityType,
+    modo: t.donar.modeLabel, que_dona: t.donar.goodsLabel, descripcion: t.donar.goodsDesc, cuota: t.donar.feeLabel, periodicidad: t.donar.periodLabel, tema: t.otro.topicLabel,
+  } : {};
+  const labels3: Record<string, string> = { nombre: t.contact.name, email: t.contact.email, consentimiento: t.errors.consentLabel };
 
   const choose = (next: RequestType) => { setType(next); setStep(2); setShowRequired(false); };
-  const goNext = () => { if (!step2Valid) return setShowRequired(true); setShowRequired(false); setStep(3); };
+  const goNext = () => { if (!step2Valid) { setShowRequired(true); return focusFirstError(); } setShowRequired(false); setTouched({}); setStep(3); };
 
   const submit = async (event: FormEvent) => {
     event.preventDefault();
-    if (!step3Valid || !type) return setShowRequired(true);
+    if (!step3Valid || !type) { setShowRequired(true); return focusFirstError(); }
     if (s("website")) return; // honeypot
     const ref = makeReference();
     setState("sending");
@@ -88,7 +135,7 @@ export function RequestForm({ initialType, project, compact = false }: { initial
     }
   };
 
-  const reset = () => { setValues({ canal: "whatsapp" }); setReference(undefined); setType(initialType); setStep(initialType ? 2 : 1); setShowRequired(false); };
+  const reset = () => { setValues({ canal: "whatsapp" }); setReference(undefined); setType(initialType); setStep(initialType ? 2 : 1); setShowRequired(false); setTouched({}); };
 
   if (reference) return <div className="scroll-mt-28 rounded-3xl bg-[#0C1320] p-8 text-center shadow-sm ring-1 ring-[#D6B25E]/20">
     <CheckCircle2 className="mx-auto h-14 w-14 text-[#D6B25E]" />
@@ -116,16 +163,16 @@ export function RequestForm({ initialType, project, compact = false }: { initial
       <div className="flex flex-wrap items-center justify-between gap-3"><h2 className="font-serif text-3xl text-[#EEE7D7]">{t.types[type].title}</h2>{!initialType && <button type="button" onClick={() => setStep(1)} className="text-sm font-bold text-[#D6B25E] underline underline-offset-4">{t.change}</button>}</div>
 
       {type === "ayuda" && <>
-        <Chips label={t.ayuda.needLabel} options={t.ayuda.needs} value={v("necesidad") as string} onChange={set("necesidad")} required />
+        <Chips label={t.ayuda.needLabel} options={t.ayuda.needs} value={v("necesidad") as string} onChange={set("necesidad")} required error={err("necesidad")} />
         <div className="grid gap-5 sm:grid-cols-2"><Field label={t.ayuda.people}><input type="number" min={1} max={20} inputMode="numeric" className={fieldClass} value={s("personas")} onChange={e => set("personas")(e.target.value)} /></Field>
           <label className="flex min-h-11 items-center gap-3 self-end text-sm font-semibold"><input type="checkbox" className="h-5 w-5 accent-[#D6B25E]" checked={v("urgente") === true} onChange={e => set("urgente")(e.target.checked)} />{t.ayuda.urgent}</label></div>
         {v("urgente") === true && <p className="rounded-xl bg-[#D6B25E]/10 p-4 text-sm leading-6 text-[#F0D893]">{t.ayuda.urgentNote} <a className="font-bold underline" href={CONTACT.phoneHref}>{CONTACT.phone}</a> · <a className="font-bold underline" href={CONTACT.whatsapp} target="_blank" rel="noreferrer">WhatsApp</a></p>}
-        <Field label={t.ayuda.message} required><textarea className={`${fieldClass} min-h-32`} value={s("mensaje")} onChange={e => set("mensaje")(e.target.value)} /><span className="mt-1 block text-xs font-normal text-slate-400">{t.ayuda.messageHint}</span></Field>
+        <Field label={t.ayuda.message} required error={err("mensaje")}><textarea className={`${fieldClass} min-h-32`} value={s("mensaje")} onChange={e => set("mensaje")(e.target.value)} onBlur={touch("mensaje")} /><span className="mt-1 block text-xs font-normal text-slate-400">{t.ayuda.messageHint}</span></Field>
       </>}
 
       {type === "voluntariado" && <>
-        <Chips label={t.voluntariado.areasLabel} options={t.voluntariado.areas} value={v("areas") as string[]} onChange={set("areas")} multiple required />
-        <Chips label={t.voluntariado.whenLabel} options={t.voluntariado.when} value={v("disponibilidad") as string[]} onChange={set("disponibilidad")} multiple required />
+        <Chips label={t.voluntariado.areasLabel} options={t.voluntariado.areas} value={v("areas") as string[]} onChange={set("areas")} multiple required error={err("areas")} />
+        <Chips label={t.voluntariado.whenLabel} options={t.voluntariado.when} value={v("disponibilidad") as string[]} onChange={set("disponibilidad")} multiple required error={err("disponibilidad")} />
         <Chips label={t.voluntariado.modeLabel} options={t.voluntariado.modes} value={v("modalidad") as string} onChange={set("modalidad")} />
         <Field label={t.voluntariado.languages}><input className={fieldClass} value={s("idiomas_habla")} onChange={e => set("idiomas_habla")(e.target.value)} /></Field>
         <label className="flex min-h-11 items-center gap-3 text-sm font-semibold"><input type="checkbox" className="h-5 w-5 accent-[#D6B25E]" checked={v("mayor_18") !== false} onChange={e => set("mayor_18")(e.target.checked)} />{t.voluntariado.adult}</label>
@@ -134,50 +181,50 @@ export function RequestForm({ initialType, project, compact = false }: { initial
       </>}
 
       {type === "organizacion" && <>
-        <div className="grid gap-5 sm:grid-cols-2"><Field label={t.organizacion.entity} required><input className={fieldClass} value={s("entidad")} onChange={e => set("entidad")(e.target.value)} /></Field><Field label={t.organizacion.web}><input type="url" inputMode="url" className={fieldClass} value={s("web")} onChange={e => set("web")(e.target.value)} /></Field></div>
-        <Chips label={t.organizacion.entityType} options={t.organizacion.entityTypes} value={v("tipo_entidad") as string} onChange={set("tipo_entidad")} required />
+        <div className="grid gap-5 sm:grid-cols-2"><Field label={t.organizacion.entity} required error={err("entidad")}><input className={fieldClass} value={s("entidad")} onChange={e => set("entidad")(e.target.value)} onBlur={touch("entidad")} /></Field><Field label={t.organizacion.web}><input type="url" inputMode="url" className={fieldClass} value={s("web")} onChange={e => set("web")(e.target.value)} /></Field></div>
+        <Chips label={t.organizacion.entityType} options={t.organizacion.entityTypes} value={v("tipo_entidad") as string} onChange={set("tipo_entidad")} required error={err("tipo_entidad")} />
         <Chips label={t.organizacion.offerLabel} options={t.organizacion.offers} value={v("colaboracion") as string[]} onChange={set("colaboracion")} multiple />
         <Field label={t.organizacion.role}><input className={fieldClass} value={s("cargo")} onChange={e => set("cargo")(e.target.value)} /></Field>
-        <Field label={t.organizacion.message} required><textarea className={`${fieldClass} min-h-32`} value={s("mensaje")} onChange={e => set("mensaje")(e.target.value)} /></Field>
+        <Field label={t.organizacion.message} required error={err("mensaje")}><textarea className={`${fieldClass} min-h-32`} value={s("mensaje")} onChange={e => set("mensaje")(e.target.value)} onBlur={touch("mensaje")} /></Field>
       </>}
 
       {type === "donar" && <>
-        <Chips label={t.donar.modeLabel} options={t.donar.modes} value={v("modo") as string} onChange={set("modo")} required />
+        <Chips label={t.donar.modeLabel} options={t.donar.modes} value={v("modo") as string} onChange={set("modo")} required error={err("modo")} />
         {v("modo") === "dinero" && <div className="rounded-2xl bg-[#08101E] p-6 text-white"><p className="leading-7">{t.donar.moneyText}</p><Link href="/donar" className="mt-4 inline-flex min-h-11 items-center rounded-full bg-[#D6B25E] px-5 py-2 text-sm font-bold text-[#120D05]">{t.donar.moneyCta}<ArrowRight className="ml-2 h-4 w-4" /></Link></div>}
         {v("modo") === "especie" && <>
-          <Chips label={t.donar.goodsLabel} options={t.donar.goods} value={v("que_dona") as string[]} onChange={set("que_dona")} multiple required />
-          <Field label={t.donar.goodsDesc} required><textarea className={`${fieldClass} min-h-24`} value={s("descripcion")} onChange={e => set("descripcion")(e.target.value)} /></Field>
+          <Chips label={t.donar.goodsLabel} options={t.donar.goods} value={v("que_dona") as string[]} onChange={set("que_dona")} multiple required error={err("que_dona")} />
+          <Field label={t.donar.goodsDesc} required error={err("descripcion")}><textarea className={`${fieldClass} min-h-24`} value={s("descripcion")} onChange={e => set("descripcion")(e.target.value)} onBlur={touch("descripcion")} /></Field>
           <Chips label={t.donar.deliveryLabel} options={t.donar.delivery} value={v("entrega") as string} onChange={set("entrega")} />
         </>}
         {v("modo") === "socio" && <>
-          <Chips label={t.donar.feeLabel} options={t.donar.fees} value={v("cuota") as string} onChange={set("cuota")} required />
+          <Chips label={t.donar.feeLabel} options={t.donar.fees} value={v("cuota") as string} onChange={set("cuota")} required error={err("cuota")} />
           {v("cuota") === "otra" && <Field label={t.donar.fees[3][1]}><input type="number" min={1} inputMode="numeric" className={fieldClass} value={s("cuota_otra")} onChange={e => set("cuota_otra")(e.target.value)} /></Field>}
-          <Chips label={t.donar.periodLabel} options={t.donar.periods} value={v("periodicidad") as string} onChange={set("periodicidad")} required />
+          <Chips label={t.donar.periodLabel} options={t.donar.periods} value={v("periodicidad") as string} onChange={set("periodicidad")} required error={err("periodicidad")} />
           <p className="rounded-xl bg-[#060A12] p-4 text-sm leading-6 text-slate-200">{t.donar.socioNote}</p>
         </>}
       </>}
 
       {type === "otro" && <>
-        <Chips label={t.otro.topicLabel} options={t.otro.topics} value={v("tema") as string} onChange={set("tema")} required />
-        <Field label={t.otro.message} required><textarea className={`${fieldClass} min-h-32`} value={s("mensaje")} onChange={e => set("mensaje")(e.target.value)} /></Field>
+        <Chips label={t.otro.topicLabel} options={t.otro.topics} value={v("tema") as string} onChange={set("tema")} required error={err("tema")} />
+        <Field label={t.otro.message} required error={err("mensaje")}><textarea className={`${fieldClass} min-h-32`} value={s("mensaje")} onChange={e => set("mensaje")(e.target.value)} onBlur={touch("mensaje")} /></Field>
       </>}
 
-      {showRequired && <p className="rounded-xl bg-red-500/10 p-3 text-sm text-red-300">{t.required}</p>}
+      {showRequired && !step2Valid && <Summary title={t.errors.summary} items={errorLabels(errors2, labels2)} />}
       {!(type === "donar" && v("modo") === "dinero") && <div className="flex flex-wrap justify-between gap-3">{!initialType ? <button type="button" onClick={() => setStep(1)} className="inline-flex min-h-11 items-center rounded-full px-4 text-sm font-bold text-[#EEE7D7]"><ArrowLeft className="mr-1 h-4 w-4" />{t.back}</button> : <span />}<button type="button" onClick={goNext} className="inline-flex min-h-12 items-center rounded-full bg-[#D6B25E] px-6 text-sm font-bold text-[#120D05]">{t.next}<ArrowRight className="ml-2 h-4 w-4" /></button></div>}
     </div>}
 
     {step === 3 && <div className="mt-7 space-y-5">
       <div className="grid gap-5 sm:grid-cols-2">
-        <Field label={t.contact.name} required><input autoComplete="name" className={fieldClass} value={s("nombre")} onChange={e => set("nombre")(e.target.value)} /></Field>
-        <Field label={t.contact.email} required><input type="email" autoComplete="email" inputMode="email" className={fieldClass} value={s("email")} onChange={e => set("email")(e.target.value)} /></Field>
+        <Field label={t.contact.name} required error={err("nombre")}><input autoComplete="name" aria-invalid={Boolean(err("nombre"))} className={fieldClass} value={s("nombre")} onChange={e => set("nombre")(e.target.value)} onBlur={touch("nombre")} /></Field>
+        <Field label={t.contact.email} required error={err("email")}><input type="email" autoComplete="email" inputMode="email" aria-invalid={Boolean(err("email"))} className={fieldClass} value={s("email")} onChange={e => set("email")(e.target.value)} onBlur={touch("email")} /></Field>
         <Field label={t.contact.phone}><input type="tel" autoComplete="tel" inputMode="tel" className={fieldClass} value={s("telefono")} onChange={e => set("telefono")(e.target.value)} /></Field>
         <Field label={t.contact.city}><input autoComplete="address-level2" className={fieldClass} value={s("ciudad")} onChange={e => set("ciudad")(e.target.value)} /></Field>
       </div>
       <Chips label={t.contact.channelLabel} options={t.contact.channels} value={v("canal") as string} onChange={set("canal")} />
       <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden className="hidden" value={s("website")} onChange={e => set("website")(e.target.value)} />
       <p className="text-xs leading-5 text-slate-400">{t.contact.sensitive}</p>
-      <label className="flex items-start gap-3 text-sm leading-6 text-slate-200"><input type="checkbox" className="mt-1 h-5 w-5 shrink-0 accent-[#D6B25E]" checked={v("consentimiento") === true} onChange={e => set("consentimiento")(e.target.checked)} /><span>{t.contact.consent} <Link className="underline" href="/identidad">{t.contact.privacyLink}</Link></span></label>
-      {showRequired && <p className="rounded-xl bg-red-500/10 p-3 text-sm text-red-300">{t.required}</p>}
+      <div data-error={err("consentimiento") ? "true" : undefined} className={`scroll-mt-32 rounded-xl ${err("consentimiento") ? "p-3 ring-2 ring-red-400/60" : ""}`}><label className="flex items-start gap-3 text-sm leading-6 text-slate-200"><input type="checkbox" className="mt-1 h-5 w-5 shrink-0 accent-[#D6B25E]" checked={v("consentimiento") === true} onChange={e => set("consentimiento")(e.target.checked)} /><span>{t.contact.consent} <Link className="underline" href="/privacidad">{t.contact.privacyLink}</Link></span></label><ErrorText text={err("consentimiento")} /></div>
+      {showRequired && !step3Valid && <Summary title={t.errors.summary} items={errorLabels(errors3, labels3)} />}
       {state === "error" && <div className="rounded-xl bg-red-500/10 p-4 text-sm text-red-200"><p>{t.error}</p><div className="mt-3 flex flex-wrap gap-2">{failedMail && <a className="inline-flex min-h-10 items-center rounded-full bg-[#D6B25E] px-4 text-xs font-bold text-[#120D05]" href={failedMail}>{t.sendByEmail}</a>}<a className="inline-flex min-h-10 items-center rounded-full border border-[#D6B25E]/50 px-4 text-xs font-bold text-[#F0D893]" href={CONTACT.whatsapp} target="_blank" rel="noreferrer">WhatsApp</a></div></div>}
       <div className="flex flex-wrap justify-between gap-3"><button type="button" onClick={() => setStep(2)} className="inline-flex min-h-11 items-center rounded-full px-4 text-sm font-bold text-[#EEE7D7]"><ArrowLeft className="mr-1 h-4 w-4" />{t.back}</button><button type="submit" disabled={state === "sending"} className="inline-flex min-h-12 items-center rounded-full bg-[#D6B25E] px-7 text-sm font-bold text-[#120D05] shadow-[0_8px_22px_rgba(214,178,94,.35)] disabled:opacity-60">{state === "sending" ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" />{t.sending}</> : <><Send className="mr-2 h-4 w-4" />{t.send}</>}</button></div>
     </div>}

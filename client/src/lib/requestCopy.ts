@@ -13,6 +13,7 @@ export type RequestCopy = {
   send: string;
   sending: string;
   required: string;
+  errors: { required: string; choose: string; email: string; name: string; consent: string; summary: string; consentLabel: string };
   projectChip: string;
   change: string;
   ayuda: { needLabel: string; needs: Option[]; people: string; urgent: string; urgentNote: string; message: string; messageHint: string };
@@ -40,6 +41,7 @@ export const requestCopy: Record<Locale, RequestCopy> = {
     otherLink: "Otra consulta o prensa",
     back: "Atrás", next: "Continuar", send: "Enviar", sending: "Enviando…",
     required: "Completa los campos obligatorios para continuar.",
+    errors: { required: "Este campo es obligatorio.", choose: "Elige al menos una opción.", email: "Revisa el email: debe tener la forma nombre@dominio.com.", name: "Escribe tu nombre (mínimo 2 letras).", consent: "Marca la casilla para que podamos responderte.", summary: "Revisa los campos marcados en rojo:", consentLabel: "Consentimiento" },
     projectChip: "Proyecto", change: "Cambiar",
     ayuda: {
       needLabel: "¿Con qué necesitas ayuda?",
@@ -94,7 +96,7 @@ export const requestCopy: Record<Locale, RequestCopy> = {
       channels: [["whatsapp", "WhatsApp"], ["telefono", "Llamada"], ["email", "Email"]],
       city: "Ciudad",
       consent: "Acepto que INICIA Foundation use estos datos solo para responder a mi solicitud.",
-      privacyLink: "Información de la entidad",
+      privacyLink: "Política de privacidad",
       sensitive: "No envíes datos médicos ni copias de documentos por este formulario.",
     },
     done: { title: "¡Solicitud enviada!", reference: "Tu número de referencia", next: "Te responderemos por el medio que has elegido. Guarda el número por si necesitas consultarnos.", again: "Enviar otra solicitud", home: "Volver al inicio" },
@@ -114,6 +116,7 @@ export const requestCopy: Record<Locale, RequestCopy> = {
     otherLink: "Other enquiry or press",
     back: "Back", next: "Continue", send: "Send", sending: "Sending…",
     required: "Please fill in the required fields to continue.",
+    errors: { required: "This field is required.", choose: "Choose at least one option.", email: "Check the e-mail: it should look like name@domain.com.", name: "Enter your name (at least 2 letters).", consent: "Tick the box so we can reply to you.", summary: "Please check the fields marked in red:", consentLabel: "Consent" },
     projectChip: "Project", change: "Change",
     ayuda: {
       needLabel: "What do you need help with?",
@@ -168,7 +171,7 @@ export const requestCopy: Record<Locale, RequestCopy> = {
       channels: [["whatsapp", "WhatsApp"], ["telefono", "Phone call"], ["email", "Email"]],
       city: "City",
       consent: "I agree that INICIA Foundation may use this data only to answer my request.",
-      privacyLink: "About the organisation",
+      privacyLink: "Privacy policy",
       sensitive: "Please do not send medical details or copies of documents through this form.",
     },
     done: { title: "Request sent!", reference: "Your reference number", next: "We will reply through the channel you chose. Keep this number in case you need to contact us.", again: "Send another request", home: "Back to home" },
@@ -188,6 +191,7 @@ export const requestCopy: Record<Locale, RequestCopy> = {
     otherLink: "Другой вопрос или пресса",
     back: "Назад", next: "Далее", send: "Отправить", sending: "Отправляем…",
     required: "Заполните обязательные поля, чтобы продолжить.",
+    errors: { required: "Это обязательное поле.", choose: "Выберите хотя бы один вариант.", email: "Проверьте email: он должен выглядеть как имя@домен.com.", name: "Укажите имя (минимум 2 буквы).", consent: "Отметьте галочку, чтобы мы могли вам ответить.", summary: "Проверьте поля, выделенные красным:", consentLabel: "Согласие на обработку данных" },
     projectChip: "Проект", change: "Изменить",
     ayuda: {
       needLabel: "С чем вам нужна помощь?",
@@ -242,7 +246,7 @@ export const requestCopy: Record<Locale, RequestCopy> = {
       channels: [["whatsapp", "WhatsApp"], ["telefono", "Звонок"], ["email", "Email"]],
       city: "Город",
       consent: "Я согласен(на), что INICIA Foundation использует эти данные только для ответа на мою заявку.",
-      privacyLink: "Информация об организации",
+      privacyLink: "Политика конфиденциальности",
       sensitive: "Не отправляйте через форму медицинские данные и копии документов.",
     },
     done: { title: "Заявка отправлена!", reference: "Номер вашей заявки", next: "Мы ответим вам удобным для вас способом. Сохраните номер на случай, если нужно будет уточнить.", again: "Отправить ещё одну заявку", home: "На главную" },
@@ -262,6 +266,7 @@ export const requestCopy: Record<Locale, RequestCopy> = {
     otherLink: "Інше питання або преса",
     back: "Назад", next: "Далі", send: "Надіслати", sending: "Надсилаємо…",
     required: "Заповніть обов’язкові поля, щоб продовжити.",
+    errors: { required: "Це обов’язкове поле.", choose: "Оберіть хоча б один варіант.", email: "Перевірте email: він має виглядати як імʼя@домен.com.", name: "Вкажіть імʼя (мінімум 2 літери).", consent: "Позначте галочку, щоб ми могли вам відповісти.", summary: "Перевірте поля, виділені червоним:", consentLabel: "Згода на обробку даних" },
     projectChip: "Проєкт", change: "Змінити",
     ayuda: {
       needLabel: "З чим вам потрібна допомога?",
@@ -316,7 +321,7 @@ export const requestCopy: Record<Locale, RequestCopy> = {
       channels: [["whatsapp", "WhatsApp"], ["telefono", "Дзвінок"], ["email", "Email"]],
       city: "Місто",
       consent: "Я погоджуюся, що INICIA Foundation використає ці дані лише для відповіді на мою заявку.",
-      privacyLink: "Інформація про організацію",
+      privacyLink: "Політика конфіденційності",
       sensitive: "Не надсилайте через форму медичні дані та копії документів.",
     },
     done: { title: "Заявку надіслано!", reference: "Номер вашої заявки", next: "Ми відповімо зручним для вас способом. Збережіть номер на випадок, якщо потрібно буде уточнити.", again: "Надіслати ще одну заявку", home: "На головну" },
