@@ -4,7 +4,7 @@ import { AlertCircle, ArrowLeft, ArrowRight, Building2, CheckCircle2, HandHeart,
 import { useLocale } from "@/lib/i18n";
 import { requestCopy } from "@/lib/requestCopy";
 import { type RequestType, flatten, makeReference, sendRequest } from "@/lib/requests";
-import { CONTACT } from "@/lib/siteConfig";
+import { CONTACT, MEMBERSHIP, ZONES } from "@/lib/siteConfig";
 import { track } from "@/lib/analytics";
 
 type Values = Record<string, string | string[] | boolean>;
@@ -44,7 +44,15 @@ export function RequestForm({ initialType, project, compact = false }: { initial
   const t = requestCopy[locale];
   const [type, setType] = useState<RequestType | undefined>(initialType);
   const [step, setStep] = useState(initialType ? 2 : 1);
-  const [values, setValues] = useState<Values>({ canal: "whatsapp" });
+  const [values, setValues] = useState<Values>(() => {
+    // Deep links such as /contacto?tipo=donar&modo=socio&plan=colaborador preselect options.
+    const params = new URLSearchParams(typeof window !== "undefined" ? window.location.search : "");
+    const start: Values = { canal: "whatsapp" };
+    const modo = params.get("modo"); if (modo && ["dinero", "especie", "socio"].includes(modo)) start.modo = modo;
+    const plan = params.get("plan"); if (plan && ["pleno", "colaborador"].includes(plan)) { start.modo = "socio"; start.plan = plan; }
+    const zona = params.get("zona"); if (zona && (ZONES as readonly string[]).includes(zona)) start.zona = zona;
+    return start;
+  });
   const [state, setState] = useState<"idle" | "sending" | "error">("idle");
   const [failedMail, setFailedMail] = useState("");
   const [showRequired, setShowRequired] = useState(false);
@@ -72,7 +80,13 @@ export function RequestForm({ initialType, project, compact = false }: { initial
       case "organizacion": need("entidad"); need("tipo_entidad", "choose"); need("mensaje"); break;
       case "donar":
         if (v("modo") === "especie") { need("que_dona", "choose"); need("descripcion"); }
-        else if (v("modo") === "socio") { need("cuota", "choose"); need("periodicidad", "choose"); }
+        else if (v("modo") === "socio") {
+          need("plan", "choose");
+          if (v("plan") === "colaborador") {
+            need("cuota", "choose"); need("periodicidad", "choose");
+            if (v("cuota") === "otra") { if (!has("cuota_otra")) e.cuota_otra = "required"; else if (Number(s("cuota_otra")) < MEMBERSHIP.minAmount) e.cuota_otra = "minAmount"; }
+          }
+        }
         else if (v("modo") !== "dinero") need("modo", "choose");
         break;
       case "otro": need("tema", "choose"); need("mensaje"); break;
@@ -108,7 +122,7 @@ export function RequestForm({ initialType, project, compact = false }: { initial
   const labels2: Record<string, string> = type ? {
     necesidad: t.ayuda.needLabel, mensaje: type === "ayuda" ? t.ayuda.message : type === "organizacion" ? t.organizacion.message : t.otro.message,
     areas: t.voluntariado.areasLabel, disponibilidad: t.voluntariado.whenLabel, entidad: t.organizacion.entity, tipo_entidad: t.organizacion.entityType,
-    modo: t.donar.modeLabel, que_dona: t.donar.goodsLabel, descripcion: t.donar.goodsDesc, cuota: t.donar.feeLabel, periodicidad: t.donar.periodLabel, tema: t.otro.topicLabel,
+    modo: t.donar.modeLabel, que_dona: t.donar.goodsLabel, descripcion: t.donar.goodsDesc, plan: t.donar.planLabel, cuota_otra: t.donar.otherAmount, cuota: t.donar.feeLabel, periodicidad: t.donar.periodLabel, tema: t.otro.topicLabel,
   } : {};
   const labels3: Record<string, string> = { nombre: t.contact.name, email: t.contact.email, consentimiento: t.errors.consentLabel };
 
@@ -121,7 +135,8 @@ export function RequestForm({ initialType, project, compact = false }: { initial
     if (s("website")) return; // honeypot
     const ref = makeReference();
     setState("sending");
-    const payload = { referencia: ref, tipo: type, proyecto: project, idioma: locale, pagina: typeof window !== "undefined" ? window.location.pathname : "", ...Object.fromEntries(Object.entries(values).filter(([key]) => key !== "website")) };
+    const fixedPlan = type === "donar" && v("modo") === "socio" && v("plan") === "pleno" ? { cuota: String(MEMBERSHIP.fullAmount), periodicidad: MEMBERSHIP.fullPeriod, cuota_otra: undefined } : {};
+    const payload = { referencia: ref, tipo: type, proyecto: project, idioma: locale, pagina: typeof window !== "undefined" ? window.location.pathname : "", ...Object.fromEntries(Object.entries(values).filter(([key]) => key !== "website")), ...fixedPlan };
     try {
       await sendRequest(payload);
       track("generate_lead", { tipo: type });
@@ -197,9 +212,15 @@ export function RequestForm({ initialType, project, compact = false }: { initial
           <Chips label={t.donar.deliveryLabel} options={t.donar.delivery} value={v("entrega") as string} onChange={set("entrega")} />
         </>}
         {v("modo") === "socio" && <>
-          <Chips label={t.donar.feeLabel} options={t.donar.fees} value={v("cuota") as string} onChange={set("cuota")} required error={err("cuota")} />
-          {v("cuota") === "otra" && <Field label={t.donar.fees[3][1]}><input type="number" min={1} inputMode="numeric" className={fieldClass} value={s("cuota_otra")} onChange={e => set("cuota_otra")(e.target.value)} /></Field>}
-          <Chips label={t.donar.periodLabel} options={t.donar.periods} value={v("periodicidad") as string} onChange={set("periodicidad")} required error={err("periodicidad")} />
+          <fieldset data-error={err("plan") ? "true" : undefined} className="scroll-mt-32"><legend className="text-sm font-semibold text-[#EEE7D7]">{t.donar.planLabel}<span className="text-[#D6B25E]"> *</span></legend>
+            <div className={`mt-3 grid gap-3 sm:grid-cols-2 ${err("plan") ? "rounded-2xl p-2 ring-2 ring-red-400/60" : ""}`}>{t.donar.plans.map(plan => { const active = v("plan") === plan.key; return <button key={plan.key} type="button" aria-pressed={active} onClick={() => set("plan")(plan.key)} className={`flex flex-col items-start rounded-2xl border p-5 text-left transition ${active ? "border-[#D6B25E] bg-[#D6B25E]/10" : "border-[#D6B25E]/20 bg-[#060A12] hover:border-[#D6B25E]"}`}><span className="font-serif text-2xl text-[#EEE7D7]">{plan.title}</span><span className="mt-1 text-sm font-bold text-[#F0D893]">{plan.price}</span><span className="mt-2 text-sm leading-6 text-slate-300">{plan.text}</span></button>; })}</div>
+            <ErrorText text={err("plan")} />
+          </fieldset>
+          {v("plan") === "colaborador" && <>
+            <Chips label={t.donar.feeLabel} options={t.donar.fees} value={v("cuota") as string} onChange={set("cuota")} required error={err("cuota")} />
+            {v("cuota") === "otra" && <Field label={t.donar.otherAmount} required error={err("cuota_otra")}><input type="number" min={MEMBERSHIP.minAmount} step={1} inputMode="numeric" className={fieldClass} value={s("cuota_otra")} onChange={e => set("cuota_otra")(e.target.value)} onBlur={touch("cuota_otra")} /></Field>}
+            <Chips label={t.donar.periodLabel} options={t.donar.periods} value={v("periodicidad") as string} onChange={set("periodicidad")} required error={err("periodicidad")} />
+          </>}
           <p className="rounded-xl bg-[#060A12] p-4 text-sm leading-6 text-slate-200">{t.donar.socioNote}</p>
         </>}
       </>}
@@ -220,6 +241,7 @@ export function RequestForm({ initialType, project, compact = false }: { initial
         <Field label={t.contact.phone}><input type="tel" autoComplete="tel" inputMode="tel" className={fieldClass} value={s("telefono")} onChange={e => set("telefono")(e.target.value)} /></Field>
         <Field label={t.contact.city}><input autoComplete="address-level2" className={fieldClass} value={s("ciudad")} onChange={e => set("ciudad")(e.target.value)} /></Field>
       </div>
+      <Chips label={t.contact.zoneLabel} options={t.contact.zones} value={v("zona") as string} onChange={set("zona")} />
       <Chips label={t.contact.channelLabel} options={t.contact.channels} value={v("canal") as string} onChange={set("canal")} />
       <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden className="hidden" value={s("website")} onChange={e => set("website")(e.target.value)} />
       <p className="text-xs leading-5 text-slate-400">{t.contact.sensitive}</p>

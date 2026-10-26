@@ -20,6 +20,8 @@ const CONFIG = {
 
 const COMMON_START = ['fecha', 'referencia', 'estado', 'responsable', 'notas', 'nombre', 'email', 'telefono', 'canal', 'ciudad', 'idioma', 'proyecto'];
 const COMMON_END = ['pagina'];
+/** Added later: kept at the end so existing rows stay aligned. */
+const EXTRA_END = ['zona', 'plan'];
 
 const REQUEST_TABS = {
   ayuda: { tab: 'Ayuda', fields: ['necesidad', 'personas', 'urgente', 'mensaje'] },
@@ -84,7 +86,7 @@ function setup() {
 
   Object.keys(REQUEST_TABS).forEach(key => {
     const conf = REQUEST_TABS[key];
-    const sheet = ensureSheet_(ss, conf.tab, COMMON_START.concat(conf.fields, COMMON_END));
+    const sheet = ensureSheet_(ss, conf.tab, COMMON_START.concat(conf.fields, COMMON_END, EXTRA_END));
     sheet.getRange(2, 3, sheet.getMaxRows() - 1, 1).setDataValidation(status);
   });
   Object.keys(CONTENT_TABS).forEach(tab => {
@@ -108,6 +110,14 @@ function ensureSheet_(ss, name, headers) {
   sheet.getRange(1, 1, 1, headers.length).setValues([headers]).setFontWeight('bold').setBackground('#0B1E3A').setFontColor('#F0D893');
   sheet.setFrozenRows(1);
   return sheet;
+}
+
+/** Adds any new column titles (e.g. zona, plan) to an existing tab without touching the data. */
+function syncHeader_(sheet, columns) {
+  const current = sheet.getRange(1, 1, 1, columns.length).getValues()[0];
+  if (current.join('|') !== columns.join('|')) {
+    sheet.getRange(1, 1, 1, columns.length).setValues([columns]).setFontWeight('bold').setBackground('#0B1E3A').setFontColor('#F0D893');
+  }
 }
 
 function sheet_() {
@@ -135,12 +145,16 @@ function doPost(e) {
 
     const ref = clean_(data.referencia) || ('INI-' + Date.now());
     const values = Object.assign({}, data, { fecha: new Date(), referencia: ref, estado: 'Nueva', responsable: '', notas: '' });
-    const columns = COMMON_START.concat(conf.fields, COMMON_END);
+    const columns = COMMON_START.concat(conf.fields, COMMON_END, EXTRA_END);
     const row = columns.map(column => column === 'fecha' ? values.fecha : clean_(values[column]));
 
     const lock = LockService.getScriptLock();
     lock.waitLock(10000);
-    try { sheet_().getSheetByName(conf.tab).appendRow(row); } finally { lock.releaseLock(); }
+    try {
+      const sheet = sheet_().getSheetByName(conf.tab);
+      syncHeader_(sheet, columns);
+      sheet.appendRow(row);
+    } finally { lock.releaseLock(); }
 
     notifyTeam_(data.tipo, columns, row, ref);
     autoReply_(email, clean_(data.nombre), ref, data.idioma);

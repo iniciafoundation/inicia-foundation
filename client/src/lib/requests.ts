@@ -1,4 +1,4 @@
-import { FORMSPREE_FALLBACK, SHEETS_ENDPOINT } from "./siteConfig";
+import { SHEETS_ENDPOINT } from "./siteConfig";
 
 export type RequestType = "ayuda" | "voluntariado" | "organizacion" | "donar" | "otro";
 export const REQUEST_TYPES: RequestType[] = ["ayuda", "voluntariado", "organizacion", "donar", "otro"];
@@ -22,23 +22,12 @@ export function flatten(payload: RequestPayload): Record<string, string> {
   return out;
 }
 
-/** Sends a request to the Google Sheet backend, or to the fallback inbox while it is not configured. */
+/** Sends a request to the foundation's Google Sheet. Throws if the sheet does not confirm it,
+ * so the form can offer the "send by e-mail" fallback instead. */
 export async function sendRequest(payload: RequestPayload, endpoint = SHEETS_ENDPOINT): Promise<void> {
-  const data = flatten(payload);
-  if (endpoint) {
-    try {
-      // text/plain avoids a CORS preflight, which Apps Script web apps do not answer.
-      const response = await fetch(endpoint, { method: "POST", body: JSON.stringify(data), headers: { "Content-Type": "text/plain;charset=utf-8" } });
-      const result = await response.json(); // an HTML error page (script not deployed correctly) throws here
-      if (response.ok && result && result.ok === true) return;
-      if (result && result.error === "rate") throw new Error("rate");
-    } catch (error) {
-      if (error instanceof Error && error.message === "rate") throw error;
-    }
-    // The sheet did not confirm the request: fall back to the e-mail inbox so nothing is lost.
-  }
-  const form = new FormData();
-  for (const [key, value] of Object.entries(data)) form.append(key, value);
-  const response = await fetch(FORMSPREE_FALLBACK, { method: "POST", body: form, headers: { Accept: "application/json" } });
-  if (!response.ok) throw new Error(`Request failed: ${response.status}`);
+  if (!endpoint) throw new Error("No endpoint configured");
+  // text/plain avoids a CORS preflight, which Apps Script web apps do not answer.
+  const response = await fetch(endpoint, { method: "POST", body: JSON.stringify(flatten(payload)), headers: { "Content-Type": "text/plain;charset=utf-8" } });
+  const result = await response.json(); // an HTML error page (script not deployed correctly) throws here
+  if (!response.ok || !result || result.ok !== true) throw new Error(result?.error || `Request failed: ${response.status}`);
 }

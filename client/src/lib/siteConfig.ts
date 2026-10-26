@@ -8,7 +8,6 @@
 export const SHEETS_ENDPOINT = "https://script.google.com/macros/s/AKfycby8-zwlvbK6Zv56Bqh-oWsL9DFCNMc0xCVoHJBG8oTBzjs1Q5FBLBc0N5Bv5JjbLWls/exec";
 
 /** Previous contact inbox, used only as a fallback while SHEETS_ENDPOINT is empty. */
-export const FORMSPREE_FALLBACK = "https://formspree.io/f/mdawrvbo";
 
 export const CONTACT = {
   phone: "+34 624 865 051",
@@ -19,6 +18,12 @@ export const CONTACT = {
 };
 
 /** Donation details. Leave a value empty ("") to show "coming soon" for that method. */
+/** Membership plans shown on the site. Change amounts here (one republish) — see the "socio" step of the form. */
+export const MEMBERSHIP = { fullAmount: 30, fullPeriod: "mensual" as const, minAmount: 5, flexibleAmounts: [5, 10, 25, 30] };
+
+/** Places where INICIA works; people choose the nearest one in the forms. */
+export const ZONES = ["gijon", "aviles", "oviedo", "madrid", "barcelona", "valencia", "online"] as const;
+
 export const DONATION = {
   holder: "Asociación Inicia Foundation",
   iban: "ES50 3007 0100 1421 5938 1827",

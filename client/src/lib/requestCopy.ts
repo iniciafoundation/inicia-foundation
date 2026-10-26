@@ -13,15 +13,15 @@ export type RequestCopy = {
   send: string;
   sending: string;
   required: string;
-  errors: { required: string; choose: string; email: string; name: string; consent: string; summary: string; consentLabel: string };
+  errors: { required: string; choose: string; email: string; name: string; consent: string; summary: string; consentLabel: string; minAmount: string };
   projectChip: string;
   change: string;
   ayuda: { needLabel: string; needs: Option[]; people: string; urgent: string; urgentNote: string; message: string; messageHint: string };
   voluntariado: { areasLabel: string; areas: Option[]; whenLabel: string; when: Option[]; modeLabel: string; modes: Option[]; languages: string; adult: string; minorNote: string; message: string };
   organizacion: { entity: string; entityType: string; entityTypes: Option[]; web: string; role: string; offerLabel: string; offers: Option[]; message: string };
-  donar: { modeLabel: string; modes: Option[]; moneyText: string; moneyCta: string; goodsLabel: string; goods: Option[]; goodsDesc: string; deliveryLabel: string; delivery: Option[]; feeLabel: string; fees: Option[]; periodLabel: string; periods: Option[]; socioNote: string };
+  donar: { modeLabel: string; modes: Option[]; moneyText: string; moneyCta: string; goodsLabel: string; goods: Option[]; goodsDesc: string; deliveryLabel: string; delivery: Option[]; planLabel: string; plans: { key: string; title: string; price: string; text: string }[]; feeLabel: string; fees: Option[]; otherAmount: string; periodLabel: string; periods: Option[]; socioNote: string };
   otro: { topicLabel: string; topics: Option[]; message: string };
-  contact: { name: string; email: string; phone: string; channelLabel: string; channels: Option[]; city: string; consent: string; privacyLink: string; sensitive: string };
+  contact: { name: string; email: string; phone: string; channelLabel: string; channels: Option[]; city: string; zoneLabel: string; zones: Option[]; consent: string; privacyLink: string; sensitive: string };
   done: { title: string; reference: string; next: string; again: string; home: string };
   error: string;
   sendByEmail: string;
@@ -41,7 +41,7 @@ export const requestCopy: Record<Locale, RequestCopy> = {
     otherLink: "Otra consulta o prensa",
     back: "Atrás", next: "Continuar", send: "Enviar", sending: "Enviando…",
     required: "Completa los campos obligatorios para continuar.",
-    errors: { required: "Este campo es obligatorio.", choose: "Elige al menos una opción.", email: "Revisa el email: debe tener la forma nombre@dominio.com.", name: "Escribe tu nombre (mínimo 2 letras).", consent: "Marca la casilla para que podamos responderte.", summary: "Revisa los campos marcados en rojo:", consentLabel: "Consentimiento" },
+    errors: { required: "Este campo es obligatorio.", choose: "Elige al menos una opción.", email: "Revisa el email: debe tener la forma nombre@dominio.com.", name: "Escribe tu nombre (mínimo 2 letras).", consent: "Marca la casilla para que podamos responderte.", summary: "Revisa los campos marcados en rojo:", consentLabel: "Consentimiento", minAmount: "La cantidad mínima es 5 €." },
     projectChip: "Proyecto", change: "Cambiar",
     ayuda: {
       needLabel: "¿Con qué necesitas ayuda?",
@@ -83,8 +83,14 @@ export const requestCopy: Record<Locale, RequestCopy> = {
       goodsDesc: "Describe qué y cuánto (aproximado)",
       deliveryLabel: "Entrega",
       delivery: [["llevo", "Lo llevo yo"], ["recoger", "Necesito que lo recojan"]],
-      feeLabel: "Cuota",
-      fees: [["5", "5 €"], ["10", "10 €"], ["20", "20 €"], ["otra", "Otra cantidad"]],
+      planLabel: "Tipo de socio/a",
+      plans: [
+        { key: "pleno", title: "Socio/a de pleno derecho", price: "30 € al mes", text: "Formas parte activa de INICIA y participas en sus programas y actividades." },
+        { key: "colaborador", title: "Socio/a colaborador/a", price: "Desde 5 €", text: "Eliges tu cuota y la frecuencia. Apoyas los programas y recibes información sobre su impacto." },
+      ],
+      feeLabel: "Tu cuota",
+      fees: [["5", "5 €"], ["10", "10 €"], ["25", "25 €"], ["30", "30 €"], ["otra", "Otra cantidad"]],
+      otherAmount: "Cantidad en euros (mínimo 5 €)",
       periodLabel: "Periodicidad",
       periods: [["mensual", "Mensual"], ["trimestral", "Trimestral"], ["anual", "Anual"]],
       socioNote: "Te contactaremos para firmar la domiciliación bancaria. No te pedimos tu cuenta por este formulario.",
@@ -95,6 +101,8 @@ export const requestCopy: Record<Locale, RequestCopy> = {
       channelLabel: "¿Cómo prefieres que te contactemos?",
       channels: [["whatsapp", "WhatsApp"], ["telefono", "Llamada"], ["email", "Email"]],
       city: "Ciudad",
+      zoneLabel: "¿Qué zona te queda mejor?",
+      zones: [["gijon", "Gijón"], ["aviles", "Avilés"], ["oviedo", "Oviedo"], ["madrid", "Madrid"], ["barcelona", "Barcelona"], ["valencia", "Valencia"], ["online", "En línea / otra zona"]],
       consent: "Acepto que INICIA Foundation use estos datos solo para responder a mi solicitud.",
       privacyLink: "Política de privacidad",
       sensitive: "No envíes datos médicos ni copias de documentos por este formulario.",
@@ -116,7 +124,7 @@ export const requestCopy: Record<Locale, RequestCopy> = {
     otherLink: "Other enquiry or press",
     back: "Back", next: "Continue", send: "Send", sending: "Sending…",
     required: "Please fill in the required fields to continue.",
-    errors: { required: "This field is required.", choose: "Choose at least one option.", email: "Check the e-mail: it should look like name@domain.com.", name: "Enter your name (at least 2 letters).", consent: "Tick the box so we can reply to you.", summary: "Please check the fields marked in red:", consentLabel: "Consent" },
+    errors: { required: "This field is required.", choose: "Choose at least one option.", email: "Check the e-mail: it should look like name@domain.com.", name: "Enter your name (at least 2 letters).", consent: "Tick the box so we can reply to you.", summary: "Please check the fields marked in red:", consentLabel: "Consent", minAmount: "The minimum amount is €5." },
     projectChip: "Project", change: "Change",
     ayuda: {
       needLabel: "What do you need help with?",
@@ -158,8 +166,14 @@ export const requestCopy: Record<Locale, RequestCopy> = {
       goodsDesc: "Describe what and roughly how much",
       deliveryLabel: "Delivery",
       delivery: [["llevo", "I will bring it"], ["recoger", "Please collect it"]],
-      feeLabel: "Membership fee",
-      fees: [["5", "€5"], ["10", "€10"], ["20", "€20"], ["otra", "Other amount"]],
+      planLabel: "Type of membership",
+      plans: [
+        { key: "pleno", title: "Full member", price: "€30 a month", text: "You are an active part of INICIA and take part in its programmes and activities." },
+        { key: "colaborador", title: "Supporting member", price: "From €5", text: "You choose the amount and frequency. You support the programmes and receive updates on their impact." },
+      ],
+      feeLabel: "Your fee",
+      fees: [["5", "€5"], ["10", "€10"], ["25", "€25"], ["30", "€30"], ["otra", "Other amount"]],
+      otherAmount: "Amount in euros (minimum €5)",
       periodLabel: "Frequency",
       periods: [["mensual", "Monthly"], ["trimestral", "Quarterly"], ["anual", "Yearly"]],
       socioNote: "We will contact you to sign the direct debit mandate. We never ask for your bank account in this form.",
@@ -170,6 +184,8 @@ export const requestCopy: Record<Locale, RequestCopy> = {
       channelLabel: "How should we contact you?",
       channels: [["whatsapp", "WhatsApp"], ["telefono", "Phone call"], ["email", "Email"]],
       city: "City",
+      zoneLabel: "Which area suits you best?",
+      zones: [["gijon", "Gijón"], ["aviles", "Avilés"], ["oviedo", "Oviedo"], ["madrid", "Madrid"], ["barcelona", "Barcelona"], ["valencia", "Valencia"], ["online", "Online / other area"]],
       consent: "I agree that INICIA Foundation may use this data only to answer my request.",
       privacyLink: "Privacy policy",
       sensitive: "Please do not send medical details or copies of documents through this form.",
@@ -191,7 +207,7 @@ export const requestCopy: Record<Locale, RequestCopy> = {
     otherLink: "Другой вопрос или пресса",
     back: "Назад", next: "Далее", send: "Отправить", sending: "Отправляем…",
     required: "Заполните обязательные поля, чтобы продолжить.",
-    errors: { required: "Это обязательное поле.", choose: "Выберите хотя бы один вариант.", email: "Проверьте email: он должен выглядеть как имя@домен.com.", name: "Укажите имя (минимум 2 буквы).", consent: "Отметьте галочку, чтобы мы могли вам ответить.", summary: "Проверьте поля, выделенные красным:", consentLabel: "Согласие на обработку данных" },
+    errors: { required: "Это обязательное поле.", choose: "Выберите хотя бы один вариант.", email: "Проверьте email: он должен выглядеть как имя@домен.com.", name: "Укажите имя (минимум 2 буквы).", consent: "Отметьте галочку, чтобы мы могли вам ответить.", summary: "Проверьте поля, выделенные красным:", consentLabel: "Согласие на обработку данных", minAmount: "Минимальная сумма — 5 €." },
     projectChip: "Проект", change: "Изменить",
     ayuda: {
       needLabel: "С чем вам нужна помощь?",
@@ -233,8 +249,14 @@ export const requestCopy: Record<Locale, RequestCopy> = {
       goodsDesc: "Опишите, что и сколько (примерно)",
       deliveryLabel: "Доставка",
       delivery: [["llevo", "Привезу сам(а)"], ["recoger", "Нужно забрать"]],
-      feeLabel: "Взнос",
-      fees: [["5", "5 €"], ["10", "10 €"], ["20", "20 €"], ["otra", "Другая сумма"]],
+      planLabel: "Вид членства",
+      plans: [
+        { key: "pleno", title: "Полноправный член", price: "30 € в месяц", text: "Вы активно участвуете в жизни INICIA, её программах и мероприятиях." },
+        { key: "colaborador", title: "Член-попечитель", price: "От 5 €", text: "Вы сами выбираете сумму и периодичность. Поддерживаете программы и получаете отчёты об их результатах." },
+      ],
+      feeLabel: "Ваш взнос",
+      fees: [["5", "5 €"], ["10", "10 €"], ["25", "25 €"], ["30", "30 €"], ["otra", "Другая сумма"]],
+      otherAmount: "Сумма в евро (минимум 5 €)",
       periodLabel: "Периодичность",
       periods: [["mensual", "Ежемесячно"], ["trimestral", "Раз в квартал"], ["anual", "Раз в год"]],
       socioNote: "Мы свяжемся с вами, чтобы оформить автоматическое списание. Номер счёта в этой форме мы не спрашиваем.",
@@ -245,6 +267,8 @@ export const requestCopy: Record<Locale, RequestCopy> = {
       channelLabel: "Как с вами удобнее связаться?",
       channels: [["whatsapp", "WhatsApp"], ["telefono", "Звонок"], ["email", "Email"]],
       city: "Город",
+      zoneLabel: "Какой город вам удобнее?",
+      zones: [["gijon", "Хихон"], ["aviles", "Авилес"], ["oviedo", "Овьедо"], ["madrid", "Мадрид"], ["barcelona", "Барселона"], ["valencia", "Валенсия"], ["online", "Онлайн / другой город"]],
       consent: "Я согласен(на), что INICIA Foundation использует эти данные только для ответа на мою заявку.",
       privacyLink: "Политика конфиденциальности",
       sensitive: "Не отправляйте через форму медицинские данные и копии документов.",
@@ -266,7 +290,7 @@ export const requestCopy: Record<Locale, RequestCopy> = {
     otherLink: "Інше питання або преса",
     back: "Назад", next: "Далі", send: "Надіслати", sending: "Надсилаємо…",
     required: "Заповніть обов’язкові поля, щоб продовжити.",
-    errors: { required: "Це обов’язкове поле.", choose: "Оберіть хоча б один варіант.", email: "Перевірте email: він має виглядати як імʼя@домен.com.", name: "Вкажіть імʼя (мінімум 2 літери).", consent: "Позначте галочку, щоб ми могли вам відповісти.", summary: "Перевірте поля, виділені червоним:", consentLabel: "Згода на обробку даних" },
+    errors: { required: "Це обов’язкове поле.", choose: "Оберіть хоча б один варіант.", email: "Перевірте email: він має виглядати як імʼя@домен.com.", name: "Вкажіть імʼя (мінімум 2 літери).", consent: "Позначте галочку, щоб ми могли вам відповісти.", summary: "Перевірте поля, виділені червоним:", consentLabel: "Згода на обробку даних", minAmount: "Мінімальна сума — 5 €." },
     projectChip: "Проєкт", change: "Змінити",
     ayuda: {
       needLabel: "З чим вам потрібна допомога?",
@@ -308,8 +332,14 @@ export const requestCopy: Record<Locale, RequestCopy> = {
       goodsDesc: "Опишіть, що і скільки (приблизно)",
       deliveryLabel: "Доставка",
       delivery: [["llevo", "Привезу сам(а)"], ["recoger", "Потрібно забрати"]],
-      feeLabel: "Внесок",
-      fees: [["5", "5 €"], ["10", "10 €"], ["20", "20 €"], ["otra", "Інша сума"]],
+      planLabel: "Вид членства",
+      plans: [
+        { key: "pleno", title: "Повноправний член", price: "30 € на місяць", text: "Ви активно берете участь у житті INICIA, її програмах і заходах." },
+        { key: "colaborador", title: "Член-меценат", price: "Від 5 €", text: "Ви самі обираєте суму та періодичність. Підтримуєте програми й отримуєте звіти про їхні результати." },
+      ],
+      feeLabel: "Ваш внесок",
+      fees: [["5", "5 €"], ["10", "10 €"], ["25", "25 €"], ["30", "30 €"], ["otra", "Інша сума"]],
+      otherAmount: "Сума в євро (мінімум 5 €)",
       periodLabel: "Періодичність",
       periods: [["mensual", "Щомісяця"], ["trimestral", "Раз на квартал"], ["anual", "Раз на рік"]],
       socioNote: "Ми зв’яжемося з вами, щоб оформити автоматичне списання. Номер рахунку в цій формі ми не запитуємо.",
@@ -320,6 +350,8 @@ export const requestCopy: Record<Locale, RequestCopy> = {
       channelLabel: "Як з вами зручніше зв’язатися?",
       channels: [["whatsapp", "WhatsApp"], ["telefono", "Дзвінок"], ["email", "Email"]],
       city: "Місто",
+      zoneLabel: "Яке місто вам зручніше?",
+      zones: [["gijon", "Хіхон"], ["aviles", "Авілес"], ["oviedo", "Ов’єдо"], ["madrid", "Мадрид"], ["barcelona", "Барселона"], ["valencia", "Валенсія"], ["online", "Онлайн / інше місто"]],
       consent: "Я погоджуюся, що INICIA Foundation використає ці дані лише для відповіді на мою заявку.",
       privacyLink: "Політика конфіденційності",
       sensitive: "Не надсилайте через форму медичні дані та копії документів.",

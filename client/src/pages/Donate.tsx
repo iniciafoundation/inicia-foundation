@@ -4,7 +4,8 @@ import { ArrowRight, Building2, Check, Copy, CreditCard, Globe, HandHeart, Landm
 import { OriginalSiteNavigation } from "@/components/OriginalSiteNavigation";
 import { RequestForm } from "@/components/RequestForm";
 import { SpiralMark } from "@/components/SpiralMark";
-import { useT } from "@/lib/i18n";
+import { useLocale, useT } from "@/lib/i18n";
+import { requestCopy } from "@/lib/requestCopy";
 import { useSettings } from "@/lib/content";
 import { track } from "@/lib/analytics";
 import { CONTACT, DONATION } from "@/lib/siteConfig";
@@ -12,7 +13,7 @@ import { CONTACT, DONATION } from "@/lib/siteConfig";
 type Method = "bizum" | "transfer" | "card" | "paypal" | "other";
 
 const copy = {
-  es: {
+  es: { membersEyebrow: "Hazte socio/a", membersTitle: "Apoyo constante, cada mes.", membersIntro: "Las cuotas de socios dan estabilidad a los programas. La cuota se cobra por domiciliación bancaria: no tienes que acordarte de transferir.", membersCta: "Hacerme socio/a", membersNote: "Tras enviar la solicitud te contactamos para firmar la orden de domiciliación SEPA. Puedes darte de baja cuando quieras.", 
     eyebrow: "Donar", title: "Tu apoyo, convertido en", accent: "ayuda real.", intro: "Cada aportación sostiene el acompañamiento a familias, la formación y los proyectos comunitarios de INICIA.",
     stats: [["317", "familias ucranianas acompañadas"], ["129", "familias de otros orígenes y vecinos"], ["2021", "trabajando desde"]],
     amountLabel: "Elige un importe", other: "Otro", amountNote: "Indica este importe en Bizum o en tu transferencia.",
@@ -32,7 +33,7 @@ const copy = {
     formTitle: "Donar material o hacerte socio/a", formIntro: "Cuéntanos qué quieres aportar y te contactamos para organizarlo.",
     trust: "INICIA Foundation · Asociación sin ánimo de lucro · NIF G05426242 · Registro de Asociaciones del Principado de Asturias nº 13148",
   },
-  en: {
+  en: { membersEyebrow: "Become a member", membersTitle: "Steady support, every month.", membersIntro: "Membership fees give the programmes stability. The fee is collected by direct debit, so you never have to remember a transfer.", membersCta: "Become a member", membersNote: "After you send the request we will contact you to sign the SEPA direct debit mandate. You can cancel at any time.", 
     eyebrow: "Donate", title: "Your support, turned into", accent: "real help.", intro: "Every contribution sustains INICIA's support for families, training and community projects.",
     stats: [["317", "Ukrainian families supported"], ["129", "families of other origins and neighbours"], ["2021", "working since"]],
     amountLabel: "Choose an amount", other: "Other", amountNote: "Enter this amount in Bizum or in your transfer.",
@@ -52,7 +53,7 @@ const copy = {
     formTitle: "Donate goods or become a member", formIntro: "Tell us what you would like to give and we will contact you to arrange it.",
     trust: "INICIA Foundation · Non-profit association · Tax ID G05426242 · Registered in the Principality of Asturias, no. 13148",
   },
-  ru: {
+  ru: { membersEyebrow: "Стать членом фонда", membersTitle: "Постоянная поддержка каждый месяц.", membersIntro: "Членские взносы дают программам стабильность. Взнос списывается автоматически с банковского счёта — не нужно помнить о переводах.", membersCta: "Стать членом фонда", membersNote: "После заявки мы свяжемся с вами, чтобы подписать поручение на автосписание SEPA. Отказаться можно в любой момент.", 
     eyebrow: "Поддержать", title: "Ваша поддержка превращается в", accent: "реальную помощь.", intro: "Каждый взнос помогает INICIA сопровождать семьи, проводить обучение и развивать местные проекты.",
     stats: [["317", "украинских семей получили поддержку"], ["129", "семей другого происхождения и местных жителей"], ["2021", "работаем с"]],
     amountLabel: "Выберите сумму", other: "Другая", amountNote: "Укажите эту сумму в Bizum или в переводе.",
@@ -72,7 +73,7 @@ const copy = {
     formTitle: "Передать вещи или стать членом фонда", formIntro: "Расскажите, чем хотите помочь, и мы свяжемся с вами, чтобы всё организовать.",
     trust: "INICIA Foundation · Некоммерческая ассоциация · NIF G05426242 · Реестр ассоциаций Астурии № 13148",
   },
-  uk: {
+  uk: { membersEyebrow: "Стати членом фонду", membersTitle: "Постійна підтримка щомісяця.", membersIntro: "Членські внески дають програмам стабільність. Внесок списується автоматично з банківського рахунку — не треба пам’ятати про перекази.", membersCta: "Стати членом фонду", membersNote: "Після заявки ми зв’яжемося з вами, щоб підписати доручення на автосписання SEPA. Відмовитися можна будь-коли.", 
     eyebrow: "Підтримати", title: "Ваша підтримка перетворюється на", accent: "реальну допомогу.", intro: "Кожен внесок допомагає INICIA супроводжувати родини, проводити навчання та розвивати місцеві проєкти.",
     stats: [["317", "українських родин отримали підтримку"], ["129", "родин іншого походження та місцевих мешканців"], ["2021", "працюємо з"]],
     amountLabel: "Оберіть суму", other: "Інша", amountNote: "Вкажіть цю суму в Bizum або в переказі.",
@@ -145,6 +146,8 @@ export default function Donate() {
   const [amount, setAmount] = useState<number | undefined>(25);
   const [custom, setCustom] = useState("");
   const settings = useSettings();
+  const [locale] = useLocale();
+  const plans = requestCopy[locale].donar.plans;
   const available: Record<Method, boolean> = { bizum: Boolean(settings.bizumCode), transfer: Boolean(DONATION.iban), card: Boolean(settings.cardLink), paypal: Boolean(settings.paypalLink), other: Boolean(settings.otherLink) };
   const methods = (["bizum", "transfer", "card", "paypal", "other"] as Method[]).filter(key => available[key]);
   const [chosen, setMethod] = useState<Method>();
@@ -182,6 +185,11 @@ export default function Donate() {
         </div>
       </div>
       <p className="mt-5 text-center text-xs leading-5 text-slate-400">{t.trust}</p>
+    </section>
+
+    <section id="socios" className="mx-auto max-w-6xl scroll-mt-28 px-5 pt-20"><p className="text-xs font-bold uppercase tracking-[.2em] text-[#D6B25E]">{t.membersEyebrow}</p><h2 className="mt-3 font-serif text-4xl md:text-5xl">{t.membersTitle}</h2><p className="mt-4 max-w-2xl leading-7 text-slate-300">{t.membersIntro}</p>
+      <div className="mt-8 grid gap-5 md:grid-cols-2">{plans.map(plan => <article key={plan.key} className="flex flex-col rounded-3xl border border-[#D6B25E]/25 bg-gradient-to-br from-[#0E1729] to-[#090F1B] p-8"><h3 className="font-serif text-3xl">{plan.title}</h3><p className="mt-2 font-serif text-4xl text-[#F0D893]">{plan.price}</p><p className="mt-4 flex-1 leading-7 text-slate-300">{plan.text}</p><Link href={`/contacto?tipo=donar&plan=${plan.key}`} className="mt-6 inline-flex min-h-12 w-fit items-center rounded-full bg-[#D6B25E] px-6 text-sm font-bold text-[#120D05]">{t.membersCta}<ArrowRight className="ml-2 h-4 w-4" /></Link></article>)}</div>
+      <p className="mt-4 text-xs leading-5 text-slate-400">{t.membersNote}</p>
     </section>
 
     <section className="mx-auto max-w-6xl px-5 py-20"><h2 className="font-serif text-4xl md:text-5xl">{t.ways}</h2>
