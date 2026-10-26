@@ -30,6 +30,13 @@ export function SiteMetadata() {
   useEffect(() => {
     const metadata = getSiteMetadata(pathname);
     const canonical = `${publicOrigin}${pathname === "/" ? "/" : pathname.replace(/\/$/, "")}`;
+    // A prerendered page already carries its exact title and description
+    // (e.g. each project's own name), so keep them on the first load.
+    const existing = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+    if (existing?.getAttribute("href") === canonical && pathname.startsWith("/proyectos/")) {
+      document.documentElement.lang = getLocale();
+      return;
+    }
     document.title = metadata.title;
     document.documentElement.lang = getLocale();
     upsertMeta('meta[name="description"]', { name: "description", content: metadata.description });

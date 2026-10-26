@@ -6,7 +6,7 @@ import legalGone from "./functions/legal-gone";
 describe("isolated Netlify migration scaffold", () => {
   it("keeps the static Vite build and functions paths explicit", () => {
     const config = readFileSync(new URL("../netlify.toml", import.meta.url), "utf8");
-    expect(config).toContain('command = "pnpm exec vite build"');
+    expect(config).toContain('command = "pnpm exec vite build && node scripts/prerender.mjs"');
     expect(config).toContain('publish = "dist/public"');
     expect(config).toContain('functions = "netlify/functions"');
     expect(config).toContain('VITE_DEPLOY_TARGET = "netlify"');

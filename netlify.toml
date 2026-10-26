@@ -1,5 +1,5 @@
 [build]
-  command = "pnpm exec vite build"
+  command = "pnpm exec vite build && node scripts/prerender.mjs"
   publish = "dist/public"
   functions = "netlify/functions"
 
@@ -74,10 +74,18 @@
   status = 410
   force = true
 
+# Public pages are prerendered to their own index.html (scripts/prerender.mjs) and
+# are served directly. Anything else (login, admin, unknown URLs) gets the app shell.
 [[redirects]]
   from = "/*"
-  to = "/index.html"
+  to = "/spa.html"
   status = 200
+
+# Hashed JS/CSS and images: let browsers keep them; HTML always revalidates.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800, stale-while-revalidate=86400"
 
 # Variant 2 scaffold only. Runtime secrets must be set in a separate Netlify
 # project's Functions environment; never put values in this file.

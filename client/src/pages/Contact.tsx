@@ -1,3 +1,4 @@
+import { SiteFooter } from "@/components/SiteFooter";
 import { Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import { OriginalSiteNavigation } from "@/components/OriginalSiteNavigation";
 import { RequestForm } from "@/components/RequestForm";
@@ -40,5 +41,5 @@ export default function Contact() {
         <p className="px-2 text-xs leading-5 text-slate-400">{t.disclaimer}</p>
       </aside>
     </section>
-  </main>;
+  <SiteFooter /></main>;
 }
