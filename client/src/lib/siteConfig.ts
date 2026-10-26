@@ -5,7 +5,7 @@
  *   While it is empty, forms fall back to the previous Formspree inbox and the
  *   news / fundraising blocks stay hidden.
  */
-export const SHEETS_ENDPOINT = "";
+export const SHEETS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxueA-pAdpT1q-nQlVhJbsWFE951qrgVD3EXYsKE7jTKnl4eYDu3kD8uYr8Xw66PkFNpw/exec";
 
 /** Previous contact inbox, used only as a fallback while SHEETS_ENDPOINT is empty. */
 export const FORMSPREE_FALLBACK = "https://formspree.io/f/mdawrvbo";

@@ -46,7 +46,7 @@ const copy: Record<Locale, HomeCopy> = {
     newsEyebrow: "Noticias", newsTitle: "Lo último de INICIA.", newsCta: "Todas las noticias",
     partnersEyebrow: "Alianzas", partnersTitle: "Con quién trabajamos.",
     donateEyebrow: "Donar", donateTitle: "Tu apoyo lo hace posible.", donateText: "Dona en segundos por Bizum o transferencia, o aporta material, alimentos o tu tiempo.", donateCta: "Donar ahora", donateOther: "Otras formas de apoyar",
-    contactEyebrow: "Contacto", contactTitle: "Hablemos.", contactText: "Gijón: Av. Manuel Llaneza, 68. Oviedo, Madrid, Barcelona y Valencia: con cita previa.", whatsapp: "WhatsApp", directions: "Cómo llegar", follow: "Síguenos", formCta: "Escribirnos",
+    contactEyebrow: "Contacto", contactTitle: "Hablemos.", contactText: "Gijón: Av. Manuel Llaneza, 68. Avilés, Oviedo, Madrid, Barcelona y Valencia: con cita previa.", whatsapp: "WhatsApp", directions: "Cómo llegar", follow: "Síguenos", formCta: "Escribirnos",
   },
   en: {
     badge: "NGO · Asturias, Spain · since 2021", heroTitle: "We start the change", heroAccent: "society needs.", heroText: "INICIA Foundation works for inclusion, community development and support for people in vulnerable situations.", ctaHelp: "I need help", ctaSupport: "I want to help", ctaProjects: "See projects",
@@ -63,7 +63,7 @@ const copy: Record<Locale, HomeCopy> = {
     newsEyebrow: "News", newsTitle: "Latest from INICIA.", newsCta: "All news",
     partnersEyebrow: "Partners", partnersTitle: "Who we work with.",
     donateEyebrow: "Donate", donateTitle: "Your support makes it possible.", donateText: "Donate in seconds by Bizum or bank transfer, or give goods, food or your time.", donateCta: "Donate now", donateOther: "Other ways to help",
-    contactEyebrow: "Contact", contactTitle: "Let's talk.", contactText: "Gijón: Av. Manuel Llaneza, 68. Oviedo, Madrid, Barcelona and Valencia: by appointment.", whatsapp: "WhatsApp", directions: "Get directions", follow: "Follow us", formCta: "Write to us",
+    contactEyebrow: "Contact", contactTitle: "Let's talk.", contactText: "Gijón: Av. Manuel Llaneza, 68. Avilés, Oviedo, Madrid, Barcelona and Valencia: by appointment.", whatsapp: "WhatsApp", directions: "Get directions", follow: "Follow us", formCta: "Write to us",
   },
   ru: {
     badge: "НКО · Астурия, Испания · с 2021 года", heroTitle: "Мы начинаем перемены, которые", heroAccent: "нужны обществу.", heroText: "INICIA Foundation работает ради инклюзии, развития сообществ и поддержки людей в трудной ситуации.", ctaHelp: "Мне нужна помощь", ctaSupport: "Хочу помочь", ctaProjects: "Проекты",
@@ -80,7 +80,7 @@ const copy: Record<Locale, HomeCopy> = {
     newsEyebrow: "Новости", newsTitle: "Последние новости INICIA.", newsCta: "Все новости",
     partnersEyebrow: "Партнёры", partnersTitle: "С кем мы работаем.",
     donateEyebrow: "Поддержать", donateTitle: "Ваша поддержка делает это возможным.", donateText: "Пожертвуйте за пару секунд через Bizum или перевод — или помогите вещами, продуктами или своим временем.", donateCta: "Поддержать", donateOther: "Другие способы помочь",
-    contactEyebrow: "Контакты", contactTitle: "Давайте поговорим.", contactText: "Хихон: Av. Manuel Llaneza, 68. Овьедо, Мадрид, Барселона и Валенсия — по предварительной записи.", whatsapp: "WhatsApp", directions: "Как добраться", follow: "Мы в соцсетях", formCta: "Написать нам",
+    contactEyebrow: "Контакты", contactTitle: "Давайте поговорим.", contactText: "Хихон: Av. Manuel Llaneza, 68. Авилес, Овьедо, Мадрид, Барселона и Валенсия — по предварительной записи.", whatsapp: "WhatsApp", directions: "Как добраться", follow: "Мы в соцсетях", formCta: "Написать нам",
   },
   uk: {
     badge: "НГО · Астурія, Іспанія · з 2021 року", heroTitle: "Ми починаємо зміни, яких", heroAccent: "потребує суспільство.", heroText: "INICIA Foundation працює заради інклюзії, розвитку громад і підтримки людей у складних обставинах.", ctaHelp: "Мені потрібна допомога", ctaSupport: "Хочу допомогти", ctaProjects: "Проєкти",
@@ -97,7 +97,7 @@ const copy: Record<Locale, HomeCopy> = {
     newsEyebrow: "Новини", newsTitle: "Останні новини INICIA.", newsCta: "Усі новини",
     partnersEyebrow: "Партнери", partnersTitle: "З ким ми працюємо.",
     donateEyebrow: "Підтримати", donateTitle: "Ваша підтримка робить це можливим.", donateText: "Пожертвуйте за кілька секунд через Bizum або переказ — або допоможіть речами, продуктами чи своїм часом.", donateCta: "Підтримати", donateOther: "Інші способи допомогти",
-    contactEyebrow: "Контакти", contactTitle: "Поговорімо.", contactText: "Хіхон: Av. Manuel Llaneza, 68. Ов’єдо, Мадрид, Барселона та Валенсія — за попереднім записом.", whatsapp: "WhatsApp", directions: "Як дістатися", follow: "Ми в соцмережах", formCta: "Написати нам",
+    contactEyebrow: "Контакти", contactTitle: "Поговорімо.", contactText: "Хіхон: Av. Manuel Llaneza, 68. Авілес, Ов’єдо, Мадрид, Барселона та Валенсія — за попереднім записом.", whatsapp: "WhatsApp", directions: "Як дістатися", follow: "Ми в соцмережах", formCta: "Написати нам",
   },
 };
 

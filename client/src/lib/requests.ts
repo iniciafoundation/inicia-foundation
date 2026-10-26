@@ -26,12 +26,16 @@ export function flatten(payload: RequestPayload): Record<string, string> {
 export async function sendRequest(payload: RequestPayload, endpoint = SHEETS_ENDPOINT): Promise<void> {
   const data = flatten(payload);
   if (endpoint) {
-    // text/plain avoids a CORS preflight, which Apps Script web apps do not answer.
-    const response = await fetch(endpoint, { method: "POST", body: JSON.stringify(data), headers: { "Content-Type": "text/plain;charset=utf-8" } });
-    if (!response.ok) throw new Error(`Request failed: ${response.status}`);
-    const result = await response.json().catch(() => ({ ok: true }));
-    if (result && result.ok === false) throw new Error(result.error || "Request rejected");
-    return;
+    try {
+      // text/plain avoids a CORS preflight, which Apps Script web apps do not answer.
+      const response = await fetch(endpoint, { method: "POST", body: JSON.stringify(data), headers: { "Content-Type": "text/plain;charset=utf-8" } });
+      const result = await response.json(); // an HTML error page (script not deployed correctly) throws here
+      if (response.ok && result && result.ok === true) return;
+      if (result && result.error === "rate") throw new Error("rate");
+    } catch (error) {
+      if (error instanceof Error && error.message === "rate") throw error;
+    }
+    // The sheet did not confirm the request: fall back to the e-mail inbox so nothing is lost.
   }
   const form = new FormData();
   for (const [key, value] of Object.entries(data)) form.append(key, value);
