@@ -3,7 +3,7 @@ import { Link } from "wouter";
 import { ArrowLeft, ArrowRight, Building2, CheckCircle2, HandHeart, HeartHandshake, LifeBuoy, Loader2, MessageCircle, Send } from "lucide-react";
 import { useLocale } from "@/lib/i18n";
 import { requestCopy } from "@/lib/requestCopy";
-import { type RequestType, makeReference, sendRequest } from "@/lib/requests";
+import { type RequestType, flatten, makeReference, sendRequest } from "@/lib/requests";
 import { CONTACT } from "@/lib/siteConfig";
 import { track } from "@/lib/analytics";
 
@@ -37,6 +37,7 @@ export function RequestForm({ initialType, project, compact = false }: { initial
   const [step, setStep] = useState(initialType ? 2 : 1);
   const [values, setValues] = useState<Values>({ canal: "whatsapp" });
   const [state, setState] = useState<"idle" | "sending" | "error">("idle");
+  const [failedMail, setFailedMail] = useState("");
   const [showRequired, setShowRequired] = useState(false);
   const [reference, setReference] = useState<string>();
   const formRef = useRef<HTMLFormElement>(null);
@@ -73,12 +74,16 @@ export function RequestForm({ initialType, project, compact = false }: { initial
     if (s("website")) return; // honeypot
     const ref = makeReference();
     setState("sending");
+    const payload = { referencia: ref, tipo: type, proyecto: project, idioma: locale, pagina: typeof window !== "undefined" ? window.location.pathname : "", ...Object.fromEntries(Object.entries(values).filter(([key]) => key !== "website")) };
     try {
-      await sendRequest({ referencia: ref, tipo: type, proyecto: project, idioma: locale, pagina: typeof window !== "undefined" ? window.location.pathname : "", ...Object.fromEntries(Object.entries(values).filter(([key]) => key !== "website")) });
+      await sendRequest(payload);
       track("generate_lead", { tipo: type });
       setReference(ref);
       setState("idle");
     } catch {
+      // Last resort: let the person send the same request from their own e-mail app.
+      const body = Object.entries(flatten(payload)).map(([key, value]) => `${key}: ${value}`).join("\n");
+      setFailedMail(`mailto:${CONTACT.requestsEmail}?subject=${encodeURIComponent(`Solicitud web ${ref} (${type})`)}&body=${encodeURIComponent(body)}`);
       setState("error");
     }
   };
@@ -173,7 +178,7 @@ export function RequestForm({ initialType, project, compact = false }: { initial
       <p className="text-xs leading-5 text-slate-400">{t.contact.sensitive}</p>
       <label className="flex items-start gap-3 text-sm leading-6 text-slate-200"><input type="checkbox" className="mt-1 h-5 w-5 shrink-0 accent-[#D6B25E]" checked={v("consentimiento") === true} onChange={e => set("consentimiento")(e.target.checked)} /><span>{t.contact.consent} <Link className="underline" href="/identidad">{t.contact.privacyLink}</Link></span></label>
       {showRequired && <p className="rounded-xl bg-red-500/10 p-3 text-sm text-red-300">{t.required}</p>}
-      {state === "error" && <p className="rounded-xl bg-red-500/10 p-3 text-sm text-red-300">{t.error} <a className="font-bold underline" href={CONTACT.whatsapp} target="_blank" rel="noreferrer">WhatsApp</a></p>}
+      {state === "error" && <div className="rounded-xl bg-red-500/10 p-4 text-sm text-red-200"><p>{t.error}</p><div className="mt-3 flex flex-wrap gap-2">{failedMail && <a className="inline-flex min-h-10 items-center rounded-full bg-[#D6B25E] px-4 text-xs font-bold text-[#120D05]" href={failedMail}>{t.sendByEmail}</a>}<a className="inline-flex min-h-10 items-center rounded-full border border-[#D6B25E]/50 px-4 text-xs font-bold text-[#F0D893]" href={CONTACT.whatsapp} target="_blank" rel="noreferrer">WhatsApp</a></div></div>}
       <div className="flex flex-wrap justify-between gap-3"><button type="button" onClick={() => setStep(2)} className="inline-flex min-h-11 items-center rounded-full px-4 text-sm font-bold text-[#EEE7D7]"><ArrowLeft className="mr-1 h-4 w-4" />{t.back}</button><button type="submit" disabled={state === "sending"} className="inline-flex min-h-12 items-center rounded-full bg-[#D6B25E] px-7 text-sm font-bold text-[#120D05] shadow-[0_8px_22px_rgba(214,178,94,.35)] disabled:opacity-60">{state === "sending" ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" />{t.sending}</> : <><Send className="mr-2 h-4 w-4" />{t.send}</>}</button></div>
     </div>}
   </form>;

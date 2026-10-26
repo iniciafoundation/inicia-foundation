@@ -15,6 +15,7 @@ export const CONTACT = {
   phoneHref: "tel:+34624865051",
   whatsapp: "https://wa.me/34624865051",
   email: "info@iniciafoundation.org",
+  requestsEmail: "direccion@iniciafoundation.org",
 };
 
 /** Donation details. Leave a value empty ("") to show "coming soon" for that method. */

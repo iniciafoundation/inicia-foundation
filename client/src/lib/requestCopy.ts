@@ -23,6 +23,7 @@ export type RequestCopy = {
   contact: { name: string; email: string; phone: string; channelLabel: string; channels: Option[]; city: string; consent: string; privacyLink: string; sensitive: string };
   done: { title: string; reference: string; next: string; again: string; home: string };
   error: string;
+  sendByEmail: string;
 };
 
 export const requestCopy: Record<Locale, RequestCopy> = {
@@ -97,7 +98,8 @@ export const requestCopy: Record<Locale, RequestCopy> = {
       sensitive: "No envíes datos médicos ni copias de documentos por este formulario.",
     },
     done: { title: "¡Solicitud enviada!", reference: "Tu número de referencia", next: "Te responderemos por el medio que has elegido. Guarda el número por si necesitas consultarnos.", again: "Enviar otra solicitud", home: "Volver al inicio" },
-    error: "No se ha podido enviar. Inténtalo de nuevo o escríbenos por WhatsApp.",
+    error: "No se ha podido enviar. Inténtalo de nuevo, envíala desde tu correo con un clic o escríbenos por WhatsApp.",
+    sendByEmail: "Enviar por correo",
   },
   en: {
     question: "What brings you to INICIA?",
@@ -170,7 +172,8 @@ export const requestCopy: Record<Locale, RequestCopy> = {
       sensitive: "Please do not send medical details or copies of documents through this form.",
     },
     done: { title: "Request sent!", reference: "Your reference number", next: "We will reply through the channel you chose. Keep this number in case you need to contact us.", again: "Send another request", home: "Back to home" },
-    error: "We could not send it. Please try again or write to us on WhatsApp.",
+    error: "We could not send it. Please try again, send it from your e-mail with one click or write to us on WhatsApp.",
+    sendByEmail: "Send by e-mail",
   },
   ru: {
     question: "Что привело вас в INICIA?",
@@ -243,7 +246,8 @@ export const requestCopy: Record<Locale, RequestCopy> = {
       sensitive: "Не отправляйте через форму медицинские данные и копии документов.",
     },
     done: { title: "Заявка отправлена!", reference: "Номер вашей заявки", next: "Мы ответим вам удобным для вас способом. Сохраните номер на случай, если нужно будет уточнить.", again: "Отправить ещё одну заявку", home: "На главную" },
-    error: "Не удалось отправить. Попробуйте ещё раз или напишите нам в WhatsApp.",
+    error: "Не удалось отправить. Попробуйте ещё раз, отправьте её со своей почты одним нажатием или напишите нам в WhatsApp.",
+    sendByEmail: "Отправить по почте",
   },
   uk: {
     question: "Що привело вас до INICIA?",
@@ -316,6 +320,7 @@ export const requestCopy: Record<Locale, RequestCopy> = {
       sensitive: "Не надсилайте через форму медичні дані та копії документів.",
     },
     done: { title: "Заявку надіслано!", reference: "Номер вашої заявки", next: "Ми відповімо зручним для вас способом. Збережіть номер на випадок, якщо потрібно буде уточнити.", again: "Надіслати ще одну заявку", home: "На головну" },
-    error: "Не вдалося надіслати. Спробуйте ще раз або напишіть нам у WhatsApp.",
+    error: "Не вдалося надіслати. Спробуйте ще раз, надішліть її зі своєї пошти одним натисканням або напишіть нам у WhatsApp.",
+    sendByEmail: "Надіслати поштою",
   },
 };
