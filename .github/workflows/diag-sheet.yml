@@ -6,5 +6,6 @@ jobs:
     timeout-minutes: 12
     steps:
       - run: |
+          set +e
           for i in $(seq 1 10); do c=$(curl -s https://iniciafoundation.org/noticias | grep -c "Ayuntamiento de Gij"); [ "$c" -gt 0 ] && break; sleep 60; done
           echo "::notice title=live::news live: $c; coop=$(curl -s https://iniciafoundation.org/noticias | grep -c 'recta final'); home=$(curl -s https://iniciafoundation.org/ | grep -c 'Ayuntamiento de Gij')"
