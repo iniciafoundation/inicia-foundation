@@ -12,7 +12,7 @@ import { type Locale, useLocale, contentLocale } from "@/lib/i18n";
 import { publicAssets } from "@/lib/publicAssets";
 import { type PhotoName, photo } from "@/lib/photos";
 import { CONTACT } from "@/lib/siteConfig";
-import { trpc } from "@/lib/trpc";
+import { useProjects } from "@/lib/projects";
 import { AllianceAreas, allianceCopy } from "@/components/AllianceAreas";
 
 const HERO_IMAGE = publicAssets.heroCommunity;
@@ -147,7 +147,7 @@ export default function Home() {
   const [locale] = useLocale();
   const t = copy[locale];
   const partners = allianceCopy[locale];
-  const projects = trpc.crm.public.projects.useQuery({ locale: contentLocale(locale) }).data ?? [];
+  const projects = useProjects(locale).data ?? [];
   const featuredSlugs = ["nucleo", "coopastur-agrosocial", "rural-futures"];
   const featured = projects.filter(project => featuredSlugs.includes(project.slug));
   const displayedProjects = featured.length ? featured : projects.slice(0, 3);

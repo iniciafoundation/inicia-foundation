@@ -1,3 +1,4 @@
+import { CtaBand } from "@/components/CtaBand";
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
 import { OriginalSiteNavigation } from "@/components/OriginalSiteNavigation";
@@ -84,6 +85,6 @@ export default function Alliances() {
 
     <section className="mx-auto max-w-7xl px-5 pb-20"><div className="flex flex-col gap-6 rounded-3xl border border-[#D6B25E]/20 bg-[#0A1424] p-8 md:flex-row md:items-center md:justify-between"><div className="max-w-md"><p className="text-xs font-bold uppercase tracking-[.18em] text-[#D6B25E]">{t.citiesLabel}</p><p className="mt-2 text-sm leading-6 text-slate-300">{t.citiesText}</p></div><div className="flex flex-wrap items-center gap-2">{reach[locale].map((stage, index) => <span key={stage} className="inline-flex items-center gap-2">{index > 0 && <ArrowRight className="h-4 w-4 text-[#D6B25E]/70" aria-hidden="true" />}<span className="rounded-full border border-[#D6B25E]/40 px-4 py-2 font-serif text-xl text-[#F0D893]" style={{ opacity: 0.55 + index * 0.11 }}>{stage}</span></span>)}</div></div></section>
     <section className="bg-[#0A1424] px-5 py-16 text-white"><div className="mx-auto flex max-w-7xl flex-col gap-6 md:flex-row md:items-center md:justify-between"><div><h2 className="font-serif text-4xl">{t.ctaTitle}</h2><p className="mt-3 max-w-2xl leading-7 text-slate-200">{t.ctaText}</p></div><Link href="/contacto?tipo=organizacion" className="inline-flex min-h-12 w-fit items-center rounded-full bg-[#D6B25E] px-6 text-sm font-bold text-[#120D05]">{t.cta} <ArrowRight className="ml-2 h-4 w-4" /></Link></div></section>
-    <SiteFooter />
+    <CtaBand /><SiteFooter />
   </main>;
 }

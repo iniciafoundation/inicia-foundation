@@ -1,7 +1,7 @@
 import { SiteFooter } from "@/components/SiteFooter";
 import { Link, useRoute } from "wouter";
 import { ArrowLeft } from "lucide-react";
-import { trpc } from "@/lib/trpc";
+import { useProjects } from "@/lib/projects";
 import { OriginalSiteNavigation } from "@/components/OriginalSiteNavigation";
 import { ProjectVisual } from "@/components/ProjectVisual";
 import { useLocale, contentLocale, type Locale } from "@/lib/i18n";
@@ -19,7 +19,7 @@ export default function ProjectDetail() {
   const [, params] = useRoute("/proyectos/:slug");
   const [locale, setLocale] = useLocale();
   const copy = labels[locale];
-  const query = trpc.crm.public.projects.useQuery({ locale: contentLocale(locale) });
+  const query = useProjects(locale);
   const project = query.data?.find(item => item.slug === params?.slug);
   const changeLocale = (nextLocale: Locale) => setLocale(nextLocale);
   if (query.isLoading) return <main className="min-h-screen bg-slate-50"><OriginalSiteNavigation locale={locale} onLocaleChange={changeLocale} /><div className="grid min-h-[70vh] place-items-center p-5"><p className="font-serif text-3xl text-[#EEE7D7]">{copy.loading}</p></div></main>;

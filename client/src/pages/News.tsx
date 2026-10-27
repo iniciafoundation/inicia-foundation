@@ -1,3 +1,4 @@
+import { CtaBand } from "@/components/CtaBand";
 import { SiteFooter } from "@/components/SiteFooter";
 import { useState } from "react";
 import { Link } from "wouter";
@@ -38,5 +39,5 @@ export default function News() {
             <div className="mt-auto flex flex-wrap gap-4 pt-5">{item.texto && <button type="button" onClick={() => setOpen(open === item.id ? undefined : item.id)} className="text-sm font-bold underline decoration-[#D6B25E] decoration-2 underline-offset-4">{open === item.id ? t.less : t.more}</button>}{item.enlace && <a href={item.enlace} target="_blank" rel="noreferrer" className="inline-flex items-center text-sm font-bold text-[#D6B25E]">{t.source}<span className="sr-only">: {item.titulo}</span><ArrowRight className="ml-1 h-4 w-4" /></a>}</div>
           </div></article>)}</div>}
     </section>
-  <SiteFooter /></main>;
+  <CtaBand /><SiteFooter /></main>;
 }

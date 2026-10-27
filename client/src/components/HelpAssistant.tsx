@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
+import { showsMobileBar } from "@/components/MobileActionBar";
 import { ArrowLeft, ArrowRight, MessageCircle, Search, Sparkles, X } from "lucide-react";
 import { forLocale, useSiteContent } from "@/lib/content";
 import { type Locale, useLocale } from "@/lib/i18n";
@@ -77,13 +78,14 @@ export function HelpAssistant() {
   const { data } = useSiteContent();
   const answers = useMemo(() => [...base[locale], ...forLocale(data?.faq ?? [], locale).map(f => ({ q: f.pregunta, a: f.respuesta, href: f.enlace || undefined, cta: f.enlace ? "→" : undefined, keys: f.palabras_clave }))], [locale, data?.faq]);
   const [open, setOpen] = useState(false);
+  const [location] = useLocation();
   const [query, setQuery] = useState("");
   const [picked, setPicked] = useState<Answer>();
   const results = query ? findAnswers(query, answers) : [];
   const internal = (href?: string) => Boolean(href && href.startsWith("/"));
   const close = () => { setOpen(false); setPicked(undefined); setQuery(""); };
 
-  return <div className="fixed bottom-4 right-4 z-40">
+  return <div className={`fixed right-4 z-40 md:bottom-4 ${showsMobileBar(location) ? "bottom-20" : "bottom-4"}`}>
     {open && <div role="dialog" aria-label={t.title} className="mb-3 flex max-h-[70vh] w-[min(92vw,380px)] flex-col overflow-hidden rounded-3xl border border-[#D6B25E]/30 bg-[#0A1120] text-[#EEE7D7] shadow-[0_30px_80px_rgba(0,0,0,.6)]">
       <div className="flex items-center justify-between border-b border-[#D6B25E]/20 px-5 py-4"><p className="flex items-center gap-2 font-serif text-xl text-[#F0D893]"><Sparkles className="h-4 w-4 text-[#D6B25E]" />{t.title}</p><button type="button" onClick={close} aria-label={t.close} className="grid h-9 w-9 place-items-center rounded-full hover:bg-white/10"><X className="h-4 w-4" /></button></div>
       <div className="flex-1 space-y-3 overflow-y-auto px-5 py-4 text-sm leading-6">

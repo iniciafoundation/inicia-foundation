@@ -1,3 +1,4 @@
+import { CtaBand } from "@/components/CtaBand";
 import { ArrowRight, HandHeart, Scale, Sprout, Users } from "lucide-react";
 import { Link } from "wouter";
 import { OriginalSiteNavigation } from "@/components/OriginalSiteNavigation";
@@ -91,6 +92,6 @@ export default function Ideology() {
     <section className="mx-auto max-w-7xl px-5 py-20"><div className="grid gap-5 md:grid-cols-2">{t.principles.map(([title, text], index) => { const Icon = PRINCIPLE_ICONS[index]; return <article key={title} className="rounded-3xl border border-[#D6B25E]/20 bg-[#0C1320] p-8 shadow-sm"><Icon className="h-7 w-7 text-[#D6B25E]" /><h2 className="mt-5 font-serif text-3xl">{title}</h2><p className="mt-4 leading-7 text-slate-300">{text}</p></article>; })}</div>
       <div className="mt-12 rounded-3xl bg-[#08101E] p-8 text-white md:p-10"><h2 className="font-serif text-4xl">{t.practiceTitle}</h2><p className="mt-5 max-w-3xl leading-8 text-slate-200">{t.practiceText}</p><Link href="/mision" className="mt-7 inline-flex items-center rounded-full bg-[#D6B25E] px-5 py-3 text-sm font-bold text-[#120D05]">{t.cta} <ArrowRight className="ml-2 h-4 w-4" /></Link></div>
     </section>
-    <SiteFooter />
+    <CtaBand /><SiteFooter />
   </main>;
 }
