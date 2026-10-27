@@ -10,6 +10,15 @@ type Story = { id: string; fecha: string; imagen: string; enlace?: string; text:
 
 const stories: Story[] = [
   {
+    id: "reunion-ayuntamiento-gijon-2026", fecha: "2026-10-27", imagen: "/assets/photos/coast-960.webp", enlace: "/alianzas",
+    text: {
+      es: { titulo: "Reunión de trabajo con el Ayuntamiento de Gijón/Xixón", resumen: "En la segunda semana de noviembre nos reuniremos con el Ayuntamiento de Gijón/Xixón para presentar la entidad y explorar vías de colaboración.", texto: "El Ayuntamiento de Gijón/Xixón ha respondido a nuestra propuesta y en la segunda semana de noviembre mantendremos una reunión de trabajo presencial.\n\nPresentaremos INICIA Foundation, nuestros proyectos y las líneas en las que podemos colaborar con la ciudad. Os contaremos los resultados." },
+      en: { titulo: "Working meeting with Gijón/Xixón City Council", resumen: "In the second week of November we will meet Gijón/Xixón City Council to present our organisation and explore ways to work together.", texto: "Gijón/Xixón City Council has responded to our proposal, and in the second week of November we will hold an in-person working meeting.\n\nWe will present INICIA Foundation, our projects and the areas where we can work with the city. We will share the results." },
+      ru: { titulo: "Рабочая встреча с мэрией Хихона", resumen: "На второй неделе ноября мы встретимся с мэрией Хихона, чтобы представить организацию и обсудить возможное сотрудничество.", texto: "Мэрия Хихона ответила на наше предложение, и на второй неделе ноября у нас пройдёт очная рабочая встреча.\n\nМы представим INICIA Foundation, наши проекты и направления, в которых можем работать вместе с городом. О результатах расскажем." },
+      uk: { titulo: "Робоча зустріч із мерією Хіхона", resumen: "На другому тижні листопада ми зустрінемося з мерією Хіхона, щоб представити організацію та обговорити можливу співпрацю.", texto: "Мерія Хіхона відповіла на нашу пропозицію, і на другому тижні листопада в нас відбудеться очна робоча зустріч.\n\nМи представимо INICIA Foundation, наші проєкти та напрями, у яких можемо працювати разом із містом. Про результати розповімо." },
+    },
+  },
+  {
     id: "coopastur-recta-final-2026", fecha: "2026-10-27", imagen: "/assets/photos/planting-960.webp", enlace: "/proyectos/coopastur-agrosocial",
     text: {
       es: { titulo: "CoopAstur AgroSocial, en la recta final", resumen: "Nuestra cooperativa social agroecológica está a punto de completar su constitución y prepararse para empezar a trabajar.", texto: "CoopAstur AgroSocial, la cooperativa social agroecológica impulsada por INICIA Foundation, entra en la recta final de su constitución.\n\nSu actividad se centrará en apoyar a la población local con formación y empleo, y en favorecer el retorno y el asentamiento de personas y familias en el medio rural, para que los pueblos vuelvan a tener vida y futuro.\n\nPronto compartiremos cómo participar. Si te interesa formar parte del proyecto, escríbenos." },
