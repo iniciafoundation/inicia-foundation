@@ -1,3 +1,4 @@
+import { CtaBand } from "@/components/CtaBand";
 import { ArrowRight, HeartHandshake, Leaf, Scale, ShieldAlert, UsersRound } from "lucide-react";
 import { Link } from "wouter";
 import { OriginalSiteNavigation } from "@/components/OriginalSiteNavigation";
@@ -195,6 +196,6 @@ export default function Mission() {
       <section className="mt-16 border-t border-[#D6B25E]/20 pt-12"><p className="text-xs font-bold uppercase tracking-[.18em] text-[#D6B25E]">{t.objectivesEyebrow}</p><h2 className="mt-3 max-w-4xl font-serif text-4xl">{t.objectivesTitle}</h2><p className="mt-5 max-w-4xl leading-8 text-slate-200">{t.objectivesIntro}</p><ol className="mt-8 grid gap-4 md:grid-cols-2">{t.objectives.map((objective, index) => <li key={objective} className="flex gap-4 rounded-2xl bg-[#0C1320] p-6 shadow-sm"><span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-[#D6B25E] text-sm font-bold text-[#120D05]">{index + 1}</span><p className="text-sm leading-7 text-slate-300">{objective}</p></li>)}</ol></section>
       <div className="mt-12 rounded-3xl border border-[#D6B25E]/40 bg-[#D6B25E]/10 p-8 md:p-10"><p className="text-xs font-bold uppercase tracking-[.18em] text-[#D6B25E]">{t.commitmentEyebrow}</p><p className="mt-4 max-w-4xl font-serif text-3xl leading-tight">{t.commitment}</p><Link href="/ideologia" className="mt-7 inline-flex items-center rounded-full bg-[#08101E] px-5 py-3 text-sm font-bold text-white">{t.cta} <ArrowRight className="ml-2 h-4 w-4" /></Link></div>
     </section>
-    <SiteFooter />
+    <CtaBand /><SiteFooter />
   </main>;
 }

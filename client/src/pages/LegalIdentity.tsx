@@ -1,3 +1,4 @@
+import { CtaBand } from "@/components/CtaBand";
 import { Building2, FileCheck2, Globe2, MapPin } from "lucide-react";
 import { OriginalSiteNavigation } from "@/components/OriginalSiteNavigation";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -116,6 +117,6 @@ export default function LegalIdentity() {
       </div>
       <section className="mt-10 rounded-3xl border border-[#D6B25E]/50 bg-[#D6B25E]/10 p-7"><h2 className="font-serif text-3xl text-[#EEE7D7]">{t.pendingTitle}</h2><p className="mt-3 max-w-3xl leading-7 text-slate-200">{t.pendingText}</p></section>
     </section>
-    <SiteFooter />
+    <CtaBand /><SiteFooter />
   </main>;
 }

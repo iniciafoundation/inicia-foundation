@@ -36,6 +36,23 @@ const projects = seed.projects
     return { ...p, title: t?.title || p.title, category: t?.category || p.category, shortDescription: t?.shortDescription || p.shortDescription, bodyHtml: t?.bodyHtml || p.bodyHtml, status: statusEs[p.status] ?? p.status };
   });
 
+// Static project files for the browser (/data/projects-xx.json): public pages read these instead of calling the API.
+const statusLabels = {
+  es: statusEs,
+  en: { development: "In development", preparation: "In preparation", implemented: "Implemented programme" },
+  ru: { development: "В разработке", preparation: "В подготовке", implemented: "Реализованная программа" },
+  uk: { development: "У розробці", preparation: "У підготовці", implemented: "Реалізована програма" },
+};
+await fs.mkdir(path.join(outDir, "data"), { recursive: true });
+for (const lang of ["es", "en", "ru", "uk"]) {
+  const byProject = new Map(seed.translations.filter(t => t.locale === lang).map(t => [t.projectId, t]));
+  const list = seed.projects.filter(p => p.visibility === "published").map(p => {
+    const t = byProject.get(p.id);
+    return { ...p, title: t?.title || p.title, category: t?.category || p.category, shortDescription: t?.shortDescription || p.shortDescription, bodyHtml: t?.bodyHtml || p.bodyHtml, status: statusLabels[lang][p.status] ?? p.status };
+  });
+  await fs.writeFile(path.join(outDir, "data", `projects-${lang}.json`), JSON.stringify(list));
+}
+
 // News, fundraising and settings from the Google Sheet. If it cannot be reached,
 // pages are still prerendered and the browser loads this content as before.
 let content;
