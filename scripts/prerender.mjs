@@ -93,6 +93,15 @@ function heroPreload(body) {
   return `  <link rel="preload" as="image" href="${src}"${srcset ? ` imagesrcset="${srcset}"` : ""}${sizes ? ` imagesizes="${sizes}"` : ""} fetchpriority="high" />\n  `;
 }
 
+/**
+ * The page is already fully rendered in HTML, so the app script is started only after the first paint.
+ * Phones then show text and the main photo without waiting for JavaScript (better PageSpeed / LCP).
+ */
+function deferAppScript(html) {
+  return html.replace(/<script type="module" crossorigin src="([^"]+)"><\/script>/, (_, src) =>
+    `<script>(function(){var d=0;function go(){if(d)return;if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",go);return}d=1;var s=document.createElement("script");s.type="module";s.crossOrigin="";s.src=${JSON.stringify(src)};document.head.appendChild(s)}requestAnimationFrame(function(){setTimeout(go,0)});setTimeout(go,1500)})()</script>`);
+}
+
 let count = 0;
 for (const route of routes) {
   const body = await render(route, { projects, content });
@@ -118,7 +127,7 @@ for (const route of routes) {
   // "/mision" -> mision.html (Netlify serves it at /mision without a trailing-slash redirect).
   const file = route === "/" ? path.join(outDir, "index.html") : path.join(outDir, `${route.slice(1)}.html`);
   await fs.mkdir(path.dirname(file), { recursive: true });
-  await fs.writeFile(file, html);
+  await fs.writeFile(file, deferAppScript(html));
   count += 1;
 }
 
@@ -133,7 +142,7 @@ for (const route of routes) {
     .replace(/<link rel="canonical" href="[^"]*"\s*\/?>\s*/, "")
     .replace('<div id="root"></div>', `<div id="root">${body}</div><script>window.__INICIA_PRERENDER__=${json({ projects, content: content ?? null })}</script>`);
   if (!html.includes(body)) throw new Error("Could not inject prerendered HTML for 404");
-  await fs.writeFile(path.join(outDir, "404.html"), html);
+  await fs.writeFile(path.join(outDir, "404.html"), deferAppScript(html));
 }
 
 // Sitemap with every prerendered public page (legal pages are lower priority).

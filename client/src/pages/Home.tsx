@@ -159,7 +159,7 @@ export default function Home() {
     <OriginalSiteNavigation />
 
     <section className="relative isolate overflow-hidden bg-[#060A12]">
-      <img src={EARTH.src} srcSet={EARTH.srcSet} sizes="100vw" alt="La Tierra vista desde el espacio con redes de luz: INICIA Foundation conecta personas y comunidades" fetchPriority="high" className="absolute inset-0 -z-20 h-full w-full object-cover object-[70%_center] opacity-90" />
+      <img src={EARTH.src} srcSet={EARTH.srcSet} sizes="(max-width: 767px) 88vw, 100vw" alt="La Tierra vista desde el espacio con redes de luz: INICIA Foundation conecta personas y comunidades" fetchPriority="high" className="absolute inset-0 -z-20 h-full w-full object-cover object-[70%_center] opacity-90" />
       <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#060A12] via-[#060A12]/85 to-transparent" />
       <div className="absolute inset-x-0 bottom-0 -z-10 h-48 bg-gradient-to-t from-[#060A12] to-transparent" />
       <SpiralMark className="pointer-events-none absolute right-[4%] top-[12%] -z-10 hidden h-[560px] w-[560px] opacity-60 lg:block" />
