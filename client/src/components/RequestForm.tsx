@@ -6,6 +6,8 @@ import { requestCopy } from "@/lib/requestCopy";
 import { type RequestType, flatten, makeReference, sendRequest } from "@/lib/requests";
 import { CONTACT, MEMBERSHIP, ZONES } from "@/lib/siteConfig";
 import { track } from "@/lib/analytics";
+import { SEPA_CREDITOR, compactIban, formatIban, isValidIban, membershipCharge, sepaCopy } from "@/lib/sepa";
+import { SignaturePad } from "./SignaturePad";
 
 type Values = Record<string, string | string[] | boolean>;
 
@@ -42,12 +44,13 @@ function Chips({ label, options, value, onChange, multiple = false, required, er
 export function RequestForm({ initialType, project, compact = false }: { initialType?: RequestType; project?: string; compact?: boolean }) {
   const [locale] = useLocale();
   const t = requestCopy[locale];
+  const sc = sepaCopy[locale];
   const [type, setType] = useState<RequestType | undefined>(initialType);
   const [step, setStep] = useState(initialType ? 2 : 1);
   const [values, setValues] = useState<Values>(() => {
     // Deep links such as /contacto?tipo=donar&modo=socio&plan=colaborador preselect options.
     const params = new URLSearchParams(typeof window !== "undefined" ? window.location.search : "");
-    const start: Values = { canal: "whatsapp" };
+    const start: Values = { canal: "whatsapp", sepa_pais: "España" };
     const modo = params.get("modo"); if (modo && ["dinero", "especie", "socio"].includes(modo)) start.modo = modo;
     const plan = params.get("plan"); if (plan && ["pleno", "colaborador", "reducida", "empresa"].includes(plan)) { start.modo = "socio"; start.plan = plan; }
     const zona = params.get("zona"); if (zona && (ZONES as readonly string[]).includes(zona)) start.zona = [zona];
@@ -70,7 +73,10 @@ export function RequestForm({ initialType, project, compact = false }: { initial
   const set = (key: string) => (next: string | string[] | boolean) => setValues(current => ({ ...current, [key]: next }));
   const has = (key: string) => { const value = values[key]; return Array.isArray(value) ? value.length > 0 : typeof value === "string" ? value.trim().length > 0 : value === true; };
 
-  type ErrKind = Exclude<keyof typeof t.errors, "summary" | "consentLabel">;
+  type ErrKind = Exclude<keyof typeof t.errors, "summary" | "consentLabel"> | "iban" | "signature" | "mandate";
+  const message = (kind: ErrKind) => kind === "iban" ? sc.ibanError : kind === "signature" ? sc.signError : kind === "mandate" ? sc.acceptError : t.errors[kind];
+  const sepaActive = type === "donar" && values.modo === "socio" && values.pago === "sepa";
+  const charge = sepaActive ? membershipCharge(values) : undefined;
   const errors2 = useMemo(() => {
     const e: Record<string, ErrKind> = {};
     const need = (key: string, kind: ErrKind = "required") => { if (!has(key)) e[key] = kind; };
@@ -90,6 +96,7 @@ export function RequestForm({ initialType, project, compact = false }: { initial
             need("entidad"); need("cuota", "choose");
             if (v("cuota") === "otra") { if (!has("cuota_otra")) e.cuota_otra = "required"; else if (Number(s("cuota_otra")) < MEMBERSHIP.companyMin) e.cuota_otra = "companyMin"; }
           }
+          need("pago", "choose");
         }
         else if (v("modo") !== "dinero") need("modo", "choose");
         break;
@@ -103,9 +110,15 @@ export function RequestForm({ initialType, project, compact = false }: { initial
     if (!name) e.nombre = "required"; else if (name.length < 2) e.nombre = "name";
     const email = s("email").trim();
     if (!email) e.email = "required"; else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) e.email = "email";
+    if (sepaActive) {
+      for (const key of ["sepa_titular", "sepa_direccion", "sepa_cp", "sepa_poblacion", "sepa_pais"]) if (!s(key).trim()) e[key] = "required";
+      if (!s("sepa_iban").trim()) e.sepa_iban = "required"; else if (!isValidIban(s("sepa_iban"))) e.sepa_iban = "iban";
+      if (!s("sepa_firma")) e.sepa_firma = "signature";
+      if (v("sepa_acepto") !== true) e.sepa_acepto = "mandate";
+    }
     if (v("consentimiento") !== true) e.consentimiento = "consent";
     return e;
-  }, [values]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [values, sepaActive]); // eslint-disable-line react-hooks/exhaustive-deps
   const step2Valid = Object.keys(errors2).length === 0;
   const step3Valid = Object.keys(errors3).length === 0;
   const [touched, setTouched] = useState<Record<string, boolean>>({});
@@ -114,7 +127,7 @@ export function RequestForm({ initialType, project, compact = false }: { initial
   const err = (key: string) => {
     const kind = (step === 3 ? errors3 : errors2)[key];
     if (!kind) return undefined;
-    if (showRequired || (touched[key] && has(key))) return t.errors[kind];
+    if (showRequired || (touched[key] && has(key))) return message(kind);
     return undefined;
   };
   const focusFirstError = () => setTimeout(() => {
@@ -128,7 +141,8 @@ export function RequestForm({ initialType, project, compact = false }: { initial
     areas: t.voluntariado.areasLabel, disponibilidad: t.voluntariado.whenLabel, tipo_entidad: t.organizacion.entityType,
     modo: t.donar.modeLabel, que_dona: t.donar.goodsLabel, descripcion: t.donar.goodsDesc, plan: t.donar.planLabel, cuota_otra: v("plan") === "empresa" ? t.donar.companyOther : t.donar.otherAmount, cuota: t.donar.feeLabel, entidad: type === "donar" ? t.donar.companyName : t.organizacion.entity, periodicidad: t.donar.periodLabel, tema: t.otro.topicLabel,
   } : {};
-  const labels3: Record<string, string> = { nombre: t.contact.name, email: t.contact.email, consentimiento: t.errors.consentLabel };
+  const labels3: Record<string, string> = { nombre: t.contact.name, email: t.contact.email, consentimiento: t.errors.consentLabel, sepa_titular: sc.holder, sepa_direccion: sc.address, sepa_cp: sc.postcode, sepa_poblacion: sc.town, sepa_pais: sc.country, sepa_iban: sc.iban, sepa_firma: sc.sign, sepa_acepto: sc.title };
+  if (type === "donar") labels2.pago = sc.payLabel;
 
   const choose = (next: RequestType) => { setType(next); setStep(2); setShowRequired(false); };
   const goNext = () => { if (!step2Valid) { setShowRequired(true); return focusFirstError(); } setShowRequired(false); setTouched({}); setStep(3); };
@@ -143,7 +157,10 @@ export function RequestForm({ initialType, project, compact = false }: { initial
     const fixedPlan = socio && v("plan") === "pleno" ? { cuota: String(MEMBERSHIP.fullAmount), periodicidad: MEMBERSHIP.fullPeriod, cuota_otra: undefined }
       : socio && v("plan") === "reducida" ? { cuota: String(MEMBERSHIP.reducedAmount), periodicidad: "mensual", cuota_otra: undefined }
       : socio && v("plan") === "empresa" ? { periodicidad: "mensual" } : {};
-    const payload = { referencia: ref, tipo: type, proyecto: project, idioma: locale, pagina: typeof window !== "undefined" ? window.location.pathname : "", ...Object.fromEntries(Object.entries(values).filter(([key]) => key !== "website")), ...fixedPlan };
+    // Bank details and the signature are sent only for a SEPA membership.
+    const kept = Object.entries(values).filter(([key]) => key !== "website" && (sepaActive || !key.startsWith("sepa_")) && (socio || key !== "pago"));
+    const sepaExtra = sepaActive && charge ? { sepa_iban: compactIban(s("sepa_iban")), sepa_importe: String(charge.amount), sepa_periodicidad: charge.period, sepa_firmado_en: new Date().toISOString(), sepa_dispositivo: typeof navigator !== "undefined" ? navigator.userAgent.slice(0, 200) : "" } : {};
+    const payload = { referencia: ref, tipo: type, proyecto: project, idioma: locale, pagina: typeof window !== "undefined" ? window.location.pathname : "", ...Object.fromEntries(kept), ...fixedPlan, ...sepaExtra };
     try {
       await sendRequest(payload);
       track("generate_lead", { tipo: type });
@@ -151,13 +168,13 @@ export function RequestForm({ initialType, project, compact = false }: { initial
       setState("idle");
     } catch {
       // Last resort: let the person send the same request from their own e-mail app.
-      const body = Object.entries(flatten(payload)).map(([key, value]) => `${key}: ${value}`).join("\n");
+      const body = Object.entries(flatten(payload)).filter(([key]) => !key.startsWith("sepa_")).map(([key, value]) => `${key}: ${value}`).join("\n");
       setFailedMail(`mailto:${CONTACT.requestsEmail}?subject=${encodeURIComponent(`Solicitud web ${ref} (${type})`)}&body=${encodeURIComponent(body)}`);
       setState("error");
     }
   };
 
-  const reset = () => { setValues({ canal: "whatsapp" }); setReference(undefined); setType(initialType); setStep(initialType ? 2 : 1); setShowRequired(false); setTouched({}); };
+  const reset = () => { setValues({ canal: "whatsapp", sepa_pais: "España" }); setReference(undefined); setType(initialType); setStep(initialType ? 2 : 1); setShowRequired(false); setTouched({}); };
 
   if (reference) return <div className="scroll-mt-28 rounded-3xl bg-[#0C1320] p-8 text-center shadow-sm ring-1 ring-[#D6B25E]/20">
     <CheckCircle2 className="mx-auto h-14 w-14 text-[#D6B25E]" />
@@ -165,6 +182,7 @@ export function RequestForm({ initialType, project, compact = false }: { initial
     <p className="mt-4 text-sm text-slate-300">{t.done.reference}</p>
     <p className="mt-1 font-mono text-2xl font-bold tracking-wider text-[#EEE7D7]">{reference}</p>
     <p className="mx-auto mt-4 max-w-md leading-7 text-slate-300">{t.done.next}</p>
+    {sepaActive && <p className="mx-auto mt-3 max-w-md text-sm leading-6 text-[#F0D893]">{sc.doneNote}</p>}
     <div className="mt-7 flex flex-wrap justify-center gap-3"><button type="button" onClick={reset} className="min-h-11 rounded-full border border-[#D6B25E]/20 px-5 py-2 text-sm font-bold text-[#EEE7D7]">{t.done.again}</button><Link href="/" className="inline-flex min-h-11 items-center rounded-full bg-[#D6B25E] px-5 py-2 text-sm font-bold text-[#120D05]">{t.done.home}</Link></div>
   </div>;
 
@@ -233,7 +251,8 @@ export function RequestForm({ initialType, project, compact = false }: { initial
             {v("cuota") === "otra" && <Field label={t.donar.otherAmount} required error={err("cuota_otra")}><input type="number" min={MEMBERSHIP.minAmount} step={1} inputMode="numeric" className={fieldClass} value={s("cuota_otra")} onChange={e => set("cuota_otra")(e.target.value)} onBlur={touch("cuota_otra")} /></Field>}
             <Chips label={t.donar.periodLabel} options={t.donar.periods} value={v("periodicidad") as string} onChange={set("periodicidad")} required error={err("periodicidad")} />
           </>}
-          <p className="rounded-xl bg-[#060A12] p-4 text-sm leading-6 text-slate-200">{t.donar.socioNote}</p>
+          <Chips label={sc.payLabel} options={sc.payOptions} value={v("pago") as string} onChange={set("pago")} required error={err("pago")} />
+          {v("pago") && <p className="rounded-xl bg-[#060A12] p-4 text-sm leading-6 text-slate-200">{v("pago") === "sepa" ? sc.sepaNote : sc.otherNote}</p>}
         </>}
       </>}
 
@@ -255,6 +274,31 @@ export function RequestForm({ initialType, project, compact = false }: { initial
       </div>
       <Chips label={t.contact.zoneLabel} options={t.contact.zones} value={v("zona") as string[]} onChange={set("zona")} multiple />
       <Chips label={t.contact.channelLabel} options={t.contact.channels} value={v("canal") as string} onChange={set("canal")} />
+      {sepaActive && <section className="space-y-5 rounded-2xl border border-[#D6B25E]/30 bg-[#060A12] p-5 sm:p-6">
+        <div><h3 className="font-serif text-2xl text-[#EEE7D7]">{sc.title}</h3><p className="mt-1 text-sm leading-6 text-slate-300">{sc.intro}</p></div>
+        <div className="grid gap-5 sm:grid-cols-2">
+          <Field label={sc.holder} required error={err("sepa_titular")}><input autoComplete="name" className={fieldClass} value={s("sepa_titular")} placeholder={s("nombre")} onChange={e => set("sepa_titular")(e.target.value)} onBlur={touch("sepa_titular")} /></Field>
+          <Field label={sc.holderNif}><input className={fieldClass} value={s("sepa_nif")} onChange={e => set("sepa_nif")(e.target.value.toUpperCase())} /></Field>
+          <div className="sm:col-span-2"><Field label={sc.address} required error={err("sepa_direccion")}><input autoComplete="street-address" className={fieldClass} value={s("sepa_direccion")} onChange={e => set("sepa_direccion")(e.target.value)} onBlur={touch("sepa_direccion")} /></Field></div>
+          <Field label={sc.postcode} required error={err("sepa_cp")}><input autoComplete="postal-code" inputMode="numeric" className={fieldClass} value={s("sepa_cp")} onChange={e => set("sepa_cp")(e.target.value)} onBlur={touch("sepa_cp")} /></Field>
+          <Field label={sc.town} required error={err("sepa_poblacion")}><input autoComplete="address-level2" className={fieldClass} value={s("sepa_poblacion")} onChange={e => set("sepa_poblacion")(e.target.value)} onBlur={touch("sepa_poblacion")} /></Field>
+          <Field label={sc.country} required error={err("sepa_pais")}><input autoComplete="country-name" className={fieldClass} value={s("sepa_pais")} onChange={e => set("sepa_pais")(e.target.value)} onBlur={touch("sepa_pais")} /></Field>
+          <Field label={sc.iban} required error={err("sepa_iban")}><input autoComplete="off" spellCheck={false} className={`${fieldClass} font-mono tracking-wide`} value={s("sepa_iban")} onChange={e => set("sepa_iban")(e.target.value.toUpperCase())} onBlur={() => { touch("sepa_iban")(); if (s("sepa_iban")) set("sepa_iban")(formatIban(s("sepa_iban"))); }} /><span className="mt-1 block text-xs font-normal text-slate-400">{sc.ibanHint}</span></Field>
+        </div>
+        <div className="rounded-xl bg-[#F7F3EA] p-5 text-[13px] leading-6 text-[#1B2433]">
+          <p className="font-bold uppercase tracking-wide text-[#0B1E3A]">{sc.mandateTitle}</p>
+          <dl className="mt-3 grid gap-x-4 gap-y-1 sm:grid-cols-[auto_1fr]">
+            <dt className="font-semibold">{sc.creditor}</dt><dd>{SEPA_CREDITOR.name} · {SEPA_CREDITOR.address}, {SEPA_CREDITOR.city}, {SEPA_CREDITOR.country}</dd>
+            <dt className="font-semibold">{sc.creditorId}</dt><dd className="font-mono">{SEPA_CREDITOR.id}</dd>
+            <dt className="font-semibold">{sc.reference}</dt><dd>{sc.referenceLater}</dd>
+            <dt className="font-semibold">{sc.paymentType}</dt><dd>{sc.recurrent}</dd>
+            {charge && <><dt className="font-semibold">{sc.amount}</dt><dd>{charge.amount} € {sc.periods[charge.period] ?? charge.period}</dd></>}
+          </dl>
+          <p className="mt-3 text-[12px] leading-5 text-[#3A4556]">{sc.legal}</p>
+        </div>
+        <SignaturePad label={sc.sign} hint={sc.signHint} clearLabel={sc.clear} error={err("sepa_firma")} onChange={set("sepa_firma")} />
+        <div data-error={err("sepa_acepto") ? "true" : undefined} className={`scroll-mt-32 rounded-xl ${err("sepa_acepto") ? "p-3 ring-2 ring-red-400/60" : ""}`}><label className="flex items-start gap-3 text-sm leading-6 text-slate-200"><input type="checkbox" className="mt-1 h-5 w-5 shrink-0 accent-[#D6B25E]" checked={v("sepa_acepto") === true} onChange={e => set("sepa_acepto")(e.target.checked)} /><span>{sc.accept}</span></label><ErrorText text={err("sepa_acepto")} /></div>
+      </section>}
       <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden className="hidden" value={s("website")} onChange={e => set("website")(e.target.value)} />
       <p className="text-xs leading-5 text-slate-400">{t.contact.sensitive}</p>
       <div data-error={err("consentimiento") ? "true" : undefined} className={`scroll-mt-32 rounded-xl ${err("consentimiento") ? "p-3 ring-2 ring-red-400/60" : ""}`}><label className="flex items-start gap-3 text-sm leading-6 text-slate-200"><input type="checkbox" className="mt-1 h-5 w-5 shrink-0 accent-[#D6B25E]" checked={v("consentimiento") === true} onChange={e => set("consentimiento")(e.target.checked)} /><span>{t.contact.consent} <Link className="underline" href="/privacidad">{t.contact.privacyLink}</Link></span></label><ErrorText text={err("consentimiento")} /></div>

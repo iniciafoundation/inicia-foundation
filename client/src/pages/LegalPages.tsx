@@ -83,6 +83,7 @@ const privacyCopy: Record<Locale, PageCopy> = {
       { h: "2. Datos que tratamos", paragraphs: [
         "A través de los formularios del sitio (solicitud de ayuda, voluntariado, organizaciones, donaciones en especie o interés en hacerse socio/a y otras consultas) recogemos: nombre, correo electrónico, teléfono, ciudad, canal e idioma de contacto preferidos, y la información que la propia persona escribe en su mensaje.",
         "Los formularios piden expresamente que no se envíen datos de salud ni documentos de identidad. Le rogamos que no incluya este tipo de información en sus mensajes.",
+        "Si una persona se hace socia y elige pagar la cuota por domiciliación bancaria (SEPA), recogemos además: titular, dirección y, opcionalmente, DNI/NIE/NIF del titular, el IBAN, la firma manuscrita realizada en pantalla, la fecha y hora de la firma y el navegador utilizado. Estos datos se usan exclusivamente para gestionar la orden de domiciliación y cobrar la cuota; se guardan en un registro confidencial de la asociación, al que solo accede la Presidencia, y se comunican a nuestra entidad bancaria únicamente en los ficheros de cobro. Se conservan mientras dure la condición de socio/a y, después, durante el plazo exigido por la normativa de servicios de pago (hasta 14 meses tras el último cargo) y la normativa contable y fiscal.",
       ] },
       { h: "3. Finalidades", paragraphs: ["Utilizamos los datos únicamente para:"], list: [
         "atender y responder a las solicitudes y consultas recibidas;",
@@ -127,6 +128,7 @@ const privacyCopy: Record<Locale, PageCopy> = {
       { h: "2. Data we process", paragraphs: [
         "Through the website forms (requests for help, volunteering, organisations, in-kind donations or interest in becoming a member, and other enquiries) we collect: name, email address, phone number, city, preferred contact channel and language, and whatever the person writes in their message.",
         "The forms expressly ask people not to send health data or identity documents. Please do not include this kind of information in your messages.",
+        "If a person becomes a member and chooses to pay the fee by SEPA direct debit, we also collect: the account holder, address and, optionally, the holder's ID/NIE/tax number, the IBAN, the hand-written signature made on screen, the date and time of signing and the browser used. These data are used only to manage the direct debit mandate and collect the fee; they are kept in a confidential register of the association that only the Presidency can access, and they are sent to our bank only in the collection files. They are kept while the person remains a member and afterwards for the period required by payment services law (up to 14 months after the last charge) and by accounting and tax law.",
       ] },
       { h: "3. Purposes", paragraphs: ["We use the data only to:"], list: [
         "handle and reply to the requests and enquiries we receive;",
@@ -171,6 +173,7 @@ const privacyCopy: Record<Locale, PageCopy> = {
       { h: "2. Какие данные мы обрабатываем", paragraphs: [
         "Через формы на сайте (запрос помощи, волонтёрство, организации, пожертвования в натуральной форме или интерес к членству, другие обращения) мы получаем: имя, адрес электронной почты, телефон, город, предпочтительный канал и язык связи, а также то, что человек сам пишет в сообщении.",
         "В формах прямо указано, что не следует отправлять данные о здоровье и документы, удостоверяющие личность. Просим не включать такую информацию в сообщения.",
+        "Если человек становится членом организации и выбирает оплату взноса автосписанием (SEPA), мы дополнительно получаем: имя владельца счёта, адрес и, по желанию, DNI/NIE/NIF владельца, IBAN, подпись, сделанную на экране, дату и время подписи и данные браузера. Эти данные используются только для оформления поручения на списание и получения взноса; они хранятся в конфиденциальном реестре организации, доступ к которому есть только у президента, и передаются нашему банку исключительно в файлах на списание. Они хранятся, пока человек остаётся членом организации, а затем в течение срока, установленного законодательством о платёжных услугах (до 14 месяцев после последнего списания), и бухгалтерским и налоговым законодательством.",
       ] },
       { h: "3. Цели обработки", paragraphs: ["Мы используем данные исключительно для того, чтобы:"], list: [
         "рассматривать полученные запросы и обращения и отвечать на них;",
@@ -215,6 +218,7 @@ const privacyCopy: Record<Locale, PageCopy> = {
       { h: "2. Які дані ми обробляємо", paragraphs: [
         "Через форми на сайті (запит допомоги, волонтерство, організації, пожертви в натуральній формі або інтерес до членства, інші звернення) ми отримуємо: ім’я, адресу електронної пошти, телефон, місто, бажаний канал і мову зв’язку, а також те, що людина сама пише в повідомленні.",
         "У формах прямо зазначено, що не слід надсилати дані про здоров’я та документи, що посвідчують особу. Просимо не додавати таку інформацію до повідомлень.",
+        "Якщо людина стає членом організації та обирає оплату внеску автосписанням (SEPA), ми додатково отримуємо: ім’я власника рахунку, адресу та, за бажанням, DNI/NIE/NIF власника, IBAN, підпис, зроблений на екрані, дату й час підпису та дані браузера. Ці дані використовуються лише для оформлення доручення на списання та отримання внеску; вони зберігаються в конфіденційному реєстрі організації, доступ до якого має лише президент, і передаються нашому банку виключно у файлах на списання. Вони зберігаються, поки людина залишається членом організації, а потім протягом строку, встановленого законодавством про платіжні послуги (до 14 місяців після останнього списання), та бухгалтерським і податковим законодавством.",
       ] },
       { h: "3. Мета обробки", paragraphs: ["Ми використовуємо дані виключно для того, щоб:"], list: [
         "розглядати отримані запити та звернення й відповідати на них;",
@@ -259,6 +263,7 @@ const privacyCopy: Record<Locale, PageCopy> = {
       { h: "2. Datos que tratamos", paragraphs: [
         "Per aciu de los formularios del sitiu (solicitú d'ayuda, voluntariáu, organizaciones, donaciones n'especie o interés en facese sociu/a y otres consultes) recoyemos: nome, corréu electrónicu, teléfonu, ciudá, canal y llingua de contautu preferíos, y la información que la mesma persona escribe nel so mensaxe.",
         "Los formularios piden espresamente que nun s'unvien datos de salú nin documentos d'identidá. Rogámos-y que nun incluya esti tipu d'información nos sos mensaxes.",
+        "Si una persona se fai socia y escueye pagar la cuota per domiciliación bancaria (SEPA), recoyemos amás: titular, direición y, opcionalmente, DNI/NIE/NIF del titular, l'IBAN, la firma fecha na pantalla, la fecha y hora de la firma y el navegador usáu. Estos datos úsense namás pa xestionar la orde de domiciliación y cobrar la cuota; guárdense nun rexistru confidencial de l'asociación, al que namás accede la Presidencia, y comuníquense al nuesu bancu namás nos ficheros de cobru. Consérvense mentes dure la condición de sociu/a y, depués, nel plazu que pide la normativa de servicios de pagu (hasta 14 meses tres l'últimu cargu) y la normativa contable y fiscal.",
       ] },
       { h: "3. Finalidaes", paragraphs: ["Usamos los datos namás pa:"], list: [
         "atender y responder a les solicitúes y consultes recibíes;",

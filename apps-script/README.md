@@ -60,3 +60,17 @@
 - Включите двухэтапную проверку для direccion@.
 - Форма не собирает номера счетов и медицинские данные.
 - Если изменили `Code.gs`, сделайте **Развернуть → Управление развёртываниями → ✏️ → Версия: новая** — адрес останется прежним.
+
+
+## SEPA direct debit for membership fees (added 2026-10)
+
+1. Paste the new `Code.gs` over the old one and save.
+2. In the editor choose the function `setupSepa` and press **Run**. Accept the new permissions (Drive, triggers).
+   It creates, in the script owner's Drive, the folder **"INICIA — Socios SEPA (confidencial)"** with the
+   spreadsheet of the same name (tabs "Socios SEPA" and "Remesas"). Do not share them.
+3. **Deploy → Manage deployments → edit (pencil) → Version: New version → Deploy.** The web app URL stays the same.
+4. Optional: write the bank BIC in `CONFIG.SEPA.CREDITOR_BIC`.
+
+Each month: open the confidential spreadsheet → menu **INICIA → Generar remesa SEPA…** → enter the collection date
+(YYYY-MM-DD) → download the XML file from the folder and upload it in Ruralvía (Remesas de adeudos SEPA, XML pain.008 / Cuaderno 19.14).
+Members marked `baja`, `devuelto` or `pausado` are skipped; `trimestral` and `anual` members are charged every 3 / 12 months from the month they signed.
