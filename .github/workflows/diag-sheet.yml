@@ -3,12 +3,9 @@ on: { push: { branches: [diag-sheet] } }
 jobs:
   check:
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 12
     steps:
       - run: |
           set +e
-          S=$(curl -sL "https://script.google.com/macros/s/AKfycby8-zwlvbK6Zv56Bqh-oWsL9DFCNMc0xCVoHJBG8oTBzjs1Q5FBLBc0N5Bv5JjbLWls/exec?action=content" | python3 -c "import sys,json;d=json.load(sys.stdin);s=d.get('settings',{});print({k:v for k,v in s.items() if 'anal' in k or 'ga' in k.lower() or 'verif' in k or 'search' in k}, 'news', len(d.get('news',[])))")
-          T=$(dig +short TXT iniciafoundation.org | tr '\n' ' ')
-          M=$(curl -s https://iniciafoundation.org/ | grep -o 'google-site-verification[^>]*\|googletagmanager[^"]*' | head -3 | tr '\n' ' ')
-          N=$(dig +short NS iniciafoundation.org | tr "\n" " "); W=$(whois iniciafoundation.org 2>/dev/null | grep -i "registrar:" | head -1)
-          echo "::notice title=ga::NS=$N | $W | settings=$S | TXT=$T | meta=$M"
+          for i in $(seq 1 10); do JS=$(curl -s https://iniciafoundation.org/contacto | grep -o '/assets/index-[A-Za-z0-9_-]*\.js' | head -1); C=$(curl -s "https://iniciafoundation.org$JS" | grep -c 'features'); P=$(curl -s https://iniciafoundation.org/privacidad | grep -c 'IBAN'); [ "$P" -gt 0 ] && break; sleep 60; done
+          echo "::notice title=live::js=$JS features=$C privacy_iban=$P"
