@@ -1,18 +1,13 @@
 name: diag-sheet
 on: { push: { branches: [diag-sheet] } }
 jobs:
-  audit:
+  check:
     runs-on: ubuntu-latest
-    timeout-minutes: 40
+    timeout-minutes: 8
     steps:
-      - uses: actions/setup-node@v4
-        with: { node-version: 22 }
       - run: |
           set +e
-          npm i -g lighthouse@12.6.1 >/dev/null 2>&1
-          for S in https://deploy-preview-8--iniciafoundation.netlify.app https://iniciafoundation.org; do echo "== $S" >> out.txt
-          for u in "" donar contacto proyectos mision noticias; do
-            rm -f r-*.json; for k in 1 2 3; do timeout 120 lighthouse "$S/$u" --quiet --max-wait-for-load=45000 --chrome-flags="--headless=new --no-sandbox" --only-categories=performance --output=json --output-path=r-$k.json >/dev/null 2>&1; done
-            node -e "const rs=[1,2,3].map(k=>{try{return require('./r-'+k+'.json')}catch{return null}}).filter(Boolean).sort((a,b)=>a.categories.performance.score-b.categories.performance.score);const r=rs[Math.floor(rs.length/2)];const a=r.audits;console.log('/$u','perf',Math.round(r.categories.performance.score*100),'('+rs.map(x=>Math.round(x.categories.performance.score*100)).join('/')+')','FCP',a['first-contentful-paint'].displayValue,'LCP',a['largest-contentful-paint'].displayValue,'TBT',a['total-blocking-time'].displayValue,'CLS',a['cumulative-layout-shift'].displayValue)" >> out.txt 2>&1
-          done; done
-          python3 -c "import sys; t=open('out.txt').read(); print('::notice title=lh::'+t.replace('%','%25').replace(chr(10),'%0A'))"
+          S=$(curl -sL "https://script.google.com/macros/s/AKfycby8-zwlvbK6Zv56Bqh-oWsL9DFCNMc0xCVoHJBG8oTBzjs1Q5FBLBc0N5Bv5JjbLWls/exec?action=content" | python3 -c "import sys,json;d=json.load(sys.stdin);s=d.get('settings',{});print({k:v for k,v in s.items() if 'anal' in k or 'ga' in k.lower() or 'verif' in k or 'search' in k}, 'news', len(d.get('news',[])))")
+          T=$(dig +short TXT iniciafoundation.org | tr '\n' ' ')
+          M=$(curl -s https://iniciafoundation.org/ | grep -o 'google-site-verification[^>]*\|googletagmanager[^"]*' | head -3 | tr '\n' ' ')
+          echo "::notice title=ga::settings=$S | TXT=$T | meta=$M"
