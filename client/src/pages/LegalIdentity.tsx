@@ -35,8 +35,8 @@ const copy: Record<Locale, LegalCopy> = {
     europeTitle: "Programas europeos",
     europeText: "Identificador de organización (OID) en Erasmus+ y el Cuerpo Europeo de Solidaridad",
     picText: "Código de identificación de participante (PIC) en el Portal de Financiación y Licitaciones de la UE",
-    pendingTitle: "Documentos en validación jurídica",
-    pendingText: "La política de privacidad, el canal de derechos ARCO-POL, el plazo de conservación, las condiciones de socio/a, las cuotas, los eventuales beneficios fiscales, el acuerdo de incorporación de voluntariado y sus seguros solo se publicarán cuando la organización aporte sus versiones definitivas aprobadas. El portal no presenta estos documentos como vigentes mientras ese proceso está pendiente.",
+    pendingTitle: "Actividad de la entidad",
+    pendingText: "Asociación sin ánimo de lucro que, desde 2021, acompaña a familias en situación de vulnerabilidad —sobre todo familias desplazadas por la guerra de Ucrania y personas migrantes— en trámites, acceso a recursos públicos, empleo y ayuda material. Actividad realizada por personas voluntarias y gratuita para las personas atendidas. La Política de privacidad, el Aviso legal y la Política de cookies están publicados al pie de cada página.",
   },
   en: {
     eyebrow: "Organisation identity",
@@ -51,8 +51,8 @@ const copy: Record<Locale, LegalCopy> = {
     europeTitle: "European programmes",
     europeText: "Organisation ID (OID) for Erasmus+ and the European Solidarity Corps",
     picText: "Participant Identification Code (PIC) in the EU Funding & Tenders Portal",
-    pendingTitle: "Documents under legal review",
-    pendingText: "The privacy policy, the channel for exercising data protection rights (ARCO-POL), the data retention period, membership conditions, fees, any tax benefits, the volunteer agreement and its insurance will only be published once the organisation provides their final approved versions. While this process is pending, the website does not present these documents as being in force.",
+    pendingTitle: "What the organisation does",
+    pendingText: "Non-profit association that, since 2021, has supported families in vulnerable situations —above all families displaced by the war in Ukraine and migrants— with paperwork, access to public services, employment and material aid. The work is done by volunteers and is free for the people we help. The Privacy policy, Legal notice and Cookie policy are linked at the foot of every page.",
   },
   ru: {
     eyebrow: "Сведения об организации",
@@ -67,8 +67,8 @@ const copy: Record<Locale, LegalCopy> = {
     europeTitle: "Европейские программы",
     europeText: "Идентификатор организации (OID) в Erasmus+ и Европейском корпусе солидарности",
     picText: "Код участника (PIC) на портале финансирования и тендеров ЕС",
-    pendingTitle: "Документы на юридической проверке",
-    pendingText: "Политика конфиденциальности, порядок реализации прав субъектов персональных данных (ARCO-POL), срок хранения данных, условия членства, членские взносы, возможные налоговые льготы, соглашение о волонтёрской деятельности и страхование волонтёров будут опубликованы только после того, как организация предоставит их окончательные утверждённые редакции. Пока этот процесс не завершён, сайт не представляет эти документы как действующие.",
+    pendingTitle: "Деятельность организации",
+    pendingText: "Некоммерческая ассоциация, которая с 2021 года помогает семьям в трудной ситуации — прежде всего семьям, вынужденно покинувшим Украину из-за войны, и мигрантам — с документами, доступом к государственным услугам, трудоустройством и материальной поддержкой. Работу выполняют волонтёры, помощь бесплатная. Политика конфиденциальности, правовая информация и политика cookies доступны внизу каждой страницы.",
   },
   uk: {
     eyebrow: "Відомості про організацію",
@@ -83,8 +83,8 @@ const copy: Record<Locale, LegalCopy> = {
     europeTitle: "Європейські програми",
     europeText: "Ідентифікатор організації (OID) в Erasmus+ і Європейському корпусі солідарності",
     picText: "Код учасника (PIC) на порталі фінансування та тендерів ЄС",
-    pendingTitle: "Документи на юридичній перевірці",
-    pendingText: "Політику конфіденційності, порядок реалізації прав суб’єктів персональних даних (ARCO-POL), строк зберігання даних, умови членства, членські внески, можливі податкові пільги, угоду про волонтерську діяльність і страхування волонтерів буде опубліковано лише після того, як організація надасть їхні остаточні затверджені редакції. Доки цей процес не завершено, сайт не подає ці документи як чинні.",
+    pendingTitle: "Діяльність організації",
+    pendingText: "Неприбуткова асоціація, яка з 2021 року допомагає родинам у скрутному становищі — насамперед родинам, які вимушено виїхали з України через війну, та мігрантам — з документами, доступом до державних послуг, працевлаштуванням і матеріальною підтримкою. Роботу виконують волонтери, допомога безкоштовна. Політика конфіденційності, правова інформація та політика cookies доступні внизу кожної сторінки.",
   },
   ast: {
     eyebrow: "Identidá de la organización",
@@ -99,8 +99,8 @@ const copy: Record<Locale, LegalCopy> = {
     europeTitle: "Programes européos",
     europeText: "Identificador d'organización (OID) n'Erasmus+ y nel Cuerpu Européu de Solidaridá",
     picText: "Códigu d'identificación de participante (PIC) nel Portal de Financiación y Llicitaciones de la UE",
-    pendingTitle: "Documentos en validación xurídica",
-    pendingText: "La política de privacidá, la canal de derechos ARCO-POL, el plazu de caltenimientu, les condiciones de sociu/a, les cuotes, los eventuales beneficios fiscales, l'alcuerdu d'incorporación de voluntariáu y los sos seguros namás se van publicar cuando la organización apurra les sos versiones definitives aprobaes. El portal nun presenta estos documentos como vixentes mentanto esi procesu tea pendiente.",
+    pendingTitle: "Actividá de la entidá",
+    pendingText: "Asociación ensin ánimu de llucru que, dende 2021, acompaña a families en situación de vulnerabilidá —sobre too families desplazaes pola guerra d'Ucraína y persones migrantes— en trámites, accesu a recursos públicos, empléu y ayuda material. Actividá fecha por persones voluntaries y de baldre pa les persones atendíes. La Política de privacidá, l'Avisu llegal y la Política de cookies tán espublizaes al pie de cada páxina.",
   },
 };
 

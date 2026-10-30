@@ -10,11 +10,11 @@ const publicSuffix = "ONG en Asturias";
 const publicPages: Record<string, Omit<SiteMetadata, "robots">> = {
   "/": {
     title: `${brand} | ONG en Asturias: inclusión y voluntariado`,
-    description: "ONG sin ánimo de lucro en Asturias: proyectos sociales, inclusión, apoyo a familias y migrantes, voluntariado y formación. Pide ayuda, colabora o dona.",
+    description: "Asociación sin ánimo de lucro de Gijón (Asturias) que desde 2021 acompaña a familias desplazadas por la guerra de Ucrania, migrantes y vecinos vulnerables: trámites, empleo y ayuda material.",
   },
   "/mision": {
-    title: `Misión y fines estatutarios | ${brand}`,
-    description: "Misión, fines estatutarios y ámbito cívico de INICIA Foundation: inclusión, comunidad, sostenibilidad y participación responsable.",
+    title: `Nuestra misión: acompañar a familias en Asturias | ${brand}`,
+    description: "Desde 2021 INICIA Foundation acompaña en Gijón y Asturias a familias desplazadas por la guerra de Ucrania, personas migrantes y vecinos vulnerables: trámites, empleo y ayuda material.",
   },
   "/ideologia": {
     title: `Ideología y compromiso cívico | ${brand}`,

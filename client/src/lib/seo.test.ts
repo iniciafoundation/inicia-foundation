@@ -5,7 +5,7 @@ describe("public SEO metadata", () => {
   it("uses the institutional public brand on the home page", () => {
     const metadata = getSiteMetadata("/");
     expect(metadata.title).toBe("INICIA Foundation | ONG en Asturias: inclusión y voluntariado");
-    expect(metadata.description).toContain("proyectos sociales");
+    expect(metadata.description).toContain("acompaña a familias");
     expect(metadata.robots).toBe("index,follow");
   });
 
