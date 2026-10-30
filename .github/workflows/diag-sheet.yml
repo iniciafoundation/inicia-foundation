@@ -10,4 +10,5 @@ jobs:
           S=$(curl -sL "https://script.google.com/macros/s/AKfycby8-zwlvbK6Zv56Bqh-oWsL9DFCNMc0xCVoHJBG8oTBzjs1Q5FBLBc0N5Bv5JjbLWls/exec?action=content" | python3 -c "import sys,json;d=json.load(sys.stdin);s=d.get('settings',{});print({k:v for k,v in s.items() if 'anal' in k or 'ga' in k.lower() or 'verif' in k or 'search' in k}, 'news', len(d.get('news',[])))")
           T=$(dig +short TXT iniciafoundation.org | tr '\n' ' ')
           M=$(curl -s https://iniciafoundation.org/ | grep -o 'google-site-verification[^>]*\|googletagmanager[^"]*' | head -3 | tr '\n' ' ')
-          echo "::notice title=ga::settings=$S | TXT=$T | meta=$M"
+          N=$(dig +short NS iniciafoundation.org | tr "\n" " "); W=$(whois iniciafoundation.org 2>/dev/null | grep -i "registrar:" | head -1)
+          echo "::notice title=ga::NS=$N | $W | settings=$S | TXT=$T | meta=$M"
