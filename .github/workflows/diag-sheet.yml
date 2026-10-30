@@ -7,5 +7,5 @@ jobs:
     steps:
       - run: |
           set +e
-          for i in $(seq 1 10); do JS=$(curl -s https://iniciafoundation.org/contacto | grep -o '/assets/index-[A-Za-z0-9_-]*\.js' | head -1); C=$(curl -s "https://iniciafoundation.org$JS" | grep -c 'features'); P=$(curl -s https://iniciafoundation.org/privacidad | grep -c 'IBAN'); [ "$P" -gt 0 ] && break; sleep 60; done
-          echo "::notice title=live::js=$JS features=$C privacy_iban=$P"
+          for i in $(seq 1 10); do H=$(curl -s https://iniciafoundation.org/ | grep -c 'empiezan de nuevo'); M=$(curl -s https://iniciafoundation.org/mision | grep -c 'Seis líneas de trabajo'); [ "$H" -gt 0 ] && [ "$M" -gt 0 ] && break; sleep 60; done
+          echo "::notice title=live::home=$H mision=$M"
