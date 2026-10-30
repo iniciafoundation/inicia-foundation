@@ -6,6 +6,7 @@ import { requestCopy } from "@/lib/requestCopy";
 import { type RequestType, flatten, makeReference, sendRequest } from "@/lib/requests";
 import { CONTACT, MEMBERSHIP, ZONES } from "@/lib/siteConfig";
 import { track } from "@/lib/analytics";
+import { useSiteContent } from "@/lib/content";
 import { SEPA_CREDITOR, compactIban, formatIban, isValidIban, membershipCharge, sepaCopy } from "@/lib/sepa";
 import { SignaturePad } from "./SignaturePad";
 
@@ -45,6 +46,9 @@ export function RequestForm({ initialType, project, compact = false }: { initial
   const [locale] = useLocale();
   const t = requestCopy[locale];
   const sc = sepaCopy[locale];
+  // SEPA is offered only once the Google Apps Script that stores signed mandates is deployed.
+  const { data: content } = useSiteContent();
+  const sepaAvailable = content.features?.sepa === true;
   const [type, setType] = useState<RequestType | undefined>(initialType);
   const [step, setStep] = useState(initialType ? 2 : 1);
   const [values, setValues] = useState<Values>(() => {
@@ -75,7 +79,7 @@ export function RequestForm({ initialType, project, compact = false }: { initial
 
   type ErrKind = Exclude<keyof typeof t.errors, "summary" | "consentLabel"> | "iban" | "signature" | "mandate";
   const message = (kind: ErrKind) => kind === "iban" ? sc.ibanError : kind === "signature" ? sc.signError : kind === "mandate" ? sc.acceptError : t.errors[kind];
-  const sepaActive = type === "donar" && values.modo === "socio" && values.pago === "sepa";
+  const sepaActive = sepaAvailable && type === "donar" && values.modo === "socio" && values.pago === "sepa";
   const charge = sepaActive ? membershipCharge(values) : undefined;
   const errors2 = useMemo(() => {
     const e: Record<string, ErrKind> = {};
@@ -96,14 +100,14 @@ export function RequestForm({ initialType, project, compact = false }: { initial
             need("entidad"); need("cuota", "choose");
             if (v("cuota") === "otra") { if (!has("cuota_otra")) e.cuota_otra = "required"; else if (Number(s("cuota_otra")) < MEMBERSHIP.companyMin) e.cuota_otra = "companyMin"; }
           }
-          need("pago", "choose");
+          if (sepaAvailable) need("pago", "choose");
         }
         else if (v("modo") !== "dinero") need("modo", "choose");
         break;
       case "otro": need("tema", "choose"); need("mensaje"); break;
     }
     return e;
-  }, [type, values]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [type, values, sepaAvailable]); // eslint-disable-line react-hooks/exhaustive-deps
   const errors3 = useMemo(() => {
     const e: Record<string, ErrKind> = {};
     const name = s("nombre").trim();
@@ -251,8 +255,10 @@ export function RequestForm({ initialType, project, compact = false }: { initial
             {v("cuota") === "otra" && <Field label={t.donar.otherAmount} required error={err("cuota_otra")}><input type="number" min={MEMBERSHIP.minAmount} step={1} inputMode="numeric" className={fieldClass} value={s("cuota_otra")} onChange={e => set("cuota_otra")(e.target.value)} onBlur={touch("cuota_otra")} /></Field>}
             <Chips label={t.donar.periodLabel} options={t.donar.periods} value={v("periodicidad") as string} onChange={set("periodicidad")} required error={err("periodicidad")} />
           </>}
-          <Chips label={sc.payLabel} options={sc.payOptions} value={v("pago") as string} onChange={set("pago")} required error={err("pago")} />
-          {v("pago") && <p className="rounded-xl bg-[#060A12] p-4 text-sm leading-6 text-slate-200">{v("pago") === "sepa" ? sc.sepaNote : sc.otherNote}</p>}
+          {sepaAvailable ? <>
+            <Chips label={sc.payLabel} options={sc.payOptions} value={v("pago") as string} onChange={set("pago")} required error={err("pago")} />
+            {v("pago") && <p className="rounded-xl bg-[#060A12] p-4 text-sm leading-6 text-slate-200">{v("pago") === "sepa" ? sc.sepaNote : sc.otherNote}</p>}
+          </> : <p className="rounded-xl bg-[#060A12] p-4 text-sm leading-6 text-slate-200">{t.donar.socioNote}</p>}
         </>}
       </>}
 

@@ -251,7 +251,7 @@ function readContent_() {
     .map(r => ({ idioma: String(r.idioma || 'es'), pregunta: String(r.pregunta).slice(0, 200), palabras_clave: String(r.palabras_clave || '').slice(0, 300), respuesta: String(r.respuesta).slice(0, 1200), enlace: String(r.enlace || '') })).slice(0, 80);
   const settings = {};
   rows('Ajustes').forEach(r => { const key = String(r.clave || '').trim(); const value = String(r.valor || '').trim(); if (/^[a-z0-9_]+$/.test(key) && value) settings[key] = value.slice(0, 500); });
-  return { news, fundraising, events, faq, settings, updated: new Date().toISOString() };
+  return { news, fundraising, events, faq, settings, features: { sepa: true }, updated: new Date().toISOString() };
 }
 
 /** Turns a Google Drive share link into a direct image URL (the file must be shared "anyone with the link"). */

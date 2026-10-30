@@ -8,7 +8,8 @@ export type NewsItem = { id: string; fecha: string; titulo: string; resumen: str
 export type Fundraiser = { proyecto: string; objetivo: number; recaudado: number; donantes: number; nota_es?: string; nota_en?: string; nota_ru?: string; nota_uk?: string };
 export type EventItem = { fecha: string; hora: string; titulo: string; lugar: string; enlace: string; idioma: string };
 export type FaqItem = { idioma: string; pregunta: string; palabras_clave: string; respuesta: string; enlace: string };
-export type SiteContent = { news: NewsItem[]; fundraising: Fundraiser[]; events: EventItem[]; faq: FaqItem[]; settings: Record<string, string> };
+/** features: what the deployed Apps Script supports (e.g. sepa = signed SEPA mandates), so the site never offers something the backend cannot store. */
+export type SiteContent = { news: NewsItem[]; fundraising: Fundraiser[]; events: EventItem[]; faq: FaqItem[]; settings: Record<string, string>; features?: { sepa?: boolean } };
 
 const EMPTY: SiteContent = { news: [], fundraising: [], events: [], faq: [], settings: {} };
 
@@ -23,7 +24,7 @@ export function useSiteContent(endpoint = SHEETS_ENDPOINT) {
       const response = await fetch(`${endpoint}?action=content`);
       if (!response.ok) throw new Error(`Content ${response.status}`);
       const data = await response.json();
-      return { news: data.news ?? [], fundraising: data.fundraising ?? [], events: data.events ?? [], faq: data.faq ?? [], settings: data.settings ?? {} };
+      return { news: data.news ?? [], fundraising: data.fundraising ?? [], events: data.events ?? [], faq: data.faq ?? [], settings: data.settings ?? {}, features: data.features ?? {} };
     },
     placeholderData: EMPTY,
   });
