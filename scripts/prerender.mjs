@@ -71,7 +71,7 @@ const plainText = value => String(value).replace(/<[^>]+>/g, " ").replace(/\s+/g
 
 const routes = [
   "/", "/mision", "/ideologia", "/proyectos", "/alianzas", "/colaborar", "/contacto", "/donar",
-  "/noticias", "/identidad", "/aviso-legal", "/privacidad", "/cookies",
+  "/noticias", "/laboratorio", "/economia-social", "/ideas", "/altavoz", "/identidad", "/aviso-legal", "/privacidad", "/cookies",
   ...projects.map(p => `/proyectos/${p.slug}`),
 ];
 

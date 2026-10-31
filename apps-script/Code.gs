@@ -32,7 +32,7 @@ const CONFIG = {
 const COMMON_START = ['fecha', 'referencia', 'estado', 'responsable', 'notas', 'nombre', 'email', 'telefono', 'canal', 'ciudad', 'idioma', 'proyecto'];
 const COMMON_END = ['pagina'];
 /** Added later: kept at the end so existing rows stay aligned. */
-const EXTRA_END = ['zona', 'plan', 'entidad', 'pago', 'mandato'];
+const EXTRA_END = ['zona', 'plan', 'entidad', 'pago', 'mandato', 'ola', 'consentimiento'];
 
 const REQUEST_TABS = {
   ayuda: { tab: 'Ayuda', fields: ['necesidad', 'personas', 'urgente', 'mensaje'] },
@@ -40,7 +40,17 @@ const REQUEST_TABS = {
   organizacion: { tab: 'Organizaciones', fields: ['entidad', 'tipo_entidad', 'web', 'cargo', 'colaboracion', 'mensaje'] },
   donar: { tab: 'Donaciones y socios', fields: ['modo', 'que_dona', 'descripcion', 'entrega', 'cuota', 'cuota_otra', 'periodicidad'] },
   otro: { tab: 'Otras consultas', fields: ['tema', 'mensaje'] },
+  // Programme forms (Spanish only). The tab is created automatically on the first request.
+  aprender: { tab: 'Lab - Aprender', fields: ['situacion', 'dedicacion', 'habilidades', 'crecer', 'espera', 'formato', 'como_conocio', 'propuesta', 'mayor_18', 'novedades'], program: true },
+  ensenar: { tab: 'Lab - Enseñar', fields: ['profesion', 'areas', 'experiencia', 'ensenaria', 'colaboracion', 'tiempo', 'formato', 'web', 'propuesta', 'mayor_18', 'novedades'], program: true },
+  colabora_lab: { tab: 'Lab - Colaborar', fields: ['tipo_entidad', 'entidad', 'cargo', 'colaboracion', 'sector', 'mensaje', 'novedades'], program: true },
+  economia: { tab: 'Economía social', fields: ['iniciativa', 'participacion', 'experiencia', 'propuesta', 'novedades'], program: true },
+  idea: { tab: 'Ideas', fields: ['idea', 'tipo_idea', 'participar', 'novedades'], program: true },
 };
+
+/** Personal share links ("Tu ola"): one row per code, no personal data. */
+const OLA_TAB = 'Ola';
+const OLA_COLUMNS = ['codigo', 'visitas', 'unidos', 'creado', 'ultima_visita'];
 
 const CONTENT_TABS = {
   Noticias: ['publicar', 'fecha', 'idioma', 'titulo', 'resumen', 'texto', 'imagen', 'enlace', 'proyecto'],
@@ -71,9 +81,24 @@ const SETTINGS = [
   ['analitica_ga4', '', 'ID de Google Analytics 4 (G-XXXXXXX)'],
   ['google_ads_conversion', '', 'ID de conversión de Google Ads (AW-XXXXXXX/etiqueta)'],
   ['aviso_banner', '', 'Texto corto para una franja de aviso arriba (vacío = sin franja)'],
+  ['contador_mostrar', 'no', 'si = mostrar el contador de comunidad (socios, voluntarios, mentores, participantes) en «Sé nuestro altavoz». Cuenta las filas de las solicitudes, excepto las marcadas «Descartada».'],
+  ['impacto_mostrar', 'no', 'si = mostrar en «Donar» los ejemplos «qué hace tu aportación» (filas impacto_1 a impacto_6). Usar solo cifras reales.'],
+  ['impacto_1', '', 'Formato: importe|texto. Ejemplo: 10|una cesta básica de alimentos para una familia'],
+  ['impacto_2', '', 'Importe|texto'],
+  ['impacto_3', '', 'Importe|texto'],
+  ['impacto_4', '', 'Importe|texto'],
+  ['impacto_5', '', 'Importe|texto'],
+  ['impacto_6', '', 'Importe|texto'],
 ];
 
-const TYPE_NAMES = { ayuda: 'Necesita ayuda', voluntariado: 'Voluntariado', organizacion: 'Organización', donar: 'Apoyo / donación', otro: 'Otra consulta' };
+const TYPE_NAMES = { ayuda: 'Necesita ayuda', voluntariado: 'Voluntariado', organizacion: 'Organización', donar: 'Apoyo / donación', otro: 'Otra consulta',
+  aprender: 'Laboratorio · Quiero aprender', ensenar: 'Laboratorio · Quiero enseñar', colabora_lab: 'Laboratorio · Quiero colaborar', economia: 'Economía social', idea: 'Idea / propuesta' };
+
+/** Reply for the programme forms: no promised deadline, and an open invitation to send ideas. */
+const PROGRAM_REPLY = {
+  subject: 'Hemos recibido tu solicitud',
+  body: (name, ref) => `Hola ${name}:\n\nGracias por tu interés en Inicia Foundation. Hemos recibido tu solicitud con la referencia ${ref}.\n\nNuestro equipo la estudiará y te escribiremos cuando encaje con alguna actividad o necesidad del programa.\n\nSi tienes propuestas para que el proyecto avance y llegue a más personas, o quieres añadir información, responde a este correo: todas las ideas son bienvenidas.\n\nUn saludo,\n${CONFIG.ORG_NAME}\n${CONFIG.SITE_URL}`,
+};
 
 const AUTOREPLY = {
   es: { subject: 'Hemos recibido tu solicitud', body: (name, ref) => `Hola ${name}:\n\nGracias por escribir a ${CONFIG.ORG_NAME}. Hemos recibido tu solicitud con la referencia ${ref}.\n\nLa revisaremos y te responderemos por el medio que has elegido. Si es urgente, escríbenos por WhatsApp al ${CONFIG.WHATSAPP}.\n\nUn saludo,\n${CONFIG.ORG_NAME}\n${CONFIG.SITE_URL}` },
@@ -107,6 +132,13 @@ function setup() {
   });
   const settings = ensureSheet_(ss, 'Ajustes', ['clave', 'valor', 'nota']);
   if (settings.getLastRow() === 1) settings.getRange(2, 1, SETTINGS.length, 3).setValues(SETTINGS);
+  else {
+    // Settings added in later versions are appended; existing values are never touched.
+    const known = settings.getRange(2, 1, settings.getLastRow() - 1, 1).getValues().map(r => String(r[0]).trim());
+    const missing = SETTINGS.filter(row => known.indexOf(row[0]) === -1);
+    if (missing.length) settings.getRange(settings.getLastRow() + 1, 1, missing.length, 3).setValues(missing);
+  }
+  ensureSheet_(ss, OLA_TAB, OLA_COLUMNS);
   settings.setColumnWidth(1, 200); settings.setColumnWidth(2, 380); settings.setColumnWidth(3, 420);
   const news = ss.getSheetByName('Noticias');
   if (news.getLastRow() === 1) news.appendRow([false, new Date(), 'es', 'Ejemplo: título de la noticia', 'Resumen de una o dos frases.', 'Texto completo (opcional).', '', '', '']);
@@ -174,13 +206,16 @@ function doPost(e) {
     const lock = LockService.getScriptLock();
     lock.waitLock(10000);
     try {
-      const sheet = sheet_().getSheetByName(conf.tab);
+      const ss = sheet_();
+      const sheet = ss.getSheetByName(conf.tab) || ensureSheet_(ss, conf.tab, columns);
       syncHeader_(sheet, columns);
       sheet.appendRow(row);
     } finally { lock.releaseLock(); }
 
     notifyTeam_(data.tipo, columns, row, ref, mandate);
+    if (isOlaCode_(data.ola)) olaAdd_(data.ola, 'unidos');
     if (mandate) sepaReply_(email, clean_(data.nombre), ref, mandate, data.idioma);
+    else if (conf.program) programReply_(email, clean_(data.nombre), ref);
     else autoReply_(email, clean_(data.nombre), ref, data.idioma);
     return json_({ ok: true, referencia: ref, mandato: mandate ? mandate.ref : undefined });
   } catch (error) {
@@ -202,6 +237,10 @@ function notifyTeam_(tipo, columns, row, ref, mandate) {
   });
 }
 
+function programReply_(email, name, ref) {
+  MailApp.sendEmail({ to: email, subject: `${PROGRAM_REPLY.subject} · ${ref}`, body: PROGRAM_REPLY.body(name.split(' ')[0] || '', ref), name: CONFIG.ORG_NAME, replyTo: CONFIG.NOTIFY_EMAIL });
+}
+
 function autoReply_(email, name, ref, lang) {
   const text = AUTOREPLY[lang] || AUTOREPLY.es;
   MailApp.sendEmail({ to: email, subject: `${text.subject} · ${ref}`, body: text.body(name.split(' ')[0] || '', ref), name: CONFIG.ORG_NAME, replyTo: CONFIG.NOTIFY_EMAIL });
@@ -219,6 +258,20 @@ function clean_(value) {
 
 function doGet(e) {
   const action = e && e.parameter && e.parameter.action;
+  const ref = e && e.parameter && String(e.parameter.ref || '').toLowerCase();
+  if (action === 'visita') {
+    if (!isOlaCode_(ref)) return json_({ ok: false });
+    // At most 60 counted visits per link every 10 minutes, so a single person cannot inflate a link.
+    const cache = CacheService.getScriptCache();
+    const key = 'v_' + ref;
+    const count = Number(cache.get(key) || 0);
+    if (count < 60) { cache.put(key, String(count + 1), 600); olaAdd_(ref, 'visitas'); }
+    return json_({ ok: true });
+  }
+  if (action === 'ola') {
+    if (!isOlaCode_(ref)) return json_({ ok: false });
+    return json_(Object.assign({ ok: true }, olaRead_(ref)));
+  }
   if (action !== 'content') return json_({ ok: true, service: 'INICIA web' });
   const cache = CacheService.getScriptCache();
   const cached = cache.get('content');
@@ -251,7 +304,15 @@ function readContent_() {
     .map(r => ({ idioma: String(r.idioma || 'es'), pregunta: String(r.pregunta).slice(0, 200), palabras_clave: String(r.palabras_clave || '').slice(0, 300), respuesta: String(r.respuesta).slice(0, 1200), enlace: String(r.enlace || '') })).slice(0, 80);
   const settings = {};
   rows('Ajustes').forEach(r => { const key = String(r.clave || '').trim(); const value = String(r.valor || '').trim(); if (/^[a-z0-9_]+$/.test(key) && value) settings[key] = value.slice(0, 500); });
-  return { news, fundraising, events, faq, settings, features: { sepa: true }, updated: new Date().toISOString() };
+  // Community figures (shown on the site only when "contador_mostrar" = "si"): rows of each tab, except discarded ones.
+  const active = name => rows(name).filter(r => String(r.estado || '').toLowerCase() !== 'descartada');
+  const comunidad = {
+    socios: active('Donaciones y socios').filter(r => String(r.modo || '') === 'socio').length,
+    voluntarios: active('Voluntariado').length,
+    mentores: active(REQUEST_TABS.ensenar.tab).length,
+    participantes: active(REQUEST_TABS.aprender.tab).length,
+  };
+  return { news, fundraising, events, faq, settings, comunidad, features: { sepa: true, programa: true, ola: true }, updated: new Date().toISOString() };
 }
 
 /** Turns a Google Drive share link into a direct image URL (the file must be shared "anyone with the link"). */
@@ -512,4 +573,38 @@ function createRemesa_(collection) {
   txs.forEach(t => sheet.getRange(t.row, col('ultimo_cobro') + 1).setValue(collection));
   store.ss.getSheetByName('Remesas').appendRow([now, collection, txs.length, total, file.getUrl()]);
   return { count: txs.length, total, url: file.getUrl() };
+}
+
+/* ---------- Tu ola: personal share links ---------- */
+
+function isOlaCode_(value) { return /^[a-z0-9]{8}$/.test(String(value || '')); }
+
+function olaSheet_() {
+  const ss = sheet_();
+  return ss.getSheetByName(OLA_TAB) || ensureSheet_(ss, OLA_TAB, OLA_COLUMNS);
+}
+
+/** Adds 1 to "visitas" or "unidos" for a code, creating its row the first time. */
+function olaAdd_(code, field) {
+  const lock = LockService.getScriptLock();
+  lock.waitLock(10000);
+  try {
+    const sheet = olaSheet_();
+    const col = OLA_COLUMNS.indexOf(field) + 1;
+    const found = sheet.getRange('A:A').createTextFinder(code).matchEntireCell(true).findNext();
+    if (found) {
+      const cell = sheet.getRange(found.getRow(), col);
+      cell.setValue(Number(cell.getValue() || 0) + 1);
+      if (field === 'visitas') sheet.getRange(found.getRow(), 5).setValue(new Date());
+    } else {
+      sheet.appendRow([code, field === 'visitas' ? 1 : 0, field === 'unidos' ? 1 : 0, new Date(), field === 'visitas' ? new Date() : '']);
+    }
+  } finally { lock.releaseLock(); }
+}
+
+function olaRead_(code) {
+  const found = olaSheet_().getRange('A:A').createTextFinder(code).matchEntireCell(true).findNext();
+  if (!found) return { visitas: 0, unidos: 0 };
+  const row = olaSheet_().getRange(found.getRow(), 1, 1, 3).getValues()[0];
+  return { visitas: Number(row[1]) || 0, unidos: Number(row[2]) || 0 };
 }
