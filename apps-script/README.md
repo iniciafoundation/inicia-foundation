@@ -74,3 +74,20 @@
 Each month: open the confidential spreadsheet → menu **INICIA → Generar remesa SEPA…** → enter the collection date
 (YYYY-MM-DD) → download the XML file from the folder and upload it in Ruralvía (Remesas de adeudos SEPA, XML pain.008 / Cuaderno 19.14).
 Members marked `baja`, `devuelto` or `pausado` are skipped; `trimestral` and `anual` members are charged every 3 / 12 months from the month they signed.
+
+## Формы программ, «Tu ola» и счётчики (добавлено 2026-11)
+
+1. Вставьте новый `Code.gs` поверх старого и сохраните.
+2. Выберите функцию **setup** → **Выполнить**. Она ничего не удаляет: добавляет вкладку «Ola» и новые строки во вкладку «Ajustes»
+   (`contador_mostrar`, `impacto_mostrar`, `impacto_1`…`impacto_6`). Существующие значения не меняются.
+3. **Развернуть → Управление развёртываниями → ✏️ → Версия: новая → Развернуть.** Адрес не меняется.
+
+Что появится:
+- Вкладки **Lab - Aprender**, **Lab - Enseñar**, **Lab - Colaborar**, **Economía social**, **Ideas** — создаются сами при первой заявке.
+  Автоответ этих форм не обещает сроков и приглашает присылать идеи.
+- Вкладка **Ola** — личные ссылки «Tu ola»: код, сколько переходов (`visitas`) и сколько заявок (`unidos`) пришло по ссылке. Личных данных нет.
+- Колонки `ola` и `consentimiento` в конце всех вкладок заявок (старые строки не сдвигаются).
+
+Скрыто до вашего решения (по умолчанию `no` во вкладке «Ajustes»):
+- `contador_mostrar` = `si` — показать на странице «Sé nuestro altavoz» счётчик сообщества. Считаются строки заявок, кроме отмеченных «Descartada».
+- `impacto_mostrar` = `si` — показать на странице «Donar» блок «Qué hace tu aportación». Строки `impacto_1`…`impacto_6` в формате `10|una cesta básica de alimentos para una familia`. Только реальные цифры.

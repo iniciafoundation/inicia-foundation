@@ -6,9 +6,11 @@ import { requestCopy } from "@/lib/requestCopy";
 import { type RequestType, flatten, makeReference, sendRequest } from "@/lib/requests";
 import { CONTACT, MEMBERSHIP, ZONES } from "@/lib/siteConfig";
 import { track } from "@/lib/analytics";
+import { arrivalOla } from "@/lib/participation";
 import { useSiteContent } from "@/lib/content";
 import { SEPA_CREDITOR, compactIban, formatIban, isValidIban, membershipCharge, sepaCopy } from "@/lib/sepa";
 import { SignaturePad } from "./SignaturePad";
+import { AltavozInvite } from "./Share";
 
 type Values = Record<string, string | string[] | boolean>;
 
@@ -164,7 +166,7 @@ export function RequestForm({ initialType, project, compact = false }: { initial
     // Bank details and the signature are sent only for a SEPA membership.
     const kept = Object.entries(values).filter(([key]) => key !== "website" && (sepaActive || !key.startsWith("sepa_")) && (socio || key !== "pago"));
     const sepaExtra = sepaActive && charge ? { sepa_iban: compactIban(s("sepa_iban")), sepa_importe: String(charge.amount), sepa_periodicidad: charge.period, sepa_firmado_en: new Date().toISOString(), sepa_dispositivo: typeof navigator !== "undefined" ? navigator.userAgent.slice(0, 200) : "" } : {};
-    const payload = { referencia: ref, tipo: type, proyecto: project, idioma: locale, pagina: typeof window !== "undefined" ? window.location.pathname : "", ...Object.fromEntries(kept), ...fixedPlan, ...sepaExtra };
+    const payload = { referencia: ref, tipo: type, proyecto: project, ola: arrivalOla(), idioma: locale, pagina: typeof window !== "undefined" ? window.location.pathname : "", ...Object.fromEntries(kept), ...fixedPlan, ...sepaExtra };
     try {
       await sendRequest(payload);
       track("generate_lead", { tipo: type });
@@ -188,6 +190,7 @@ export function RequestForm({ initialType, project, compact = false }: { initial
     <p className="mx-auto mt-4 max-w-md leading-7 text-slate-300">{t.done.next}</p>
     {sepaActive && <p className="mx-auto mt-3 max-w-md text-sm leading-6 text-[#F0D893]">{sc.doneNote}</p>}
     <div className="mt-7 flex flex-wrap justify-center gap-3"><button type="button" onClick={reset} className="min-h-11 rounded-full border border-[#D6B25E]/20 px-5 py-2 text-sm font-bold text-[#EEE7D7]">{t.done.again}</button><Link href="/" className="inline-flex min-h-11 items-center rounded-full bg-[#D6B25E] px-5 py-2 text-sm font-bold text-[#120D05]">{t.done.home}</Link></div>
+    <AltavozInvite />
   </div>;
 
   return <form ref={formRef} onSubmit={submit} noValidate className={`scroll-mt-28 rounded-3xl bg-[#0C1320] shadow-sm ring-1 ring-[#D6B25E]/20 ${compact ? "p-6" : "p-6 sm:p-9"}`}>

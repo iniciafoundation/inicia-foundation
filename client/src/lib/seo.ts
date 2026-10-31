@@ -40,6 +40,22 @@ const publicPages: Record<string, Omit<SiteMetadata, "robots">> = {
     title: `Donar | ${brand} · Bizum y transferencia`,
     description: "Apoya a INICIA Foundation con Bizum, transferencia bancaria, material o alimentos. Cada aportación sostiene el acompañamiento a familias en Asturias.",
   },
+  "/laboratorio": {
+    title: `Laboratorio de Innovación Social: empleo y formación en Asturias | ${brand}`,
+    description: "Nuevos caminos hacia el empleo en Asturias: acompañamiento, competencias digitales y mentoría. Participa como alumno/a, mentor/a o empresa colaboradora.",
+  },
+  "/economia-social": {
+    title: `Economía social: cooperativa, empresa de inserción y tiendas de segunda mano | ${brand}`,
+    description: "Inicia Foundation prepara una cooperativa, una empresa de inserción y tiendas solidarias de segunda mano en Asturias. Súmate desde el principio.",
+  },
+  "/ideas": {
+    title: `Tu idea cuenta | ${brand}`,
+    description: "Propón un proyecto, una mejora o algo que echas en falta. Las mejores ideas para Inicia Foundation vienen de la comunidad.",
+  },
+  "/altavoz": {
+    title: `Sé nuestro altavoz | ${brand}`,
+    description: "Comparte Inicia Foundation con tu gente: cada mensaje puede acercar ayuda, formación o empleo a alguien en Asturias.",
+  },
   "/noticias": {
     title: `Noticias | ${brand}`,
     description: "Novedades de INICIA Foundation: actividades, proyectos, convocatorias y resultados.",

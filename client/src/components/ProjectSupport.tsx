@@ -1,7 +1,8 @@
 import { Link } from "wouter";
 import { HandHeart, HeartHandshake } from "lucide-react";
 import { useSiteContent } from "@/lib/content";
-import { useLocale, contentLocale, type Locale } from "@/lib/i18n";
+import { useLocale, contentLocale } from "@/lib/i18n";
+import { donationReference } from "@/lib/participation";
 
 const copy = {
   es: { title: "Apoya este proyecto", raised: "recaudados de", donors: "personas ya han apoyado", donate: "Donar a este proyecto", join: "Quiero participar", concept: "Indica en el concepto" },
@@ -21,7 +22,7 @@ export function ProjectSupport({ slug, title }: { slug: string; title: string })
   const goal = data?.fundraising.find(item => item.proyecto === slug);
   const percent = goal && goal.objetivo > 0 ? Math.min(100, Math.round((goal.recaudado / goal.objetivo) * 100)) : 0;
   const note = goal ? (goal[`nota_${contentLocale(locale)}` as const] || goal.nota_es) : undefined;
-  const reference = `Donativo ${title}`.slice(0, 35);
+  const reference = donationReference(title);
 
   return <section className="mt-10 overflow-hidden rounded-3xl bg-[#08101E] p-7 text-white sm:p-9">
     <p className="text-xs font-bold uppercase tracking-[.2em] text-[#D6B25E]">{t.title}</p>
@@ -30,6 +31,6 @@ export function ProjectSupport({ slug, title }: { slug: string; title: string })
       <p className="mt-2 text-sm text-slate-300">{percent}% · {goal.donantes} {t.donors}</p>
       {note && <p className="mt-4 leading-7 text-slate-100">{note}</p>}</div>}
     <p className="mt-5 text-sm text-slate-300">{t.concept}: <span className="font-mono font-semibold text-[#F0D893]">{reference}</span></p>
-    <div className="mt-6 flex flex-wrap gap-3"><Link href="/donar" className="inline-flex min-h-12 items-center gap-2 rounded-full bg-[#D6B25E] px-6 text-sm font-bold text-[#120D05]"><HeartHandshake className="h-4 w-4" />{t.donate}</Link><Link href={`/contacto?tipo=voluntariado&proyecto=${encodeURIComponent(title)}`} className="inline-flex min-h-12 items-center gap-2 rounded-full border border-white/30 px-6 text-sm font-bold"><HandHeart className="h-4 w-4 text-[#D6B25E]" />{t.join}</Link></div>
+    <div className="mt-6 flex flex-wrap gap-3"><Link href={`/donar?proyecto=${slug}`} className="inline-flex min-h-12 items-center gap-2 rounded-full bg-[#D6B25E] px-6 text-sm font-bold text-[#120D05]"><HeartHandshake className="h-4 w-4" />{t.donate}</Link><Link href={`/contacto?tipo=voluntariado&proyecto=${encodeURIComponent(title)}`} className="inline-flex min-h-12 items-center gap-2 rounded-full border border-white/30 px-6 text-sm font-bold"><HandHeart className="h-4 w-4 text-[#D6B25E]" />{t.join}</Link></div>
   </section>;
 }

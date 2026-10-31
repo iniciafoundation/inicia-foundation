@@ -88,6 +88,7 @@ const privacyCopy: Record<Locale, PageCopy> = {
       { h: "3. Finalidades", paragraphs: ["Utilizamos los datos únicamente para:"], list: [
         "atender y responder a las solicitudes y consultas recibidas;",
         "gestionar el voluntariado, la condición de socio/a y la colaboración con personas y organizaciones;",
+        "gestionar la participación en nuestros programas (por ejemplo, el Laboratorio de Innovación Social y las iniciativas de economía social) y estudiar las ideas y propuestas que nos envían;",
         "informar sobre nuestras actividades, solo si la persona lo ha solicitado.",
       ] },
       { h: "4. Base jurídica", paragraphs: ["Conforme al artículo 6 del RGPD, el tratamiento se basa en:"], list: [
@@ -133,6 +134,7 @@ const privacyCopy: Record<Locale, PageCopy> = {
       { h: "3. Purposes", paragraphs: ["We use the data only to:"], list: [
         "handle and reply to the requests and enquiries we receive;",
         "manage volunteering, membership and collaboration with individuals and organisations;",
+        "manage participation in our programmes (for example the Social Innovation Lab and our social economy initiatives) and review the ideas and proposals people send us;",
         "inform about our activities, only if the person has asked for it.",
       ] },
       { h: "4. Legal basis", paragraphs: ["Under Article 6 GDPR, processing is based on:"], list: [
@@ -178,6 +180,7 @@ const privacyCopy: Record<Locale, PageCopy> = {
       { h: "3. Цели обработки", paragraphs: ["Мы используем данные исключительно для того, чтобы:"], list: [
         "рассматривать полученные запросы и обращения и отвечать на них;",
         "организовывать волонтёрство, членство и сотрудничество с людьми и организациями;",
+        "организовывать участие в наших программах (например, в Лаборатории социальных инноваций и инициативах социальной экономики) и рассматривать присланные идеи и предложения;",
         "информировать о нашей деятельности — только если человек сам об этом попросил.",
       ] },
       { h: "4. Правовые основания", paragraphs: ["В соответствии со статьёй 6 GDPR обработка основана на:"], list: [
@@ -223,6 +226,7 @@ const privacyCopy: Record<Locale, PageCopy> = {
       { h: "3. Мета обробки", paragraphs: ["Ми використовуємо дані виключно для того, щоб:"], list: [
         "розглядати отримані запити та звернення й відповідати на них;",
         "організовувати волонтерство, членство та співпрацю з людьми й організаціями;",
+        "організовувати участь у наших програмах (наприклад, у Лабораторії соціальних інновацій та ініціативах соціальної економіки) і розглядати надіслані ідеї та пропозиції;",
         "інформувати про нашу діяльність — лише якщо людина сама про це попросила.",
       ] },
       { h: "4. Правові підстави", paragraphs: ["Відповідно до статті 6 GDPR обробка ґрунтується на:"], list: [
@@ -268,6 +272,7 @@ const privacyCopy: Record<Locale, PageCopy> = {
       { h: "3. Finalidaes", paragraphs: ["Usamos los datos namás pa:"], list: [
         "atender y responder a les solicitúes y consultes recibíes;",
         "xestionar el voluntariáu, la condición de sociu/a y la collaboración con persones y organizaciones;",
+        "xestionar la participación nos nuestros programes (por exemplu, el Llaboratoriu d'Innovación Social y les iniciatives d'economía social) y estudiar les idees y propuestes que nos unvien;",
         "informar sobre les nuestres actividaes, namás si la persona lo pidió.",
       ] },
       { h: "4. Base xurídica", paragraphs: ["Conforme al artículu 6 del RGPD, el tratamientu básase en:"], list: [
@@ -331,6 +336,7 @@ const cookieCopy: Record<Locale, CookieCopy> = {
     rows: [
       { name: "inicia-lang", category: "Necesaria", purpose: "Recordar el idioma elegido (localStorage).", consent: false },
       { name: "inicia-consent", category: "Necesaria", purpose: "Recordar su decisión sobre las cookies (localStorage).", consent: false },
+      { name: "inicia-ola", category: "Necesaria", purpose: "Guardar su enlace personal «Tu ola», solo si usted lo crea en la página «Sé nuestro altavoz» (localStorage). El enlace solo permite contar visitas y altas, sin datos personales.", consent: false },
       { name: "_ga, _ga_*", category: "Analítica", purpose: "Google Analytics 4: estadísticas agregadas de uso del sitio.", consent: true },
       { name: "_gcl_au", category: "Publicidad / conversión", purpose: "Google Ads: medición de conversiones de campañas.", consent: true },
     ],
@@ -364,6 +370,7 @@ const cookieCopy: Record<Locale, CookieCopy> = {
     rows: [
       { name: "inicia-lang", category: "Necessary", purpose: "Remembers the chosen language (localStorage).", consent: false },
       { name: "inicia-consent", category: "Necessary", purpose: "Remembers your cookie choice (localStorage).", consent: false },
+      { name: "inicia-ola", category: "Necessary", purpose: "Stores your personal «Tu ola» link, only if you create it on the «Be our voice» page (localStorage). The link only counts visits and sign-ups, with no personal data.", consent: false },
       { name: "_ga, _ga_*", category: "Analytics", purpose: "Google Analytics 4: aggregate website usage statistics.", consent: true },
       { name: "_gcl_au", category: "Advertising / conversion", purpose: "Google Ads: campaign conversion measurement.", consent: true },
     ],
@@ -397,6 +404,7 @@ const cookieCopy: Record<Locale, CookieCopy> = {
     rows: [
       { name: "inicia-lang", category: "Необходимые", purpose: "Запоминает выбранный язык (localStorage).", consent: false },
       { name: "inicia-consent", category: "Необходимые", purpose: "Запоминает ваш выбор относительно cookies (localStorage).", consent: false },
+      { name: "inicia-ola", category: "Необходимые", purpose: "Хранит вашу личную ссылку «Tu ola», только если вы создали её на странице «Станьте нашим голосом» (localStorage). Ссылка считает лишь переходы и регистрации, без персональных данных.", consent: false },
       { name: "_ga, _ga_*", category: "Аналитика", purpose: "Google Analytics 4: обобщённая статистика использования сайта.", consent: true },
       { name: "_gcl_au", category: "Реклама / конверсии", purpose: "Google Ads: измерение конверсий рекламных кампаний.", consent: true },
     ],
@@ -430,6 +438,7 @@ const cookieCopy: Record<Locale, CookieCopy> = {
     rows: [
       { name: "inicia-lang", category: "Необхідні", purpose: "Запам’ятовує обрану мову (localStorage).", consent: false },
       { name: "inicia-consent", category: "Необхідні", purpose: "Запам’ятовує ваш вибір щодо cookies (localStorage).", consent: false },
+      { name: "inicia-ola", category: "Необхідні", purpose: "Зберігає ваше особисте посилання «Tu ola», лише якщо ви створили його на сторінці «Станьте нашим голосом» (localStorage). Посилання рахує лише переходи та реєстрації, без персональних даних.", consent: false },
       { name: "_ga, _ga_*", category: "Аналітика", purpose: "Google Analytics 4: узагальнена статистика використання сайту.", consent: true },
       { name: "_gcl_au", category: "Реклама / конверсії", purpose: "Google Ads: вимірювання конверсій рекламних кампаній.", consent: true },
     ],
@@ -463,6 +472,7 @@ const cookieCopy: Record<Locale, CookieCopy> = {
     rows: [
       { name: "inicia-lang", category: "Necesaria", purpose: "Recordar la llingua escoyida (localStorage).", consent: false },
       { name: "inicia-consent", category: "Necesaria", purpose: "Recordar la so decisión sobre les cookies (localStorage).", consent: false },
+      { name: "inicia-ola", category: "Necesaria", purpose: "Guardar el so enllaz personal «Tu ola», namás si lu crea na páxina «Sé el nuestru altavoz» (localStorage). L'enllaz namás cuenta visites y altes, ensin datos personales.", consent: false },
       { name: "_ga, _ga_*", category: "Analítica", purpose: "Google Analytics 4: estadístiques agregaes d'usu del sitiu.", consent: true },
       { name: "_gcl_au", category: "Publicidá / conversión", purpose: "Google Ads: midida de conversiones de campañes.", consent: true },
     ],
