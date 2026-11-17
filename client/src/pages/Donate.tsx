@@ -183,7 +183,8 @@ export default function Donate() {
   const small = chosenAmount !== undefined && chosenAmount <= SMALL_MAX;
   // Card, PayPal and other platforms charge a fee per payment: for small amounts only Bizum and transfer are offered.
   const methods = (["bizum", "transfer", "card", "paypal", "other"] as Method[]).filter(key => available[key] && (!small || key === "bizum" || key === "transfer"));
-  const [chosen, setMethod] = useState<Method>();
+  // ?metodo=bizum (or transfer, card…) opens that payment method directly, e.g. from a "Dona por Bizum" button.
+  const [chosen, setMethod] = useState<Method | undefined>(() => { if (typeof window === "undefined") return undefined; const m = new URLSearchParams(window.location.search).get("metodo"); return m && ["bizum", "transfer", "card", "paypal", "other"].includes(m) ? m as Method : undefined; });
   const method = chosen && available[chosen] ? chosen : methods[0];
   const finalAmount = custom ? Number(custom) || undefined : amount;
 
