@@ -3,9 +3,11 @@ on: { push: { branches: [diag-sheet] } }
 jobs:
   check:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 5
     steps:
       - run: |
           set +e
-          for i in $(seq 1 10); do H=$(curl -s https://iniciafoundation.org/ | grep -c 'empiezan de nuevo'); M=$(curl -s https://iniciafoundation.org/mision | grep -c 'Seis líneas de trabajo'); [ "$H" -gt 0 ] && [ "$M" -gt 0 ] && break; sleep 60; done
-          echo "::notice title=live::home=$H mision=$M"
+          U=https://docs.google.com/forms/d/1YTfQ4ef8wIZuIFYvn6zpe4f6GgB8qeOcN0AhfqgYbN8/viewform
+          R=$(curl -sL -o page.html -w "%{http_code} %{url_effective}" "$U")
+          T=$(grep -o '<title>[^<]*' page.html | head -1); A=$(grep -c 'accepting responses\|ya no acepta' page.html); L=$(grep -c 'ServiceLogin\|accounts.google.com' page.html)
+          echo "::notice title=form::$R | $T | closed=$A | login=$L"
