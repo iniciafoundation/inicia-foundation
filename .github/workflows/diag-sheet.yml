@@ -3,11 +3,10 @@ on: { push: { branches: [diag-sheet] } }
 jobs:
   check:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 12
     steps:
       - run: |
           set +e
-          U=https://docs.google.com/forms/d/1YTfQ4ef8wIZuIFYvn6zpe4f6GgB8qeOcN0AhfqgYbN8/viewform
-          R=$(curl -sL -o page.html -w "%{http_code} %{url_effective}" "$U")
-          T=$(grep -o '<title>[^<]*' page.html | head -1); A=$(grep -c 'accepting responses\|ya no acepta' page.html); L=$(grep -c 'ServiceLogin\|accounts.google.com' page.html)
-          echo "::notice title=form::$R | $T | closed=$A | login=$L"
+          for i in $(seq 1 10); do P=$(curl -s https://iniciafoundation.org/proyectos/reutiliza-y-forma | grep -c 'gijon-juventud'); [ "$P" -gt 0 ] && break; sleep 60; done
+          L=$(curl -s -o /dev/null -w "%{http_code}" https://iniciafoundation.org/assets/partners/gijon-juventud-480.webp)
+          echo "::notice title=live::page_logo=$P logo_http=$L"
