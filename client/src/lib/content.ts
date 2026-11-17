@@ -9,7 +9,10 @@ export type Fundraiser = { proyecto: string; objetivo: number; recaudado: number
 export type EventItem = { fecha: string; hora: string; titulo: string; lugar: string; enlace: string; idioma: string };
 export type FaqItem = { idioma: string; pregunta: string; palabras_clave: string; respuesta: string; enlace: string };
 /** features: what the deployed Apps Script supports (e.g. sepa = signed SEPA mandates), so the site never offers something the backend cannot store. */
-export type SiteContent = { news: NewsItem[]; fundraising: Fundraiser[]; events: EventItem[]; faq: FaqItem[]; settings: Record<string, string>; features?: { sepa?: boolean } };
+/** Community figures counted by the Apps Script from the request tabs (shown only when "contador_mostrar" = "si"). */
+export type Community = { socios: number; voluntarios: number; mentores: number; participantes: number };
+/** features: what the deployed Apps Script supports (sepa = signed SEPA mandates, programa = programme forms, ola = personal share links). */
+export type SiteContent = { news: NewsItem[]; fundraising: Fundraiser[]; events: EventItem[]; faq: FaqItem[]; settings: Record<string, string>; features?: { sepa?: boolean; programa?: boolean; ola?: boolean }; comunidad?: Community };
 
 const EMPTY: SiteContent = { news: [], fundraising: [], events: [], faq: [], settings: {} };
 
@@ -24,7 +27,7 @@ export function useSiteContent(endpoint = SHEETS_ENDPOINT) {
       const response = await fetch(`${endpoint}?action=content`);
       if (!response.ok) throw new Error(`Content ${response.status}`);
       const data = await response.json();
-      return { news: data.news ?? [], fundraising: data.fundraising ?? [], events: data.events ?? [], faq: data.faq ?? [], settings: data.settings ?? {}, features: data.features ?? {} };
+      return { news: data.news ?? [], fundraising: data.fundraising ?? [], events: data.events ?? [], faq: data.faq ?? [], settings: data.settings ?? {}, features: data.features ?? {}, comunidad: data.comunidad };
     },
     placeholderData: EMPTY,
   });

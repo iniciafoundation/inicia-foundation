@@ -33,7 +33,7 @@ export const DONATION = {
   iban: "ES50 3007 0100 1421 5938 1827",
   bic: "",
   bank: "Caja Rural de Gijón",
-  bizumCode: "",
+  bizumCode: "15251",
   /** Optional card / international payment link (e.g. Stripe Payment Link). */
   cardLink: "",
   /** Optional Teaming group link for 1 €/month micro-donations. */

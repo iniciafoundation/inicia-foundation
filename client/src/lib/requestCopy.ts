@@ -54,7 +54,7 @@ export const requestCopy: Record<Locale, RequestCopy> = {
     },
     voluntariado: {
       areasLabel: "¿En qué te gustaría ayudar?",
-      areas: [["logistica", "Logística y reparto"], ["idiomas", "Traducción e idiomas"], ["formacion", "Formación y clases"], ["tecnologia", "Tecnología"], ["comunicacion", "Comunicación, redes y diseño"], ["eventos", "Eventos"], ["acompanamiento", "Acompañamiento a personas"]],
+      areas: [["logistica", "Logística y reparto"], ["idiomas", "Traducción e idiomas"], ["formacion", "Formación y clases"], ["tecnologia", "Tecnología"], ["comunicacion", "Redes sociales y comunicación"], ["diseno", "Diseño, foto y vídeo"], ["tienda", "Tienda solidaria de segunda mano"], ["mentoria", "Mentoría y orientación laboral"], ["eventos", "Eventos"], ["acompanamiento", "Acompañamiento a personas"]],
       whenLabel: "¿Cuándo puedes?",
       when: [["semana_manana", "Entre semana · mañanas"], ["semana_tarde", "Entre semana · tardes"], ["fin_semana", "Fines de semana"]],
       modeLabel: "Modalidad",
@@ -142,7 +142,7 @@ export const requestCopy: Record<Locale, RequestCopy> = {
     },
     voluntariado: {
       areasLabel: "How would you like to help?",
-      areas: [["logistica", "Logistics and distribution"], ["idiomas", "Translation and languages"], ["formacion", "Teaching and training"], ["tecnologia", "Technology"], ["comunicacion", "Communication, social media and design"], ["eventos", "Events"], ["acompanamiento", "Supporting people"]],
+      areas: [["logistica", "Logistics and distribution"], ["idiomas", "Translation and languages"], ["formacion", "Teaching and training"], ["tecnologia", "Technology"], ["comunicacion", "Social media and communication"], ["diseno", "Design, photo and video"], ["tienda", "Second-hand charity shop"], ["mentoria", "Mentoring and career guidance"], ["eventos", "Events"], ["acompanamiento", "Supporting people"]],
       whenLabel: "When are you available?",
       when: [["semana_manana", "Weekdays · mornings"], ["semana_tarde", "Weekdays · afternoons"], ["fin_semana", "Weekends"]],
       modeLabel: "Format",
@@ -230,7 +230,7 @@ export const requestCopy: Record<Locale, RequestCopy> = {
     },
     voluntariado: {
       areasLabel: "Чем вы хотели бы помогать?",
-      areas: [["logistica", "Логистика и раздача"], ["idiomas", "Переводы и языки"], ["formacion", "Обучение и занятия"], ["tecnologia", "Технологии"], ["comunicacion", "Соцсети, дизайн, коммуникации"], ["eventos", "Мероприятия"], ["acompanamiento", "Сопровождение людей"]],
+      areas: [["logistica", "Логистика и раздача"], ["idiomas", "Переводы и языки"], ["formacion", "Обучение и занятия"], ["tecnologia", "Технологии"], ["comunicacion", "Соцсети и коммуникации"], ["diseno", "Дизайн, фото и видео"], ["tienda", "Благотворительный магазин подержанных вещей"], ["mentoria", "Наставничество и профориентация"], ["eventos", "Мероприятия"], ["acompanamiento", "Сопровождение людей"]],
       whenLabel: "Когда вы можете?",
       when: [["semana_manana", "Будни · утро"], ["semana_tarde", "Будни · вечер"], ["fin_semana", "Выходные"]],
       modeLabel: "Формат",
@@ -318,7 +318,7 @@ export const requestCopy: Record<Locale, RequestCopy> = {
     },
     voluntariado: {
       areasLabel: "Чим ви хотіли б допомагати?",
-      areas: [["logistica", "Логістика та роздача"], ["idiomas", "Переклади та мови"], ["formacion", "Навчання та заняття"], ["tecnologia", "Технології"], ["comunicacion", "Соцмережі, дизайн, комунікації"], ["eventos", "Заходи"], ["acompanamiento", "Супровід людей"]],
+      areas: [["logistica", "Логістика та роздача"], ["idiomas", "Переклади та мови"], ["formacion", "Навчання та заняття"], ["tecnologia", "Технології"], ["comunicacion", "Соцмережі та комунікації"], ["diseno", "Дизайн, фото та відео"], ["tienda", "Благодійний магазин вживаних речей"], ["mentoria", "Наставництво та профорієнтація"], ["eventos", "Заходи"], ["acompanamiento", "Супровід людей"]],
       whenLabel: "Коли ви можете?",
       when: [["semana_manana", "Будні · ранок"], ["semana_tarde", "Будні · вечір"], ["fin_semana", "Вихідні"]],
       modeLabel: "Формат",
@@ -406,7 +406,7 @@ export const requestCopy: Record<Locale, RequestCopy> = {
     },
     voluntariado: {
       areasLabel: "¿En qué te prestaría ayudar?",
-      areas: [["logistica", "Loxística y repartu"], ["idiomas", "Traducción y llingües"], ["formacion", "Formación y clases"], ["tecnologia", "Teunoloxía"], ["comunicacion", "Comunicación, redes y diseñu"], ["eventos", "Eventos"], ["acompanamiento", "Acompañamientu a persones"]],
+      areas: [["logistica", "Loxística y repartu"], ["idiomas", "Traducción y llingües"], ["formacion", "Formación y clases"], ["tecnologia", "Teunoloxía"], ["comunicacion", "Redes sociales y comunicación"], ["diseno", "Diseñu, semeya y videu"], ["tienda", "Tienda solidaria de segunda mano"], ["mentoria", "Mentoría y orientación llaboral"], ["eventos", "Eventos"], ["acompanamiento", "Acompañamientu a persones"]],
       whenLabel: "¿Cuándo pues?",
       when: [["semana_manana", "Ente selmana · mañanes"], ["semana_tarde", "Ente selmana · tardes"], ["fin_semana", "Fines de selmana"]],
       modeLabel: "Modalidá",

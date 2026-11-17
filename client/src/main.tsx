@@ -21,7 +21,7 @@ const app = (
 
 // Form deep links (?tipo=…&plan=…) render a different first screen than the prerendered page,
 // so those are rendered fresh instead of hydrated (avoids a React hydration mismatch).
-const changesFirstRender = ["tipo", "proyecto", "modo", "plan", "zona"].some(key => new URLSearchParams(window.location.search).has(key));
+const changesFirstRender = ["tipo", "proyecto", "modo", "plan", "zona", "metodo"].some(key => new URLSearchParams(window.location.search).has(key));
 
 if (prerendered && container.hasChildNodes() && getLocale() === "es" && !changesFirstRender) {
   queryClient.setQueryData(projectsKey("es"), prerendered.projects, { updatedAt: 1 });
